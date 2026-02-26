@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Hiring Playbook</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; padding: 20px; min-height: 100vh; }
+  h1 { text-align: center; font-size: 1.3rem; margin-bottom: 4px; }
+  .subtitle { text-align: center; color: #888; font-size: 0.8rem; margin-bottom: 24px; }
+  .back { text-align: center; margin-bottom: 20px; }
+  .back a { color: #8b5cf6; text-decoration: none; font-size: 0.8rem; }
+  .roles { max-width: 700px; margin: 0 auto; display: flex; flex-direction: column; gap: 12px; }
+  .role-card { border-radius: 14px; padding: 16px 18px; cursor: pointer; transition: all 0.15s; }
+  .role-card:hover { transform: scale(1.005); }
+  .role-header { display: flex; align-items: center; gap: 10px; }
+  .role-emoji { font-size: 1.4rem; }
+  .role-title { font-size: 0.95rem; font-weight: 700; }
+  .role-one-liner { font-size: 0.75rem; color: #aaa; font-style: italic; }
+  .role-tag { font-size: 0.6rem; padding: 2px 8px; border-radius: 20px; font-weight: 600; margin-left: auto; white-space: nowrap; }
+  .detail { display: none; margin-top: 14px; animation: fadeIn 0.2s ease; }
+  .detail.open { display: block; }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  .section { margin-bottom: 16px; }
+  .section h4 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 8px; }
+  .section ul { list-style: none; padding: 0; }
+  .section li { font-size: 0.78rem; color: #ccc; padding: 3px 0 3px 16px; position: relative; line-height: 1.5; }
+  .section li::before { content: '→'; position: absolute; left: 0; color: #666; }
+  .budget-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .budget-item { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; text-align: center; }
+  .budget-label { font-size: 0.62rem; color: #888; text-transform: uppercase; }
+  .budget-value { font-size: 0.9rem; font-weight: 700; margin-top: 2px; }
+  .where-grid { display: flex; flex-wrap: wrap; gap: 6px; }
+  .where-tag { font-size: 0.72rem; background: rgba(255,255,255,0.08); padding: 4px 10px; border-radius: 8px; color: #ccc; }
+  .interview-q { background: rgba(255,255,255,0.04); border-left: 3px solid; padding: 10px 14px; border-radius: 0 8px 8px 0; margin-bottom: 8px; }
+  .interview-q .q { font-size: 0.8rem; font-weight: 600; color: #fff; margin-bottom: 6px; }
+  .interview-q .good, .interview-q .bad { font-size: 0.73rem; padding: 2px 0; }
+  .interview-q .good { color: #4ade80; }
+  .interview-q .bad { color: #f87171; }
+  .success-list li::before { content: '✓'; color: #4ade80; }
+  .tap-hint { font-size: 0.65rem; color: #555; text-align: center; margin-top: 4px; }
+
+  .r-ecomm { background: linear-gradient(135deg, #2d1a1a, #251515); border: 2px solid #ef4444; }
+  .r-ecomm h4 { color: #ef4444; }
+  .r-ecomm .role-tag { background: #ef4444; color: #fff; }
+  .r-ecomm .interview-q { border-color: #ef4444; }
+
+  .r-brand { background: linear-gradient(135deg, #2d2a1a, #252115); border: 2px solid #f59e0b; }
+  .r-brand h4 { color: #f59e0b; }
+  .r-brand .role-tag { background: #f59e0b; color: #000; }
+  .r-brand .interview-q { border-color: #f59e0b; }
+
+  .r-product { background: linear-gradient(135deg, #2a1a2d, #211528); border: 2px solid #c084fc; }
+  .r-product h4 { color: #c084fc; }
+  .r-product .role-tag { background: #c084fc; color: #000; }
+  .r-product .interview-q { border-color: #c084fc; }
+
+  .r-finance { background: linear-gradient(135deg, #1a2a2d, #152528); border: 2px solid #38bdf8; }
+  .r-finance h4 { color: #38bdf8; }
+  .r-finance .role-tag { background: #38bdf8; color: #000; }
+  .r-finance .interview-q { border-color: #38bdf8; }
+
+  .r-cs { background: linear-gradient(135deg, #2d2418, #251f14); border: 2px solid #fb923c; }
+  .r-cs h4 { color: #fb923c; }
+  .r-cs .role-tag { background: #fb923c; color: #000; }
+  .r-cs .interview-q { border-color: #fb923c; }
+</style>
+</head>
+<body>
+
+<div class="back"><a href="index.html">← Back to Hub</a></div>
+<h1>🧩 Odd Pieces — Hiring Playbook</h1>
+<p class="subtitle">Job descriptions · Budgets · Sources · Interview questions · 90-day success</p>
+
+<div class="roles">
+
+<!-- ======================== ECOMM LEAD ======================== -->
+<div class="role-card r-ecomm" onclick="toggle('ecomm')">
+  <div class="role-header">
+    <span class="role-emoji">📈</span>
+    <div>
+      <div class="role-title">Ecomm / Marketplace Lead</div>
+      <div class="role-one-liner">How we sell & grow</div>
+    </div>
+    <span class="role-tag">HIRE NOW 🔴</span>
+  </div>
+  <div class="tap-hint">tap for full details ↓</div>
+  <div class="detail" id="ecomm">
+
+    <div class="section">
+      <h4>Job Description</h4>
+      <ul>
+        <li>Own and grow revenue across Shopify and Amazon channels</li>
+        <li>Manage Amazon Seller Central — listings, A+ content, PPC, brand registry</li>
+        <li>Shopify storefront optimization — CRO, A/B testing, UX improvements</li>
+        <li>Run and optimize paid campaigns (Amazon Sponsored, Google Shopping)</li>
+        <li>Keyword research and SEO for both platforms</li>
+        <li>Pricing strategy — MAP, bundles, promotions, competitive positioning</li>
+        <li>Product launch execution on each channel</li>
+        <li>Weekly reporting — revenue, CVR, ROAS, traffic, BSR</li>
+        <li>Monitor Amazon account health, policy changes, and compliance</li>
+        <li>Explore new channels (Walmart, TikTok Shop, wholesale)</li>
+        <li>Coordinate with Brand Lead on listing creative</li>
+        <li>Use AI tools for copywriting and data analysis</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Budget (USD)</h4>
+      <div class="budget-grid">
+        <div class="budget-item"><div class="budget-label">Global Remote</div><div class="budget-value">$2,000–4,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">North America</div><div class="budget-value">$4,000–6,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Vancouver Local</div><div class="budget-value">$5,500–8,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Fractional/Agency</div><div class="budget-value">$2,500–5,000/mo</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Where to Find</h4>
+      <div class="where-grid">
+        <span class="where-tag">Upwork ($25+/hr filter)</span>
+        <span class="where-tag">LinkedIn — "DTC ecommerce"</span>
+        <span class="where-tag">eCommerceFuel community</span>
+        <span class="where-tag">Seller communities (Helium 10, Jungle Scout)</span>
+        <span class="where-tag">Twitter/X DTC community</span>
+        <span class="where-tag">MarketerHire</span>
+      </div>
+      <ul style="margin-top:8px;">
+        <li>Best value regions: South Africa, Eastern Europe, Pakistan, LatAm</li>
+        <li>Look for people who've grown a brand from $500K–$5M range</li>
+        <li>Agency alumni often make great hires — they've seen many brands</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Interview Questions</h4>
+      <div class="interview-q">
+        <div class="q">"If I said grow our Shopify revenue 30% in 6 months, what's your first move?"</div>
+        <div class="bad">❌ "What's your budget for ads?"</div>
+        <div class="good">✅ "Let me see your current CVR, AOV, and traffic sources first"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"Our Amazon listing is ranking page 3. Walk me through your approach."</div>
+        <div class="bad">❌ "Increase PPC budget"</div>
+        <div class="good">✅ "I'd audit the listing copy, images, reviews, then look at keyword indexing before touching ads"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"We sell puzzles on Shopify and Amazon. What's a risk of selling on both?"</div>
+        <div class="bad">❌ "I don't think there's a risk"</div>
+        <div class="good">✅ "Channel conflict — Amazon can cannibalize DTC margin. Need a strategy for differentiation (bundles, exclusives, pricing)"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>90-Day Success Criteria</h4>
+      <ul class="success-list">
+        <li>Full audit of Shopify + Amazon performance completed (week 1-2)</li>
+        <li>All listings optimized — copy, images, keywords, A+ content</li>
+        <li>PPC campaigns restructured with clear ROAS targets</li>
+        <li>Weekly reporting dashboard live and shared</li>
+        <li>One product launch executed end-to-end on both channels</li>
+        <li>Channel strategy doc created — pricing, differentiation, roadmap</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================== BRAND / MARKETING ======================== -->
+<div class="role-card r-brand" onclick="toggle('brand')">
+  <div class="role-header">
+    <span class="role-emoji">🎨</span>
+    <div>
+      <div class="role-title">Brand / Marketing Lead</div>
+      <div class="role-one-liner">How we look & communicate</div>
+    </div>
+    <span class="role-tag">HIRE NEXT 🟡</span>
+  </div>
+  <div class="tap-hint">tap for full details ↓</div>
+  <div class="detail" id="brand">
+
+    <div class="section">
+      <h4>Job Description</h4>
+      <ul>
+        <li>Own brand identity — visual guidelines, tone of voice, brand bible</li>
+        <li>Direct all creative output — product photography, lifestyle shoots, packaging</li>
+        <li>Plan and execute email/SMS marketing (Klaviyo) — automated flows + campaigns</li>
+        <li>Social media strategy and content calendar (Instagram, TikTok, Pinterest)</li>
+        <li>Create paid ad creative concepts and briefs (Meta, Google, TikTok)</li>
+        <li>Build puzzle community — UGC, influencer partnerships, ambassador program</li>
+        <li>Support Kickstarter campaigns with storytelling and creative assets</li>
+        <li>Use AI tools (Midjourney, Canva AI) for rapid creative production</li>
+        <li>PR and press outreach — gift guides, puzzle blogs, lifestyle media</li>
+        <li>Customer lifecycle marketing — retention, loyalty, repeat purchase programs</li>
+        <li>Coordinate with Ecomm Lead on listing imagery and A+ content</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Budget (USD)</h4>
+      <div class="budget-grid">
+        <div class="budget-item"><div class="budget-label">Global Remote</div><div class="budget-value">$2,000–4,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">North America</div><div class="budget-value">$4,000–6,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Vancouver Local</div><div class="budget-value">$5,500–8,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Fractional/Agency</div><div class="budget-value">$2,000–4,500/mo</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Where to Find</h4>
+      <div class="where-grid">
+        <span class="where-tag">Upwork — "DTC brand manager"</span>
+        <span class="where-tag">LinkedIn — ecomm marketing</span>
+        <span class="where-tag">Dribbble / Behance (creative leads)</span>
+        <span class="where-tag">Twitter/X DTC community</span>
+        <span class="where-tag">MarketerHire</span>
+        <span class="where-tag">WorkingNotWorking</span>
+      </div>
+      <ul style="margin-top:8px;">
+        <li>Best value regions: South Africa, Argentina, Philippines (senior), Eastern Europe</li>
+        <li>Look for DTC brand experience — not just "marketing" generalists</li>
+        <li>Portfolio matters more than resume — ask to see brands they've built</li>
+        <li>AI-native is a must — they should already be using Midjourney/Canva AI</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Interview Questions</h4>
+      <div class="interview-q">
+        <div class="q">"Show me a brand you built or transformed. Walk me through your decisions."</div>
+        <div class="bad">❌ Generic portfolio of logos and social posts</div>
+        <div class="good">✅ Shows strategic thinking — why they made choices, what the results were</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"Our email list is 10K subscribers but only driving 15% of Shopify revenue. What do you do?"</div>
+        <div class="bad">❌ "Send more emails"</div>
+        <div class="good">✅ "Audit your flows first — welcome, abandoned cart, post-purchase. Then segment your list and test campaign frequency"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"We're a puzzle brand. How would you build community around that?"</div>
+        <div class="bad">❌ "Post on social media more"</div>
+        <div class="good">✅ "Puzzles are inherently shareable — UGC of finished puzzles, speed challenges, collab with puzzle influencers, exclusive designs for community members"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>90-Day Success Criteria</h4>
+      <ul class="success-list">
+        <li>Brand bible / style guide created or updated</li>
+        <li>Email flows audited and optimized (welcome, cart, post-purchase, winback)</li>
+        <li>Content calendar live — 30 days planned at all times</li>
+        <li>At least 2 email campaigns sent per week with A/B testing</li>
+        <li>Email revenue contribution ≥ 25% of Shopify</li>
+        <li>Influencer/UGC pipeline started — 5+ creators identified and contacted</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================== PRODUCT DEV ======================== -->
+<div class="role-card r-product" onclick="toggle('product')">
+  <div class="role-header">
+    <span class="role-emoji">🧪</span>
+    <div>
+      <div class="role-title">Product Developer</div>
+      <div class="role-one-liner">What we make</div>
+    </div>
+    <span class="role-tag">HIRE 🟣</span>
+  </div>
+  <div class="tap-hint">tap for full details ↓</div>
+  <div class="detail" id="product">
+
+    <div class="section">
+      <h4>Job Description</h4>
+      <ul>
+        <li>Research market trends, competitors, and puzzle industry opportunities</li>
+        <li>Develop new puzzle concepts with Visionary — themes, formats, sizes, difficulty</li>
+        <li>Source and manage manufacturers (primarily China-based)</li>
+        <li>Request, evaluate, and iterate on samples — quality, fit, finish, durability</li>
+        <li>Design and refine packaging — unboxing experience is part of the product</li>
+        <li>Manage BOM (bill of materials) and landed cost per SKU</li>
+        <li>Own the product development calendar — concept to shelf timeline</li>
+        <li>Negotiate pricing, MOQs, and payment terms with factories</li>
+        <li>Ensure compliance — safety certifications, customs, labeling</li>
+        <li>Coordinate with Ops on production schedules and inventory planning</li>
+        <li>Coordinate with Brand Lead on product photography and lifestyle imagery</li>
+        <li>Track competitor product launches and market gaps</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Budget (USD)</h4>
+      <div class="budget-grid">
+        <div class="budget-item"><div class="budget-label">Global Remote</div><div class="budget-value">$1,500–3,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">North America</div><div class="budget-value">$4,000–6,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Vancouver Local</div><div class="budget-value">$5,000–7,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">China-Based</div><div class="budget-value">$1,500–3,000/mo</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Where to Find</h4>
+      <div class="where-grid">
+        <span class="where-tag">Upwork — "product development sourcing"</span>
+        <span class="where-tag">LinkedIn — CPG / consumer products</span>
+        <span class="where-tag">Emily Carr / design school grads (Vancouver)</span>
+        <span class="where-tag">Alibaba sourcing agent networks</span>
+        <span class="where-tag">Puzzle / board game industry contacts</span>
+        <span class="where-tag">Canton Fair connections</span>
+      </div>
+      <ul style="margin-top:8px;">
+        <li>China-based sourcing agent with product dev skills can be incredible value</li>
+        <li>Look for physical product experience — not just digital</li>
+        <li>Puzzle/game/toy industry experience is a huge plus</li>
+        <li>Must understand manufacturing constraints, not just design</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Interview Questions</h4>
+      <div class="interview-q">
+        <div class="q">"If I told you to launch a new puzzle SKU, what's the first thing you do?"</div>
+        <div class="bad">❌ "What do you want it to look like?"</div>
+        <div class="good">✅ "What's the margin target? Who's the customer? What's selling well now? What gaps exist in the lineup?"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"A factory sends you a sample and the quality isn't right. What do you do?"</div>
+        <div class="bad">❌ "Tell them to redo it"</div>
+        <div class="good">✅ "Document specific issues with photos, reference the spec sheet, get on a call to align expectations, request revised sample with timeline"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"How do you decide between two factories — one cheaper, one better quality?"</div>
+        <div class="bad">❌ Goes with cheaper immediately</div>
+        <div class="good">✅ "Depends on the product positioning. For a premium brand, quality is non-negotiable. I'd calculate total landed cost including defect rates, returns, and brand impact"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>90-Day Success Criteria</h4>
+      <ul class="success-list">
+        <li>Full product line audit — margins, performance, gaps identified</li>
+        <li>Manufacturer relationship map documented (current + backup factories)</li>
+        <li>Next 2-3 SKU concepts developed with cost estimates</li>
+        <li>Product development calendar created — 12-month pipeline view</li>
+        <li>At least 1 new product in sample stage</li>
+        <li>BOM and landed cost template standardized for all SKUs</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================== FINANCE ======================== -->
+<div class="role-card r-finance" onclick="toggle('finance')">
+  <div class="role-header">
+    <span class="role-emoji">💰</span>
+    <div>
+      <div class="role-title">Finance</div>
+      <div class="role-one-liner">The numbers</div>
+    </div>
+    <span class="role-tag">HIRE 🔵</span>
+  </div>
+  <div class="tap-hint">tap for full details ↓</div>
+  <div class="detail" id="finance">
+
+    <div class="section">
+      <h4>Job Description</h4>
+      <ul>
+        <li>Manage bookkeeping — accounts payable, accounts receivable, reconciliations</li>
+        <li>Monthly P&L, balance sheet, and cash flow statements</li>
+        <li>Budget creation and variance tracking</li>
+        <li>Track profitability by channel (Shopify, Amazon, Kickstarter)</li>
+        <li>Track profitability by SKU — identify winners and losers</li>
+        <li>Manage payroll, contractor payments, and tax filings</li>
+        <li>Cash flow forecasting — especially around large inventory buys</li>
+        <li>Support Product Dev with cost analysis and margin modeling</li>
+        <li>Sales tax / GST / HST compliance across jurisdictions</li>
+        <li>Amazon fee reconciliation and reimbursement claims</li>
+        <li>Financial planning for Kickstarter campaigns and product launches</li>
+        <li>Work directly with Visionary on strategic financial decisions</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Budget (USD)</h4>
+      <div class="budget-grid">
+        <div class="budget-item"><div class="budget-label">Global Remote</div><div class="budget-value">$1,000–2,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">North America</div><div class="budget-value">$3,000–5,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Vancouver Bookkeeper</div><div class="budget-value">$2,500–4,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Fractional CFO</div><div class="budget-value">$1,500–3,000/mo</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Where to Find</h4>
+      <div class="where-grid">
+        <span class="where-tag">Upwork — "ecommerce bookkeeper"</span>
+        <span class="where-tag">Belay (fractional finance)</span>
+        <span class="where-tag">LinkedIn — "ecomm controller"</span>
+        <span class="where-tag">Local CPA firms (Vancouver)</span>
+        <span class="where-tag">A2X / Xero partner network</span>
+      </div>
+      <ul style="margin-top:8px;">
+        <li>Best value: Pakistan, Philippines, Eastern Europe for bookkeeping</li>
+        <li>MUST have ecommerce experience — Amazon fees and multi-channel reconciliation is complex</li>
+        <li>Consider splitting: remote bookkeeper + fractional CFO for strategy</li>
+        <li>Familiarity with Xero/QuickBooks + A2X (Amazon accounting) is key</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Interview Questions</h4>
+      <div class="interview-q">
+        <div class="q">"We sell on Shopify and Amazon. How do you track profitability by channel?"</div>
+        <div class="bad">❌ "I just look at the revenue numbers"</div>
+        <div class="good">✅ "Revenue minus COGS, platform fees, shipping, ads, and returns per channel. Amazon has hidden fees — referral, FBA, storage. I'd use A2X to automate the reconciliation"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"We need to place a $50K inventory order. How do you help me decide?"</div>
+        <div class="bad">❌ "Do you have the cash?"</div>
+        <div class="good">✅ "I'd model cash flow impact — when does the cash go out vs. when do we see revenue? What's our runway after? Can we negotiate payment terms? What's the expected ROI by SKU?"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>90-Day Success Criteria</h4>
+      <ul class="success-list">
+        <li>Books cleaned up and current — all reconciliations done</li>
+        <li>Monthly financial reporting cadence established (by 10th of each month)</li>
+        <li>Profitability by channel and by top SKUs calculated</li>
+        <li>Cash flow forecast model built (12-month rolling)</li>
+        <li>Amazon fee audit completed — reimbursement claims filed</li>
+        <li>Budget template created for next quarter</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- ======================== CUSTOMER SERVICE ======================== -->
+<div class="role-card r-cs" onclick="toggle('cs')">
+  <div class="role-header">
+    <span class="role-emoji">💬</span>
+    <div>
+      <div class="role-title">Customer Service</div>
+      <div class="role-one-liner">How we care</div>
+    </div>
+    <span class="role-tag">HIRE 🟠</span>
+  </div>
+  <div class="tap-hint">tap for full details ↓</div>
+  <div class="detail" id="cs">
+
+    <div class="section">
+      <h4>Job Description</h4>
+      <ul>
+        <li>Respond to customer inquiries across all channels (email, chat, Amazon, social DMs)</li>
+        <li>Handle returns, exchanges, refunds, and replacements</li>
+        <li>Manage Amazon buyer messages within 24hr SLA</li>
+        <li>Resolve product issues — missing pieces, damaged items, defects</li>
+        <li>Proactively request and manage product reviews</li>
+        <li>Escalate product quality issues to Product Dev</li>
+        <li>Build and maintain FAQ, help center, and response templates</li>
+        <li>Monitor and respond to negative reviews (Amazon + Shopify)</li>
+        <li>Track common complaints and surface patterns to team</li>
+        <li>Post-purchase follow-up — satisfaction checks, review requests</li>
+        <li>Use AI tools for templated responses and ticket triage</li>
+        <li>Turn unhappy customers into fans — go above and beyond on resolution</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Budget (USD)</h4>
+      <div class="budget-grid">
+        <div class="budget-item"><div class="budget-label">Global Remote</div><div class="budget-value">$800–1,500/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Philippines</div><div class="budget-value">$800–1,200/mo</div></div>
+        <div class="budget-item"><div class="budget-label">North America</div><div class="budget-value">$2,500–4,000/mo</div></div>
+        <div class="budget-item"><div class="budget-label">Part-Time / VA</div><div class="budget-value">$500–1,000/mo</div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>Where to Find</h4>
+      <div class="where-grid">
+        <span class="where-tag">Upwork</span>
+        <span class="where-tag">OnlineJobs.ph</span>
+        <span class="where-tag">LinkedIn</span>
+        <span class="where-tag">Gorgias / Zendesk partner networks</span>
+      </div>
+      <ul style="margin-top:8px;">
+        <li>Philippines is strong for CS — English fluency, service culture, good timezone overlap</li>
+        <li>Start part-time and scale with volume</li>
+        <li>Amazon CS experience is specifically valuable — buyer messages have strict SLAs</li>
+        <li>Look for empathy + problem-solving, not just "fast typing"</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h4>Interview Questions</h4>
+      <div class="interview-q">
+        <div class="q">"A customer says their puzzle is missing 3 pieces and leaves a 1-star review. What do you do?"</div>
+        <div class="bad">❌ "Send a replacement"</div>
+        <div class="good">✅ "Apologize immediately, offer replacement + small gift. Then contact them privately to ask if they'd update the review. Flag the issue to Product Dev to check the batch"</div>
+      </div>
+      <div class="interview-q">
+        <div class="q">"You notice the same complaint coming up 5 times this week. What's your move?"</div>
+        <div class="bad">❌ "Keep resolving each ticket"</div>
+        <div class="good">✅ "Document the pattern, alert the team with data, suggest a fix — maybe it's a listing issue, packaging problem, or manufacturing defect that needs escalation"</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <h4>90-Day Success Criteria</h4>
+      <ul class="success-list">
+        <li>All response channels set up and monitored daily</li>
+        <li>Average response time ≤ 12 hours</li>
+        <li>Template library created for top 20 inquiry types</li>
+        <li>Review request system live and running</li>
+        <li>Monthly CS report — volume, themes, CSAT, resolution rate</li>
+        <li>Escalation process documented (when to flag Product Dev, Ops, etc.)</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /roles -->
+
+<div style="text-align:center; margin-top:24px; color:#555; font-size:0.7rem;">
+  Odd Pieces · Hiring Playbook · Tap each role to expand
+</div>
+
+<script>
+function toggle(id) {
+  const panel = document.getElementById(id);
+  const isOpen = panel.classList.contains('open');
+  document.querySelectorAll('.detail').forEach(p => p.classList.remove('open'));
+  if (!isOpen) {
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+</script>
+
+</body>
+</html>

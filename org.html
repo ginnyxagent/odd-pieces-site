@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Org Structure</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; padding: 20px; min-height: 100vh; }
+  h1 { text-align: center; font-size: 1.4rem; margin-bottom: 6px; color: #fff; }
+  .subtitle { text-align: center; color: #888; font-size: 0.82rem; margin-bottom: 28px; }
+  .org { display: flex; flex-direction: column; align-items: center; gap: 0; max-width: 800px; margin: 0 auto; }
+  .card { border-radius: 14px; padding: 16px 18px; width: 100%; max-width: 360px; text-align: center; position: relative; cursor: pointer; transition: all 0.2s; }
+  .card:hover { transform: scale(1.01); }
+  .card h3 { font-size: 0.92rem; margin-bottom: 4px; }
+  .card .role-summary { font-size: 0.78rem; color: #ccc; line-height: 1.4; }
+  .card .emoji { font-size: 1.5rem; margin-bottom: 4px; }
+  .card .tag { display: inline-block; font-size: 0.62rem; padding: 2px 8px; border-radius: 20px; margin-top: 6px; font-weight: 600; }
+  .card .tap-hint { font-size: 0.65rem; color: #666; margin-top: 6px; }
+  .visionary { background: linear-gradient(135deg, #6c3ce0, #4a1fb8); border: 2px solid #8b5cf6; }
+  .visionary .tag { background: #8b5cf6; color: #fff; }
+  .integrator { background: linear-gradient(135deg, #1e6091, #155280); border: 2px solid #3b82f6; }
+  .integrator .tag { background: #3b82f6; color: #fff; }
+  .hire { background: linear-gradient(135deg, #2d2d3f, #252536); border: 2px solid #555; }
+  .hire-now { border-color: #ef4444; }
+  .hire-now .tag { background: #ef4444; color: #fff; }
+  .hire-next { border-color: #f59e0b; }
+  .hire-next .tag { background: #f59e0b; color: #000; }
+  .product-dev { border-color: #c084fc; }
+  .product-dev .tag { background: #c084fc; color: #000; }
+  .finance { border-color: #38bdf8; }
+  .finance .tag { background: #38bdf8; color: #000; }
+  .active { border-color: #22c55e; }
+  .active .tag { background: #22c55e; color: #000; }
+  .cs { border-color: #fb923c; }
+  .cs .tag { background: #fb923c; color: #000; }
+  .ai-card { background: linear-gradient(135deg, #1a2a1a, #1e2e1e); border: 2px solid #4ade80; }
+  .ai-card .tag { background: #4ade80; color: #000; }
+  .connector { width: 2px; height: 24px; background: #555; }
+  .branch { display: flex; gap: 10px; width: 100%; max-width: 700px; justify-content: center; flex-wrap: wrap; }
+  .branch .card { max-width: 220px; flex: 1; min-width: 150px; }
+  .section-label { color: #888; font-size: 0.68rem; text-transform: uppercase; letter-spacing: 2px; margin: 16px 0 8px; }
+  .detail-panel { display: none; width: 100%; max-width: 700px; border-radius: 14px; padding: 20px; margin: 8px 0; text-align: left; animation: fadeIn 0.2s ease; }
+  .detail-panel.open { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+  .detail-panel h4 { font-size: 0.85rem; margin-bottom: 10px; color: #fff; }
+  .detail-section { margin-bottom: 14px; }
+  .detail-section h5 { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+  .detail-section ul { list-style: none; padding: 0; }
+  .detail-section li { font-size: 0.78rem; color: #ccc; padding: 3px 0; padding-left: 16px; position: relative; line-height: 1.4; }
+  .detail-section li::before { content: '→'; position: absolute; left: 0; color: #888; }
+  .kpi-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .kpi-item { background: rgba(255,255,255,0.05); border-radius: 8px; padding: 10px; text-align: center; }
+  .kpi-item .kpi-label { font-size: 0.65rem; color: #888; text-transform: uppercase; letter-spacing: 0.5px; }
+  .kpi-item .kpi-value { font-size: 0.82rem; color: #fff; font-weight: 600; margin-top: 2px; }
+  .legend { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-top: 28px; padding-bottom: 20px; }
+  .legend-item { display: flex; align-items: center; gap: 5px; font-size: 0.72rem; color: #aaa; }
+  .legend-dot { width: 9px; height: 9px; border-radius: 50%; }
+  .dp-visionary { background: rgba(108,60,224,0.15); border: 1px solid #8b5cf6; }
+  .dp-visionary h5 { color: #8b5cf6; }
+  .dp-integrator { background: rgba(30,96,145,0.15); border: 1px solid #3b82f6; }
+  .dp-integrator h5 { color: #3b82f6; }
+  .dp-product { background: rgba(192,132,252,0.1); border: 1px solid #c084fc; }
+  .dp-product h5 { color: #c084fc; }
+  .dp-finance { background: rgba(56,189,248,0.1); border: 1px solid #38bdf8; }
+  .dp-finance h5 { color: #38bdf8; }
+  .dp-ecomm { background: rgba(239,68,68,0.1); border: 1px solid #ef4444; }
+  .dp-ecomm h5 { color: #ef4444; }
+  .dp-brand { background: rgba(245,158,11,0.1); border: 1px solid #f59e0b; }
+  .dp-brand h5 { color: #f59e0b; }
+  .dp-ops { background: rgba(34,197,94,0.1); border: 1px solid #22c55e; }
+  .dp-ops h5 { color: #22c55e; }
+  .dp-cs { background: rgba(251,146,60,0.1); border: 1px solid #fb923c; }
+  .dp-cs h5 { color: #fb923c; }
+  .side-branch { display: flex; gap: 10px; width: 100%; max-width: 500px; justify-content: center; flex-wrap: wrap; }
+  .side-branch .card { max-width: 200px; flex: 1; min-width: 150px; }
+</style>
+</head>
+<body>
+
+<h1>🧩 Odd Pieces — Accountability Chart</h1>
+<p class="subtitle">EOS Structure · Lean & Global · AI-Assisted · Tap any role for details</p>
+
+<div class="org">
+
+  <!-- VISIONARY -->
+  <div class="card visionary" onclick="toggle('visionary')">
+    <div class="emoji">🧩</div>
+    <h3>VISIONARY</h3>
+    <p class="role-summary">Brand vision · Product direction · Partnerships</p>
+    <span class="tag">FOUNDER</span>
+    <div class="tap-hint">tap for details ↓</div>
+  </div>
+
+  <div class="detail-panel dp-visionary" id="visionary">
+    <h4>🧩 Visionary</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Set brand vision, mission, and long-term direction</li>
+        <li>Final say on product line — what puzzles get made</li>
+        <li>Lead Kickstarter campaigns and brand storytelling</li>
+        <li>Build key partnerships and collaborations (artists, retailers, licensors)</li>
+        <li>Champion company culture and brand values</li>
+        <li>Quarterly strategic planning with Integrator (EOS V/TO™)</li>
+        <li>Approve major creative and financial decisions</li>
+        <li>Work directly with Product Dev and Finance</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Revenue Target</div><div class="kpi-value">Annual goal</div></div>
+        <div class="kpi-item"><div class="kpi-label">New SKUs/Year</div><div class="kpi-value">Pipeline target</div></div>
+        <div class="kpi-item"><div class="kpi-label">Brand Awareness</div><div class="kpi-value">Social following, PR</div></div>
+        <div class="kpi-item"><div class="kpi-label">Kickstarter</div><div class="kpi-value">Campaign $ raised</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- PRODUCT DEV + FINANCE directly with Visionary -->
+  <div class="section-label">Reports Directly to Visionary</div>
+
+  <div class="side-branch">
+    <div class="card hire product-dev" onclick="toggle('product')">
+      <div class="emoji">🧪</div>
+      <h3>PRODUCT DEV</h3>
+      <p class="role-summary"><em>What we MAKE</em></p>
+      <span class="tag">HIRE 🟣</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+
+    <div class="card hire finance" onclick="toggle('finance')">
+      <div class="emoji">💰</div>
+      <h3>FINANCE</h3>
+      <p class="role-summary"><em>The numbers</em></p>
+      <span class="tag">HIRE 🔵</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+  </div>
+
+  <!-- PRODUCT DEV DETAIL -->
+  <div class="detail-panel dp-product" id="product">
+    <h4>🧪 Product Developer — "What We Make"</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Research market trends, competitors, and puzzle industry gaps</li>
+        <li>Develop new puzzle concepts with Visionary (themes, sizes, difficulty, formats)</li>
+        <li>Source and manage manufacturers (primarily China-based)</li>
+        <li>Request and evaluate samples — quality, fit, finish, durability</li>
+        <li>Design and iterate packaging (unboxing experience matters)</li>
+        <li>Manage BOM (bill of materials) and landed cost per SKU</li>
+        <li>Coordinate with Brand Lead on product photography and lifestyle imagery</li>
+        <li>Own the product development calendar — concept to shelf timeline</li>
+        <li>Negotiate pricing, MOQs, and payment terms with factories</li>
+        <li>Ensure compliance (safety certs, customs, labeling requirements)</li>
+        <li>Collaborate with Ops on production schedules and inventory planning</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">New SKUs Launched</div><div class="kpi-value"># per quarter</div></div>
+        <div class="kpi-item"><div class="kpi-label">Landed COGS</div><div class="kpi-value">≤ target % of retail</div></div>
+        <div class="kpi-item"><div class="kpi-label">Dev Timeline</div><div class="kpi-value">Concept → launch days</div></div>
+        <div class="kpi-item"><div class="kpi-label">Sample Approval Rate</div><div class="kpi-value">1st pass %</div></div>
+        <div class="kpi-item"><div class="kpi-label">Defect Rate</div><div class="kpi-value">≤ 2% per run</div></div>
+        <div class="kpi-item"><div class="kpi-label">Product Review Score</div><div class="kpi-value">≥ 4.5 avg new SKUs</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINANCE DETAIL -->
+  <div class="detail-panel dp-finance" id="finance">
+    <h4>💰 Finance — "The Numbers"</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Manage bookkeeping, accounts payable/receivable</li>
+        <li>Monthly P&L, balance sheet, and cash flow reporting</li>
+        <li>Budget creation and variance tracking</li>
+        <li>Track profitability by channel (Shopify, Amazon, Kickstarter)</li>
+        <li>Track profitability by SKU — identify winners and losers</li>
+        <li>Manage payroll, contractor payments, and tax filings</li>
+        <li>Cash flow forecasting — especially around inventory buys</li>
+        <li>Support Product Dev with cost analysis and margin modeling</li>
+        <li>Sales tax / GST compliance across jurisdictions</li>
+        <li>Amazon fee reconciliation and reimbursement claims</li>
+        <li>Financial planning for launches and Kickstarter campaigns</li>
+        <li>Work directly with Visionary on strategic financial decisions</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Gross Margin</div><div class="kpi-value">Target %</div></div>
+        <div class="kpi-item"><div class="kpi-label">Net Profit Margin</div><div class="kpi-value">Target %</div></div>
+        <div class="kpi-item"><div class="kpi-label">Cash Runway</div><div class="kpi-value">≥ 3 months</div></div>
+        <div class="kpi-item"><div class="kpi-label">Books Closed By</div><div class="kpi-value">10th of month</div></div>
+        <div class="kpi-item"><div class="kpi-label">Channel Profitability</div><div class="kpi-value">Monthly by channel</div></div>
+        <div class="kpi-item"><div class="kpi-label">Budget Variance</div><div class="kpi-value">≤ 10%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- INTEGRATOR -->
+  <div class="card integrator" onclick="toggle('integrator')">
+    <div class="emoji">🔧</div>
+    <h3>INTEGRATOR</h3>
+    <p class="role-summary">Runs the machine · Team mgmt · Execution</p>
+    <span class="tag">IN PLACE ✅</span>
+    <div class="tap-hint">tap for details ↓</div>
+  </div>
+
+  <div class="detail-panel dp-integrator" id="integrator">
+    <h4>🔧 Integrator</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Translate vision into executable plans and priorities</li>
+        <li>Run weekly L10 meetings, manage the scorecard</li>
+        <li>Hold all department leads accountable to their KPIs</li>
+        <li>Own hiring, onboarding, and team performance</li>
+        <li>Manage cross-functional projects and deadlines</li>
+        <li>Resolve issues between departments (IDS™ process)</li>
+        <li>Build and document systems, SOPs, and processes</li>
+        <li>Manage P&L and budget allocation with Visionary</li>
+        <li>Vendor and contractor management</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Rocks Completed</div><div class="kpi-value">≥ 80% on time</div></div>
+        <div class="kpi-item"><div class="kpi-label">Scorecard Health</div><div class="kpi-value">≥ 80% on track</div></div>
+        <div class="kpi-item"><div class="kpi-label">Team Retention</div><div class="kpi-value">Right people, right seats</div></div>
+        <div class="kpi-item"><div class="kpi-label">Gross Margin</div><div class="kpi-value">Target %</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+  <div class="section-label">Reports to Integrator</div>
+
+  <!-- FOUR LEADS -->
+  <div class="branch">
+    <div class="card hire hire-now" onclick="toggle('ecomm')">
+      <div class="emoji">📈</div>
+      <h3>ECOMM / MARKETPLACE</h3>
+      <p class="role-summary"><em>How we SELL & GROW</em></p>
+      <span class="tag">HIRE NOW 🔴</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+
+    <div class="card hire hire-next" onclick="toggle('brand')">
+      <div class="emoji">🎨</div>
+      <h3>BRAND / MARKETING</h3>
+      <p class="role-summary"><em>How we LOOK & COMMUNICATE</em></p>
+      <span class="tag">HIRE NEXT 🟡</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+
+    <div class="card hire active" onclick="toggle('ops')">
+      <div class="emoji">📦</div>
+      <h3>OPS / SUPPLY CHAIN</h3>
+      <p class="role-summary">🇵🇰 Pakistan team</p>
+      <span class="tag">ACTIVE ✅</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+
+    <div class="card hire cs" onclick="toggle('cs')">
+      <div class="emoji">💬</div>
+      <h3>CUSTOMER SERVICE</h3>
+      <p class="role-summary"><em>How we CARE</em></p>
+      <span class="tag">HIRE 🟠</span>
+      <div class="tap-hint">tap ↓</div>
+    </div>
+  </div>
+
+  <!-- ECOMM DETAIL -->
+  <div class="detail-panel dp-ecomm" id="ecomm">
+    <h4>📈 Ecomm / Marketplace Lead — "How We Sell & Grow"</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Own Shopify storefront — conversion rate optimization, A/B testing, UX</li>
+        <li>Manage Amazon seller account — listings, A+ content, brand registry</li>
+        <li>Run and optimize PPC campaigns (Amazon Sponsored Ads, Google Shopping)</li>
+        <li>Keyword research and SEO for both Shopify and Amazon</li>
+        <li>Pricing strategy across channels (MAP, promotions, bundles)</li>
+        <li>Analyze sales data — identify trends, top sellers, underperformers</li>
+        <li>Manage product launches on each channel (listing setup, launch strategy)</li>
+        <li>Monitor and respond to Amazon account health, policy changes</li>
+        <li>Explore new channels (Walmart, TikTok Shop, wholesale)</li>
+        <li>Weekly reporting: revenue, conversion, ROAS, traffic by channel</li>
+        <li>Coordinate with Brand Lead on listing creative and copy</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Total Revenue</div><div class="kpi-value">$ by channel/month</div></div>
+        <div class="kpi-item"><div class="kpi-label">Shopify CVR</div><div class="kpi-value">≥ 2.5%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Amazon ROAS</div><div class="kpi-value">≥ 4x</div></div>
+        <div class="kpi-item"><div class="kpi-label">ACoS</div><div class="kpi-value">≤ 25%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Avg Order Value</div><div class="kpi-value">$ target</div></div>
+        <div class="kpi-item"><div class="kpi-label">Organic Traffic</div><div class="kpi-value">MoM growth %</div></div>
+        <div class="kpi-item"><div class="kpi-label">BSR Rank</div><div class="kpi-value">Top SKU rankings</div></div>
+        <div class="kpi-item"><div class="kpi-label">New Channel Rev</div><div class="kpi-value">% of total</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- BRAND DETAIL -->
+  <div class="detail-panel dp-brand" id="brand">
+    <h4>🎨 Brand / Marketing Lead — "How We Look & Communicate"</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Own brand identity — visual guidelines, tone of voice, brand bible</li>
+        <li>Direct all creative output (product photos, lifestyle shoots, packaging design)</li>
+        <li>Plan and execute email/SMS marketing (Klaviyo) — flows + campaigns</li>
+        <li>Social media strategy and content calendar (Instagram, TikTok, Pinterest)</li>
+        <li>Create paid ad creative (Meta, Google, TikTok) — concepts + briefs</li>
+        <li>Build community — engage puzzle enthusiasts, UGC, influencer partnerships</li>
+        <li>Support Kickstarter campaigns with storytelling and creative assets</li>
+        <li>Use AI tools (Midjourney, Canva AI) for rapid creative production</li>
+        <li>Coordinate with Ecomm Lead on listing imagery and A+ content</li>
+        <li>PR and press outreach — gift guides, puzzle blogs, lifestyle media</li>
+        <li>Customer lifecycle marketing — retention, loyalty, repeat purchase</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Email Revenue</div><div class="kpi-value">≥ 30% of Shopify</div></div>
+        <div class="kpi-item"><div class="kpi-label">Email Open Rate</div><div class="kpi-value">≥ 40%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Social Growth</div><div class="kpi-value">Followers MoM %</div></div>
+        <div class="kpi-item"><div class="kpi-label">Engagement Rate</div><div class="kpi-value">≥ 3%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Paid Ad ROAS</div><div class="kpi-value">≥ 3x</div></div>
+        <div class="kpi-item"><div class="kpi-label">Repeat Purchase</div><div class="kpi-value">≥ 25%</div></div>
+        <div class="kpi-item"><div class="kpi-label">UGC Collected</div><div class="kpi-value"># per month</div></div>
+        <div class="kpi-item"><div class="kpi-label">Brand Sentiment</div><div class="kpi-value">Reviews + NPS</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- OPS DETAIL -->
+  <div class="detail-panel dp-ops" id="ops">
+    <h4>📦 Ops / Supply Chain — Pakistan Team</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Inventory management across all channels (Shopify, FBA, 3PL)</li>
+        <li>Demand forecasting and reorder planning</li>
+        <li>Coordinate inbound shipments — freight forwarding, customs, duties</li>
+        <li>Manage FBA inventory — shipment creation, replenishment, storage limits</li>
+        <li>3PL relationship management and SLA tracking</li>
+        <li>Purchase order creation and tracking with manufacturers</li>
+        <li>Monitor landed costs and flag margin changes</li>
+        <li>Returns processing and reporting</li>
+        <li>Data entry, reconciliation, and inventory audits</li>
+        <li>Weekly inventory reports — stock levels, days of supply, aging</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Stockout Rate</div><div class="kpi-value">≤ 2% of SKUs</div></div>
+        <div class="kpi-item"><div class="kpi-label">Inventory Accuracy</div><div class="kpi-value">≥ 98%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Days of Supply</div><div class="kpi-value">30-60 day target</div></div>
+        <div class="kpi-item"><div class="kpi-label">FBA In-Stock</div><div class="kpi-value">≥ 95%</div></div>
+        <div class="kpi-item"><div class="kpi-label">Landed Cost Accuracy</div><div class="kpi-value">Within 5% forecast</div></div>
+        <div class="kpi-item"><div class="kpi-label">Fulfillment Speed</div><div class="kpi-value">≤ 2 day ship</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CS DETAIL -->
+  <div class="detail-panel dp-cs" id="cs">
+    <h4>💬 Customer Service — "How We Care"</h4>
+    <div class="detail-section">
+      <h5>Core Duties</h5>
+      <ul>
+        <li>Respond to customer inquiries across all channels (email, Shopify chat, Amazon messages, social DMs)</li>
+        <li>Handle returns, exchanges, refunds, and replacements</li>
+        <li>Manage Amazon buyer messages within 24hr SLA</li>
+        <li>Resolve product issues — missing pieces, damaged items, defects</li>
+        <li>Proactively request and manage product reviews</li>
+        <li>Escalate product quality issues to Product Dev</li>
+        <li>Build and maintain FAQ, help center, and response templates</li>
+        <li>Monitor and respond to negative reviews (Amazon + Shopify)</li>
+        <li>Track common complaints and surface patterns to team</li>
+        <li>Post-purchase follow-up — thank you flows, satisfaction checks</li>
+        <li>Use AI tools for templated responses and ticket triage</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5>KPIs</h5>
+      <div class="kpi-grid">
+        <div class="kpi-item"><div class="kpi-label">Response Time</div><div class="kpi-value">≤ 12 hrs avg</div></div>
+        <div class="kpi-item"><div class="kpi-label">Resolution Rate</div><div class="kpi-value">≥ 95% first contact</div></div>
+        <div class="kpi-item"><div class="kpi-label">CSAT Score</div><div class="kpi-value">≥ 4.5 / 5</div></div>
+        <div class="kpi-item"><div class="kpi-label">Amazon Response</div><div class="kpi-value">≤ 24 hrs (SLA)</div></div>
+        <div class="kpi-item"><div class="kpi-label">Review Request Rate</div><div class="kpi-value"># sent per month</div></div>
+        <div class="kpi-item"><div class="kpi-label">Return Rate</div><div class="kpi-value">Track + reduce MoM</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="connector"></div>
+
+  <!-- AI LAYER -->
+  <div class="card ai-card" style="max-width: 500px;" onclick="toggle('ai')">
+    <div class="emoji">🤖</div>
+    <h3>AI LAYER (Replaces VAs)</h3>
+    <p class="role-summary">Graphics · Copy · Web · Data · Reports</p>
+    <span class="tag">TOOL, NOT HEADCOUNT</span>
+    <div class="tap-hint">tap for details ↓</div>
+  </div>
+
+  <div class="detail-panel" id="ai" style="background: rgba(74,222,128,0.05); border: 1px solid #4ade80;">
+    <h4>🤖 AI Layer — What It Replaces</h4>
+    <div class="detail-section">
+      <h5 style="color: #4ade80;">Tasks Handled by AI</h5>
+      <ul>
+        <li>Graphic design — product mockups, social graphics (Midjourney, Canva AI)</li>
+        <li>Copywriting — listings, emails, ad copy (Claude, ChatGPT)</li>
+        <li>Basic web updates — landing pages, minor Shopify edits (Cursor, AI code)</li>
+        <li>Data analysis — sales reports, trend spotting (AI + spreadsheets)</li>
+        <li>Customer service — templated responses, FAQ chatbot</li>
+        <li>Content repurposing — blog → social → email snippets</li>
+      </ul>
+    </div>
+    <div class="detail-section">
+      <h5 style="color: #4ade80;">Still Needs Humans</h5>
+      <ul>
+        <li>Brand judgment — "does this feel like Odd Pieces?"</li>
+        <li>Strategy — what to sell, when, why, to whom</li>
+        <li>Relationships — suppliers, partners, influencers</li>
+        <li>Complex decisions — pricing, launches, crisis management</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#8b5cf6"></div> Visionary</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#c084fc"></div> Product Dev</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#38bdf8"></div> Finance</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#3b82f6"></div> Integrator</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#ef4444"></div> Hire Now</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f59e0b"></div> Hire Next</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#22c55e"></div> Active</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fb923c"></div> Customer Service</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#4ade80"></div> AI Layer</div>
+</div>
+
+<script>
+function toggle(id) {
+  const panel = document.getElementById(id);
+  const isOpen = panel.classList.contains('open');
+  document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('open'));
+  if (!isOpen) {
+    panel.classList.add('open');
+    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+}
+</script>
+
+</body>
+</html>
