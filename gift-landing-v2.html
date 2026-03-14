@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Found It — Odd Pieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FFFBF0;
+    --ink: #1A1A1A;
+    --yellow: #FEE000;
+    --orange: #FC9C1C;
+    --red: #FF4016;
+    --muted: #7A7060;
+    --border: #E8E0CC;
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    padding: 20px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: -0.02em;
+  }
+  .logo span { color: var(--orange); }
+  nav a.shop-link {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--muted);
+    text-decoration: none;
+    letter-spacing: 0.04em;
+  }
+  nav a.shop-link:hover { color: var(--ink); }
+
+  /* ── HERO ── */
+  .hero {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 56px 24px 32px;
+    text-align: center;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--yellow);
+    color: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    border-radius: 100px;
+    margin-bottom: 24px;
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+
+  .hero-sub {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: var(--muted);
+    max-width: 440px;
+    margin: 0 auto 40px;
+  }
+
+  /* ── TEASER CLUES ── */
+  .teaser {
+    background: var(--ink);
+    border-radius: 16px;
+    padding: 28px 24px;
+    margin: 0 auto 40px;
+    max-width: 600px;
+    text-align: left;
+  }
+  .teaser-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--yellow);
+    margin-bottom: 14px;
+  }
+  .clue-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+  .clue-row:last-child { border-bottom: none; }
+  .clue-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.7rem;
+    color: var(--yellow);
+    background: rgba(254,224,0,0.12);
+    border-radius: 6px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .clue-text {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.55);
+    line-height: 1.5;
+    filter: blur(4px);
+    user-select: none;
+  }
+  .clue-text strong { color: rgba(255,255,255,0.7); }
+  .teaser-cta {
+    margin-top: 18px;
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    font-style: italic;
+  }
+
+  /* ── EMAIL GATE ── */
+  .gate {
+    max-width: 480px;
+    margin: 0 auto;
+    padding: 0 24px 60px;
+  }
+
+  .gate-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+  }
+
+  .gate-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .gate-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  /* gift toggle */
+  .toggle-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .toggle-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .toggle-btn {
+    border: 1.5px solid var(--border);
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 12px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    font-family: 'Inter', sans-serif;
+  }
+  .toggle-btn .t-icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+  .toggle-btn .t-text { font-size: 0.78rem; font-weight: 600; color: var(--ink); line-height: 1.3; }
+  .toggle-btn:hover { border-color: var(--orange); }
+  .toggle-btn.selected {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    box-shadow: 0 2px 8px rgba(254,224,0,0.3);
+  }
+
+  .form-field {
+    margin-bottom: 12px;
+  }
+  .form-field input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-field input:focus { border-color: var(--orange); background: white; }
+  .form-field input::placeholder { color: #B0A898; }
+
+  .submit-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: opacity 0.15s, transform 0.1s;
+    letter-spacing: 0.01em;
+  }
+  .submit-btn:hover { opacity: 0.92; transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .fine-print {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 12px;
+    line-height: 1.5;
+  }
+
+  /* ── WHY SECTION ── */
+  .why {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 40px 24px 64px;
+    text-align: center;
+  }
+  .why-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 28px;
+  }
+  .why-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 520px) { .why-grid { grid-template-columns: 1fr; gap: 10px; } }
+  .why-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 16px;
+  }
+  .why-icon { font-size: 1.5rem; margin-bottom: 8px; }
+  .why-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .why-desc { font-size: 0.78rem; color: var(--muted); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 24px;
+    text-align: center;
+  }
+  footer a { color: var(--muted); text-decoration: none; font-size: 0.8rem; }
+  footer a:hover { color: var(--ink); }
+  .footer-sep { margin: 0 10px; color: var(--border); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://oddpieces.com" class="logo">Odd<span>Pieces</span> 🧩</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles" class="shop-link">Shop Puzzles →</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="badge">🔓 Secret Unlocked</div>
+  <h1>You found the<br><em>answer key.</em></h1>
+  <p class="hero-sub">Every Odd Pieces puzzle hides something. Hidden characters, cryptic clues, a final riddle. Enter your email to unlock the full guide — and find out what you missed.</p>
+</div>
+
+<!-- TEASER: blurred clues -->
+<div class="teaser" style="margin: 0 24px 40px; max-width: 600px; margin-left: auto; margin-right: auto;">
+  <div class="teaser-label">🔍 Hidden clues inside your puzzle</div>
+  <div class="clue-row">
+    <span class="clue-num">01</span>
+    <span class="clue-text">Look at the <strong>bottom-left corner</strong> — the shadow doesn't match the light source. That's intentional.</span>
+  </div>
+  <div class="clue-row">
+    <span class="clue-num">02</span>
+    <span class="clue-text">There's a <strong>hidden character</strong> that appears in every Odd Pieces puzzle. Did you find them?</span>
+  </div>
+  <div class="clue-row">
+    <span class="clue-num">03</span>
+    <span class="clue-text">The <strong>final riddle</strong> is encoded in the image. Most people miss it. Unlock to see the answer.</span>
+  </div>
+  <p class="teaser-cta">🔒 Unlock to reveal all clues</p>
+</div>
+
+<!-- EMAIL GATE -->
+<div class="gate">
+  <div class="gate-card">
+    <div class="gate-title">Unlock your answer key</div>
+    <div class="gate-sub">Takes 10 seconds. You'll also get 10% off your next puzzle — because once you know the secrets, you can't stop at one.</div>
+
+    <div class="toggle-label">One quick thing:</div>
+    <div class="toggle-group">
+      <div class="toggle-btn" onclick="selectType(this, 'gift')" id="btn-gift">
+        <span class="t-icon">🎁</span>
+        <span class="t-text">Someone gifted<br>this to me</span>
+      </div>
+      <div class="toggle-btn" onclick="selectType(this, 'self')" id="btn-self">
+        <span class="t-icon">🛍️</span>
+        <span class="t-text">I bought this<br>for myself</span>
+      </div>
+    </div>
+
+    <form action="#klaviyo-form" method="post">
+      <input type="hidden" name="purchase_type" id="purchase_type" value="">
+      <div class="form-field">
+        <input type="text" name="first_name" placeholder="First name" autocomplete="given-name">
+      </div>
+      <div class="form-field">
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+      </div>
+      <button type="submit" class="submit-btn">Unlock My Answer Key →</button>
+    </form>
+
+    <p class="fine-print">No spam. Just puzzle secrets, new drops, and the occasional weird Easter egg. 🧩</p>
+  </div>
+</div>
+
+<!-- WHY SECTION -->
+<div class="why">
+  <div class="why-label">What makes Odd Pieces different</div>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-icon">🔍</div>
+      <div class="why-title">Hidden Easter Eggs</div>
+      <div class="why-desc">Every puzzle hides things most people never find. Now you'll know.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">😲</div>
+      <div class="why-title">The Reveal</div>
+      <div class="why-desc">The box image is just the beginning. The story ends somewhere unexpected.</div>
+    </div>
+    <div class="why-card">
+      <div class="why-icon">🎨</div>
+      <div class="why-title">Original Art</div>
+      <div class="why-desc">Every puzzle is an original illustrated story. No stock. No generic.</div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <a href="https://oddpieces.com">oddpieces.com</a>
+  <span class="footer-sep">·</span>
+  <a href="https://oddpieces.com/en-us/collections/puzzles">Browse all puzzles</a>
+  <span class="footer-sep">·</span>
+  <span style="color: var(--border); font-size:0.8rem;">© Odd Pieces</span>
+</footer>
+
+<script>
+  function selectType(el, type) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('purchase_type').value = type;
+  }
+</script>
+
+</body>
+</html>
