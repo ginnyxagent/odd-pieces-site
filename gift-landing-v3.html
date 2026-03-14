@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Found It — Odd Pieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --muted: #7A7060;
+    --border: rgba(26,26,26,0.1);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--ink);
+    padding: 0 32px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+    text-decoration: none;
+  }
+  .nav-link {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.45);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  .nav-link:hover { color: var(--orange); }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--ink);
+    padding: 72px 24px 64px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(254,224,0,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--yellow);
+    margin-bottom: 20px;
+    display: block;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.4rem, 8vw, 4rem);
+    text-transform: uppercase;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--yellow);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.55);
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ── TEASER ── */
+  .teaser-section {
+    background: var(--cream);
+    padding: 56px 24px 0;
+  }
+  .section-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .clues-wrap {
+    max-width: 560px;
+    margin: 0 auto;
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    background: white;
+  }
+  .clue-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+  }
+  .clue-row:last-child { border-bottom: none; }
+  .clue-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.7rem;
+    color: var(--ink);
+    background: var(--yellow);
+    border-radius: 6px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .clue-text {
+    font-size: 0.9rem;
+    color: var(--ink);
+    line-height: 1.55;
+    filter: blur(5px);
+    user-select: none;
+    opacity: 0.7;
+  }
+  .lock-overlay {
+    text-align: center;
+    padding: 16px 24px;
+    background: var(--ink);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.72rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.4);
+  }
+  .lock-overlay span { color: var(--yellow); }
+
+  /* ── GATE ── */
+  .gate-section {
+    padding: 48px 24px 64px;
+  }
+  .gate-card {
+    max-width: 480px;
+    margin: 0 auto;
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 32px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.07);
+  }
+  .gate-card h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .gate-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 26px;
+  }
+
+  /* toggle */
+  .q-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .toggle-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 22px;
+  }
+  .toggle-btn {
+    border: 1.5px solid var(--border);
+    background: var(--cream);
+    border-radius: 12px;
+    padding: 14px 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+  }
+  .toggle-btn .t-icon { font-size: 1.4rem; display: block; margin-bottom: 5px; }
+  .toggle-btn .t-text {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+    line-height: 1.3;
+  }
+  .toggle-btn:hover { border-color: var(--orange); }
+  .toggle-btn.selected {
+    border-color: var(--yellow);
+    background: var(--yellow);
+    box-shadow: 0 2px 10px rgba(254,224,0,0.35);
+  }
+
+  /* form */
+  .form-row { margin-bottom: 10px; }
+  .form-row input {
+    width: 100%;
+    padding: 13px 16px;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--ink);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    -webkit-appearance: none;
+  }
+  .form-row input:focus { border-color: var(--orange); background: #fff; }
+  .form-row input::placeholder { color: #B8AD9E; }
+
+  .cta-btn {
+    width: 100%;
+    padding: 16px;
+    background: var(--red);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: opacity 0.15s, transform 0.1s;
+  }
+  .cta-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+  .cta-btn:active { transform: translateY(0); }
+
+  .fine-print {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.55;
+  }
+
+  /* ── FEATURES ── */
+  .features {
+    background: var(--ink);
+    padding: 64px 24px;
+  }
+  .features .section-label { color: rgba(255,255,255,0.3); margin-bottom: 36px; }
+  .features-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 500px) { .features-grid { grid-template-columns: 1fr; gap: 10px; } }
+  .feat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 14px;
+    padding: 22px 16px;
+    text-align: center;
+  }
+  .feat-icon { font-size: 1.6rem; margin-bottom: 10px; }
+  .feat-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #fff;
+    margin-bottom: 6px;
+  }
+  .feat-desc { font-size: 0.77rem; color: rgba(255,255,255,0.4); line-height: 1.5; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  footer a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  footer a:hover { color: var(--orange); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://oddpieces.com" class="logo">Odd Pieces 🧩</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles" class="nav-link">Shop Puzzles →</a>
+</nav>
+
+<!-- HERO (dark, like oddpieces.com sections) -->
+<section class="hero">
+  <span class="hero-label">🔓 Secret Unlocked</span>
+  <h1>You found<br>the <em>answer key.</em></h1>
+  <p class="hero-sub">Every Odd Pieces puzzle hides something. Enter your email to unlock the full guide — and find out what you missed.</p>
+</section>
+
+<!-- TEASER: blurred clues -->
+<section class="teaser-section">
+  <p class="section-label">🔍 Hidden clues inside your puzzle</p>
+  <div class="clues-wrap">
+    <div class="clue-row">
+      <span class="clue-num">01</span>
+      <span class="clue-text">Look at the bottom-left corner — the shadow doesn't match the light source. That's intentional.</span>
+    </div>
+    <div class="clue-row">
+      <span class="clue-num">02</span>
+      <span class="clue-text">There's a hidden character that appears in every Odd Pieces puzzle. Did you find them?</span>
+    </div>
+    <div class="clue-row">
+      <span class="clue-num">03</span>
+      <span class="clue-text">The final riddle is encoded in the image. Most people miss it. Unlock to see the answer.</span>
+    </div>
+    <div class="lock-overlay">🔒 <span>Unlock to reveal all clues</span></div>
+  </div>
+</section>
+
+<!-- EMAIL GATE -->
+<section class="gate-section">
+  <div class="gate-card">
+    <h2>Unlock Your<br>Answer Key</h2>
+    <p class="gate-sub">Takes 10 seconds. You'll also get 10% off your next puzzle — because once you know the secrets, you can't stop at one.</p>
+
+    <p class="q-label">Quick question:</p>
+    <div class="toggle-group">
+      <div class="toggle-btn" onclick="selectType(this,'gift')" id="btn-gift">
+        <span class="t-icon">🎁</span>
+        <span class="t-text">Someone gifted<br>this to me</span>
+      </div>
+      <div class="toggle-btn" onclick="selectType(this,'self')" id="btn-self">
+        <span class="t-icon">🛍️</span>
+        <span class="t-text">I bought this<br>for myself</span>
+      </div>
+    </div>
+
+    <form action="#klaviyo-form" method="post">
+      <input type="hidden" name="purchase_type" id="purchase_type" value="">
+      <div class="form-row">
+        <input type="text" name="first_name" placeholder="First name" autocomplete="given-name">
+      </div>
+      <div class="form-row">
+        <input type="email" name="email" placeholder="Your email" required autocomplete="email">
+      </div>
+      <button type="submit" class="cta-btn">Unlock My Answer Key →</button>
+    </form>
+
+    <p class="fine-print">No spam. Just puzzle secrets, new drops, and the occasional weird Easter egg. 🧩</p>
+  </div>
+</section>
+
+<!-- FEATURES (dark section, matches site pattern) -->
+<section class="features">
+  <p class="section-label">What makes Odd Pieces different</p>
+  <div class="features-grid">
+    <div class="feat-card">
+      <div class="feat-icon">🔍</div>
+      <div class="feat-title">Hidden Easter Eggs</div>
+      <div class="feat-desc">Every puzzle hides things most people never find.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">😲</div>
+      <div class="feat-title">The Reveal</div>
+      <div class="feat-desc">The box is just the beginning. The story ends somewhere unexpected.</div>
+    </div>
+    <div class="feat-card">
+      <div class="feat-icon">🎨</div>
+      <div class="feat-title">Original Art</div>
+      <div class="feat-desc">Every puzzle is an original illustrated story. No stock. No generic.</div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <a href="https://oddpieces.com">oddpieces.com</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles">Browse all puzzles</a>
+  <span style="color:rgba(255,255,255,0.15);font-size:11px;">© Odd Pieces</span>
+</footer>
+
+<script>
+  function selectType(el, type) {
+    document.querySelectorAll('.toggle-btn').forEach(b => b.classList.remove('selected'));
+    el.classList.add('selected');
+    document.getElementById('purchase_type').value = type;
+  }
+</script>
+
+</body>
+</html>
