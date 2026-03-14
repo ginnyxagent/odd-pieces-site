@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Email Designer Brief</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Inter',sans-serif; background:var(--cream); color:var(--ink); font-size:15px; line-height:1.6; }
+
+  /* NAV */
+  nav { background:var(--ink); padding:0 40px; position:sticky; top:0; z-index:100; display:flex; align-items:center; gap:24px; height:52px; overflow-x:auto; }
+  nav a { font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; text-transform:uppercase; letter-spacing:0.12em; color:rgba(255,255,255,0.5); text-decoration:none; white-space:nowrap; transition:color 0.15s; }
+  nav a:hover { color:var(--orange); }
+  nav .logo { color:var(--yellow); font-size:13px; margin-right:8px; }
+
+  /* LAYOUT */
+  .section { max-width:900px; margin:0 auto; padding:64px 40px; }
+  .section-tag { font-family:'Nunito',sans-serif; font-weight:800; font-size:11px; text-transform:uppercase; letter-spacing:0.2em; color:var(--orange); margin-bottom:12px; display:block; }
+  .section-title { font-family:'Nunito',sans-serif; font-weight:900; font-size:clamp(28px,4vw,48px); text-transform:uppercase; line-height:0.95; letter-spacing:-0.02em; margin-bottom:16px; }
+  .section-intro { font-size:16px; font-weight:500; line-height:1.7; max-width:640px; margin-bottom:40px; color:#555; }
+  .divider { height:4px; background:var(--yellow); width:48px; border-radius:2px; margin:20px 0 32px; }
+
+  /* HERO */
+  .hero { background:var(--ink); padding:80px 40px 60px; text-align:center; }
+  .hero h1 { font-family:'Nunito',sans-serif; font-weight:900; font-size:clamp(36px,6vw,72px); text-transform:uppercase; color:white; line-height:0.9; letter-spacing:-0.03em; margin-bottom:16px; }
+  .hero h1 span { color:var(--yellow); }
+  .hero p { font-size:16px; color:rgba(255,255,255,0.6); max-width:480px; margin:0 auto; }
+  .hero-tag { display:inline-block; background:var(--red); color:white; font-family:'Nunito',sans-serif; font-weight:900; font-size:11px; letter-spacing:0.15em; text-transform:uppercase; padding:6px 16px; border-radius:4px; margin-bottom:24px; }
+
+  /* TEMPLATE CARDS */
+  .template-grid { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+  @media(max-width:700px) { .template-grid { grid-template-columns:1fr; } }
+  .template-card { background:white; border-radius:12px; overflow:hidden; border:2px solid transparent; transition:border-color 0.15s; }
+  .template-card:hover { border-color:var(--orange); }
+  .template-card-header { padding:24px; }
+  .template-card-name { font-family:'Nunito',sans-serif; font-weight:900; font-size:20px; text-transform:uppercase; margin-bottom:4px; }
+  .template-card-type { font-family:'Nunito',sans-serif; font-weight:800; font-size:10px; letter-spacing:0.15em; text-transform:uppercase; display:inline-block; padding:3px 10px; border-radius:20px; margin-bottom:12px; }
+  .template-card-desc { font-size:14px; color:#666; line-height:1.6; margin-bottom:16px; }
+  .template-card-when { font-size:13px; color:#999; line-height:1.6; }
+  .template-card-when strong { color:#555; }
+  .template-preview { background:#F0EDE8; padding:20px; text-align:center; border-top:1px solid #EEE; }
+  .template-preview a { font-family:'Nunito',sans-serif; font-weight:800; font-size:12px; letter-spacing:0.1em; text-transform:uppercase; color:var(--ink); text-decoration:none; border-bottom:2px solid var(--yellow); padding-bottom:2px; }
+
+  /* COLOR SWATCHES */
+  .color-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(130px,1fr)); gap:12px; }
+  .swatch { border-radius:8px; overflow:hidden; border:1px solid rgba(0,0,0,0.06); }
+  .swatch-color { height:80px; }
+  .swatch-info { background:white; padding:12px; }
+  .swatch-name { font-family:'Nunito',sans-serif; font-weight:800; font-size:13px; margin-bottom:2px; }
+  .swatch-hex { font-size:12px; color:#888; font-family:monospace; }
+  .swatch-use { font-size:11px; color:#AAA; margin-top:4px; }
+
+  /* SPEC TABLE */
+  table { width:100%; border-collapse:collapse; margin:20px 0; font-size:14px; }
+  th { text-align:left; border-bottom:2px solid var(--ink); padding:10px 12px; font-family:'Nunito',sans-serif; font-weight:800; font-size:12px; text-transform:uppercase; letter-spacing:0.1em; }
+  td { padding:10px 12px; border-bottom:1px solid #EEE; color:#444; }
+  tr:hover td { background:#FAFAF5; }
+
+  /* DO / DON'T */
+  .do-dont { display:grid; grid-template-columns:1fr 1fr; gap:0; border-radius:12px; overflow:hidden; border:2px solid var(--ink); margin:24px 0; }
+  @media(max-width:600px) { .do-dont { grid-template-columns:1fr; } }
+  .do-col { background:var(--blue); }
+  .dont-col { background:#FFE8E4; }
+  .dd-header { font-family:'Nunito',sans-serif; font-weight:900; font-size:16px; padding:16px 24px; border-bottom:2px solid rgba(0,0,0,0.1); }
+  .do-col .dd-header { color:#0A5C47; }
+  .dont-col .dd-header { color:var(--red); }
+  .dd-item { font-size:14px; font-weight:500; padding:12px 24px; border-bottom:1px solid rgba(0,0,0,0.06); line-height:1.5; }
+  .dd-item:last-child { border-bottom:none; }
+
+  /* CALLOUT */
+  .callout { background:var(--ink); color:white; border-radius:8px; padding:24px 28px; margin:24px 0; }
+  .callout p { color:rgba(255,255,255,0.8); font-size:15px; line-height:1.7; }
+  .callout strong { color:var(--yellow); }
+
+  /* CHECKLIST */
+  .checklist { list-style:none; padding:0; }
+  .checklist li { font-size:14px; padding:10px 0; border-bottom:1px solid #EEE; display:flex; gap:10px; align-items:flex-start; }
+  .checklist li::before { content:'→'; font-family:'Nunito',sans-serif; font-weight:700; color:var(--orange); flex-shrink:0; }
+
+  /* BAND */
+  .ink-band { background:var(--ink); color:white; }
+  .ink-band .section-tag { color:var(--blue); }
+  .ink-band .section-title { color:white; }
+  .ink-band .section-intro { color:rgba(255,255,255,0.6); }
+  .ink-band .divider { background:var(--blue); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="logo">🧩</a>
+  <a href="#templates">Templates</a>
+  <a href="#colors">Colors</a>
+  <a href="#type">Typography</a>
+  <a href="#images">Image Specs</a>
+  <a href="#rules">Rules</a>
+  <a href="#process">Process</a>
+  <a href="#checklist">Checklist</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">FOR MARTIN — DESIGNER REFERENCE</div>
+  <h1>EMAIL <span>DESIGN</span> BRIEF</h1>
+  <p>Everything you need to design Odd Pieces emails. Templates, colors, specs, rules. Bookmark this page.</p>
+</div>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  01 — THE 4 TEMPLATES                 -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="templates">
+  <span class="section-tag">01 — Templates</span>
+  <h2 class="section-title">THE 4 EMAIL TEMPLATES</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Every email uses one of these four templates. Each has a different energy, layout, and purpose. You'll be told which one to use in the campaign brief.</p>
+
+  <div class="template-grid">
+
+    <!-- THE REVEAL -->
+    <div class="template-card">
+      <div class="template-card-header">
+        <div class="template-card-type" style="background:#1A1A1A;color:#FEE000;">🔮 Dark</div>
+        <div class="template-card-name">The Reveal</div>
+        <p class="template-card-desc">Single product spotlight. Dark, moody, mysterious. Like opening a secret file. One puzzle, one story, one CTA.</p>
+        <p class="template-card-when"><strong>Use when:</strong> Launching a new puzzle, featuring a specific product, telling the story of one puzzle's hidden elements.</p>
+      </div>
+      <div class="template-preview">
+        <a href="the-reveal.html" target="_blank">Preview Template →</a>
+      </div>
+    </div>
+
+    <!-- THE LINEUP -->
+    <div class="template-card">
+      <div class="template-card-header">
+        <div class="template-card-type" style="background:#FFFBF0;color:#FC9C1C;border:1px solid #FC9C1C;">🗂️ Light</div>
+        <div class="template-card-name">The Lineup</div>
+        <p class="template-card-desc">Multi-product grid. Cream background, 3-product showcase with colored card borders. Curated collection energy.</p>
+        <p class="template-card-when"><strong>Use when:</strong> Showing multiple puzzles, seasonal collections, "pick your favorite" sends, new arrivals.</p>
+      </div>
+      <div class="template-preview">
+        <a href="the-lineup.html" target="_blank">Preview Template →</a>
+      </div>
+    </div>
+
+    <!-- THE DEAL -->
+    <div class="template-card">
+      <div class="template-card-header">
+        <div class="template-card-type" style="background:#FF4016;color:white;">🔥 Urgent</div>
+        <div class="template-card-name">The Deal</div>
+        <p class="template-card-desc">Bundle promo with urgency. Bold Red-Orange header, discount code strip, 3-tier bundle comparison. Can't-miss energy.</p>
+        <p class="template-card-when"><strong>Use when:</strong> Bundle sales, flash deals, Black Friday, limited-time offers, restock alerts.</p>
+      </div>
+      <div class="template-preview">
+        <a href="the-deal.html" target="_blank">Preview Template →</a>
+      </div>
+    </div>
+
+    <!-- THE LETTER -->
+    <div class="template-card">
+      <div class="template-card-header">
+        <div class="template-card-type" style="background:#F0EDE8;color:#888;">✉️ Personal</div>
+        <div class="template-card-name">The Letter</div>
+        <p class="template-card-desc">Plain text from Ginny. No images, no graphics. Just a personal note that feels like a real email from a friend.</p>
+        <p class="template-card-when"><strong>Use when:</strong> Personal updates, behind-the-scenes, check-ins, stories, "just wanted to say hi" sends. <em>No design needed — copy only.</em></p>
+      </div>
+      <div class="template-preview">
+        <a href="the-letter.html" target="_blank">Preview Template →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  02 — BRAND COLORS                    -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="colors">
+  <span class="section-tag">02 — Colors</span>
+  <h2 class="section-title">BRAND PALETTE</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Use the FULL palette. Not just yellow. Rotate colors by template and mood. Every email should feel like Odd Pieces — bold, fun, unexpected.</p>
+
+  <div class="color-grid">
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FEE000;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Puzzle Yellow</div>
+        <div class="swatch-hex">#FEE000</div>
+        <div class="swatch-use">CTAs, highlights, dividers</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#C1E3E8;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Mystery Blue</div>
+        <div class="swatch-hex">#C1E3E8</div>
+        <div class="swatch-use">Social proof bars, cool accents</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FC9C1C;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Adventure Orange</div>
+        <div class="swatch-hex">#FC9C1C</div>
+        <div class="swatch-use">Eyebrows, tags, warm accents</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FF4016;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Urgency Red</div>
+        <div class="swatch-hex">#FF4016</div>
+        <div class="swatch-use">Sales, urgency, "The Deal" template</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#1A1A1A;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Ink Black</div>
+        <div class="swatch-hex">#1A1A1A</div>
+        <div class="swatch-use">Dark backgrounds, headers, text</div>
+      </div>
+    </div>
+    <div class="swatch">
+      <div class="swatch-color" style="background:#FFFBF0;border:1px solid #EEE;"></div>
+      <div class="swatch-info">
+        <div class="swatch-name">Cream</div>
+        <div class="swatch-hex">#FFFBF0</div>
+        <div class="swatch-use">Light backgrounds, body sections</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:32px;">
+    <p><strong>Important:</strong> Don't default to yellow + cream for everything. That's the old templates. Use the full palette. Dark backgrounds with color pops (The Reveal). Blue social proof strips. Orange eyebrow labels. Red urgency headers. Mix it up.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  03 — TYPOGRAPHY                       -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section ink-band" id="type">
+  <span class="section-tag">03 — Typography</span>
+  <h2 class="section-title">FONTS & TYPE RULES</h2>
+  <div class="divider"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;">
+    <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:24px;">
+      <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:36px;color:var(--yellow);text-transform:uppercase;line-height:1;margin-bottom:12px;">NUNITO</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">
+        <strong style="color:white;">Headlines, CTAs, labels</strong><br>
+        Weight: 800–900 (Extra Bold / Black)<br>
+        Style: UPPERCASE, tight tracking<br>
+        Fallback: Arial, sans-serif
+      </p>
+    </div>
+    <div style="background:rgba(255,255,255,0.08);border-radius:8px;padding:24px;">
+      <p style="font-family:'Inter',sans-serif;font-weight:400;font-size:28px;color:var(--blue);line-height:1;margin-bottom:12px;">Inter</p>
+      <p style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.6;">
+        <strong style="color:white;">Body copy, descriptions, footer</strong><br>
+        Weight: 400–500 (Regular / Medium)<br>
+        Style: Normal case, generous line height (1.75)<br>
+        Fallback: Arial, sans-serif
+      </p>
+    </div>
+  </div>
+
+  <table style="color:white;border-color:rgba(255,255,255,0.15);">
+    <thead>
+      <tr>
+        <th style="color:var(--yellow);border-color:rgba(255,255,255,0.3);">Element</th>
+        <th style="color:var(--yellow);border-color:rgba(255,255,255,0.3);">Font</th>
+        <th style="color:var(--yellow);border-color:rgba(255,255,255,0.3);">Size</th>
+        <th style="color:var(--yellow);border-color:rgba(255,255,255,0.3);">Style</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">Main headline</td><td style="border-color:rgba(255,255,255,0.08);">Nunito 900</td><td style="border-color:rgba(255,255,255,0.08);">28–32px</td><td style="border-color:rgba(255,255,255,0.08);">UPPERCASE, tight</td></tr>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">Eyebrow label</td><td style="border-color:rgba(255,255,255,0.08);">Nunito 800</td><td style="border-color:rgba(255,255,255,0.08);">11px</td><td style="border-color:rgba(255,255,255,0.08);">UPPERCASE, 0.2em spacing</td></tr>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">Body copy</td><td style="border-color:rgba(255,255,255,0.08);">Inter 400</td><td style="border-color:rgba(255,255,255,0.08);">15–16px</td><td style="border-color:rgba(255,255,255,0.08);">Normal case, 1.75 line height</td></tr>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">CTA button</td><td style="border-color:rgba(255,255,255,0.08);">Nunito 900</td><td style="border-color:rgba(255,255,255,0.08);">13–14px</td><td style="border-color:rgba(255,255,255,0.08);">UPPERCASE, 0.12em spacing</td></tr>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">Product names</td><td style="border-color:rgba(255,255,255,0.08);">Nunito 800</td><td style="border-color:rgba(255,255,255,0.08);">14px</td><td style="border-color:rgba(255,255,255,0.08);">Normal case or UPPERCASE</td></tr>
+      <tr><td style="color:white;border-color:rgba(255,255,255,0.08);">Footer</td><td style="border-color:rgba(255,255,255,0.08);">Inter 400</td><td style="border-color:rgba(255,255,255,0.08);">11–12px</td><td style="border-color:rgba(255,255,255,0.08);">Muted color (#888–#AAA)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  04 — IMAGE SPECS                      -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="images">
+  <span class="section-tag">04 — Image Specs</span>
+  <h2 class="section-title">WHAT TO MAKE & HOW BIG</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Every image has exact specs. Follow them precisely — wrong sizes break the layout on mobile.</p>
+
+  <table>
+    <thead>
+      <tr><th>Image</th><th>Dimensions</th><th>Format</th><th>Max Size</th><th>Notes</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Hero image (The Reveal)</strong></td>
+        <td>600 × 400px</td>
+        <td>JPG or PNG</td>
+        <td>200KB</td>
+        <td>Dark, moody. Product shot or dramatic box reveal. Dark edges that blend into #1A1A1A background.</td>
+      </tr>
+      <tr>
+        <td><strong>Hero image (The Deal)</strong></td>
+        <td>600 × 300px</td>
+        <td>JPG or PNG</td>
+        <td>200KB</td>
+        <td>Stacked bundle shot or lifestyle group image. Can be brighter.</td>
+      </tr>
+      <tr>
+        <td><strong>Product card (The Lineup)</strong></td>
+        <td>168 × 180px</td>
+        <td>JPG or PNG</td>
+        <td>80KB each</td>
+        <td>Clean product shot on white or light background. Consistent across all 3.</td>
+      </tr>
+      <tr>
+        <td><strong>The Letter</strong></td>
+        <td>None</td>
+        <td>—</td>
+        <td>—</td>
+        <td>No images needed. Text only.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <p><strong>Retina tip:</strong> Design at 2x (e.g. 1200×800 for a 600×400 hero) then export at the dimensions listed above. This keeps images sharp on high-DPI screens.</p>
+  </div>
+
+  <h3 style="font-family:'Nunito',sans-serif;font-weight:900;font-size:18px;text-transform:uppercase;margin:32px 0 16px;">Image Style Guide</h3>
+
+  <div class="do-dont">
+    <div class="do-col">
+      <div class="dd-header">✅ DO</div>
+      <div class="dd-item">Dark, moody product shots for The Reveal</div>
+      <div class="dd-item">Show puzzles mid-solve (pieces scattered, hands visible)</div>
+      <div class="dd-item">Lifestyle shots: couples at table, wine, mood lighting</div>
+      <div class="dd-item">Close-ups of hidden Easter eggs and details</div>
+      <div class="dd-item">Consistent white/light backgrounds for product cards</div>
+      <div class="dd-item">Use brand colors in backgrounds and overlays</div>
+    </div>
+    <div class="dont-col">
+      <div class="dd-header">❌ DON'T</div>
+      <div class="dd-item">Stock photo energy (generic, staged, corporate)</div>
+      <div class="dd-item">Bright white flat-lay that looks like every other brand</div>
+      <div class="dd-item">Kids or family-centric imagery (we're adult-focused)</div>
+      <div class="dd-item">Text baked into images (keep text in HTML)</div>
+      <div class="dd-item">Busy backgrounds that compete with the product</div>
+      <div class="dd-item">Gradients or effects that don't match brand</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  05 — DESIGN RULES                     -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section ink-band" id="rules">
+  <span class="section-tag">05 — Rules</span>
+  <h2 class="section-title">DESIGN DO'S & DON'TS</h2>
+  <div class="divider"></div>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:12px;overflow:hidden;border:2px solid rgba(255,255,255,0.15);">
+    <div style="background:var(--blue);">
+      <div style="padding:16px 24px;border-bottom:2px solid rgba(0,0,0,0.1);font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:#0A5C47;">✅ ALWAYS DO</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Follow the template layout exactly — don't rearrange sections</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Use the exact colors from this brief (#FEE000, not "yellow")</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Test on mobile before submitting — everything must work at 320px</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Keep CTA buttons full-width on mobile</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Use the copy exactly as provided — don't change words</div>
+      <div style="padding:12px 24px;font-size:14px;">Make the CTA the most visually prominent element</div>
+    </div>
+    <div style="background:#FFE8E4;">
+      <div style="padding:16px 24px;border-bottom:2px solid rgba(0,0,0,0.1);font-family:'Nunito',sans-serif;font-weight:900;font-size:16px;color:var(--red);">❌ NEVER DO</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Add decorative elements not in the template</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Use colors not in the brand palette</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Change the copy, subject line, or CTA text</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Use more than 2 brand colors per email (plus ink + cream)</div>
+      <div style="padding:12px 24px;border-bottom:1px solid rgba(0,0,0,0.06);font-size:14px;">Make images heavier than the max file sizes listed</div>
+      <div style="padding:12px 24px;font-size:14px;">Bake text into images — all copy stays in HTML</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  06 — PROCESS                          -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section" id="process">
+  <span class="section-tag">06 — Process</span>
+  <h2 class="section-title">HOW EMAILS GET MADE</h2>
+  <div class="divider"></div>
+
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:16px;">
+    <div style="background:white;border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-10px;right:12px;font-family:'Nunito',sans-serif;font-weight:900;font-size:80px;color:var(--yellow);opacity:0.3;line-height:1;">1</div>
+      <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;margin-bottom:8px;position:relative;">Brief + Copy</p>
+      <p style="font-size:13px;color:#666;line-height:1.5;position:relative;">Willis (AI) writes the campaign brief, copy, subject lines, and image direction. Posted to ClickUp.</p>
+    </div>
+    <div style="background:white;border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-10px;right:12px;font-family:'Nunito',sans-serif;font-weight:900;font-size:80px;color:var(--orange);opacity:0.3;line-height:1;">2</div>
+      <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;margin-bottom:8px;position:relative;">Design</p>
+      <p style="font-size:13px;color:#666;line-height:1.5;position:relative;">Martin creates images, builds email in Klaviyo using the template and exact copy provided. Moves task to "for review."</p>
+    </div>
+    <div style="background:white;border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-10px;right:12px;font-family:'Nunito',sans-serif;font-weight:900;font-size:80px;color:var(--red);opacity:0.3;line-height:1;">3</div>
+      <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;margin-bottom:8px;position:relative;">Review</p>
+      <p style="font-size:13px;color:#666;line-height:1.5;position:relative;">Ginny previews in Klaviyo. Approves or requests one round of changes.</p>
+    </div>
+    <div style="background:white;border-radius:12px;padding:24px;position:relative;overflow:hidden;">
+      <div style="position:absolute;top:-10px;right:12px;font-family:'Nunito',sans-serif;font-weight:900;font-size:80px;color:#1A1A1A;opacity:0.15;line-height:1;">4</div>
+      <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:14px;text-transform:uppercase;margin-bottom:8px;position:relative;">Schedule</p>
+      <p style="font-size:13px;color:#666;line-height:1.5;position:relative;">Ginny schedules send in Klaviyo. Task moves to "complete."</p>
+    </div>
+  </div>
+
+  <div class="callout" style="margin-top:24px;">
+    <p><strong>Martin's role is visual execution only.</strong> You will always receive: the exact copy, which template to use, image direction with references, and CTA text. Your job is to make it look amazing in Klaviyo. Don't change the words. Don't add sections. Just make it beautiful.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════ -->
+<!--  07 — PRE-SEND CHECKLIST               -->
+<!-- ═══════════════════════════════════════ -->
+<section class="section ink-band" id="checklist">
+  <span class="section-tag">07 — Checklist</span>
+  <h2 class="section-title">BEFORE YOU SUBMIT</h2>
+  <div class="divider"></div>
+
+  <ul class="checklist" style="color:white;">
+    <li style="border-color:rgba(255,255,255,0.08);">Copy matches the brief EXACTLY — no changes, no typos</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Correct template used (The Reveal / The Lineup / The Deal / The Letter)</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Brand colors used correctly (check hex codes, not "close enough")</li>
+    <li style="border-color:rgba(255,255,255,0.08);">All images are correct dimensions and under max file size</li>
+    <li style="border-color:rgba(255,255,255,0.08);">All links work and go to the right pages</li>
+    <li style="border-color:rgba(255,255,255,0.08);">CTA button is visible, clickable, and correct text</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Preview text / preheader is set (not blank)</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Tested on mobile (Klaviyo preview → mobile view)</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Subject line entered correctly</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Unsubscribe link present and working</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Sent yourself a test email and checked inbox rendering</li>
+    <li style="border-color:rgba(255,255,255,0.08);">Task moved to "for review" in ClickUp</li>
+  </ul>
+</section>
+
+<!-- FOOTER -->
+<div style="background:var(--ink);padding:40px;text-align:center;border-top:3px solid var(--yellow);">
+  <p style="font-family:'Nunito',sans-serif;font-weight:900;font-size:13px;letter-spacing:0.15em;text-transform:uppercase;color:var(--yellow);margin-bottom:8px;">ODD PIECES — EMAIL DESIGN BRIEF</p>
+  <p style="font-family:'Inter',sans-serif;font-size:12px;color:#555;">Last updated March 2026 · Questions? Ask Ginny or Willis in ClickUp.</p>
+</div>
+
+</body>
+</html>
