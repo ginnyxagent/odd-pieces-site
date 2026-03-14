@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Emails</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: #08080f; color: #e8e8e8; padding: 32px 20px 60px; }
+  .container { max-width: 680px; margin: 0 auto; }
+  .back { color: #555; font-size: 0.8rem; text-decoration: none; display: inline-block; margin-bottom: 32px; transition: color 0.15s; }
+  .back:hover { color: #fff; }
+  h1 { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; color: #fff; }
+  .subtitle { color: #444; font-size: 0.85rem; margin-bottom: 48px; }
+
+  .section-label { color: #555; font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 12px; margin-top: 40px; }
+
+  .link-row { display: flex; flex-direction: column; gap: 2px; }
+  a.link-btn { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; border-radius: 10px; text-decoration: none; border: 1px solid #141420; background: #0d0d1a; transition: background 0.15s, border-color 0.15s; }
+  a.link-btn:hover { background: #111120; border-color: #222236; }
+  a.link-btn:hover .arrow { color: #f59e0b; transform: translateX(2px); }
+  .link-left { display: flex; align-items: center; gap: 14px; }
+  .link-icon { font-size: 1rem; opacity: 0.7; width: 20px; text-align: center; }
+  .link-title { font-size: 0.9rem; font-weight: 500; color: #ddd; margin-bottom: 2px; }
+  .link-sub { font-size: 0.72rem; color: #3d3d55; }
+  .arrow { font-size: 0.8rem; color: #2a2a40; transition: color 0.15s, transform 0.15s; }
+
+  /* ── KPI DASHBOARD ── */
+  .kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 10px; margin-top: 12px; }
+  .kpi-card { background: #0d0d1a; border: 1px solid #141420; border-radius: 10px; padding: 18px 16px; }
+  .kpi-label { font-size: 0.65rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: #444; margin-bottom: 8px; }
+  .kpi-value { font-size: 1.5rem; font-weight: 700; color: #fff; }
+  .kpi-sub { font-size: 0.7rem; color: #3d3d55; margin-top: 4px; }
+  .kpi-loading { color: #333; font-style: italic; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="index.html" class="back">← Back to Team Hub</a>
+  <h1>📧 Emails</h1>
+  <p class="subtitle">KPIs, calendar, copy, and design briefs.</p>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  KPI DASHBOARD (Klaviyo API)              -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section-label">📊 KPI Dashboard</div>
+  <div class="kpi-grid">
+    <div class="kpi-card">
+      <div class="kpi-label">Open Rate</div>
+      <div class="kpi-value" id="kpi-open-rate"><span class="kpi-loading">—</span></div>
+      <div class="kpi-sub">Last 30 days</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Click Rate</div>
+      <div class="kpi-value" id="kpi-click-rate"><span class="kpi-loading">—</span></div>
+      <div class="kpi-sub">Last 30 days</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">Revenue</div>
+      <div class="kpi-value" id="kpi-revenue"><span class="kpi-loading">—</span></div>
+      <div class="kpi-sub">Last 30 days</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">List Size</div>
+      <div class="kpi-value" id="kpi-list-size"><span class="kpi-loading">—</span></div>
+      <div class="kpi-sub">Active profiles</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════ -->
+  <!--  LINKS                                    -->
+  <!-- ══════════════════════════════════════════ -->
+  <div class="section-label" style="margin-top:40px;">📋 Resources</div>
+  <div class="link-row">
+    <a href="calendar.html" class="link-btn">
+      <div class="link-left">
+        <span class="link-icon">◷</span>
+        <div>
+          <div class="link-title">Email Calendar</div>
+          <div class="link-sub">Schedule · Key dates · Status tracking</div>
+        </div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/19uQbR3W_pWXQtifxFI8SDKPziNChJvlLLBVlrkTDkXg/edit?gid=1169699215#gid=1169699215" target="_blank" class="link-btn">
+      <div class="link-left">
+        <span class="link-icon">◈</span>
+        <div>
+          <div class="link-title">Email Copy</div>
+          <div class="link-sub">Subject lines · Body copy · Google Sheet</div>
+        </div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+    <a href="email-templates/designer-brief.html" class="link-btn">
+      <div class="link-left">
+        <span class="link-icon">◉</span>
+        <div>
+          <div class="link-title">Email Design Brief</div>
+          <div class="link-sub">Specs · Brand rules · Designer handoff</div>
+        </div>
+      </div>
+      <span class="arrow">→</span>
+    </a>
+  </div>
+
+</div>
+
+<script>
+// Klaviyo KPI fetch — hits the local API proxy
+(async function() {
+  try {
+    const res = await fetch('api/klaviyo-kpis');
+    if (!res.ok) throw new Error('API error');
+    const data = await res.json();
+    if (data.open_rate) document.getElementById('kpi-open-rate').textContent = data.open_rate + '%';
+    if (data.click_rate) document.getElementById('kpi-click-rate').textContent = data.click_rate + '%';
+    if (data.revenue) document.getElementById('kpi-revenue').textContent = '$' + Number(data.revenue).toLocaleString();
+    if (data.list_size) document.getElementById('kpi-list-size').textContent = Number(data.list_size).toLocaleString();
+  } catch(e) {
+    // KPIs stay as dashes until API is connected
+    console.log('Klaviyo KPIs not loaded:', e.message);
+  }
+})();
+</script>
+</body>
+</html>

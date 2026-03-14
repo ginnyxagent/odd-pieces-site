@@ -5,24 +5,262 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Odd Pieces — Team Hub</title>
 <style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #1a1a2e; color: #eee; padding: 24px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
-  h1 { font-size: 1.6rem; margin-bottom: 8px; }
-  .sub { color: #888; margin-bottom: 40px; font-size: 0.9rem; }
-  .links { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 400px; }
-  a.btn { display: block; text-align: center; padding: 20px; border-radius: 14px; text-decoration: none; color: #fff; font-weight: 600; font-size: 1rem; transition: transform 0.15s; }
-  a.btn:hover { transform: scale(1.02); }
-  .btn-org { background: linear-gradient(135deg, #6c3ce0, #4a1fb8); border: 2px solid #8b5cf6; }
-  .btn-hire { background: linear-gradient(135deg, #dc2626, #991b1b); border: 2px solid #ef4444; }
-  .btn-desc { font-size: 0.78rem; color: #ccc; font-weight: 400; margin-top: 4px; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #08080f;
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 560px;
+    margin: 0 auto;
+    padding: 72px 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    margin-bottom: 56px;
+  }
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    background: #F5C842;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .brand-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #F5C842;
+  }
+  h1 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .header-sub {
+    font-size: 0.85rem;
+    color: #444;
+  }
+
+  /* ── SECTION LABELS ── */
+  .section-label {
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    margin-top: 40px;
+  }
+  .section-label.team { color: #10b981; }
+  .section-label.brand { color: #a78bfa; }
+  .section-label.marketing { color: #f59e0b; }
+
+  /* ── NAV ITEMS ── */
+  .nav-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+
+  a.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid #141420;
+    background: #0d0d1a;
+    transition: background 0.15s, border-color 0.15s;
+    gap: 16px;
+  }
+
+  a.nav-item:hover {
+    background: #111120;
+    border-color: #222236;
+  }
+
+  a.nav-item:hover .nav-arrow {
+    color: #F5C842;
+    transform: translateX(2px);
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .nav-icon {
+    font-size: 1rem;
+    flex-shrink: 0;
+    width: 20px;
+    text-align: center;
+    opacity: 0.7;
+  }
+
+  .nav-text {}
+  .nav-title {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #ddd;
+    margin-bottom: 2px;
+  }
+  .nav-desc {
+    font-size: 0.72rem;
+    color: #3d3d55;
+  }
+
+  .nav-arrow {
+    font-size: 0.8rem;
+    color: #2a2a40;
+    flex-shrink: 0;
+    transition: color 0.15s, transform 0.15s;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid #111120;
+    margin: 40px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 56px;
+    font-size: 0.72rem;
+    color: #282836;
+  }
 </style>
 </head>
 <body>
-<h1>🧩 Odd Pieces</h1>
-<p class="sub">Team Hub — EOS Operating System</p>
-<div class="links">
-  <a href="org.html" class="btn btn-org">Accountability Chart<div class="btn-desc">Org structure · Roles · KPIs · Duties</div></a>
-  <a href="hiring.html" class="btn btn-hire">Hiring Playbook<div class="btn-desc">Job descriptions · Budgets · Where to find · Interview Qs</div></a>
+<div class="page">
+
+  <div class="header">
+    <div class="brand-mark">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Odd Pieces</span>
+    </div>
+    <h1>Team Hub</h1>
+    <p class="header-sub">Internal docs, playbooks, and dashboards</p>
+  </div>
+
+  <!-- TEAM -->
+  <div class="section-label team">Team</div>
+  <div class="nav-list">
+    <a href="org.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">⬡</span>
+        <div class="nav-text">
+          <div class="nav-title">Accountability Chart</div>
+          <div class="nav-desc">Org structure · Roles · KPIs · Duties</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="hiring.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◈</span>
+        <div class="nav-text">
+          <div class="nav-title">Hiring Playbook</div>
+          <div class="nav-desc">Job descriptions · Budgets · Where to find · Interview Qs</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- BRAND -->
+  <div class="section-label brand">Brand</div>
+  <div class="nav-list">
+    <a href="brand-guidelines.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◉</span>
+        <div class="nav-text">
+          <div class="nav-title">Brand Guidelines</div>
+          <div class="nav-desc">Voice · Logo · Colours · Typography · Packaging · Channels</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="visual-system.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◧</span>
+        <div class="nav-text">
+          <div class="nav-title">Visual System</div>
+          <div class="nav-desc">The Split · Warning Stamps · Pattern · Frame · Type · Colour combos</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="text-effects.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◨</span>
+        <div class="nav-text">
+          <div class="nav-title">Text Effects</div>
+          <div class="nav-desc">Hard shadow · Outline · Stroke treatments · Do's & Don'ts</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- MARKETING -->
+  <div class="section-label marketing">Marketing</div>
+  <div class="nav-list">
+    <a href="calendar.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◷</span>
+        <div class="nav-text">
+          <div class="nav-title">Marketing Calendar</div>
+          <div class="nav-desc">Schedule · Channels · Key dates · Status tracking</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="email-hub.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◻</span>
+        <div class="nav-text">
+          <div class="nav-title">Emails</div>
+          <div class="nav-desc">KPI dashboard · Email calendar · Copy · Design brief</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="creative-pipeline.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◈</span>
+        <div class="nav-text">
+          <div class="nav-title">Ad Creative Pipeline</div>
+          <div class="nav-desc">Concepts · Briefs · Copy · Landing pages · Status</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+
+  <div class="footer">Odd Pieces internal use only</div>
+
 </div>
 </body>
 </html>
