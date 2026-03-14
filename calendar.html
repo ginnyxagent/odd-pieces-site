@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Marketing Calendar 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --bg: #f7f5f2;
+    --surface: #ffffff;
+    --surface2: #f2efea;
+    --border: #e5e0d8;
+    --border2: #ccc7bc;
+    --text: #1c1917;
+    --muted: #78716c;
+    --accent: #5b3df5;
+    --accent-hover: #4c2ee6;
+    --accent-pale: #ede9fe;
+    --green: #16a34a;
+    --green-pale: #dcfce7;
+    --red: #dc2626;
+    --red-pale: #fee2e2;
+    --yellow: #ca8a04;
+    --yellow-pale: #fef9c3;
+  }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+  /* ── HEADER ── */
+  .header {
+    background: #1c1917;
+    padding: 0 28px;
+    height: 52px;
+    display: flex; align-items: center; gap: 16px;
+    position: sticky; top: 0; z-index: 300;
+  }
+  .logo { font-size: 1rem; font-weight: 900; color: #fff; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
+  .logo-tag { background: var(--accent); color: #fff; font-size: 0.6rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase; }
+  .back { color: #666; text-decoration: none; font-size: 0.73rem; font-weight: 500; padding: 4px 10px; border: 1px solid #333; border-radius: 6px; transition: all .15s; }
+  .back:hover { color: #fff; border-color: #666; }
+  .hright { margin-left: auto; display: flex; gap: 8px; }
+  .hbtn { padding: 6px 14px; border-radius: 8px; border: 1px solid #333; background: transparent; color: #aaa; font-size: 0.73rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .hbtn:hover { color: #fff; border-color: #666; }
+  .hbtn.pri { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 700; }
+  .hbtn.pri:hover { background: var(--accent-hover); }
+
+  /* ── TABS ── */
+  .tabs { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 28px; display: flex; position: sticky; top: 52px; z-index: 200; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
+  .tab { padding: 14px 24px; border: none; background: transparent; color: var(--muted); font-size: 0.82rem; font-weight: 700; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .15s; letter-spacing: -.01em; }
+  .tab:hover { color: var(--text); }
+  .tab.on { color: var(--accent); border-bottom-color: var(--accent); }
+  .tab-body { display: none; } .tab-body.on { display: block; }
+
+  /* ── INSIGHTS BAR ── */
+  .insights-bar { display: none; background: var(--yellow-pale); border-bottom: 2px solid #fde68a; padding: 10px 28px; gap: 10px; flex-wrap: wrap; align-items: center; }
+  .insights-bar.show { display: flex; }
+  .ins-label { font-weight: 800; color: var(--yellow); font-size: 0.68rem; text-transform: uppercase; letter-spacing: .06em; }
+  .ins-tag { background: #fff; border: 1.5px solid #fde68a; border-radius: 6px; padding: 2px 9px; font-size: 0.71rem; color: var(--yellow); font-weight: 700; }
+  .ins-undo-all { margin-left: auto; font-size: 0.7rem; color: var(--muted); background: #fff; border: 1.5px solid var(--border); border-radius: 7px; padding: 4px 12px; cursor: pointer; font-weight: 600; transition: all .15s; }
+  .ins-undo-all:hover { color: var(--text); }
+
+  /* ── PILLAR COLOURS (light-mode vivid) ── */
+  .p-Promo     { --pc: #b45309; --pb: #fef3c7; }
+  .p-Seasonal  { --pc: #15803d; --pb: #dcfce7; }
+  .p-Brand     { --pc: #be185d; --pb: #fce7f3; }
+  .p-Community { --pc: #1d4ed8; --pb: #dbeafe; }
+  .p-Artist    { --pc: #6d28d9; --pb: #ede9fe; }
+  .p-Brain     { --pc: #0e7490; --pb: #cffafe; }
+
+  /* ━━━━ CALENDAR VIEW ━━━━ */
+  .cal-wrap { padding: 24px 28px 60px; max-width: 1240px; margin: 0 auto; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 24px; background: var(--surface); border: 1.5px solid var(--border); border-radius: 12px; padding: 10px 16px; align-items: center; }
+  .legend-label { font-size: 0.63rem; color: var(--muted); text-transform: uppercase; letter-spacing: .07em; font-weight: 700; margin-right: 4px; }
+  .leg-item { display: flex; align-items: center; gap: 5px; font-size: 0.73rem; color: var(--text); font-weight: 500; }
+  .leg-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
+
+  .cal-month { margin-bottom: 44px; }
+  .cal-month-name { font-size: 1.05rem; font-weight: 900; color: var(--text); letter-spacing: -.03em; margin-bottom: 12px; display: flex; align-items: center; gap: 12px; }
+  .cal-month-line { flex: 1; height: 2px; background: var(--border); border-radius: 2px; }
+
+  .cal-dow { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; margin-bottom: 4px; }
+  .cal-dow span { font-size: 0.62rem; text-align: center; color: var(--muted); text-transform: uppercase; letter-spacing: .06em; font-weight: 700; padding: 4px 0; }
+
+  .cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 4px; }
+  .cal-cell { background: var(--surface); border: 1.5px solid var(--border); border-radius: 10px; min-height: 90px; padding: 7px 8px; transition: border-color .12s, box-shadow .12s; }
+  .cal-cell.empty { background: transparent; border-color: transparent; }
+  .cal-cell.today { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-pale); }
+  .cal-cell:not(.empty):hover { border-color: var(--border2); box-shadow: 0 2px 10px rgba(0,0,0,.06); }
+
+  .cal-day-num { font-size: 0.71rem; color: var(--muted); font-weight: 700; margin-bottom: 5px; line-height: 1; }
+  .cal-cell.today .cal-day-num { color: #fff; background: var(--accent); display: inline-flex; align-items: center; justify-content: center; width: 21px; height: 21px; border-radius: 50%; font-size: 0.63rem; }
+
+  .chip { display: flex; align-items: center; gap: 4px; font-size: 0.6rem; font-weight: 700; padding: 2px 6px; border-radius: 5px; margin-bottom: 3px; cursor: pointer; line-height: 1.3; background: var(--pb); color: var(--pc); border: 1px solid transparent; transition: box-shadow .12s, transform .1s; overflow: hidden; }
+  .chip:hover { box-shadow: 0 2px 8px rgba(0,0,0,.12); transform: translateY(-1px); border-color: var(--pc); }
+  .chip.pending  { display: none; }
+  .chip.rejected { display: none; }
+  .chip-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--pc); flex-shrink: 0; }
+  .chip-txt { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+
+  /* ── DRAWER ── */
+  .drawer-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.25); z-index: 400; backdrop-filter: blur(2px); }
+  .drawer-overlay.open { display: block; }
+  .drawer { position: fixed; right: 0; top: 0; bottom: 0; width: 440px; max-width: 96vw; background: var(--surface); border-left: 2px solid var(--border); z-index: 450; overflow-y: auto; transform: translateX(100%); transition: transform .25s cubic-bezier(.4,0,.2,1); box-shadow: -10px 0 40px rgba(0,0,0,.1); }
+  .drawer.open { transform: translateX(0); }
+  .drawer-header { padding: 18px 20px; border-bottom: 1.5px solid var(--border); display: flex; align-items: flex-start; gap: 10px; background: var(--surface2); }
+  .drawer-close { margin-left: auto; background: var(--border); border: none; color: var(--muted); border-radius: 8px; padding: 5px 12px; cursor: pointer; font-size: 0.73rem; font-weight: 700; flex-shrink: 0; transition: all .15s; }
+  .drawer-close:hover { background: var(--border2); color: var(--text); }
+  .drawer-date { font-size: 0.67rem; color: var(--muted); margin-bottom: 3px; font-weight: 600; }
+  .drawer-theme { font-size: 0.95rem; font-weight: 800; color: var(--text); letter-spacing: -.01em; }
+  .drawer-body { padding: 18px 20px; }
+  .ptag { font-size: 0.62rem; font-weight: 800; padding: 3px 9px; border-radius: 5px; display: inline-block; margin-bottom: 12px; background: var(--pb); color: var(--pc); letter-spacing: .03em; text-transform: uppercase; }
+  .drawer-desc { font-size: 0.8rem; color: var(--muted); line-height: 1.6; margin-bottom: 18px; }
+  .drawer-section { font-size: 0.62rem; text-transform: uppercase; letter-spacing: .09em; color: var(--muted); font-weight: 800; margin-bottom: 10px; padding-bottom: 6px; border-bottom: 1.5px solid var(--border); }
+
+  .email-item { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; padding: 11px 13px; margin-bottom: 7px; transition: border-color .12s; }
+  .email-item:hover { border-color: var(--border2); }
+  .email-item.approved { border-color: #86efac; background: #f0fdf4; }
+  .email-item.rejected { display: none; }
+  .email-date { font-size: 0.63rem; color: var(--muted); margin-bottom: 4px; font-weight: 600; }
+  .email-subj { font-size: 0.81rem; color: var(--text); line-height: 1.45; margin-bottom: 8px; font-weight: 500; }
+  .email-acts { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
+  .edec { font-size: 0.65rem; font-weight: 600; }
+  .edec-app { color: var(--green); } .edec-rej { color: var(--red); }
+
+  /* Buttons */
+  .ba { padding: 4px 12px; border-radius: 7px; border: 1.5px solid var(--green); background: transparent; color: var(--green); font-size: 0.71rem; font-weight: 700; cursor: pointer; transition: all .15s; }
+  .ba:hover { background: var(--green); color: #fff; }
+  .br { padding: 4px 12px; border-radius: 7px; border: 1.5px solid var(--red); background: transparent; color: var(--red); font-size: 0.71rem; font-weight: 700; cursor: pointer; transition: all .15s; }
+  .br:hover { background: var(--red); color: #fff; }
+  .bundo { font-size: 0.62rem; color: var(--muted); background: none; border: none; cursor: pointer; text-decoration: underline; padding: 0 3px; }
+  .bundo:hover { color: var(--text); }
+  .tba { padding: 6px 16px; border-radius: 8px; border: 2px solid var(--green); background: transparent; color: var(--green); font-size: 0.76rem; font-weight: 800; cursor: pointer; transition: all .15s; }
+  .tba:hover { background: var(--green); color: #fff; }
+  .tbr { padding: 6px 16px; border-radius: 8px; border: 2px solid var(--red); background: transparent; color: var(--red); font-size: 0.76rem; font-weight: 800; cursor: pointer; transition: all .15s; }
+  .tbr:hover { background: var(--red); color: #fff; }
+  .theme-actions { display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap; align-items: center; }
+  .theme-dec-badge { font-size: 0.72rem; padding: 4px 10px; border-radius: 7px; font-weight: 700; }
+  .tdb-app { background: var(--green-pale); color: var(--green); }
+  .tdb-rej { background: var(--red-pale); color: var(--red); }
+
+
+  .brief-field { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 8px; padding: 10px 13px; }
+  .brief-field.full { grid-column: 1 / -1; }
+  .bf-label { font-size: .6rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800; margin-bottom: 5px; }
+  .bf-val { font-size: .8rem; color: var(--text); line-height: 1.5; }
+
+  /* List brief */
+  .lt-brief-toggle { font-size: 0.63rem; color: var(--accent); font-weight: 700; cursor: pointer; margin-top: 5px; display: inline-flex; align-items: center; gap: 3px; }
+  .lt-brief-toggle:hover { opacity: .75; }
+  .lt-brief { display: none; background: var(--accent-pale); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 7px 10px; font-size: 0.71rem; color: #4c1d95; line-height: 1.5; margin-top: 5px; }
+  .lt-brief.open { display: block; }
+
+  /* Brief toggle */
+  .brief-toggle { font-size: 0.66rem; color: var(--accent); font-weight: 700; cursor: pointer; margin: 5px 0 2px; display: inline-flex; align-items: center; gap: 4px; }
+  .brief-toggle:hover { opacity: .75; }
+  .brief-body { display: none; background: var(--accent-pale); border-left: 3px solid var(--accent); border-radius: 0 6px 6px 0; padding: 8px 10px; font-size: 0.73rem; color: #4c1d95; line-height: 1.55; margin-bottom: 6px; }
+  .brief-body.open { display: block; }
+
+  /* Reject panel */
+  .rp { margin-top: 8px; padding: 12px; background: #fff5f5; border: 1.5px solid #fecaca; border-radius: 8px; display: none; }
+  .rp.open { display: block; }
+  .rp-lbl { font-size: 0.62rem; color: var(--red); font-weight: 800; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 7px; }
+  .reasons { display: flex; gap: 5px; flex-wrap: wrap; margin-bottom: 8px; }
+  .rb { padding: 3px 10px; border-radius: 10px; border: 1.5px solid var(--border); background: #fff; color: var(--muted); font-size: 0.69rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .rb:hover { border-color: var(--red); color: var(--red); }
+  .rb.on { background: var(--red-pale); border-color: var(--red); color: var(--red); }
+  .rp-note { width: 100%; background: #fff; border: 1.5px solid var(--border); border-radius: 7px; color: var(--text); font-size: 0.75rem; padding: 6px 9px; resize: none; font-family: inherit; margin-bottom: 8px; }
+  .rp-note:focus { outline: none; border-color: var(--red); }
+  .rp-ok { padding: 5px 14px; border-radius: 7px; background: var(--red); border: none; color: #fff; font-size: 0.72rem; font-weight: 700; cursor: pointer; }
+  .rp-ok:hover { background: #b91c1c; }
+
+  /* ━━━━ AGENCY LIST VIEW ━━━━ */
+  .list-wrap { padding: 0 28px 60px; }
+  .list-toolbar { display: flex; gap: 7px; flex-wrap: wrap; align-items: center; padding: 16px 0 12px; }
+  .pill { padding: 5px 14px; border-radius: 20px; border: 1.5px solid var(--border); background: var(--surface); color: var(--muted); font-size: 0.72rem; font-weight: 600; cursor: pointer; transition: all .15s; }
+  .pill:hover { color: var(--text); border-color: var(--border2); }
+  .pill.on  { background: var(--accent); border-color: var(--accent); color: #fff; box-shadow: 0 2px 10px rgba(91,61,245,.2); }
+  .pill.on-g { background: var(--green); border-color: var(--green); color: #fff; }
+  .pill.on-r { background: var(--red); border-color: var(--red); color: #fff; }
+  .fsep { width: 1px; height: 18px; background: var(--border); }
+
+  .export-note { font-size: 0.74rem; color: #4c1d95; background: var(--accent-pale); border: 1.5px solid #c4b5fd; border-radius: 10px; padding: 11px 16px; margin-bottom: 16px; font-weight: 500; }
+
+  .list-table { width: 100%; border-collapse: separate; border-spacing: 0; background: var(--surface); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; box-shadow: 0 2px 12px rgba(0,0,0,.05); }
+  .list-table th { font-size: 0.63rem; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); font-weight: 800; padding: 10px 16px; text-align: left; border-bottom: 2px solid var(--border); background: var(--surface2); white-space: nowrap; }
+  .list-table td { font-size: 0.81rem; padding: 11px 16px; border-bottom: 1px solid var(--border); vertical-align: top; background: var(--surface); }
+  .list-table tr:last-child td { border-bottom: none; }
+  .list-table tr:hover td { background: var(--surface2); }
+  .list-table tr.approved td { background: #f0fdf4; }
+  .list-table tr.rejected { display: none; }
+  .list-table.show-rejected tr.rejected { display: table-row; }
+  .list-table tr.hidden { display: none; }
+
+  .lt-date { color: var(--muted); font-size: 0.73rem; white-space: nowrap; font-weight: 700; }
+  .lt-subj { color: var(--text); line-height: 1.45; font-weight: 500; }
+  .lt-theme { font-size: 0.72rem; }
+  .pillar-chip { font-size: 0.61rem; font-weight: 800; padding: 2px 8px; border-radius: 5px; display: inline-block; text-transform: uppercase; letter-spacing: .03em; }
+
+  /* MODAL */
+  .overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 600; align-items: center; justify-content: center; padding: 20px; backdrop-filter: blur(3px); }
+  .overlay.open { display: flex; }
+  .modal { background: var(--surface); border: 1.5px solid var(--border); border-radius: 16px; padding: 26px; max-width: 620px; width: 100%; max-height: 85vh; overflow-y: auto; box-shadow: 0 24px 64px rgba(0,0,0,.15); }
+  .modal h2 { font-size: 1.05rem; font-weight: 900; margin-bottom: 4px; letter-spacing: -.02em; }
+  .modal p { font-size: 0.76rem; color: var(--muted); margin-bottom: 14px; }
+  .modal pre { background: var(--surface2); border: 1.5px solid var(--border); border-radius: 10px; padding: 14px; font-size: 0.69rem; color: var(--text); white-space: pre-wrap; word-break: break-word; max-height: 340px; overflow-y: auto; }
+  .mcopy { margin-top: 12px; padding: 7px 18px; border-radius: 8px; border: none; background: var(--accent); color: #fff; cursor: pointer; font-size: 0.76rem; font-weight: 700; margin-right: 8px; }
+  .mcopy:hover { background: var(--accent-hover); }
+  .mclose { margin-top: 12px; padding: 7px 18px; border-radius: 8px; border: 1.5px solid var(--border); background: transparent; color: var(--muted); cursor: pointer; font-size: 0.76rem; font-weight: 600; }
+
+  @media (max-width: 768px) {
+    .cal-cell { min-height: 60px; }
+    .chip-txt { display: none; }
+    .drawer { width: 100%; border-left: none; border-top: 2px solid var(--border); top: auto; height: 70vh; transform: translateY(100%); }
+    .drawer.open { transform: translateY(0); }
+  }
+  @media (max-width: 500px) {
+    .cal-wrap, .list-wrap { padding-left: 14px; padding-right: 14px; }
+    .list-table th:nth-child(2), .list-table td:nth-child(2) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <a href="index.html" class="back">← Hub</a>
+  <div class="logo">🧩 Odd Pieces <span class="logo-tag">2026 Calendar</span></div>
+  <div class="hright">
+    <button class="hbtn pri" onclick="exportList()">📋 Export for Agency</button>
+  </div>
+</div>
+
+<div class="tabs">
+  <button class="tab on" onclick="switchTab('cal',this)">📅 Calendar View</button>
+  <button class="tab"    onclick="switchTab('list',this)">📋 Agency Email List</button>
+</div>
+
+<div class="insights-bar" id="insights-bar">
+  <span class="ins-label">🧠 Learning from rejections:</span>
+  <span id="ins-content"></span>
+  <button class="ins-undo-all" onclick="undoAllRejections()">↩ Undo all rejections</button>
+</div>
+
+<!-- CALENDAR TAB -->
+<div class="tab-body on" id="tb-cal">
+  <div class="cal-wrap">
+    <div class="legend">
+      <span class="legend-label">Themes:</span>
+      <span class="leg-item p-Promo"><span class="leg-dot" style="background:#b45309"></span>Promo</span>
+      <span class="leg-item p-Seasonal"><span class="leg-dot" style="background:#15803d"></span>Seasonal</span>
+      <span class="leg-item p-Brand"><span class="leg-dot" style="background:#be185d"></span>Brand</span>
+      <span class="leg-item p-Community"><span class="leg-dot" style="background:#1d4ed8"></span>Community</span>
+      <span class="leg-item p-Artist"><span class="leg-dot" style="background:#6d28d9"></span>Artist</span>
+      <span class="leg-item p-Brain"><span class="leg-dot" style="background:#0e7490"></span>Brain/Offline</span>
+      <span style="font-size:.65rem;color:var(--muted);margin-left:8px">Click any chip to review email topics →</span>
+    </div>
+    <div id="cal-body"></div>
+  </div>
+</div>
+
+<!-- AGENCY LIST TAB -->
+<div class="tab-body" id="tb-list">
+  <div class="list-wrap">
+    <div class="list-toolbar">
+      <button class="pill on" onclick="setListFilter('all',this)">All</button>
+      <div class="fsep"></div>
+      <button class="pill" onclick="setListFilter('approved',this)">✅ Approved</button>
+      <button class="pill" onclick="setListFilter('pending',this)">⬜ Pending</button>
+      <button class="pill" onclick="setListFilter('rejected',this)">❌ Rejected</button>
+      <div class="fsep"></div>
+      <button class="pill" onclick="setListFilter('Promo',this)">💰 Promo</button>
+      <button class="pill" onclick="setListFilter('Seasonal',this)">🌿 Seasonal</button>
+      <button class="pill" onclick="setListFilter('Brand',this)">🧩 Brand</button>
+      <button class="pill" onclick="setListFilter('Community',this)">👥 Community</button>
+      <button class="pill" onclick="setListFilter('Artist',this)">🎨 Artist</button>
+      <button class="pill" onclick="setListFilter('Brain',this)">🧠 Brain</button>
+    </div>
+    <div class="export-note">💡 Approve topics you want to keep → hit <strong>Export for Agency</strong> to get a clean list ready to hand off.</div>
+    <table class="list-table">
+      <thead><tr>
+        <th style="width:90px">Date</th>
+        <th style="width:170px">Theme</th>
+        <th>Email Subject / Topic</th>
+        <th style="width:120px">Decision</th>
+      </tr></thead>
+      <tbody id="list-body"></tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Drawer -->
+<div class="drawer-overlay" id="drawer-overlay" onclick="closeDrawer()"></div>
+<div class="drawer" id="drawer">
+  <div class="drawer-header">
+    <div>
+      <div class="drawer-date" id="d-date"></div>
+      <div class="drawer-theme" id="d-theme"></div>
+    </div>
+    <button class="drawer-close" onclick="closeDrawer()">✕ Close</button>
+  </div>
+  <div class="drawer-body" id="d-body"></div>
+</div>
+
+<!-- Export modal -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2>📋 Agency Export — Approved Campaigns</h2>
+    <p>Clean list of approved email topics ready to hand off to the agency.</p>
+    <pre id="exp-text"></pre>
+    <button class="mcopy" onclick="copyExp()">Copy to clipboard</button>
+    <button class="mclose" onclick="closeModal()">Close</button>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════
+
+const THEMES = [
+  { id:'iwd',            pillar:'Community', name:'🌸 Women\'s History & IWD',      desc:'International Women\'s Day (Mar 8) + Women\'s History Month. Feature women artists in the lineup. Inclusive, educational, celebratory.' },
+  { id:'puzzle-culture', pillar:'Brain',     name:'🧩 Puzzle Culture',              desc:'Crosswords, trivia, logic puzzles, escape rooms — puzzle people are our people. Lean into the identity, not just the product.' },
+  { id:'detox-challenge',pillar:'Brain',     name:'📵 Digital Detox Challenge',     desc:'Structured offline challenge — 30-min daily, weekend screen-free. Community participation angle. Repeat quarterly.' },
+  { id:'tabletop',       pillar:'Community', name:'🎯 Tabletop & Games Culture',    desc:'Tabletop gaming audience overlaps heavily with our demo. Strategy games, trivia nights, puzzle clubs.' },
+  { id:'literacy',       pillar:'Brain',     name:'📚 World Literacy & Book Day',   desc:'World Book Day (Apr 23), International Literacy Day (Sep 8). Brain-health angle: reading + puzzles = offline enrichment.' },
+  { id:'spring-reset',   pillar:'Seasonal',  name:'🌱 Spring Reset',               desc:'First day of spring — reframe as a reason to stay in. New routines, new puzzle.' },
+  { id:'pi-day',         pillar:'Community', name:'🥧 Pi Day — Trivia Crowd',       desc:'3.14 reasons your brain deserves better than Netflix. Nerdy/trivia crowd bait.' },
+  { id:'brain-offline',  pillar:'Brain',     name:'🧠 Offline Is the New Luxury',   desc:'Targets digital-fatigued 30-45 demo. Anchor in March, repeat in Aug/Oct.' },
+  { id:'tax-refund',     pillar:'Promo',     name:'💸 Tax Refund — Treat Yourself', desc:'Our audience has disposable income. $39 feels easy when you just got a refund.' },
+  { id:'artist-series',  pillar:'Artist',    name:'🎨 Meet the Artist Series',      desc:'Feature the minority artists behind the puzzles. Monthly, anchored to World Art Day (Apr 15).' },
+  { id:'earth-day',      pillar:'Brand',     name:'🌍 Earth Day — Made to Last',    desc:'Made to last, not for the landfill. Premium quality meets sustainability.' },
+  { id:'pet-lovers',     pillar:'Community', name:'🐾 Pet Lovers',                  desc:'National Pet Day (Apr 11), International Cat Day (Aug 8), National Dog Day (Aug 26).' },
+  { id:'mothers-day',    pillar:'Promo',     name:'💐 Mother\'s Day',               desc:'Mom doesn\'t want another candle. Thoughtful premium gift positioning.' },
+  { id:'asian-heritage', pillar:'Brand',     name:'🇨🇦 Asian Heritage Month',       desc:'Founders are Asian Canadian. May = Asian Heritage Month. Founders story + artist spotlights.' },
+  { id:'screen-free',    pillar:'Brain',     name:'🧘 Screen-Free / Mental Health', desc:'The art of slowing down. Offline challenge. Puzzle as the phone antidote.' },
+  { id:'star-wars',      pillar:'Community', name:'⭐ Star Wars Day',               desc:'May the 4th be with your brain. Trivia/pop culture crowd hook.' },
+  { id:'fathers-day',    pillar:'Promo',     name:'👔 Father\'s Day',               desc:'Dad doesn\'t need another tie. Same playbook as Mother\'s Day.' },
+  { id:'summer-stay-in', pillar:'Seasonal',  name:'🌙 Summer Nights In',            desc:'Contrarian summer angle. Summer nights are better offline. Patio + puzzle.' },
+  { id:'prime-day',      pillar:'Promo',     name:'⚡ Prime Day',                   desc:'Amazon moment — teaser + live campaign.' },
+  { id:'treat-yourself', pillar:'Promo',     name:'🎁 Mid-Year Treat Yourself',     desc:'Mid-year you deserves something nice. Permission-to-spend moment.' },
+  { id:'relaxation-day', pillar:'Seasonal',  name:'😌 National Relaxation Day',     desc:'Permission to do nothing productive. Puzzles as rest, not productivity.' },
+  { id:'cozy-season',    pillar:'Seasonal',  name:'🍂 Cozy Season',                desc:'It\'s officially puzzle season. Biggest seasonal moment of the year.' },
+  { id:'game-night',     pillar:'Community', name:'🎲 Game Night / Trivia Crowd',   desc:'Trivia night lovers are core to our demo. Peaks on National Board Game Day (Nov 15).' },
+  { id:'mhd',            pillar:'Brain',     name:'🧠 World Mental Health Day',     desc:'Your brain needs offline time. Puzzle as mental wellness tool.' },
+  { id:'holiday-gifts',  pillar:'Promo',     name:'🎁 Holiday Gift Guide',          desc:'The gift for people who have everything. $39 positioned as premium but accessible.' },
+  { id:'nesting',        pillar:'Seasonal',  name:'🏠 Nesting Season',              desc:'Nesting season is officially open. Holiday hibernation — cozy, stay-in.' },
+  { id:'bfcm',           pillar:'Promo',     name:'🛍 Black Friday / Cyber Monday', desc:'Biggest sales moment of the year. VIP early access, urgency, best deal.' },
+  { id:'board-game-day', pillar:'Community', name:'🎲 National Board Game Day',     desc:'Puzzles: the upgrade from Catan. Game night crowd.' },
+  { id:'founders',       pillar:'Brand',     name:'🧩 Founders Story',              desc:'Asian-Canadian founders, minority artists. Brand differentiation no competitor can copy.' },
+  { id:'holiday-season', pillar:'Promo',     name:'🎄 Holiday Season',              desc:'Gift deadlines, last-chance shipping, Winter Solstice, NYE hooks.' },
+];
+
+const EMAILS = [
+  { themeId:"nerd-days",      date:"2026-04-01", subject:"April Fools' Day. No tricks — just a puzzle you actually want.",                    brief:"April Fools email where the twist is there's no trick — just a good puzzle. One line setup, one line payoff." },
+  { themeId:"nerd-days",      date:"2026-04-26", subject:"Alien Day (4/26). In space, no one can hear you puzzle.",                           brief:"Alien fan easter egg — dark background, one dry line, no explanation. Niche but deeply rewarding for those who get it." },
+  { themeId:"nerd-days",      date:"2026-05-25", subject:"Towel Day. Don't panic — it's just a puzzle. 🧣",                                   brief:"Towel Day / Hitchhiker's reference — clean design, Don't Panic headline, puzzle as the answer to the universe." },
+  { themeId:"nerd-days",      date:"2026-06-06", subject:"Tetris Day. Same click. Way longer payoff.",                                        brief:"Tetris Day — side-by-side visual: Tetris block snapping vs puzzle piece clicking. Same brain hit, longer payoff." },
+  { themeId:"nerd-days",      date:"2026-09-22", subject:"Happy Hobbit Day. The Shire had good taste. So do you.",                            brief:"Hobbit Day — warm earthy tones, cozy framing, compliment the reader's taste. \"You're a Bilbo, not a Sackville-Baggins.\"" },
+  { themeId:"nerd-days",      date:"2026-10-13", subject:"Ada Lovelace Day. The first programmer would have finished this in a weekend.",     brief:"Ada Lovelace Day — position the puzzle as something the world's first programmer would appreciate. Smart, dry, no over-explaining." },
+  { themeId:"nerd-days",      date:"2026-10-23", subject:"Mole Day (10/23, 6:02am). 6.02 x 10^23 reasons to stay in today.",                 brief:"Mole Day easter egg — Avogadro's number in the subject, minimal design, reward the chemistry nerds. Zero explanation needed." },
+  { themeId:"nerd-days",      date:"2026-11-23", subject:"Fibonacci Day (11/23). 1, 1, 2, 3 — the sequence that ends with you.",              brief:"Fibonacci Day — the sequence as the visual motif, \"it all adds up\" framing, clean and elegant." },
+  { themeId:"spring-reset",   date:"2026-03-23", subject:"New season, new routine. Same couch. 🌱",                                           brief:"Same couch, new puzzle — permission to not change your routine just because it's spring. Warm and self-aware." },
+  { themeId:"brain-offline",  date:"2026-03-27", subject:"Put down the phone. Pick up something better.",                                     brief:"Clean, direct challenge — phone down, puzzle up. No lecture. Just the swap." },
+  { themeId:"brain-offline",  date:"2026-08-21", subject:"Offline is the new luxury. 📵",                                                     brief:"One headline, beautiful lifestyle image of someone puzzling offline. No bullet points. Offline = aspirational." },
+  { themeId:"brain-offline",  date:"2026-10-16", subject:"Your brain is asking for 30 minutes. Here's what to give it.",                     brief:"30 minutes offline, here's what to do with them. Caring not preachy — specific ask, specific product answer." },
+  { themeId:"tax-refund",     date:"2026-04-06", subject:"Tax refund szn. Treat yourself — you actually earned this.",                        brief:"Casual permission slip — \"you got money back, spend it on something good.\" Young, direct, no guilt." },
+  { themeId:"tax-refund",     date:"2026-04-08", subject:"The government gave it back. We say: spend it well.",                               brief:"Dry one-liner on taxes, then the product as the smart spend. Short and punchy." },
+  { themeId:"artist-series",  date:"2026-04-15", subject:"Meet the artist: [Name] — the story behind April's puzzle.",                       brief:"Full artist profile: large photo, name, hometown, 2-3 sentences on their practice. The puzzle is the hero product. CTA: shop." },
+  { themeId:"artist-series",  date:"2026-06-15", subject:"Meet the artist: [Name] — why they make art that challenges you.",                  brief:"Editorial profile — not \"who they are\" but \"why they make art.\" One strong quote leads. CTA: shop their puzzle." },
+  { themeId:"artist-series",  date:"2026-08-17", subject:"Meet the artist: [Name] — the puzzle that almost didn't get made.",                brief:"Behind-the-scenes story — the challenge, pivot, or accident that made this puzzle happen. Honest and specific." },
+  { themeId:"artist-series",  date:"2026-09-21", subject:"Meet the artist: [Name] — the puzzle you didn't know you needed.",                 brief:"Discovery email — \"you didn't know you needed this artist.\" Intrigue-led, no spoilers in the preview text." },
+  { themeId:"artist-series",  date:"2026-10-19", subject:"Meet the artist: [Name] — art that makes you look twice.",                         brief:"Zoom-in visual treatment — show a detail of the puzzle art first, pull back to reveal the full image. The art earns attention." },
+  { themeId:"artist-series",  date:"2026-11-13", subject:"The artist behind your puzzle: a story worth knowing.",                             brief:"Final artist spotlight of the year — reflective tone, thank the artist directly in copy. Doubles as a gift rec." },
+  { themeId:"earth-day",      date:"2026-04-20", subject:"Earth Day. We made something worth keeping — not tossing.",                                   brief:"Earth Day — the anti-fast-consumer angle. This isn't disposable. Show a framed puzzle on a wall. \"Made to keep.\"" },
+  { themeId:"earth-day",      date:"2026-04-22", subject:"We made ours to be finished, framed, and kept.",                                    brief:"Earth Day hero email — \"designed to be finished, framed, and kept.\" Quality photography, no greenwashing, just facts." },
+  { themeId:"pet-lovers",     date:"2026-04-11", subject:"National Pet Day. Here's how to celebrate (on the couch).",                        brief:"National Pet Day — cozy couch energy, puzzle + pet-optional lifestyle. Warm, inclusive, stays-in vibe." },
+  { themeId:"pet-lovers",     date:"2026-08-08", subject:"International Cat Day. This beats doom-scrolling every time.",                      brief:"Cat Day — the puzzle beats doom-scrolling. No pet required. Clean comparison, humor-forward." },
+  { themeId:"pet-lovers",     date:"2026-08-26", subject:"National Dog Day. Take the afternoon off. No fetch required.",                      brief:"Dog Day — \"no fetch required\" = inclusive lazy afternoon energy. Playful, warm, no pet ownership assumed." },
+  { themeId:"mothers-day",    date:"2026-04-27", subject:"Mother's Day is May 10. Here's what to get her (before it's too late).",                                    brief:"2-week Mother's Day push — \"she doesn't want another candle\" is the hook. Show the puzzle as the thoughtful upgrade gift." },
+  { themeId:"mothers-day",    date:"2026-05-01", subject:"One week to Mother's Day. Still time to order — but not for long.",            brief:"Mid-push reminder — \"one week left, here's the link.\" Short, warm urgency. Not panicked. Just a nudge." },
+  { themeId:"mothers-day",    date:"2026-05-03", subject:"Last day to guarantee Mother's Day delivery. Order by tonight.",                           brief:"Shipping deadline — 7 days to Mother's Day. Short, clear, one CTA. No fluff. Just \"order now or you'll be apologizing.\"" },
+  { themeId:"asian-heritage", date:"2026-05-11", subject:"Why we started Odd Pieces — a founders story.",                                     brief:"Founders email: two Asian-Canadian siblings who built this so art that looks like them ends up on people's walls. Personal, no pitch." },
+  { themeId:"asian-heritage", date:"2026-05-19", subject:"Asian Heritage Month: meet the artists behind your puzzles.",                       brief:"Artist gallery: 2-3 Asian artists, large photos, names, one line each. Art leads. CTA: shop." },
+  { themeId:"screen-free",    date:"2026-05-22", subject:"The art of slowing down — why puzzles hit different offline.",                      brief:"Editorial-style email making the case for offline enrichment — \"analog isn't boring, screens are.\" Thoughtful, not preachy." },
+  { themeId:"screen-free",    date:"2026-05-29", subject:"Screen-free weekend challenge. Are you brave enough?",                              brief:"Weekend challenge email — \"48 hours offline, here's your weapon.\" Dare-format, community angle, puzzle is the tool." },
+  { themeId:"star-wars",      date:"2026-05-04", subject:"May the 4th be with your brain 🧩",                                                brief:"May the 4th — one headline, Star Wars-adjacent visual, shop link. If there's a second sentence it's already too long." },
+  { themeId:"tabletop",       date:"2026-05-29", subject:"If your idea of a good time involves a table and a strategy — hi.",                brief:"Tabletop crowd identity email — \"if you own Catan, you're already our kind of person.\" Casual, direct, community-feel." },
+  { themeId:"fathers-day",    date:"2026-06-01", subject:"Father's Day is June 21. Dad doesn't need another tie — get him this.",              brief:"3-week Father's Day push — \"dad doesn't need a tie, get him something he'll actually open.\" Same energy as Mother's Day." },
+  { themeId:"fathers-day",    date:"2026-06-08", subject:"Father's Day is June 21. Two weeks to get it right.",                          brief:"Mid-push — \"two weeks out, here's what to get him.\" Re-surface the product, keep the tone dry and confident." },
+  { themeId:"fathers-day",    date:"2026-06-14", subject:"Last day to guarantee Father's Day delivery. Order by tonight.",                           brief:"Shipping deadline — 7 days to Father's Day. Short, urgent, one CTA. \"Order tonight or you're getting him a card.\"" },
+  { themeId:"summer-stay-in", date:"2026-06-26", subject:"Summer nights are better offline. 🌙",                                              brief:"Anti-summer-FOMO email — while everyone's out, celebrate the people who chose to stay in. Warm, knowing, slightly smug." },
+  { themeId:"summer-stay-in", date:"2026-07-03", subject:"Add this to your weekend. You won't regret it.",                                  brief:"Long weekend permission slip — \"you don't have to go anywhere.\" Cozy lifestyle image, low-key energy." },
+  { themeId:"summer-stay-in", date:"2026-07-24", subject:"Summer slump? Your brain wants a real challenge.",                                  brief:"August slump email — \"your brain is bored too.\" Reframe the mid-summer lull as the perfect puzzle moment." },
+  { themeId:"prime-day",      date:"2026-07-13", subject:"Something big drops tomorrow. ⚡",                                                  brief:"Prime Day teaser — one cryptic line, lightning bolt visual, no product shown. Pure anticipation." },
+  { themeId:"prime-day",      date:"2026-07-14", subject:"Prime Day: our best deal of the summer — today only.",                             brief:"Prime Day live — discount front and center, hard deadline, one button. Nothing else in the email." },
+  { themeId:"treat-yourself", date:"2026-07-06", subject:"Mid-year you deserves something nice.",                                             brief:"Mid-year permission email — \"you made it to July, reward yourself.\" Warm, self-care framing, no guilt." },
+  { themeId:"puzzle-culture", date:"2026-04-09", subject:"If you love crosswords, trivia, or escape rooms — this is next.",                  brief:"Identity email for crossword/trivia/escape room fans — \"if that's you, this is your next obsession.\" Specific and welcoming." },
+  { themeId:"puzzle-culture", date:"2026-10-09", subject:"Crosswords are great. This stays with you longer.",                                brief:"Crossword upgrade email — \"crosswords disappear, this stays on your wall.\" Quality vs ephemeral comparison." },
+  { themeId:"detox-challenge",date:"2026-04-17", subject:"The 30-minute offline challenge. Can you do it?",                                  brief:"Offline challenge kickoff — \"30 minutes, no phone, here's what to do instead.\" Easy entry, community framing." },
+  { themeId:"detox-challenge",date:"2026-07-10", subject:"A screen-free weekend challenge. Here's the rules.",                               brief:"Screen-free weekend challenge — give them actual rules like a game. Make it shareable. Puzzle is the tool." },
+  { themeId:"detox-challenge",date:"2026-10-02", subject:"October offline challenge starts today. Join us.",                                  brief:"October offline challenge launch — community event framing, \"we're all doing it together.\" Puzzle = the way in." },
+  { themeId:"relaxation-day", date:"2026-08-15", subject:"National Relaxation Day: permission to do nothing productive.",                     brief:"Anti-hustle email — \"doing nothing productive is the point.\" Puzzle as real rest, not another thing to finish." },
+  { themeId:"relaxation-day", date:"2026-08-16", subject:"What does rest actually look like? (Not doom-scrolling.)",                         brief:"Redefine rest — \"rest isn't scrolling, this is.\" Conversational, relatable, one clear visual of someone actually relaxing." },
+  { themeId:"literacy",       date:"2026-04-23", subject:"World Book Day: two things that give your brain what it actually needs.",          brief:"World Book Day pairing — \"readers and puzzlers are the same people.\" Affirm the identity, show book + puzzle lifestyle." },
+  { themeId:"literacy",       date:"2026-09-08", subject:"International Literacy Day. Reading + puzzles: the offline stack.",                brief:"Literacy Day — \"the offline stack: a book and a puzzle.\" Tech-adjacent framing for an analog enrichment habit." },
+  { themeId:"cozy-season",    date:"2026-09-07", subject:"Cozy season is loading. 🍂 New arrivals inside.",                                  brief:"Cozy season launch — fall palette, new arrivals grid, \"it's time\" energy. Warm, anticipatory, no hard sell yet." },
+  { themeId:"cozy-season",    date:"2026-09-22", subject:"It's officially puzzle season. 🍂",                                                brief:"Fall equinox — one confident declaration that puzzle season is open. Beautiful fall image, minimal copy." },
+  { themeId:"cozy-season",    date:"2026-09-25", subject:"What do you actually do on weekends in your 30s? (This.)",                        brief:"\"This is what weekends look like in your 30s\" — self-aware, slightly funny, totally relatable for the demo." },
+  { themeId:"tabletop",       date:"2026-09-18", subject:"Trivia night is great. Have you leveled up yet?",                                  brief:"Trivia/gamer upgrade email — \"you've mastered trivia night, here's what's next.\" Progression framing, gamer tone." },
+  { themeId:"game-night",     date:"2026-09-11", subject:"Trivia night hits different when it's at home.",                                   brief:"Home trivia night upgrade — \"bar trivia is fine, but this hits different at home.\" Cozy vs loud comparison." },
+  { themeId:"game-night",     date:"2026-11-14", subject:"Tomorrow is National Board Game Day. We have thoughts.",                           brief:"Board Game Day teaser — opinionated take on tabletop games, sets up tomorrow's featured puzzle. \"We have thoughts.\"" },
+  { themeId:"mhd",            date:"2026-10-10", subject:"World Mental Health Day: your brain needs offline time.",                          brief:"World Mental Health Day — puzzle as genuine offline self-care. Warm, not clinical. \"Give your brain a real break.\"" },
+  { themeId:"mhd",            date:"2026-10-12", subject:"The most radical thing you can do this weekend: unplug.",                          brief:"Follow-up to MHD — \"in 2026, unplugging is the radical act.\" Bold, slightly provocative, puzzle as the tool." },
+  { themeId:"holiday-gifts",  date:"2026-10-05", subject:"The gift that works for everyone on your list.",                                   brief:"October holiday guide for early planners — \"the one gift that works for everyone.\" Clean gift guide layout." },
+  { themeId:"holiday-gifts",  date:"2026-11-09", subject:"Still stuck on one person? This solves it.",                                      brief:"\"Still stuck on [that one person]?\" — conversational, specific problem, one clear answer. Short and warm." },
+  { themeId:"nesting",        date:"2026-11-02", subject:"Nesting season is officially open. 🏠",                                            brief:"Nesting season launch — warm fall photography, declare the season open, new arrivals or featured puzzle. Inviting energy." },
+  { themeId:"nesting",        date:"2026-11-06", subject:"Your home called. It wants a puzzle night.",                                       brief:"\"Your home called\" — playful, domestic, cozy. Puzzle as the centerpiece of the ideal weekend at home." },
+  { themeId:"nesting",        date:"2026-11-11", subject:"What does a good November weekend actually look like?",                            brief:"Editorial-style email — describe the perfect November Saturday. The puzzle is in the scene, not the pitch." },
+  { themeId:"bfcm",           date:"2026-11-02", subject:"Something big is coming November 27.",                                             brief:"Mystery teaser — dark background, one cryptic line about Nov 27, nothing else. Build anticipation." },
+  { themeId:"holiday-gifts",  date:"2026-11-16", subject:"Start your holiday shopping here. (One good decision.)",                          brief:"Pre-BF gift reminder — \"Black Friday is in 11 days and you can already start.\" Smart shopper framing." },
+  { themeId:"bfcm",           date:"2026-11-12", subject:"Black Friday early access starts now. VIP list only. 🔒",                                 brief:"VIP early access launch — \"you're on the list, here's what's coming.\" Insider energy, tease the deal without revealing discount." },
+  { themeId:"bfcm",           date:"2026-11-17", subject:"Here's what's dropping on Black Friday. (You heard it first.)",                          brief:"Deal preview — show the specific products dropping on BF, build desire. \"You saw it first.\" Wishlist CTA." },
+  { themeId:"bfcm",           date:"2026-11-23", subject:"4 days. Our biggest sale of the year. Mark the date.",                            brief:"4-day countdown — short, punchy, one visual. \"It's almost here.\" Add-to-calendar CTA." },
+  { themeId:"bfcm",           date:"2026-11-25", subject:"Tomorrow is Black Friday. We're ready. Are you?",                                 brief:"Black Friday eve — one line, one button, nothing else. Maximum anticipation, zero distraction." },
+  { themeId:"bfcm",           date:"2026-11-27", subject:"Black Friday is ON. Our biggest sale of the year. 🔥",                            brief:"Black Friday live — discount prominent, deadline clear, one button. The offer does the work. No copy needed." },
+  { themeId:"bfcm",           date:"2026-11-28", subject:"Still going. Black Friday deals end at midnight.",                                 brief:"\"Still going\" extension email — catches yesterday's procrastinators. Countdown clock if possible. Midnight deadline." },
+  { themeId:"bfcm",           date:"2026-11-30", subject:"Cyber Monday: one more day to save big. 💻",                                      brief:"Cyber Monday close — one offer, one button, deadline visible. Cleaner than BF email. \"Last one.\"" },
+  { themeId:"board-game-day", date:"2026-11-15", subject:"Puzzles: the upgrade from Catan you didn't know you needed. 🎲",                  brief:"Board Game Day — opinionated take: \"Catan is fine, but this is better.\" Slightly bold, tabletop crowd will appreciate it." },
+  { themeId:"tabletop",       date:"2026-11-20", subject:"The tabletop crowd already knows. Now everyone else is catching on.",              brief:"The tabletop crowd found us first — now everyone else is catching on. Early adopter flattery, gift-season timing." },
+  { themeId:"founders",       date:"2026-05-11", subject:"Why we started Odd Pieces — a founders story.",                                    brief:"Asian Heritage Month — two founders, one origin story, zero pitch. Tell it like a letter, not a brand email." },
+  // ── DECEMBER: heavy push pre-cutoff (Dec 1-9), light post-cutoff, warm close ──
+  { themeId:"holiday-gifts",  date:"2026-12-01", subject:"December dropped. Here's exactly what to get everyone.",                         brief:"December gift guide launch — clean grid of gifting options, puzzle as the easy universal answer. Organized and helpful." },
+  { themeId:"holiday-gifts",  date:"2026-12-03", subject:"Gifts under $50 that feel like $100.",                                  brief:"Price anchoring — $39 = premium feel at accessible price. Short list format. CTA: shop." },
+  { themeId:"holiday-gifts",  date:"2026-12-05", subject:"For the person who says they don't want anything. (They're lying.)",                 brief:"\"They say they don't want anything (they're lying)\" — humor-first, puzzle as the gift they didn't know they wanted." },
+  { themeId:"holiday-gifts",  date:"2026-12-07", subject:"8 days. Zero gifts. We've got you.",                  brief:"\"Still haven't solved [Name]?\" — conversational one-on-one tone, puzzle as the obvious answer. 8 days, no stress." },
+  { themeId:"holiday-gifts",  date:"2026-12-08", subject:"Tomorrow's your last shot at stress-free Christmas gifting.",                   brief:"One day before cutoff — calm urgency. \"Tomorrow's the last day, here's the link.\" No panic, just clarity." },
+  { themeId:"holiday-season", date:"2026-12-09", subject:"Standard shipping closes today. This is the nudge you needed.", brief:"Shipping cutoff day — one line, one link, one CTA. No images needed. \"Today is the day. Here's the link.\"" },
+  { themeId:"holiday-season", date:"2026-12-11", subject:"Missed the window? Don't panic — here's your backup plan.",              brief:"\"Missed standard shipping? Here's your backup plan\" — expedited + digital gift card options. Helpful, no shame, practical." },
+  { themeId:"founders",       date:"2026-12-27", subject:"A letter from us, before the year ends.",              brief:"Year-end brand story. Reflective, warm — remind subscribers who we are. No hard sell. CTA: read." },
+  { themeId:"holiday-season", date:"2026-12-17", subject:"Still shipping. Still arriving by the 25th. But not for long.",           brief:"Final expedited window — \"it can still arrive by the 25th if you order today.\" One option, one deadline, one button." },
+  { themeId:"holiday-season", date:"2026-12-19", subject:"The holidays are a great reason to stay in. 🧩",                       brief:"Anti-stress holiday warmth. The puzzle as the antidote to holiday chaos. Light, cozy. CTA: shop." },
+  { themeId:"holiday-season", date:"2026-12-21", subject:"The longest night of the year. Perfect. ❄️",                           brief:"Winter solstice — the longest night deserves the most beautiful puzzle. Atmospheric photography, minimal copy." },
+  { themeId:"holiday-season", date:"2026-12-23", subject:"Last order of the year. Make it a good one.",                          brief:"\"Last order of the year\" — reflective and warm. Short. The last sales email before the brand switches to gratitude mode." },
+  { themeId:"holiday-season", date:"2026-12-26", subject:"The gifts are open. Now what? 🧩",                                     brief:"Boxing Day — \"the gifts are open, now what?\" Playful post-Christmas energy. The puzzle fills the quiet week." },
+  { themeId:"holiday-season", date:"2026-12-28", subject:"What a year. Here's what we made together.",                  brief:"Year-end recap — highlights from 2026, a look at what's coming, genuine thanks. Written like a person, not a brand." },
+  { themeId:"holiday-season", date:"2026-12-31", subject:"New year. More puzzles. Less doom-scrolling.",                         brief:"NYE manifesto — \"more puzzles, less doom-scrolling\" as the resolution for 2027. Short, bold, entirely on-brand." },
+  { themeId:"founders",       date:"2026-12-20", subject:"The artists who made 2026. A thank you from us.",                 brief:"Pure gratitude email — feature 2-3 artists from 2026, thank them and the customers by name (or collectively). No CTA. Just appreciation." },
+  { themeId:"founders",       date:"2026-12-22", subject:"This year, your puzzle landed in living rooms we never expected.",    brief:"\"Your puzzle ended up somewhere we never expected\" — customer reach story. A map or stat showing where puzzles landed in 2026. Makes the reader feel part of the impact." },
+  { themeId:"founders",       date:"2026-12-29", subject:"What we got wrong this year. (And what we're doing about it.)",      brief:"Honest mistake email — one thing Odd Pieces got wrong in 2026, what they learned, what changes in 2027. The most memorable email of the year if done right." },
+];
+
+const REJECT_REASONS = ['Off-brand','Wrong tone','Too generic','Not our audience','Wrong timing','Tried before','Other'];
+const MONTHS_LONG = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+const DAYS_SHORT  = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+
+// ═══════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════
+// ─── COMMITTED APPROVALS ─────────────────────────────────────────────────────
+// Baked in at deploy time. Never lost even if localStorage is cleared.
+// To update: edit email-approvals.json and redeploy (Willis handles this).
+const COMMITTED_APPROVALS = {
+  themes: {
+    "tax-refund": { decision:"rejected", note:"most of them probably won't get a tax refund. instead, they will be paying taxes." }
+  },
+  emails: {
+    "2":{"decision":"rejected"},"3":{"decision":"rejected"},"5":{"decision":"rejected"},
+    "6":{"decision":"rejected","note":"most of them probably won't get a tax refund."},
+    "7":{"decision":"rejected","note":"most of them probably won't get a tax refund."},
+    "8":{"decision":"approved"},"9":{"decision":"approved"},"10":{"decision":"approved"},
+    "11":{"decision":"rejected"},"12":{"decision":"rejected"},"13":{"decision":"rejected"},
+    "14":{"decision":"rejected"},"15":{"decision":"approved"},"16":{"decision":"approved"},
+    "17":{"decision":"approved"},"18":{"decision":"approved"},"19":{"decision":"approved"},
+    "20":{"decision":"rejected"},"21":{"decision":"rejected","note":"already repeated"},
+    "22":{"decision":"approved"},"23":{"decision":"approved"},"24":{"decision":"approved"},
+    "25":{"decision":"approved"},"26":{"decision":"approved"},"27":{"decision":"rejected"},
+    "28":{"decision":"rejected"},"29":{"decision":"rejected"},"30":{"decision":"approved"},
+    "31":{"decision":"rejected"},"32":{"decision":"rejected"},"33":{"decision":"approved"},
+    "34":{"decision":"approved"},"35":{"decision":"approved"},"36":{"decision":"approved"},
+    "37":{"decision":"approved"},"38":{"decision":"rejected"},"39":{"decision":"approved"},
+    "40":{"decision":"approved"},"41":{"decision":"approved"},"42":{"decision":"rejected"},
+    "43":{"decision":"approved"},"44":{"decision":"approved"},"45":{"decision":"approved"},
+    "46":{"decision":"approved"},"47":{"decision":"approved"},"48":{"decision":"rejected"},
+    "49":{"decision":"approved"},"50":{"decision":"rejected"},"51":{"decision":"approved"},
+    "52":{"decision":"approved"},"53":{"decision":"approved"},"54":{"decision":"approved"},
+    "55":{"decision":"approved"},"56":{"decision":"approved"},"57":{"decision":"approved"},
+    "58":{"decision":"approved"},"59":{"decision":"approved"},"60":{"decision":"approved"},
+    "61":{"decision":"approved"},"62":{"decision":"approved"},"63":{"decision":"rejected"},
+    "64":{"decision":"approved"},"65":{"decision":"approved"},"66":{"decision":"approved"},
+    "67":{"decision":"approved"},"68":{"decision":"approved"},"69":{"decision":"approved"},
+    "70":{"decision":"approved"},"71":{"decision":"approved"},"72":{"decision":"approved"},
+    "73":{"decision":"approved"},"74":{"decision":"approved"},"75":{"decision":"approved"},
+    "76":{"decision":"approved"},"77":{"decision":"approved"},"78":{"decision":"approved"},
+    "79":{"decision":"approved"},"80":{"decision":"approved"},"81":{"decision":"approved"},
+    "82":{"decision":"approved"},"83":{"decision":"approved"},"84":{"decision":"approved"},
+    "85":{"decision":"rejected"},"86":{"decision":"approved"},"87":{"decision":"approved"},
+    "88":{"decision":"approved"},"89":{"decision":"approved"},"90":{"decision":"approved"},
+    "91":{"decision":"approved"},"92":{"decision":"approved"},
+    "93":{"decision":"approved"},"94":{"decision":"approved"}
+  }
+};
+// ─────────────────────────────────────────────────────────────────────────────
+
+// Merge: committed approvals are base, localStorage entries override (newer decisions win)
+const _lt = JSON.parse(localStorage.getItem('op_t3')||'{}');
+const _le = JSON.parse(localStorage.getItem('op_e3')||'{}');
+const tSaved = {...COMMITTED_APPROVALS.themes, ..._lt};
+const eSaved = {...COMMITTED_APPROVALS.emails, ..._le};
+// Persist merged state so future sessions always have full history
+localStorage.setItem('op_t3', JSON.stringify(tSaved));
+localStorage.setItem('op_e3', JSON.stringify(eSaved));
+let listFilter = 'all';
+let activeDrawerThemeId = null;
+
+function tDec(id){ return tSaved[id]?.decision||'pending'; }
+function eDec(i) { return eSaved[i]?.decision||'pending'; }
+function save()  { localStorage.setItem('op_t3',JSON.stringify(tSaved)); localStorage.setItem('op_e3',JSON.stringify(eSaved)); }
+
+function approveTheme(id){ tSaved[id]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(id); renderCal(); renderList(); }
+function approveEmail(i) { eSaved[i]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(activeDrawerThemeId); renderList(); updateCalChips(); }
+function undoTheme(id)   { delete tSaved[id]; save(); refreshDrawer(id); renderCal(); renderList(); updateInsights(); }
+function undoEmail(i)    { delete eSaved[i];  save(); refreshDrawer(activeDrawerThemeId); renderList(); updateCalChips(); updateInsights(); }
+
+function openThemeReject(id){ document.getElementById('trp-'+id)?.classList.toggle('open'); }
+function openEmailReject(i) { document.getElementById('erp-'+i)?.classList.toggle('open'); }
+function toggleBrief(i){ const b=document.getElementById('brief-'+i); const a=document.getElementById('bta-'+i); if(!b) return; const open=b.classList.toggle('open'); if(a) a.textContent=open?'▾':'▸'; }
+
+function toggleTR(id,r,el){ _toggleR(tSaved,id,r,el); }
+function toggleER(i,r,el) { _toggleR(eSaved,i,r,el); }
+function _toggleR(store,key,r,el){
+  if(!store[key]) store[key]={decision:'pending',reasons:[],note:''};
+  const rs=store[key].reasons, ix=rs.indexOf(r);
+  if(ix===-1){rs.push(r);el.classList.add('on');}else{rs.splice(ix,1);el.classList.remove('on');}
+}
+function confirmThemeReject(id){
+  const n=document.getElementById('tnote-'+id)?.value.trim()||'';
+  if(!tSaved[id]) tSaved[id]={decision:'pending',reasons:[],note:''};
+  tSaved[id].decision='rejected'; tSaved[id].note=n; save(); closeDrawer(); renderCal(); renderList(); updateInsights();
+}
+function confirmEmailReject(i){
+  const n=document.getElementById('erp-note-'+i)?.value.trim()||'';
+  if(!eSaved[i]) eSaved[i]={decision:'pending',reasons:[],note:''};
+  eSaved[i].decision='rejected'; eSaved[i].note=n; save(); refreshDrawer(activeDrawerThemeId); renderList(); updateCalChips(); updateInsights();
+}
+
+// ═══════════════════════════════════════════════
+// CALENDAR RENDER
+// ═══════════════════════════════════════════════
+function buildDateIndex(){
+  const idx={};
+  EMAILS.forEach((e,i)=>{ if(!idx[e.date]) idx[e.date]=[]; idx[e.date].push(i); });
+  return idx;
+}
+
+const PILLAR_COLOR={ Promo:'#b45309', Seasonal:'#15803d', Brand:'#be185d', Community:'#1d4ed8', Artist:'#6d28d9', Brain:'#0e7490' };
+const PILLAR_BG={    Promo:'#fef3c7', Seasonal:'#dcfce7', Brand:'#fce7f3', Community:'#dbeafe', Artist:'#ede9fe', Brain:'#cffafe' };
+
+function renderCal(){
+  const dateIdx=buildDateIndex();
+  const today=new Date(); today.setHours(0,0,0,0);
+  const months=['2026-03','2026-04','2026-05','2026-06','2026-07','2026-08','2026-09','2026-10','2026-11','2026-12'];
+  let html='';
+  for(const mkey of months){
+    const [y,m]=mkey.split('-').map(Number);
+    const firstDay=new Date(y,m-1,1).getDay();
+    const daysInMonth=new Date(y,m,0).getDate();
+    html+=`<div class="cal-month"><div class="cal-month-name">${MONTHS_LONG[m-1]} ${y}<div class="cal-month-line"></div></div><div class="cal-dow">${DAYS_SHORT.map(d=>`<span>${d}</span>`).join('')}</div><div class="cal-grid">`;
+    for(let i=0;i<firstDay;i++) html+=`<div class="cal-cell empty"></div>`;
+    for(let d=1;d<=daysInMonth;d++){
+      const ds=`${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+      const dt=new Date(y,m-1,d); dt.setHours(0,0,0,0);
+      const isToday=dt.getTime()===today.getTime();
+      const items=dateIdx[ds]||[];
+      html+=`<div class="cal-cell${isToday?' today':''}" id="cell-${ds}"><div class="cal-day-num">${d}</div>`;
+      items.forEach(i=>{
+        const e=EMAILS[i]; const th=THEMES.find(t=>t.id===e.themeId); if(!th) return;
+        const color=PILLAR_COLOR[th.pillar]||'#666'; const bg=PILLAR_BG[th.pillar]||'#f0f0f0';
+        const dec=eDec(i);
+        html+=`<div class="chip p-${th.pillar} ${dec}" id="chip-${i}" onclick="openDrawer('${th.id}')" title="${e.subject}" style="--pc:${color};--pb:${bg}"><span class="chip-dot"></span><span class="chip-txt">${th.name.replace(/^[^\s]+\s/,'')}</span></div>`;
+      });
+      html+=`</div>`;
+    }
+    html+=`</div></div>`;
+  }
+  document.getElementById('cal-body').innerHTML=html;
+}
+
+function updateCalChips(){
+  EMAILS.forEach((e,i)=>{
+    const chip=document.getElementById('chip-'+i);
+    if(!chip) return;
+    const th=THEMES.find(t=>t.id===e.themeId);
+    if(!th) return;
+    chip.className=`chip p-${th.pillar} ${eDec(i)}`;
+    chip.style.setProperty('--pc',PILLAR_COLOR[th.pillar]||'#666');
+    chip.style.setProperty('--pb',PILLAR_BG[th.pillar]||'#f0f0f0');
+  });
+}
+
+// ═══════════════════════════════════════════════
+// DRAWER
+// ═══════════════════════════════════════════════
+function openDrawer(themeId){
+  activeDrawerThemeId=themeId;
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+  refreshDrawer(themeId);
+}
+function closeDrawer(){
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+  activeDrawerThemeId=null;
+}
+function refreshDrawer(themeId){
+  if(!themeId) return;
+  const th=THEMES.find(t=>t.id===themeId); if(!th) return;
+  const dec=tDec(themeId);
+  const themeEmails=EMAILS.map((e,i)=>({e,i})).filter(({e})=>e.themeId===themeId);
+  const color=PILLAR_COLOR[th.pillar]||'#666'; const bg=PILLAR_BG[th.pillar]||'#f0f0f0';
+  document.getElementById('d-date').textContent='';
+  document.getElementById('d-theme').textContent=th.name;
+  let tBadge='';
+  if(dec==='approved') tBadge=`<span class="theme-dec-badge tdb-app">✅ Approved</span>`;
+  else if(dec==='rejected'){ const s=tSaved[themeId]; const why=[...(s?.reasons||[]),s?.note||''].filter(Boolean).join(', '); tBadge=`<span class="theme-dec-badge tdb-rej">❌ Rejected${why?': '+why:''}</span>`; }
+  const prevTR=tSaved[themeId]?.reasons||[];
+  const trp=`<div class="rp" id="trp-${themeId}"><div class="rp-lbl">Why reject?</div><div class="reasons">${REJECT_REASONS.map(r=>`<button class="rb ${prevTR.includes(r)?'on':''}" onclick="toggleTR('${themeId}','${r}',this)">${r}</button>`).join('')}</div><textarea class="rp-note" id="tnote-${themeId}" rows="2" placeholder="Notes (optional)">${tSaved[themeId]?.note||''}</textarea><button class="rp-ok" onclick="confirmThemeReject('${themeId}')">Confirm Reject</button></div>`;
+  const emailHTML=themeEmails.map(({e,i})=>{
+    const edec=eDec(i); const {label}=fmtDate(e.date);
+    let decBadge='';
+    if(edec==='approved') decBadge=`<span class="edec edec-app">✅ Approved <button class="bundo" onclick="undoEmail(${i})">undo</button></span>`;
+    else if(edec==='rejected'){ const s=eSaved[i]; const why=[...(s?.reasons||[]),s?.note||''].filter(Boolean).join(', '); decBadge=`<span class="edec edec-rej">❌ Rejected${why?': '+why:''} <button class="bundo" onclick="undoEmail(${i})">undo</button></span>`; }
+    const prevER=eSaved[i]?.reasons||[];
+    const erp=`<div class="rp" id="erp-${i}"><div class="rp-lbl">Why reject?</div><div class="reasons">${REJECT_REASONS.map(r=>`<button class="rb ${prevER.includes(r)?'on':''}" onclick="toggleER(${i},'${r}',this)">${r}</button>`).join('')}</div><textarea class="rp-note" id="erp-note-${i}" rows="2" placeholder="Notes (optional)">${eSaved[i]?.note||''}</textarea><button class="rp-ok" onclick="confirmEmailReject(${i})">Confirm Reject</button></div>`;
+    const hasBrief = e.brief && e.brief.length > 0;
+    return `<div class="email-item ${edec}" id="ei-${i}"><div class="email-date">${label} · ${e.date}</div><div class="email-subj">${e.subject}</div>${hasBrief?`<div style="display:flex;gap:10px;align-items:center;margin:5px 0 2px"><div class="brief-toggle" onclick="toggleBrief(${i})">📝 Messaging brief <span id="bta-${i}">▸</span></div><button onclick="openFullBrief(${i})" style="font-size:.62rem;color:var(--accent);background:none;border:none;cursor:pointer;font-weight:700;padding:0">📄 Full brief →</button></div><div class="brief-body" id="brief-${i}">${e.brief}</div>`:''}<div class="email-acts">${edec!=='approved'?`<button class="ba" onclick="approveEmail(${i})">✓ Approve</button>`:''} ${edec!=='rejected'?`<button class="br" onclick="openEmailReject(${i})">✗ Reject</button>`:''} ${decBadge}</div>${erp}</div>`;
+  }).join('');
+  document.getElementById('d-body').innerHTML=`<span class="ptag p-${th.pillar}" style="--pc:${color};--pb:${bg}">${th.pillar}</span><div class="drawer-desc">${th.desc}</div><div class="theme-actions">${dec!=='approved'?`<button class="tba" onclick="approveTheme('${themeId}')">✓ Approve Theme</button>`:''} ${dec!=='rejected'?`<button class="tbr" onclick="openThemeReject('${themeId}')">✗ Reject Theme</button>`:''} ${tBadge} ${dec!=='pending'?`<button class="bundo" onclick="undoTheme('${themeId}')">undo</button>`:''}</div>${trp}<div class="drawer-section">Email Topics (${themeEmails.length})</div>${emailHTML}`;
+}
+
+// ═══════════════════════════════════════════════
+// LIST VIEW
+// ═══════════════════════════════════════════════
+function renderList(){
+  const sorted=[...EMAILS].map((e,i)=>({e,i})).sort((a,b)=>a.e.date.localeCompare(b.e.date));
+  const MONTH_COLORS = ['#fef9f0','#f0f7ff','#f5f0fe','#f0fdf4','#fff5f5','#f0fdfd','#fffbeb','#f5f0ff','#f0f4ff','#fdf0f7'];
+  let lastMonth=''; let monthIdx=-1;
+  const rows=[]; 
+  // First pass: count visible per month for header
+  const monthCounts={};
+  sorted.forEach(({e,i})=>{
+    const th=THEMES.find(t=>t.id===e.themeId); if(!th) return;
+    const edec=eDec(i);
+    const vis=listFilter==='all'?edec!=='rejected':listFilter==='approved'?edec==='approved':listFilter==='pending'?edec==='pending':listFilter==='rejected'?edec==='rejected':th.pillar===listFilter&&edec!=='rejected';
+    if(!vis) return;
+    const mo=e.date.slice(0,7); monthCounts[mo]=(monthCounts[mo]||0)+1;
+  });
+  sorted.forEach(({e,i})=>{
+    const th=THEMES.find(t=>t.id===e.themeId); if(!th) return;
+    const edec=eDec(i);
+    const vis=listFilter==='all'?edec!=='rejected':listFilter==='approved'?edec==='approved':listFilter==='pending'?edec==='pending':listFilter==='rejected'?edec==='rejected':th.pillar===listFilter&&edec!=='rejected';
+    const mo=e.date.slice(0,7);
+    if(mo!==lastMonth){
+      lastMonth=mo; monthIdx=(monthIdx+1)%MONTH_COLORS.length;
+      const [,m]=mo.split('-'); const count=monthCounts[mo]||0;
+      const approvedCount=sorted.filter(x=>x.e.date.slice(0,7)===mo&&eDec(x.i)==='approved').length;
+      const badge=approvedCount>0?`<span style="background:#dcfce7;color:#15803d;border-radius:5px;padding:2px 8px;font-size:.65rem;font-weight:700;margin-left:8px">✅ ${approvedCount} approved</span>`:'';
+      rows.push(`<tr class="month-header" style="background:${MONTH_COLORS[monthIdx]}"><td colspan="4" style="padding:10px 16px;font-weight:900;font-size:.82rem;letter-spacing:-.01em;border-bottom:2px solid var(--border);color:var(--text)">${MONTHS_LONG[+m-1]} 2026 <span style="font-weight:500;color:var(--muted);font-size:.72rem">${count} email${count!==1?'s':''}</span>${badge}</td></tr>`);
+    }
+    const {label,day}=fmtDate(e.date);
+    const color=PILLAR_COLOR[th.pillar]||'#666'; const bg=PILLAR_BG[th.pillar]||'#f0f0f0';
+    const briefHtml=e.brief?`<div style="display:flex;gap:8px;align-items:center;margin-top:5px"><div class="lt-brief-toggle" onclick="toggleListBrief(${i})">📝 brief <span id="lbta-${i}">▸</span></div><button onclick="openFullBrief(${i})" style="font-size:.62rem;color:var(--accent);background:none;border:none;cursor:pointer;font-weight:700;padding:0">📄 Full brief →</button></div><div class="lt-brief" id="lbrief-${i}">${e.brief}</div>`:'';
+    let decCell='';
+    if(edec==='approved') decCell=`<span style="color:var(--green);font-size:.75rem;font-weight:700">✅ Approved</span><br><button class="bundo" onclick="undoEmailList(${i})">undo</button>`;
+    else if(edec==='rejected') decCell=`<span style="color:var(--red);font-size:.75rem;font-weight:700">❌ Rejected</span><br><button class="bundo" onclick="undoEmailList(${i})">undo</button>`;
+    else decCell=`<button class="ba" onclick="approveEmailList(${i})">✓ Approve</button> <button class="br" onclick="rejectEmailList(${i})">✗ Reject</button>`;
+    const rowBg=MONTH_COLORS[monthIdx];
+    rows.push(`<tr class="${vis?edec:'hidden'}" id="lrow-${i}" style="--row-bg:${rowBg}"><td class="lt-date" style="background:${rowBg}"><strong>${label}</strong><br>${day}</td><td class="lt-theme" style="background:${rowBg}"><span class="pillar-chip" style="background:${bg};color:${color}">${th.pillar}</span><br><span style="font-size:.71rem;color:var(--muted)">${th.name}</span></td><td class="lt-subj" style="background:${rowBg}">${e.subject}${briefHtml}</td><td style="white-space:nowrap;background:${rowBg}">${decCell}</td></tr>`);
+  });
+  document.getElementById('list-body').innerHTML=rows.join('')||'<tr><td colspan="4" style="color:var(--muted);padding:20px;text-align:center">Nothing matches.</td></tr>';
+}
+function openDrawerAndReject(i){ openDrawer(EMAILS[i].themeId); setTimeout(()=>openEmailReject(i),150); }
+function approveEmailList(i){ eSaved[i]={decision:'approved',reasons:[],note:''}; save(); renderList(); updateCalChips(); updateInsights(); }
+function undoEmailList(i){ delete eSaved[i]; save(); renderList(); updateCalChips(); updateInsights(); }
+function rejectEmailList(i){ eSaved[i]={decision:'rejected',reasons:[],note:''}; save(); renderList(); updateCalChips(); updateInsights(); }
+function toggleListBrief(i){ const b=document.getElementById('lbrief-'+i); const a=document.getElementById('lbta-'+i); if(!b) return; const open=b.classList.toggle('open'); if(a) a.textContent=open?'▾':'▸'; }
+
+// ═══════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════
+function fmtDate(ds){
+  const [y,m,d]=ds.split('-').map(Number); const dt=new Date(y,m-1,d);
+  return {day:DAYS_SHORT[dt.getDay()], label:`${MONTHS_LONG[m-1].slice(0,3)} ${d}`};
+}
+
+// ═══════════════════════════════════════════════
+// EXPORT
+// ═══════════════════════════════════════════════
+function exportList(){
+  const approved=EMAILS.map((e,i)=>({e,i})).filter(({i})=>eDec(i)==='approved');
+  let txt='ODD PIECES — APPROVED EMAIL CAMPAIGNS 2026\n'+'─'.repeat(50)+'\n';
+  if(!approved.length){ txt+='\nNo campaigns approved yet.'; }
+  else {
+    let lastMonth='';
+    approved.sort((a,b)=>a.e.date.localeCompare(b.e.date)).forEach(({e,i})=>{
+      const month=e.date.slice(0,7); const th=THEMES.find(t=>t.id===e.themeId);
+      if(month!==lastMonth){ const [,m]=month.split('-'); txt+=`\n── ${MONTHS_LONG[+m-1].toUpperCase()} ──\n`; lastMonth=month; }
+      txt+=`  ${e.date}  [${th?.pillar}]  ${e.subject}\n`;
+    });
+  }
+  document.getElementById('exp-text').textContent=txt;
+  document.getElementById('modal').classList.add('open');
+}
+function copyExp(){ navigator.clipboard.writeText(document.getElementById('exp-text').textContent).then(()=>{const b=document.querySelector('.mcopy');b.textContent='Copied!';setTimeout(()=>b.textContent='Copy to clipboard',2000);}); }
+function closeModal(){ document.getElementById('modal').classList.remove('open'); }
+
+// ═══════════════════════════════════════════════
+// TABS & FILTERS
+// ═══════════════════════════════════════════════
+function switchTab(tab,btn){ document.querySelectorAll('.tab').forEach(b=>b.classList.remove('on')); document.querySelectorAll('.tab-body').forEach(b=>b.classList.remove('on')); btn.classList.add('on'); document.getElementById('tb-'+tab).classList.add('on'); }
+function setListFilter(f,btn){ listFilter=f; document.querySelectorAll('.list-toolbar .pill').forEach(b=>b.classList.remove('on','on-g','on-r')); if(f==='approved') btn.classList.add('on-g'); else if(f==='rejected') btn.classList.add('on-r'); else btn.classList.add('on'); const tbl=document.querySelector('.list-table'); if(tbl) tbl.classList.toggle('show-rejected', f==='rejected'); renderList(); }
+
+// ═══════════════════════════════════════════════
+// INSIGHTS
+// ═══════════════════════════════════════════════
+function updateInsights(){
+  const allReasons=[]; const rejectedPillars={};
+  Object.entries(tSaved).forEach(([id,s])=>{ if(s.decision==='rejected'){ allReasons.push(...(s.reasons||[])); if(s.note) allReasons.push(s.note); const th=THEMES.find(t=>t.id===id); if(th) rejectedPillars[th.pillar]=(rejectedPillars[th.pillar]||0)+1; } });
+  Object.entries(eSaved).forEach(([i,s])=>{ if(s.decision==='rejected'){ allReasons.push(...(s.reasons||[])); if(s.note) allReasons.push(s.note); const th=THEMES.find(t=>t.id===EMAILS[i]?.themeId); if(th) rejectedPillars[th.pillar]=(rejectedPillars[th.pillar]||0)+1; } });
+  const totalRej=Object.values(eSaved).filter(s=>s.decision==='rejected').length+Object.values(tSaved).filter(s=>s.decision==='rejected').length;
+  if(totalRej===0){ document.getElementById('insights-bar').classList.remove('show'); return; }
+  const reasonCount={}; allReasons.forEach(r=>{ if(r) reasonCount[r]=(reasonCount[r]||0)+1; });
+  const topReasons=Object.entries(reasonCount).sort((a,b)=>b[1]-a[1]).slice(0,3).map(([r])=>r);
+  const topPillars=Object.entries(rejectedPillars).sort((a,b)=>b[1]-a[1]).slice(0,2).map(([p])=>p);
+  let tags='';
+  if(topReasons.length) tags+=topReasons.map(r=>`<span class="ins-tag">❌ ${r}</span>`).join(' ');
+  if(topPillars.length) tags+=' &nbsp; '+topPillars.map(p=>`<span class="ins-tag" style="border-color:#fca5a5;color:var(--red)">Less ${p}</span>`).join(' ');
+  tags+=` <span style="color:var(--muted);font-size:.67rem">(${totalRej} removed)</span>`;
+  document.getElementById('ins-content').innerHTML=tags;
+  document.getElementById('insights-bar').classList.add('show');
+}
+function undoAllRejections(){
+  if(!confirm('Undo all rejections and bring everything back?')) return;
+  Object.keys(tSaved).forEach(id=>{ if(tSaved[id].decision==='rejected') delete tSaved[id]; });
+  Object.keys(eSaved).forEach(i=>{ if(eSaved[i].decision==='rejected') delete eSaved[i]; });
+  save(); renderCal(); renderList(); updateInsights();
+  if(activeDrawerThemeId) refreshDrawer(activeDrawerThemeId);
+}
+
+
+// ═══ FULL BRIEF ═══
+const PILLAR_TONE = {
+  Promo:     'Urgent, direct, conversion-focused',
+  Seasonal:  'Warm, atmospheric, lifestyle-led',
+  Brand:     'Personal, authentic, story-driven',
+  Community: 'Playful, inclusive, identity-affirming',
+  Artist:    'Editorial, visual, human-first',
+  Brain:     'Thoughtful, empowering, slightly provocative',
+};
+const PILLAR_CTA = {
+  Promo:     'Shop now',
+  Seasonal:  'Shop the collection',
+  Brand:     'Read our story',
+  Community: 'Shop now',
+  Artist:    'Shop their puzzle',
+  Brain:     'Shop now',
+};
+
+function openFullBrief(i){
+  const e = EMAILS[i];
+  const th = THEMES.find(t => t.id === e.themeId);
+  if(!th) return;
+  const {label} = fmtDate(e.date);
+  const color = PILLAR_COLOR[th.pillar]||'#666';
+  const bg = PILLAR_BG[th.pillar]||'#f0f0f0';
+  const tone = PILLAR_TONE[th.pillar] || 'Clear, warm, on-brand';
+  const cta  = PILLAR_CTA[th.pillar]  || 'Shop now';
+
+  document.getElementById('bm-title').textContent = e.subject;
+  document.getElementById('bm-body').innerHTML = `
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:16px">
+      <div class="brief-field"><div class="bf-label">Campaign</div><div class="bf-val">${th.name}</div></div>
+      <div class="brief-field"><div class="bf-label">Date</div><div class="bf-val">${label}, ${e.date}</div></div>
+      <div class="brief-field"><div class="bf-label">Pillar</div><div class="bf-val"><span style="background:${bg};color:${color};padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:700">${th.pillar}</span></div></div>
+      <div class="brief-field"><div class="bf-label">Tone</div><div class="bf-val">${tone}</div></div>
+    </div>
+    <div class="brief-field full" style="margin-bottom:10px">
+      <div class="bf-label">Subject line</div>
+      <div class="bf-val" style="font-weight:700;font-size:.9rem">${e.subject}</div>
+    </div>
+    <div class="brief-field full" style="margin-bottom:10px">
+      <div class="bf-label">Core message — what this email should communicate</div>
+      <div class="bf-val">${e.brief||'—'}</div>
+    </div>
+    <div class="brief-field full" style="margin-bottom:10px">
+      <div class="bf-label">Primary CTA</div>
+      <div class="bf-val"><strong>${cta}</strong></div>
+    </div>
+    <div class="brief-field full">
+      <div class="bf-label">Theme context</div>
+      <div class="bf-val" style="color:var(--muted)">${th.desc}</div>
+    </div>
+  `;
+  window._currentBriefIdx = i;
+  document.getElementById('brief-modal').classList.add('open');
+}
+function closeBriefModal(){ document.getElementById('brief-modal').classList.remove('open'); }
+function copyBrief(){
+  const i = window._currentBriefIdx;
+  const e = EMAILS[i]; const th = THEMES.find(t=>t.id===e.themeId);
+  const {label} = fmtDate(e.date);
+  const txt = [
+    'EMAIL BRIEF',
+    '─'.repeat(40),
+    `Campaign:     ${th?.name}`,
+    `Date:         ${label}, ${e.date}`,
+    `Pillar:       ${th?.pillar}`,
+    `Tone:         ${PILLAR_TONE[th?.pillar]||''}`,
+    '',
+    `Subject line: ${e.subject}`,
+    '',
+    `Core message: ${e.brief}`,
+    '',
+    `Primary CTA:  ${PILLAR_CTA[th?.pillar]||'Shop now'}`,
+    '',
+    `Theme context: ${th?.desc}`,
+  ].join('\n');
+  navigator.clipboard.writeText(txt).then(()=>{
+    const b=document.querySelector('#brief-modal .mcopy');
+    b.textContent='Copied!'; setTimeout(()=>b.textContent='Copy brief',2000);
+  });
+}
+
+// INIT
+renderCal(); renderList(); updateInsights();
+
+</script>
+
+<!-- Full Brief Modal -->
+<div class="overlay" id="brief-modal">
+  <div class="modal" style="max-width:680px">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:18px">
+      <div>
+        <div style="font-size:.65rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);font-weight:800;margin-bottom:4px">Email Brief</div>
+        <h2 id="bm-title" style="font-size:1rem"></h2>
+      </div>
+      <button class="mclose" onclick="closeBriefModal()" style="margin:0">✕</button>
+    </div>
+    <div id="bm-body"></div>
+    <div style="margin-top:16px;display:flex;gap:8px">
+      <button class="mcopy" onclick="copyBrief()">Copy brief</button>
+      <button class="mclose" onclick="closeBriefModal()">Close</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

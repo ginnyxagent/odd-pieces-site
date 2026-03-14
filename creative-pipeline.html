@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Creative Pipeline — Odd Pieces</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #faf7f2; color: #1a1a1a; min-height: 100vh; }
+
+  /* NAV */
+  .topnav { background: #fff; border-bottom: 2px solid #1a1a1a; padding: 12px 24px; display: flex; align-items: center; gap: 12px; }
+  .topnav a { color: #999; text-decoration: none; font-size: 0.82rem; font-weight: 600; }
+  .topnav a:hover { color: #1a1a1a; }
+  .topnav .sep { color: #ccc; }
+  .topnav .current { color: #f97316; font-weight: 800; }
+
+  /* HEADER */
+  .header { max-width: 1400px; margin: 0 auto; padding: 28px 28px 16px; display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
+  .header h1 { font-size: 1.4rem; font-weight: 800; letter-spacing: -0.5px; }
+  .header p { color: #999; font-size: 0.82rem; margin-top: 3px; }
+  .header-actions { display: flex; gap: 8px; }
+  .btn-primary { background: #1a1a1a; color: #fff; border: none; padding: 10px 18px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .btn-primary:hover { background: #333; }
+  .btn-ghost { background: #fff; color: #555; border: 1.5px solid #e0dbd4; padding: 10px 14px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; }
+  .btn-ghost:hover { border-color: #999; }
+
+  /* STATS */
+  .stats { max-width: 1400px; margin: 0 auto; display: flex; gap: 10px; padding: 0 28px 20px; flex-wrap: wrap; }
+  .stat { background: #fff; border: 1.5px solid #ede8e0; border-radius: 12px; padding: 14px 20px; min-width: 110px; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .stat .num { font-size: 1.8rem; font-weight: 800; letter-spacing: -1px; }
+  .stat .lbl { font-size: 0.7rem; color: #999; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 700; margin-top: 2px; }
+  .stat.s-all .num { color: #1a1a1a; }
+  .stat.s-brief .num { color: #7c3aed; }
+  .stat.s-prod .num { color: #2563eb; }
+  .stat.s-review .num { color: #d97706; }
+  .stat.s-approved .num { color: #16a34a; }
+  .stat.s-live .num { color: #dc2626; }
+
+  /* FILTERS */
+  .filters { max-width: 1400px; margin: 0 auto; padding: 0 28px 20px; display: flex; gap: 8px; flex-wrap: wrap; }
+  .filter-btn { background: #fff; border: 1.5px solid #ede8e0; color: #999; padding: 6px 14px; border-radius: 99px; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+  .filter-btn.active { background: #1a1a1a; border-color: #1a1a1a; color: #fff; }
+  .filter-btn:hover:not(.active) { border-color: #999; color: #333; }
+
+  /* KANBAN */
+  .kanban-wrap { max-width: 1400px; margin: 0 auto; padding: 0 28px 48px; }
+  .kanban { display: flex; gap: 14px; overflow-x: auto; min-height: 500px; }
+  .kanban::-webkit-scrollbar { height: 6px; }
+  .kanban::-webkit-scrollbar-track { background: #f0ebe3; border-radius: 3px; }
+  .kanban::-webkit-scrollbar-thumb { background: #ccc5bb; border-radius: 3px; }
+
+  .col { flex: 0 0 270px; }
+  .col-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; padding-bottom: 8px; border-bottom: 2px solid; }
+  .col-title { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; }
+  .col-count { font-size: 0.72rem; font-weight: 700; background: #f0ebe3; padding: 2px 8px; border-radius: 99px; color: #888; }
+
+  .col-briefing .col-header { border-color: #7c3aed; }
+  .col-briefing .col-title { color: #7c3aed; }
+  .col-production .col-header { border-color: #2563eb; }
+  .col-production .col-title { color: #2563eb; }
+  .col-review .col-header { border-color: #d97706; }
+  .col-review .col-title { color: #d97706; }
+  .col-approved .col-header { border-color: #16a34a; }
+  .col-approved .col-title { color: #16a34a; }
+  .col-live .col-header { border-color: #dc2626; }
+  .col-live .col-title { color: #dc2626; }
+
+  .cards { display: flex; flex-direction: column; gap: 8px; }
+  .empty-col { font-size: 0.78rem; color: #ccc; text-align: center; padding: 20px 10px; background: #fff; border: 1.5px dashed #e0dbd4; border-radius: 10px; }
+
+  /* CARD */
+  .card { background: #fff; border: 1.5px solid #ede8e0; border-radius: 12px; padding: 14px; cursor: pointer; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: 0 1px 4px rgba(0,0,0,.04); }
+  .card:hover { border-color: #f97316; box-shadow: 0 4px 16px rgba(0,0,0,.08); }
+  .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px; }
+  .fmt-tag { font-size: 0.68rem; font-weight: 700; padding: 2px 8px; border-radius: 99px; flex-shrink: 0; }
+  .fmt-image { background: #eff6ff; color: #2563eb; }
+  .fmt-video { background: #f5f3ff; color: #7c3aed; }
+  .fmt-carousel { background: #f0fdf4; color: #16a34a; }
+  .card-title { font-size: 0.88rem; font-weight: 700; line-height: 1.3; margin-bottom: 5px; }
+  .card-hook { font-size: 0.76rem; color: #888; line-height: 1.4; margin-bottom: 8px; }
+  .card-emotion { font-size: 0.72rem; color: #f97316; font-weight: 600; margin-bottom: 8px; }
+  .card-footer { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 4px; }
+  .card-variants { font-size: 0.7rem; color: #999; }
+  .card-variants b { color: #1a1a1a; }
+  .assignee-chips { display: flex; gap: 4px; flex-wrap: wrap; }
+  .chip { font-size: 0.68rem; font-weight: 600; background: #f5f0e8; color: #555; padding: 2px 7px; border-radius: 99px; }
+
+  /* MODAL */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 100; overflow-y: auto; padding: 20px; }
+  .modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+  .modal { background: #fff; border: 1.5px solid #ede8e0; border-radius: 16px; width: 100%; max-width: 860px; margin: auto; box-shadow: 0 20px 60px rgba(0,0,0,.15); }
+  .modal-header { padding: 22px 26px 18px; border-bottom: 1.5px solid #ede8e0; display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; }
+  .modal-header-left { flex: 1; }
+  .modal-title-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+  .modal-title { font-size: 1.1rem; font-weight: 800; letter-spacing: -0.3px; }
+  .status-pill { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .pill-briefing { background: #f5f3ff; color: #7c3aed; }
+  .pill-production { background: #eff6ff; color: #2563eb; }
+  .pill-review { background: #fffbeb; color: #d97706; }
+  .pill-approved { background: #f0fdf4; color: #16a34a; }
+  .pill-live { background: #fef2f2; color: #dc2626; }
+  .modal-sub { font-size: 0.8rem; color: #888; font-style: italic; }
+  .modal-close { background: #f5f0e8; border: none; color: #888; font-size: 1rem; cursor: pointer; padding: 6px 10px; border-radius: 8px; flex-shrink: 0; }
+  .modal-close:hover { background: #ede8e0; color: #1a1a1a; }
+
+  .modal-body { padding: 24px 26px; }
+  .section { margin-bottom: 26px; }
+  .section-label { font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #f97316; margin-bottom: 10px; }
+
+  /* CONCEPT GRID */
+  .meta-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .meta-cell { background: #faf7f2; border: 1.5px solid #ede8e0; border-radius: 8px; padding: 10px 12px; }
+  .meta-cell label { font-size: 0.68rem; color: #999; text-transform: uppercase; letter-spacing: 0.07em; font-weight: 700; display: block; margin-bottom: 3px; }
+  .meta-cell .val { font-size: 0.85rem; color: #1a1a1a; font-weight: 600; }
+  .meta-cell.full { grid-column: 1 / -1; }
+  .meta-cell .val.hook { font-style: italic; color: #555; font-weight: 400; }
+
+  /* ASSIGNEES */
+  .assignee-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+  .assignee-chip { display: flex; align-items: center; gap: 6px; background: #f5f0e8; border: 1.5px solid #ede8e0; padding: 6px 12px; border-radius: 99px; font-size: 0.8rem; font-weight: 600; }
+  .assignee-chip .role { font-size: 0.68rem; color: #999; font-weight: 600; }
+  .add-assignee { background: transparent; border: 1.5px dashed #ccc; color: #999; padding: 6px 12px; border-radius: 99px; font-size: 0.78rem; cursor: pointer; }
+  .add-assignee:hover { border-color: #f97316; color: #f97316; }
+
+  /* DESIGNER BRIEF */
+  .brief-box { background: #fffbf5; border: 2px solid #fed7aa; border-radius: 12px; padding: 18px 20px; }
+  .brief-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px; }
+  .brief-top-label { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; color: #ea580c; letter-spacing: 0.08em; }
+  .copy-brief-btn { background: #1a1a1a; color: #fff; border: none; padding: 7px 14px; border-radius: 6px; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+  .copy-brief-btn:hover { background: #333; }
+
+  .brief-block { margin-bottom: 14px; }
+  .brief-block:last-child { margin-bottom: 0; }
+  .brief-block h4 { font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; color: #999; margin-bottom: 6px; }
+
+  /* STEP-BY-STEP INSTRUCTIONS */
+  .step-list { display: flex; flex-direction: column; gap: 8px; }
+  .step { display: flex; gap: 10px; align-items: flex-start; background: #fff; border: 1.5px solid #ede8e0; border-radius: 8px; padding: 10px 12px; }
+  .step-num { background: #f97316; color: #fff; font-size: 0.72rem; font-weight: 800; width: 20px; height: 20px; border-radius: 99px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; }
+  .step-content { font-size: 0.84rem; color: #1a1a1a; line-height: 1.5; }
+  .step-content strong { color: #1a1a1a; }
+  .step-content em { color: #888; font-style: normal; font-size: 0.78rem; }
+
+  /* VISUAL EXAMPLE BOX */
+  .visual-box { background: #fff; border: 1.5px solid #ede8e0; border-radius: 8px; padding: 12px 14px; }
+  .visual-box .vb-label { font-size: 0.68rem; color: #999; font-weight: 700; text-transform: uppercase; margin-bottom: 6px; }
+  .visual-box p { font-size: 0.84rem; color: #333; line-height: 1.5; }
+  .visual-zones { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; margin-top: 8px; }
+  .zone { background: #faf7f2; border: 1.5px dashed #e0dbd4; border-radius: 6px; padding: 8px 10px; text-align: center; font-size: 0.72rem; color: #888; }
+  .zone strong { display: block; color: #1a1a1a; font-size: 0.78rem; margin-bottom: 2px; }
+
+  /* DO/DON'T */
+  .do-dont { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dos, .donts { border-radius: 8px; padding: 10px 12px; }
+  .dos { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+  .donts { background: #fef2f2; border: 1.5px solid #fecaca; }
+  .dos h5 { color: #16a34a; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+  .donts h5 { color: #dc2626; font-size: 0.72rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.07em; margin-bottom: 6px; }
+  .dos li, .donts li { font-size: 0.8rem; color: #374151; line-height: 1.5; margin-bottom: 3px; padding-left: 4px; }
+
+  /* VARIATIONS TABLE */
+  .var-table { width: 100%; border-collapse: collapse; border-radius: 10px; overflow: hidden; border: 1.5px solid #ede8e0; }
+  .var-table thead th { background: #f5f0e8; padding: 9px 12px; font-size: 0.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #555; text-align: left; border-bottom: 1.5px solid #ede8e0; }
+  .var-table tbody td { padding: 10px 12px; font-size: 0.82rem; color: #1a1a1a; border-bottom: 1.5px solid #f5f0e8; vertical-align: top; line-height: 1.4; }
+  .var-table tbody tr:last-child td { border-bottom: none; }
+  .var-table tbody tr:hover td { background: #fffbf5; }
+  .var-num { font-weight: 800; color: #f97316; }
+  .var-change { font-size: 0.72rem; background: #f5f0e8; color: #888; padding: 2px 7px; border-radius: 99px; font-weight: 700; }
+  .var-what { font-size: 0.8rem; color: #333; }
+
+  /* COPY VARIANTS */
+  .copy-variants { display: flex; flex-direction: column; gap: 8px; }
+  .copy-card { background: #faf7f2; border: 1.5px solid #ede8e0; border-radius: 10px; padding: 14px; }
+  .copy-card-header { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+  .copy-lbl { background: #1a1a1a; color: #fff; font-size: 0.7rem; font-weight: 800; padding: 2px 8px; border-radius: 99px; }
+  .copy-angle { font-size: 0.72rem; color: #999; font-weight: 600; }
+  .copy-headline { font-size: 0.95rem; font-weight: 800; color: #1a1a1a; margin-bottom: 5px; letter-spacing: -0.2px; }
+  .copy-body { font-size: 0.82rem; color: #555; line-height: 1.5; margin-bottom: 6px; }
+  .copy-cta { font-size: 0.78rem; color: #16a34a; font-weight: 700; }
+
+  /* LP */
+  .lp-row { background: #faf7f2; border: 1.5px solid #ede8e0; border-radius: 8px; padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+  .lp-url { font-size: 0.85rem; color: #2563eb; font-weight: 600; text-decoration: none; }
+  .lp-url:hover { text-decoration: underline; }
+  .lp-badge { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .lp-ready { background: #f0fdf4; color: #16a34a; }
+  .lp-tbd { background: #fffbeb; color: #d97706; }
+
+  /* MODAL ACTIONS */
+  .modal-actions { padding: 18px 26px; border-top: 1.5px solid #ede8e0; display: flex; gap: 8px; flex-wrap: wrap; }
+  .btn-advance { background: #1a1a1a; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .btn-advance:hover { background: #333; }
+  .btn-reject { background: transparent; border: 1.5px solid #dc2626; color: #dc2626; padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .btn-reject:hover { background: #fef2f2; }
+  .btn-approve-final { background: #16a34a; color: #fff; border: none; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
+  .btn-export { background: #fff; border: 1.5px solid #ede8e0; color: #555; padding: 10px 16px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; cursor: pointer; margin-left: auto; }
+  .btn-export:hover { border-color: #999; }
+
+  /* ADD / EDIT MODALS */
+  .form-group { margin-bottom: 14px; }
+  .form-label { font-size: 0.75rem; font-weight: 700; color: #555; display: block; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .form-input, .form-select, .form-textarea { width: 100%; background: #faf7f2; border: 1.5px solid #e0dbd4; border-radius: 8px; color: #1a1a1a; padding: 10px 12px; font-size: 0.88rem; font-family: inherit; }
+  .form-input:focus, .form-select:focus, .form-textarea:focus { outline: none; border-color: #f97316; background: #fff; }
+  .form-textarea { resize: vertical; min-height: 80px; line-height: 1.5; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+  /* TOAST */
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); background: #1a1a1a; color: #fff; padding: 10px 20px; border-radius: 8px; font-size: 0.85rem; font-weight: 600; z-index: 999; opacity: 0; transition: opacity 0.3s; pointer-events: none; }
+  .toast.show { opacity: 1; }
+
+  @media (max-width: 640px) {
+    .header, .stats, .filters, .kanban-wrap { padding-left: 16px; padding-right: 16px; }
+    .col { flex: 0 0 240px; }
+    .meta-grid { grid-template-columns: 1fr 1fr; }
+    .do-dont { grid-template-columns: 1fr; }
+    .form-grid { grid-template-columns: 1fr; }
+    .visual-zones { grid-template-columns: 1fr 1fr; }
+  }
+
+  /* ── VISUAL BRIEF ────────────────────────────────────────────────────── */
+  .vbrief { display: flex; flex-direction: column; gap: 20px; }
+
+  /* Quick-start top row */
+  .vb-top { display: grid; grid-template-columns: auto 1fr; gap: 16px; align-items: start; }
+
+  /* Layout canvas diagram */
+  .layout-canvas { width: 110px; flex-shrink: 0; }
+  .lc-label { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #999; margin-bottom: 6px; text-align: center; }
+  .lc-frame { border: 2px solid #1a1a1a; border-radius: 6px; overflow: hidden; display: flex; flex-direction: column; }
+  .lc-frame.square { width: 110px; height: 110px; }
+  .lc-frame.story  { width: 62px;  height: 110px; }
+  .lc-zone { display: flex; align-items: center; justify-content: center; font-size: 0.58rem; font-weight: 700; text-align: center; padding: 2px 4px; line-height: 1.2; }
+  .lc-zone.z-top  { background: #f0ebe3; color: #888; flex: 1; }
+  .lc-zone.z-mid  { background: #fde68a; color: #92400e; flex: 2; border-top: 1.5px solid #1a1a1a; border-bottom: 1.5px solid #1a1a1a; }
+  .lc-zone.z-bot  { background: #dbeafe; color: #1e40af; flex: 1; }
+  .lc-zone.z-full { background: #fde68a; color: #92400e; flex: 3; }
+  .lc-zone.z-cap  { background: #dbeafe; color: #1e40af; flex: 1; }
+  .lc-zone.z-end  { background: #dcfce7; color: #166534; flex: 1; }
+
+  /* Goal + key points */
+  .vb-goal-card { background: #fffbf5; border: 2px solid #fed7aa; border-radius: 12px; padding: 14px 16px; flex: 1; }
+  .vb-goal-label { font-size: 0.62rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.08em; color: #ea580c; margin-bottom: 6px; }
+  .vb-goal-text { font-size: 0.88rem; font-weight: 700; color: #1a1a1a; line-height: 1.4; margin-bottom: 10px; }
+  .vb-keys { display: flex; flex-direction: column; gap: 5px; }
+  .vb-key { font-size: 0.78rem; color: #555; display: flex; gap: 6px; align-items: flex-start; line-height: 1.35; }
+  .vb-key::before { content: "→"; color: #f97316; font-weight: 900; flex-shrink: 0; }
+
+  /* Visual tone references */
+  .vb-refs { }
+  .vb-section-label { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.1em; color: #999; margin-bottom: 8px; }
+  .ref-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .ref-item { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio: 1; }
+  .ref-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .ref-item .ref-cap { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(0,0,0,0.55); color: #fff; font-size: 0.6rem; font-weight: 700; padding: 4px 6px; line-height: 1.2; }
+  .ref-item.bad img { filter: grayscale(40%) brightness(0.8); }
+  .ref-item.bad::after { content: "✗"; position: absolute; top: 5px; right: 7px; color: #f87171; font-size: 1.1rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+  .ref-item.good::after { content: "✓"; position: absolute; top: 5px; right: 7px; color: #4ade80; font-size: 1.1rem; font-weight: 900; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+
+  /* Do / Don't visual grid */
+  .do-dont-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .dd-card { border-radius: 10px; padding: 10px 12px; display: flex; gap: 8px; align-items: flex-start; }
+  .dd-card.do   { background: #f0fdf4; border: 1.5px solid #bbf7d0; }
+  .dd-card.dont { background: #fef2f2; border: 1.5px solid #fecaca; }
+  .dd-icon { font-size: 0.9rem; flex-shrink: 0; margin-top: 1px; }
+  .dd-text { font-size: 0.76rem; color: #333; line-height: 1.4; }
+
+  /* Format thumbnails */
+  .fmt-thumbs { display: flex; gap: 10px; flex-wrap: wrap; }
+  .fmt-thumb { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+  .fmt-box { border: 2px solid #1a1a1a; border-radius: 4px; background: #f5f0e8; display: flex; align-items: center; justify-content: center; }
+  .fmt-box.sq { width: 44px; height: 44px; }
+  .fmt-box.st { width: 25px; height: 44px; }
+  .fmt-box.hz { width: 70px; height: 44px; }
+  .fmt-box.rect { width: 55px; height: 44px; }
+  .fmt-box span { font-size: 0.5rem; color: #888; font-weight: 700; text-align: center; line-height: 1.2; padding: 2px; }
+  .fmt-thumb-label { font-size: 0.65rem; color: #555; font-weight: 600; text-align: center; max-width: 70px; }
+
+  /* Spec strip */
+  .spec-strip { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 4px; }
+  .spec-pill { background: #1a1a1a; color: #fff; font-size: 0.68rem; font-weight: 700; padding: 3px 10px; border-radius: 99px; }
+  .spec-pill.orange { background: #f97316; }
+
+  /* Headline text overlay preview */
+  .text-preview { background: #1a1a1a; color: #fff; border-radius: 8px; padding: 12px 14px; font-size: 0.82rem; font-weight: 800; line-height: 1.3; display: inline-block; margin-top: 4px; letter-spacing: -0.2px; }
+  .text-preview .sub { font-size: 0.7rem; font-weight: 400; color: #aaa; margin-top: 3px; }
+
+  /* collapsible detail */
+  .detail-toggle { font-size: 0.72rem; color: #999; cursor: pointer; display: flex; align-items: center; gap: 4px; margin-top: 6px; }
+  .detail-toggle:hover { color: #f97316; }
+  .detail-body { margin-top: 8px; }
+
+
+  /* ══ REDESIGNED MODAL BODY ══════════════════════════════════════════════ */
+
+  /* Header strip */
+  .mh-assign  { font-size:0.8rem; color:#666; margin-top:4px; }
+  .mh-assign b { color:#1a1a1a; }
+
+  /* Concept card */
+  .concept-card { background:#faf7f2; border:1.5px solid #ede8e0; border-radius:12px; padding:16px 18px; margin-bottom:20px; }
+  .concept-card .cc-row { display:grid; grid-template-columns:auto 1fr; gap:6px 14px; font-size:0.82rem; }
+  .concept-card .cc-lbl { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#999; padding-top:2px; }
+  .concept-card .cc-val { color:#1a1a1a; font-weight:600; line-height:1.4; }
+  .concept-card .cc-val.big { font-size:0.9rem; font-weight:700; }
+
+  /* Technical strip */
+  .tech-strip { display:flex; gap:8px; flex-wrap:wrap; align-items:center; margin-bottom:18px; }
+  .tech-lbl { font-size:0.62rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#bbb; margin-right:2px; }
+  .tech-pill { background:#f0ebe3; color:#666; font-size:0.68rem; font-weight:700; padding:3px 10px; border-radius:99px; }
+
+  /* Section headers */
+  .ms-header { display:flex; align-items:center; gap:8px; margin-bottom:12px; }
+  .ms-title  { font-size:0.7rem; font-weight:800; text-transform:uppercase; letter-spacing:0.1em; color:#f97316; }
+  .ms-divider{ flex:1; height:1px; background:#ede8e0; }
+
+  /* Variation cards */
+  .var-card  { background:#fff; border:1.5px solid #ede8e0; border-radius:12px; padding:16px; margin-bottom:10px; }
+  .var-card-header { display:flex; align-items:center; gap:10px; margin-bottom:12px; }
+  .var-num-badge { background:#1a1a1a; color:#fff; font-size:0.72rem; font-weight:800; padding:4px 10px; border-radius:99px; flex-shrink:0; }
+  .var-card-title { font-size:0.82rem; font-weight:700; color:#555; }
+  .var-fmt-pill   { margin-left:auto; font-size:0.65rem; font-weight:700; background:#f0ebe3; color:#888; padding:2px 8px; border-radius:99px; flex-shrink:0; }
+
+  .var-fields { display:flex; flex-direction:column; gap:8px; }
+  .vf-row { display:grid; grid-template-columns:110px 1fr; gap:8px; align-items:start; }
+  .vf-lbl { font-size:0.65rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:#999; padding-top:2px; }
+  .vf-val { font-size:0.82rem; color:#1a1a1a; line-height:1.45; }
+  .vf-val.text-on-img { background:#1a1a1a; color:#fff; border-radius:6px; padding:6px 10px; font-weight:700; font-size:0.82rem; display:inline-block; }
+  .vf-val.text-on-img.none { background:#f0ebe3; color:#999; font-weight:600; }
+
+  /* Inspiration mini-grid */
+  .inspo-grid { display:flex; gap:6px; flex-wrap:wrap; }
+  .inspo-img  { width:70px; height:70px; object-fit:cover; border-radius:6px; border:1.5px solid #ede8e0; }
+
+  /* Copy section */
+  .copy-section { margin-bottom:20px; }
+  .copy-context-box { background:#fffbf5; border:2px solid #fed7aa; border-radius:10px; padding:12px 14px; margin-bottom:12px; font-size:0.8rem; color:#555; line-height:1.5; }
+  .copy-context-box strong { color:#ea580c; }
+  .copy-variants2 { display:flex; flex-direction:column; gap:8px; }
+  .cv2-card { border:1.5px solid #ede8e0; border-radius:10px; overflow:hidden; }
+  .cv2-head  { background:#f5f0e8; padding:8px 12px; display:flex; gap:8px; align-items:center; }
+  .cv2-lbl   { background:#1a1a1a; color:#fff; font-size:0.68rem; font-weight:800; padding:2px 8px; border-radius:99px; }
+  .cv2-angle { font-size:0.72rem; color:#888; font-weight:600; }
+  .cv2-body  { padding:10px 12px; display:flex; flex-direction:column; gap:5px; }
+  .cv2-row   { display:grid; grid-template-columns:80px 1fr; gap:6px; font-size:0.8rem; }
+  .cv2-field { font-size:0.62rem; font-weight:800; text-transform:uppercase; letter-spacing:0.07em; color:#999; padding-top:2px; }
+  .cv2-text  { color:#1a1a1a; line-height:1.4; }
+  .cv2-text.headline { font-weight:700; }
+  .cv2-text.cta { color:#f97316; font-weight:700; }
+
+  /* LP row */
+  .lp-section { display:flex; align-items:center; gap:10px; background:#f5f0e8; border-radius:10px; padding:12px 14px; }
+  .lp-icon { font-size:1.1rem; }
+  .lp-section a { font-size:0.82rem; font-weight:700; color:#1a1a1a; text-decoration:none; word-break:break-all; }
+  .lp-section a:hover { color:#f97316; }
+
+
+  /* Inspiration section */
+  .inspo-section { margin-top:16px; }
+  .inspo-label { font-size:0.62rem; font-weight:800; text-transform:uppercase; letter-spacing:0.08em; color:#999; margin-bottom:8px; }
+  .inspo-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:8px; }
+  .inspo-item { border-radius:8px; overflow:hidden; position:relative; aspect-ratio:1; border:1.5px solid #ede8e0; }
+  .inspo-item img { width:100%; height:100%; object-fit:cover; display:block; }
+  .inspo-item .inspo-cap { position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,0.6); color:#fff; font-size:0.58rem; font-weight:600; padding:4px 6px; line-height:1.3; }
+
+</style>
+</head>
+<body>
+
+<div class="topnav">
+  <a href="index.html">🧩 Hub</a>
+  <span class="sep">›</span>
+  <span class="current">Creative Pipeline</span>
+</div>
+
+<div class="header">
+  <div>
+    <h1>🎯 Ad Creative Pipeline</h1>
+    <p>Meta Ads — Concepts · Briefs · Copy · Variations · Landing Pages</p>
+  </div>
+  <div class="header-actions">
+    <button class="btn-ghost" onclick="exportAll()">📤 Export</button>
+    <button class="btn-primary" onclick="openAddModal()">＋ New Concept</button>
+  </div>
+</div>
+
+<div class="stats" id="statsBar"></div>
+
+
+  <div class="filters">
+  <button class="filter-btn active" onclick="filterBy('all',this)">All</button>
+  <button class="filter-btn" onclick="filterBy('image',this)">🖼 Image</button>
+  <button class="filter-btn" onclick="filterBy('video',this)">🎬 Video</button>
+  <button class="filter-btn" onclick="filterBy('carousel',this)">🎠 Carousel</button>
+</div>
+
+<div class="kanban-wrap">
+  <div class="kanban" id="kanban"></div>
+</div>
+
+<!-- DETAIL MODAL -->
+<div class="modal-overlay" id="detailModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-header-left">
+        <div class="modal-title-row">
+          <div class="modal-title" id="mTitle"></div>
+          <span class="status-pill" id="mBadge"></span>
+          <span class="fmt-tag" id="mFmt"></span>
+        </div>
+        <div class="modal-sub" id="mHook"></div>
+      </div>
+      <button class="modal-close" onclick="closeModal('detailModal')">✕</button>
+    </div>
+    <div class="modal-body" id="modalBody"></div>
+    <div class="modal-actions" id="modalActions"></div>
+  </div>
+</div>
+
+<!-- ADD MODAL -->
+<div class="modal-overlay" id="addModal">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">＋ New Concept</div>
+      <button class="modal-close" onclick="closeModal('addModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="form-group" style="grid-column:1/-1">
+          <label class="form-label">Concept Name *</label>
+          <input class="form-input" id="nName" placeholder="e.g. The Gift Nobody Expects">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Format *</label>
+          <select class="form-select" id="nFormat">
+            <option value="image">🖼 Static Image</option>
+            <option value="video">🎬 Video</option>
+            <option value="carousel">🎠 Carousel</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of Variations</label>
+          <select class="form-select" id="nVarCount">
+            <option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8" selected>8</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Hook / Core Angle * <span style="text-transform:none;letter-spacing:0;font-weight:400;color:#999;">(what is this ad trying to say?)</span></label>
+        <input class="form-input" id="nHook" placeholder="e.g. Nobody knows what's inside — that's the point">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Target Emotion</label>
+        <input class="form-input" id="nEmotion" placeholder="e.g. Curiosity, Delight, Gift relief">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Assignees <span style="text-transform:none;letter-spacing:0;font-weight:400;color:#999;">(comma-separated, e.g. Designer, Video Creator 1)</span></label>
+        <input class="form-input" id="nAssigned" placeholder="Designer, Video Creator 1">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Landing Page URL</label>
+        <input class="form-input" id="nLP" placeholder="https://... (leave blank = TBD)">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-advance" onclick="addConcept()">Create Concept</button>
+      <button class="btn-export" onclick="closeModal('addModal')">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const STATUSES = ['briefing','production','review','approved','live'];
+const STATUS_LABELS = { briefing:'Brief Ready', production:'In Production', review:'In Review', approved:'✓ Approved', live:'🔴 Live Testing' };
+
+let concepts = [
+  {
+    id:1,
+    name:"The Box Lied",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Main Copy V1",
+    format:"image",
+    status:"briefing",
+    hook:"Framework: PATTERN INTERRUPT. The image on the box shows one scene — but what you build is what happened 15 seconds later. The box literally lies to you. That's the product.",
+    assignees:["Martin"],
+    landingPage:"https://oddpieces.com/collections/all",
+    lpReady:false,
+    visualDirection:"Side-by-side: LEFT = the box image (a calm, normal scene). RIGHT = what you actually build (the chaotic aftermath 15 seconds later). Big text across the middle: 'The box shows this. You build this.' Pattern interrupt — people stop because it looks like a comparison ad, then realise the twist.",
+    refs:[],
+    variations:[
+      { num:1, changes:"Side-by-side split image, Copy A", copy:"A", format:"1080×1080 square" },
+      { num:2, changes:"Same layout, Copy B headline", copy:"B", format:"1080×1080 square" },
+      { num:3, changes:"Portrait crop, Copy A", copy:"A", format:"1080×1920 story" },
+      { num:4, changes:"Dark background version", copy:"A", format:"1080×1080 square" }
+    ],
+    brief:{
+      adGoal:"Stop the scroll by showing something that looks like a mistake or contradiction. The image on the box vs what you actually build — that gap IS the product.",
+      imageSize:"1080×1080px square. Also 1080×1920px story.",
+      whatToShow:"Split the image exactly in half. LEFT side: the box artwork — a normal calm scene (e.g. a cat sitting on a table). RIGHT side: what you actually build — the 'after' scene, 15 seconds later (e.g. the cat has knocked everything off the table, chaos). Both sides should feel like screenshots from the actual puzzle art. Clean dividing line down the middle.",
+      textOnImage:"One line across the top: 'What the box shows.' / 'What you actually build.' (label each half). Then big text at the bottom: 'The box lies. That's the point.'",
+      textNOTonImage:"No body copy. No URLs. No bullet points.",
+      layout:"Perfect 50/50 split down the middle. Both halves same style/art direction. Text labels at top of each half. Payoff line at the bottom.",
+      visualZones:["Left half: box image scene (calm/before)", "Right half: what you build (after, 15 secs later)", "Bottom: 'The box lies. That's the point.'"],
+      dos:["Both halves must feel like they're from the same puzzle — same art style, same characters","The contrast between left and right should be dramatic — calm vs chaos","Make the dividing line clean and intentional","Font should be bold and readable at phone size"],
+      donts:["Don't use stock photos — use actual Odd Pieces puzzle art","Don't make both sides too similar — the contrast is the hook","Don't add a cluttered background","Don't show the full puzzle — just the key scene from each side"]
+    },
+    copyVariants:[
+      { label:"A", angle:"Pattern interrupt / reveal", headline:"The box shows one scene. You build what happened next.", body:"Every Odd Pieces puzzle has a secret. The image on the box? That's just the beginning. What you actually build is the scene 15 seconds later. 1,000 pieces. One twist you won't see coming.", cta:"Shop Now →" },
+      { label:"B", angle:"Direct callout", headline:"The box lied. In the best way possible.", body:"Odd Pieces mystery puzzles — the image on the box isn't what you build. You build the scene that happens 15 seconds after. Nobody sees it coming. Everyone wants another.", cta:"See it →" }
+    ]
+  },
+  {
+    id:2,
+    name:"It's 1:47am",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Main Copy V1",
+    format:"video",
+    status:"briefing",
+    hook:"Framework: FAKE ORGANIC / UGC. Open with a confession, not a product. 'I was supposed to fold laundry. It is now 1:47am.' Nobody sees the product until they're already hooked.",
+    assignees:["Catherine"],
+    landingPage:"https://oddpieces.com/pages/promo",
+    lpReady:false,
+    visualDirection:"UGC-style. Messy table, real lamp, pieces everywhere. Text on screen appears first — 'I was supposed to fold laundry. It is now 1:47am.' — before the camera even shows the puzzle. Feels like someone's personal TikTok, not an ad.",
+    refs:[],
+    variations:[
+      { num:1, changes:"Base — text hook opens cold, no product for first 3 secs", copy:"A", format:"1080×1920 vertical (Reels)" },
+      { num:2, changes:"Same footage, Copy B caption swap", copy:"B", format:"1080×1920 vertical (Reels)" },
+      { num:3, changes:"Second creator, same script", copy:"A", format:"1080×1920 vertical (Reels)" },
+      { num:4, changes:"Square crop for feed", copy:"A", format:"1080×1080 square" }
+    ],
+    brief:{
+      adGoal:"Make it feel like a real person's honest confession — not an ad. The relatable situation hooks before the product is ever shown.",
+      imageSize:"1080×1920px vertical (Reels). Square crop 1080×1080 as secondary.",
+      whatToShow:"Messy table, puzzle pieces everywhere, warm lamp light, maybe a cold cup of tea. Hands placing pieces. NO studio setup. First 3 seconds: only text on screen, no product visible yet. Then slow pan to show the puzzle spread. End with a 2-sec shot of the box.",
+      textOnImage:"Opens with: 'I was supposed to fold laundry.' (pause) 'It is now 1:47am.' TikTok-style caption font. No brand name until the end.",
+      textNOTonImage:"No polished titles. No logo at the start. No 'ad-like' graphics.",
+      layout:"Vertical full screen. Real, lived-in space. Warm, not bright. Pacing is slow and honest — no jump cuts.",
+      visualZones:["First 3 secs: text on dark/blurred background — confession hook", "Main: hands on puzzle, warm messy table", "Last 2 secs: box visible, brand name appears small"],
+      dos:["Must feel like a real person filmed this themselves","Warm lighting only — lamp, not overhead","Slow, unhurried — this is 1am energy, not hype energy","The box twist (box shows one thing, you build another) should be mentioned mid-video"],
+      donts:["No ring light","No fast cuts or upbeat music","Don't start with the brand or product name","Don't look like it was filmed in a studio"]
+    },
+    copyVariants:[
+      { label:"A", angle:"Late night confession", headline:"I was supposed to fold laundry. It's 1:47am.", body:"The puzzle that does this is Odd Pieces. The image on the box? Not what you're building. You're building what happened 15 seconds later. It's genuinely impossible to stop.", cta:"Try Odd Pieces →" },
+      { label:"B", angle:"Anti-doomscroll", headline:"I replaced doomscrolling with this. Big mistake.", body:"1,000 pieces. The box shows one scene. You build the scene that comes after. It's called Odd Pieces and it ruins your sleep schedule in the best way.", cta:"Shop now →" }
+    ]
+  },
+  {
+    id:3,
+    name:"Box vs Build — The Reveal Carousel",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Main Copy V1",
+    format:"carousel",
+    status:"production",
+    hook:"Framework: BEFORE / AFTER. Slide 1 = box image (calm scene). Slide 2 = 'But you don't build this.' Slide 3-4 = pieces coming together. Slide 5 = the actual build revealed (15 secs later scene). Slide 6 = CTA. The swipe IS the twist.",
+    assignees:["Martin"],
+    landingPage:"https://oddpieces.com/products/mystery-1000",
+    lpReady:true,
+    visualDirection:"6-slide carousel. Each slide feels like one frame of a story. Slide 1 = box art (the lie). Slide 5 = the real build (the reveal). The contrast between 1 and 5 is the payoff. Consistent style across all slides — same font, same layout, same border.",
+    refs:[],
+    variations:[
+      { num:1, changes:"Full 6-slide, Copy A caption", copy:"A", format:"1080×1080 per slide" },
+      { num:2, changes:"Same slides, Copy B caption", copy:"B", format:"1080×1080 per slide" },
+      { num:3, changes:"Shortened 4-slide version (1, 2, 5, 6 only)", copy:"A", format:"1080×1080 per slide" },
+      { num:4, changes:"Dark dramatic background version", copy:"A", format:"1080×1080 per slide" }
+    ],
+    brief:{
+      adGoal:"Get the swipe. The twist is the product — so the carousel has to make people need to see slide 5. Every slide earns the next swipe.",
+      imageSize:"1080×1080px per slide. 6 slides total.",
+      whatToShow:"Slide 1: Box artwork — a calm normal scene. Label: 'The box shows you this.' | Slide 2: Text only — 'But this isn't what you build.' | Slides 3-4: Pieces scattered, partial build, no image revealed. Label: '1,000 pieces. Zero idea what's coming.' | Slide 5: THE REVEAL — the actual scene, 15 seconds after the box image. Big moment. Label: 'You build this.' | Slide 6: Product shot + CTA.",
+      textOnImage:"Each slide: ONE label or one punchy line. Slide 1: 'The box shows you this.' Slide 2: 'But this isn't what you build.' Slides 3-4: minimal. Slide 5: 'You build this.' Slide 6: brand + CTA.",
+      textNOTonImage:"No paragraphs. No descriptions. One line per slide — that's it.",
+      layout:"Consistent across all slides: same font, same position for text (bottom), same background treatment. The only thing that changes is the image. Feels like a storyboard.",
+      visualZones:["Top: scene image filling the frame", "Bottom strip: one-line text label", "Slide 6 only: product + CTA centered"],
+      dos:["Slides 1 and 5 must use actual Odd Pieces puzzle artwork","The contrast between slide 1 and slide 5 must be dramatic — that IS the product","Make slide 5 feel like a big moment — bigger text, maybe a subtle glow or frame","Consistent visual style = professional and bingeable"],
+      donts:["Don't reveal the slide 5 scene before slide 5","Don't use different fonts slide to slide","Don't make slides 3-4 too long — the middle is just tension, not content","Don't let slide 1 look too similar to slide 5"]
+    },
+    copyVariants:[
+      { label:"A", angle:"The lie reveal", headline:"The box shows one scene. You build what happened next.", body:"Swipe to see the twist → Every Odd Pieces puzzle hides a secret. The image on the box is just the setup. What you actually build is the scene 15 seconds later. 1,000 pieces. One reveal nobody sees coming.", cta:"Shop now →" },
+      { label:"B", angle:"Direct challenge", headline:"Can you figure out what you're building before the last piece?", body:"The box shows one thing. What you build is something else entirely. Swipe to see why 100K+ people can't stop →", cta:"Try it →" }
+    ]
+  },
+  {
+    id:4,
+    name:"The Google Search Ad",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Gifting Ad Copy V3",
+    format:"image",
+    status:"briefing",
+    hook:"Framework: PATTERN INTERRUPT + PROBLEM FIRST. Background = a real Google search screenshot: 'unique gifts for people who have everything'. Overlay: 'You found it.' + Odd Pieces box. The most self-aware ad possible.",
+    assignees:["Martin"],
+    landingPage:"https://oddpieces.com/collections/gifts",
+    lpReady:true,
+    visualDirection:"Full bleed background = screenshot of a Google search results page for 'unique gifts for [husband/wife/partner] who has everything'. Slightly blurred/dimmed. Centred overlay: the Odd Pieces box + 'You found it.' in bold. Bottom: product name + CTA. The joke writes itself — the ad IS the search result.",
+    refs:[],
+    variations:[
+      { num:1, changes:"'unique gifts for husband who has everything' search, Copy A", copy:"A", format:"1080×1080 square" },
+      { num:2, changes:"'unique gifts for wife who has everything' search, Copy B", copy:"B", format:"1080×1080 square" },
+      { num:3, changes:"'unique gifts for parents who have everything' search", copy:"A", format:"1080×1080 square" },
+      { num:4, changes:"Portrait crop, Copy A", copy:"A", format:"1080×1920 story" },
+      { num:5, changes:"Dark version — dark bg instead of Google screenshot", copy:"A", format:"1080×1080 square" }
+    ],
+    brief:{
+      adGoal:"Stop someone mid-scroll by showing them their own search behaviour. They've literally googled this. Seeing it reflected back triggers instant recognition.",
+      imageSize:"1080×1080px square. Also 1080×1920px story.",
+      whatToShow:"Background: a realistic Google search results page screenshot. Search query: 'unique gifts for [husband/wife] who has everything'. Blur or dim it slightly so it's readable but not distracting. In the centre of the image: the Odd Pieces puzzle box, clean product shot. Above the box in bold text: 'You found it.' Below: 'Odd Pieces — the puzzle where the box shows one scene, you build another.'",
+      textOnImage:"'You found it.' — big, bold, centred above the product. Keep it to that one line + brand name below.",
+      textNOTonImage:"Don't write the full product description on the image.",
+      layout:"Google screenshot fills the background (blurred 20-30%). Product box centred, mid-image. 'You found it.' text above the box. Brand name below. Clean and self-contained.",
+      visualZones:["Background: Google search screenshot, blurred/dimmed", "Centre: Odd Pieces box (clean product shot)", "Above product: 'You found it.' bold text", "Below product: brand name small"],
+      dos:["Make the Google search look authentic — real font, real layout (you can mock it up in Figma or use a screenshot)","The search query should match the audience — swap 'husband/wife' across variations","Product should be clean and clearly visible against the blurred bg","'You found it.' should feel triumphant, not salesy"],
+      donts:["Don't make the Google search too small to read","Don't use a fake or obviously wrong Google UI","Don't add too much text — the concept does the work","Don't make it look like a Google ad (no blue links style)"]
+    },
+    copyVariants:[
+      { label:"A", angle:"You found it", headline:"You found it.", body:"The puzzle where the box shows one scene — and you build what happened 15 seconds later. 1,000 pieces. Zero hints. The gift they'll actually remember.", cta:"Shop Odd Pieces →" },
+      { label:"B", angle:"Gift problem solved", headline:"Stop Googling. Start here.", body:"Odd Pieces mystery puzzles — the image on the box isn't what you build. It's the scene 15 seconds after. Novel, addictive, and actually surprising. The gift that solves the problem.", cta:"See it →" }
+    ]
+  },
+  {
+    id:5,
+    name:"Wait... That's Not What's On The Box",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Main Copy V1",
+    format:"video",
+    status:"briefing",
+    hook:"Framework: FAKE ORGANIC + PATTERN INTERRUPT. Someone builds the puzzle. Gets near the end. Realises what they're building doesn't match the box. The confusion + realisation moment IS the viral hook.",
+    assignees:["Catherine"],
+    landingPage:"https://oddpieces.com/pages/promo",
+    lpReady:false,
+    visualDirection:"Person is mid-puzzle, nearly done. They pick up the box, look at the image on it, look back at what they've built. Do a double-take. Text on screen: 'wait... this isn't what's on the box??' Then the smile/laugh of realisation. Under 15 seconds total. Must feel like they filmed themselves — not scripted.",
+    refs:[],
+    variations:[
+      { num:1, changes:"Base — double-take reaction, Copy A caption", copy:"A", format:"1080×1920 vertical (Reels)" },
+      { num:2, changes:"Same video, Copy B caption", copy:"B", format:"1080×1920 vertical (Reels)" },
+      { num:3, changes:"Second creator, same script/moment", copy:"A", format:"1080×1920 vertical (Reels)" },
+      { num:4, changes:"Add on-screen caption text mid-video", copy:"A", format:"1080×1920 vertical (Reels)" },
+      { num:5, changes:"Square crop for feed", copy:"B", format:"1080×1080 square" }
+    ],
+    brief:{
+      adGoal:"Capture the genuine 'oh THAT'S what this is' moment. That realisation is what people share. Under 15 seconds, no branding at the start.",
+      imageSize:"1080×1920px vertical (Reels). Square crop 1080×1080 secondary.",
+      whatToShow:"Person sitting at a table, puzzle nearly complete (80-90% done). They pick up the box and look at the image on the lid. Then look back at the puzzle they're building. Pause. Double-take. The puzzle doesn't match the box — it's the scene 15 seconds after. Text appears on screen: 'wait... that's not what's on the box??' Then the realisation smile/laugh. End with box shown clearly to camera for 2 seconds.",
+      textOnImage:"On-screen text (TikTok caption style): 'wait... that's not what's on the box??' — appears exactly when they do the double-take. Small brand name at the very end only.",
+      textNOTonImage:"No intro titles. No brand at the start. No scripted-looking graphics.",
+      layout:"Vertical full-screen. Person and puzzle table fill the frame. Face visible and well-lit — the reaction has to read clearly. Box visible in hand during the comparison moment.",
+      visualZones:["Main frame: person at puzzle table, near-complete puzzle visible", "Their hands: holding box for comparison", "Bottom third: on-screen caption text", "Last 2 secs: box face to camera + brand appears"],
+      dos:["The double-take must feel genuine — not performed","Both the box image AND the built puzzle must be visible in the same frame at the comparison moment","Good face lighting — the realisation expression is the hook","Keep it under 15 seconds — every second must earn its keep"],
+      donts:["Don't script it so it sounds rehearsed","Don't start with the brand or a product intro","Don't hide the box image — the comparison is the whole point","Don't show this with a 100% complete puzzle — keep it 80-90% done so it still feels in-progress"]
+    },
+    copyVariants:[
+      { label:"A", angle:"The realisation hook", headline:"Wait… that's not what's on the box??", body:"That's the whole point. Odd Pieces puzzles show one scene on the box — and you build the scene that happens 15 seconds after. 1,000 pieces. One twist you won't see coming until you're almost done.", cta:"See it for yourself →" },
+      { label:"B", angle:"Punchy", headline:"The box shows one thing. You build another.", body:"1,000 pieces. The image on the box is just the setup. What you build is what happened next. Odd Pieces — the puzzle that surprises you at the end.", cta:"Odd Pieces →" }
+    ]
+  },
+  {
+    id:6,
+    name:"1,000 Pieces. The Box Lies.",
+    inspo:[{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02MMF-COREGameDescription.png?v=1765494153",cap:"📸 Social proof — people mid-reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/02FASF-COREGameDescription.png?v=1764887433",cap:"😂 Group energy / fun reaction (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0345/9180/1483/files/01MMF-COREAngled.png?v=1765494147",cap:"📦 Product as hero — clean angled shot (Exploding Kittens)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/AMC_SSC01UNI_V1-03.png?v=1770820975",cap:"🎯 Lifestyle + product in use (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0525/4565/0856/files/Untitleddesign_3_1.png?v=1761572360",cap:"🎁 Bundle / gift framing (Big Potato)"},{url:"https://cdn.shopify.com/s/files/1/0938/5957/8197/files/mega-bundle-brunch.jpg?v=1743762237",cap:"✨ Premium lifestyle / gift styling (Cloudberries)"}],
+    copyVersion:"Main Copy V1",
+    format:"image",
+    status:"briefing",
+    hook:"Framework: NUMBER / STAT. Three lines on a dark background. No product photo needed. Pure copy play. The numbers do all the work.",
+    assignees:["Martin"],
+    landingPage:"https://oddpieces.com/pages/promo",
+    lpReady:false,
+    visualDirection:"Dark background (near-black or deep warm charcoal). Three lines of bold white text centred on the image. Nothing else. Possibly a very subtle, dark puzzle texture in the background. The copy IS the creative.",
+    refs:[],
+    variations:[
+      { num:1, changes:"Version A copy, dark background", copy:"A", format:"1080×1080 square" },
+      { num:2, changes:"Version B copy, dark background", copy:"B", format:"1080×1080 square" },
+      { num:3, changes:"Warm cream background version, dark text", copy:"A", format:"1080×1080 square" },
+      { num:4, changes:"Portrait crop, Version A", copy:"A", format:"1080×1920 story" },
+      { num:5, changes:"Add subtle puzzle texture to background", copy:"A", format:"1080×1080 square" }
+    ],
+    brief:{
+      adGoal:"Stop the scroll with boldness. No product photo, no lifestyle, no people. Just three lines that make someone read twice.",
+      imageSize:"1080×1080px square. Also 1080×1920px story.",
+      whatToShow:"Text only. Three lines centred on a dark background. That is the entire image. The font needs to be heavy/bold and big enough to fill most of the frame. Optional: very subtle, dark puzzle piece texture in the background — barely visible.",
+      textOnImage:"Line 1: '1,000 pieces.' / Line 2: 'The box shows one scene.' / Line 3: 'You build what happens next.' — OR use Copy B version. That's it. Nothing else.",
+      textNOTonImage:"No product image on this version. No tagline. No URL.",
+      layout:"Centred, vertically stacked three lines. Lots of breathing space around the text. The emptiness is intentional — it makes the text hit harder.",
+      visualZones:["Full frame: dark background", "Centre: three-line bold text stack", "Optional: subtle puzzle texture in background at 10% opacity"],
+      dos:["Font must be very bold and very large — fills the frame","Equal spacing between the three lines","Dark background makes text pop — don't go too light","If adding texture, keep it extremely subtle — it should barely be visible"],
+      donts:["Don't add a product photo to this version — the text IS the ad","Don't use more than 3 lines","Don't use a thin or decorative font — bold only","Don't add a border or frame"]
+    },
+    copyVariants:[
+      { label:"A", angle:"Stat/reveal", headline:"1,000 pieces. The box shows one scene. You build what happens next.", body:"Odd Pieces — the mystery puzzle where the image on the box is just the setup. What you actually build is the scene 15 seconds later. Nobody sees it coming.", cta:"Shop Now →" },
+      { label:"B", angle:"Punchy three-liner", headline:"1,000 pieces. 1 lie on the box. 1 twist you won't see coming.", body:"The image on the Odd Pieces box isn't what you build. You're building the scene 15 seconds after. That's the whole game. 1,000 pieces of pure suspense.", cta:"See it →" }
+    ]
+  }
+];
+
+let activeFilter = 'all';
+
+/* ---- RENDER ---- */
+function renderStats() {
+  const t = concepts.length;
+  const c = s => concepts.filter(x => x.status === s).length;
+  document.getElementById('statsBar').innerHTML = `
+    <div class="stat s-all"><div class="num">${t}</div><div class="lbl">Total</div></div>
+    <div class="stat s-brief"><div class="num">${c('briefing')}</div><div class="lbl">Brief Ready</div></div>
+    <div class="stat s-prod"><div class="num">${c('production')}</div><div class="lbl">Production</div></div>
+    <div class="stat s-review"><div class="num">${c('review')}</div><div class="lbl">Review</div></div>
+    <div class="stat s-approved"><div class="num">${c('approved')}</div><div class="lbl">Approved</div></div>
+    <div class="stat s-live"><div class="num">${c('live')}</div><div class="lbl">Live</div></div>
+  `;
+}
+
+function fmtTag(f) {
+  const map = { image:'🖼 Image', video:'🎬 Video', carousel:'🎠 Carousel' };
+  const cls = { image:'fmt-image', video:'fmt-video', carousel:'fmt-carousel' };
+  return `<span class="fmt-tag ${cls[f]}">${map[f]}</span>`;
+}
+
+function renderKanban() {
+  const list = activeFilter === 'all' ? concepts : concepts.filter(c => c.format === activeFilter);
+  document.getElementById('kanban').innerHTML = STATUSES.map(s => {
+    const cols = list.filter(c => c.status === s);
+    const cards = cols.length ? cols.map(c => `
+      <div class="card" onclick="openDetail(${c.id})">
+        <div class="card-top">${fmtTag(c.format)}</div>
+        <div class="card-title">${c.name}</div>
+        <div class="card-hook">${c.hook}</div>
+        <div class="card-footer">
+          <div class="card-variants"><b>${c.variations.length}</b> variations</div>
+          <div class="assignee-chips">${c.assignees.map(a => `<span class="chip">${a}</span>`).join('')}</div>
+        </div>
+      </div>`).join('') : `<div class="empty-col">Nothing here yet</div>`;
+    return `<div class="col col-${s}">
+      <div class="col-header">
+        <div class="col-title">${STATUS_LABELS[s]}</div>
+        <div class="col-count">${cols.length}</div>
+      </div>
+      <div class="cards">${cards}</div>
+    </div>`;
+  }).join('');
+}
+
+/* ---- DETAIL MODAL ---- */
+function openDetail(id) {
+  const c = concepts.find(x => x.id === id);
+  if (!c) return;
+  const fmtMap = { image:'🖼 Image', video:'🎬 Video', carousel:'🎠 Carousel' };
+  const fmtCls = { image:'fmt-image', video:'fmt-video', carousel:'fmt-carousel' };
+
+  document.getElementById('mTitle').textContent = c.name;
+  const badge = document.getElementById('mBadge');
+  badge.className = `status-pill pill-${c.status}`;
+  badge.textContent = STATUS_LABELS[c.status];
+  const fmt = document.getElementById('mFmt');
+  fmt.className = `fmt-tag ${fmtCls[c.format]}`;
+  fmt.textContent = fmtMap[c.format];
+  document.getElementById('mHook').textContent = `"${c.hook}"`;
+
+  const b = c.brief;
+  const zoneHTML = b.visualZones.map(z => `<div class="zone">${z}</div>`).join('');
+  const dosHTML = b.dos.map(d => `<li>${d}</li>`).join('');
+  const dontsHTML = b.donts.map(d => `<li>${d}</li>`).join('');
+  const stepsHTML = [
+    { label:'File specs', text:`Create at: <strong>${b.imageSize}</strong>` },
+    { label:'What to show', text:b.whatToShow },
+    { label:'Text ON the image', text:`<strong>YES, put this:</strong> ${b.textOnImage}` },
+    { label:'Text NOT on the image', text:`<strong>Do NOT add:</strong> ${b.textNOTonImage}` },
+    { label:'Layout', text:b.layout }
+  ].map((s, i) => `<div class="step"><div class="step-num">${i+1}</div><div class="step-content"><strong>${s.label}:</strong> ${s.text}</div></div>`).join('');
+  const layoutDiagramHTML = makeLayoutDiagram(c);
+  const formatThumbsHTML  = makeFormatThumbs(c.variations);
+  const refsHTML          = makeRefsHTML(c);
+  const doDontGridHTML    = makeDoDontGrid(b.dos, b.donts);
+
+  const varRows = c.variations.map(v => `<tr>
+    <td><span class="var-num">V${v.num}</span></td>
+    <td>${v.format}</td>
+    <td><span class="var-change">${v.changes}</span></td>
+    <td>Copy ${v.copy}</td>
+  </tr>`).join('');
+
+  const copyHTML = c.copyVariants.map(v => `
+    <div class="copy-card">
+      <div class="copy-card-header">
+        <span class="copy-lbl">Copy ${v.label}</span>
+        <span class="copy-angle">${v.angle}</span>
+      </div>
+      <div class="copy-headline">${v.headline}</div>
+      <div class="copy-body">${v.body}</div>
+      <div class="copy-cta">CTA: ${v.cta}</div>
+    </div>`).join('');
+
+  const lpHTML = c.landingPage
+    ? `<div class="lp-row"><a class="lp-url" href="${c.landingPage}" target="_blank">${c.landingPage}</a><span class="lp-badge ${c.lpReady ? 'lp-ready':'lp-tbd'}">${c.lpReady ? '✓ Ready':'Not tested'}</span></div>`
+    : `<div class="lp-row"><span style="color:#999;font-size:0.85rem;">No landing page assigned yet</span><span class="lp-badge lp-tbd">TBD</span></div>`;
+
+  // ── Build variation cards (one per variation) ──────────────────────────
+  const varCards = c.variations.map(v => {
+    const copyVar = c.copyVariants.find(cv => cv.label === v.copy) || c.copyVariants[0];
+    const textOnImg = copyVar ? `"${copyVar.headline}"` : b.textOnImage;
+    const hasNone = !copyVar || v.changes.toLowerCase().includes('caption only');
+    const inspoImgs = ''; // unused
+    const imageNotes = v.changes.toLowerCase().includes('swap') || v.changes.toLowerCase().includes('same')
+      ? 'Same background as V1 — only swap the text.'
+      : b.whatToShow.split('.').slice(0,2).join('.') + '.';
+    return `<div class="var-card">
+      <div class="var-card-header">
+        <div class="var-num-badge">V${v.num}</div>
+        <div class="var-card-title">${v.changes}</div>
+        <div class="var-fmt-pill">${v.format}</div>
+      </div>
+      <div class="var-fields">
+        <div class="vf-row">
+          <div class="vf-lbl">Text on image</div>
+          <div class="vf-val text-on-img${hasNone?' none':''}">${hasNone ? 'No headline — caption only' : textOnImg}</div>
+        </div>
+        <div class="vf-row">
+          <div class="vf-lbl">Image notes</div>
+          <div class="vf-val">${imageNotes} <em style="color:#bbb;font-size:0.75rem;">— rest is up to you 🎨</em></div>
+        </div>
+
+      </div>
+    </div>`;
+  }).join('');
+
+  // ── Inspo section (shown once, after all variations) ───────────────────
+  const inspoSection = (c.inspo && c.inspo.length) ? `
+    <div class="ms-header" style="margin-top:4px"><div class="ms-title">💡 Ad Creative Inspo — Framework References</div><div class="ms-divider"></div></div>
+    <div class="inspo-grid" style="grid-template-columns:repeat(3,1fr);display:grid;gap:8px;margin-bottom:20px;">
+      ${c.inspo.map(i => `<div class="inspo-item"><img src="${i.url}" loading="lazy" onerror="this.parentElement.style.display='none'"><div class="inspo-cap">${i.cap}</div></div>`).join('')}
+    </div>` : '';
+
+  // ── Build copy cards for media buyer ────────────────────────────────────
+  const copyCards2 = ''; // copy lives in the spreadsheet
+
+  const lpSection = c.landingPage
+    ? `<div class="lp-section"><div class="lp-icon">🔗</div><a href="${c.landingPage}" target="_blank">${c.landingPage}</a><span class="lp-badge ${c.lpReady?'lp-ready':'lp-tbd'}">${c.lpReady?'✓ Tested':'Not tested'}</span></div>`
+    : `<div class="lp-section"><div class="lp-icon">🔗</div><span style="color:#999;font-size:0.82rem;">Landing page TBD</span><span class="lp-badge lp-tbd">TBD</span></div>`;
+
+  document.getElementById('modalBody').innerHTML = `
+
+    <!-- ── CONCEPT OVERVIEW ─────────────────────────────────────────── -->
+    <div class="copy-context-box" style="margin-bottom:16px;">
+      <div style="margin-bottom:8px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;">
+        <span style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#ea580c;">Assigned to</span>
+        <span style="background:#1a1a1a;color:#fff;font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:99px;">${c.assignees.join(', ')}</span>
+        <span style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#ea580c;margin-left:8px;">Format</span>
+        <span style="background:#f0ebe3;color:#555;font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:99px;">${fmtMap[c.format]}</span>
+      </div>
+      <div style="font-size:0.82rem;color:#aaa;line-height:1.5;margin-bottom:12px;">
+        Odd Pieces is a mystery jigsaw puzzle — 1,000 pieces, no image on the box. The person building it has no idea what they're making until the last piece drops.
+      </div>
+      <div style="background:#fff3e0;border-left:3px solid #f97316;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:10px;">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ea580c;margin-bottom:3px;">This ad is trying to</div>
+        <div style="font-size:0.88rem;font-weight:700;color:#1a1a1a;line-height:1.4;">${c.brief.adGoal}</div>
+      </div>
+      <div style="background:#fff3e0;border-left:3px solid #f97316;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:12px;">
+        <div style="font-size:0.62rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#ea580c;margin-bottom:3px;">Visual direction</div>
+        <div style="font-size:0.88rem;font-weight:700;color:#1a1a1a;line-height:1.4;">${c.visualDirection}</div>
+      </div>
+      <div style="font-size:0.74rem;color:#bbb;line-height:1.5;">
+        <strong style="color:#ccc;">Not:</strong> a children's toy ad, stock photo, or anything generic. No rainbow colours, no clipart, no busy layouts.
+      </div>
+    </div>
+
+    <!-- ── TECHNICAL (small, secondary) ────────────────────────────── -->
+    <div class="tech-strip">
+      <span class="tech-lbl">Technical</span>
+      <span class="tech-pill">📐 ${b.imageSize}</span>
+      <span class="tech-pill">🏷 OP_${c.name.replace(/[^a-zA-Z0-9]/g,'').substring(0,12)}_V[#]_[format]</span>
+      <span class="tech-pill">${fmtMap[c.format]}</span>
+    </div>
+
+    <!-- ── DESIGNER BRIEF ──────────────────────────────────────────── -->
+    <div class="ms-header"><div class="ms-title">🎨 Designer Brief</div><div class="ms-divider"></div>
+      <button class="copy-brief-btn" style="flex-shrink:0" onclick="copyBrief(${id})">📋 Copy Brief</button>
+    </div>
+    ${varCards}
+
+    \${inspoSection}
+
+    <!-- ── COPY FOR META (media buyer) ────────────────────────────── -->
+    <div class="ms-header" style="margin-top:8px"><div class="ms-title">✍️ Copy for Meta — Media Buyer</div><div class="ms-divider"></div></div>
+    <div class="copy-context-box">
+      <strong>Context:</strong> This is the ${c.format} ad for the <em>${c.name}</em> concept.
+      Hook angle: "${c.hook}" — pair each copy variant with the matching variation above.
+
+      <div style="margin-top:10px;padding-top:10px;border-top:1px solid #fed7aa;display:flex;align-items:center;gap:10px;flex-wrap:wrap;">
+        <span style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.07em;color:#ea580c;">Copy version</span>
+        <span style="background:#1a1a1a;color:#fff;font-size:0.75rem;font-weight:700;padding:3px 10px;border-radius:99px;">${c.copyVersion || 'Main Copy V1'}</span>
+        <a href="https://docs.google.com/spreadsheets/d/1jPsfruib9krB6ApFsEriBsml7xP7ZW2MPrOOJWeqjP0/edit" target="_blank" style="font-size:0.75rem;font-weight:700;color:#f97316;text-decoration:none;display:flex;align-items:center;gap:4px;">📊 Open Copy Spreadsheet →</a>
+      </div>
+    </div>
+
+
+    <!-- ── LANDING PAGE ────────────────────────────────────────────── -->
+    <div style="margin-top:14px">${lpSection}</div>
+  `;
+
+  const next = STATUSES[STATUSES.indexOf(c.status)+1];
+  let acts = '';
+  if (next) acts += `<button class="btn-advance" onclick="advanceStatus(${id})">→ Move to ${STATUS_LABELS[next]}</button>`;
+  if (c.status !== 'live') acts += `<button class="btn-reject" onclick="rejectConcept(${id})">↩ Needs Rework</button>`;
+  acts += `<button class="btn-export" onclick="exportConcept(${id})">📤 Export Brief</button>`;
+  document.getElementById('modalActions').innerHTML = acts;
+
+  document.getElementById('detailModal').classList.add('open');
+}
+
+function advanceStatus(id) {
+  const c = concepts.find(x => x.id === id);
+  const i = STATUSES.indexOf(c.status);
+  if (i < STATUSES.length-1) { c.status = STATUSES[i+1]; closeModal('detailModal'); renderStats(); renderKanban(); showToast(`Moved to ${STATUS_LABELS[c.status]}`); }
+}
+function rejectConcept(id) {
+  concepts.find(x => x.id === id).status = 'briefing';
+  closeModal('detailModal'); renderStats(); renderKanban(); showToast('Sent back for rework');
+}
+
+function copyBrief(id) {
+  const c = concepts.find(x => x.id === id);
+  const b = c.brief;
+  let t = `DESIGNER BRIEF: ${c.name}\n${'='.repeat(40)}\n\n`;
+  t += `WHAT THIS AD NEEDS TO DO:\n${b.adGoal}\n\n`;
+  t += `FILE SPECS:\n${b.imageSize}\n\n`;
+  t += `WHAT TO SHOW:\n${b.whatToShow}\n\n`;
+  t += `TEXT TO PUT ON THE IMAGE:\n${b.textOnImage}\n\n`;
+  t += `TEXT NOT ON THE IMAGE:\n${b.textNOTonImage}\n\n`;
+  t += `LAYOUT:\n${b.layout}\n\n`;
+  t += `IMAGE ZONES (top to bottom):\n${b.visualZones.map((z,i)=>`${i+1}. ${z}`).join('\n')}\n\n`;
+  t += `DO:\n${b.dos.map(d=>`✅ ${d}`).join('\n')}\n\n`;
+  t += `DON'T:\n${b.donts.map(d=>`❌ ${d}`).join('\n')}\n\n`;
+  t += `VARIATIONS TO CREATE:\n`;
+  c.variations.forEach(v => { t += `V${v.num} | ${v.format} | ${v.changes} | Use Copy ${v.copy}\n`; });
+  navigator.clipboard.writeText(t).then(() => showToast('Brief copied to clipboard!'));
+}
+
+function exportConcept(id) {
+  const c = concepts.find(x => x.id === id);
+  let t = `CONCEPT: ${c.name}\nStatus: ${STATUS_LABELS[c.status]} | Format: ${c.format}\n\n`;
+  t += copyBriefText(c);
+  t += `\nCOPY VARIANTS:\n`;
+  c.copyVariants.forEach(v => { t += `\n[${v.label} — ${v.angle}]\nHeadline: ${v.headline}\nBody: ${v.body}\nCTA: ${v.cta}\n`; });
+  t += `\nLANDING PAGE: ${c.landingPage || 'TBD'}`;
+  const blob = new Blob([t], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `brief-${c.name.toLowerCase().replace(/\s+/g,'-')}.txt`;
+  a.click();
+}
+function copyBriefText(c) { const b = c.brief; return `FILE: ${b.imageSize}\nSHOW: ${b.whatToShow}\nTEXT ON IMAGE: ${b.textOnImage}\nNO TEXT: ${b.textNOTonImage}\nLAYOUT: ${b.layout}\n`; }
+
+function exportAll() {
+  let t = `ODD PIECES — AD CREATIVE PIPELINE\n${new Date().toLocaleDateString()}\n${'='.repeat(40)}\n\n`;
+  concepts.forEach(c => { t += `${c.name} | ${STATUS_LABELS[c.status]} | ${c.format} | ${c.assignees.join(', ')} | ${c.variations.length} variations\n`; });
+  const blob = new Blob([t], {type:'text/plain'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = 'pipeline-export.txt'; a.click();
+}
+
+function openAddModal() { document.getElementById('addModal').classList.add('open'); }
+
+function addConcept() {
+  const name = document.getElementById('nName').value.trim();
+  const hook = document.getElementById('nHook').value.trim();
+  if (!name || !hook) { showToast('Name and hook are required', true); return; }
+  const assigneesRaw = document.getElementById('nAssigned').value;
+  const assignees = assigneesRaw ? assigneesRaw.split(',').map(a => a.trim()).filter(Boolean) : ['TBD'];
+  const varCount = parseInt(document.getElementById('nVarCount').value);
+  const vars = Array.from({length:varCount}, (_,i) => ({ num:i+1, changes:`Variation ${i+1}`, copy:'A', format:'1080×1080 square' }));
+  concepts.push({
+    id: Date.now(),
+    name, hook,
+    format: document.getElementById('nFormat').value,
+    status: 'briefing',
+    emotion: document.getElementById('nEmotion').value || 'TBD',
+    assignees,
+    landingPage: document.getElementById('nLP').value || '',
+    lpReady: false,
+    visualDirection: 'TBD',
+    variations: vars,
+    brief: { adGoal:'TBD', imageSize:'1080×1080px', whatToShow:'TBD', textOnImage:'TBD', textNOTonImage:'Body copy (Ginny handles this)', layout:'TBD', visualZones:['Top: TBD','Middle: TBD','Bottom: TBD'], dos:['Follow brand guidelines'], donts:['Nothing off-brand'] },
+    copyVariants: []
+  });
+  closeModal('addModal');
+  ['nName','nHook','nEmotion','nAssigned','nLP'].forEach(id => document.getElementById(id).value = '');
+  renderStats(); renderKanban();
+  showToast(`"${name}" added!`);
+}
+
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+function filterBy(f, btn) {
+  activeFilter = f;
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderKanban();
+}
+function showToast(msg, err=false) {
+  const t = document.getElementById('toast');
+  t.textContent = msg; t.style.background = err ? '#dc2626' : '#1a1a1a';
+  t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 2500);
+}
+
+document.querySelectorAll('.modal-overlay').forEach(el => {
+  el.addEventListener('click', e => { if (e.target === el) el.classList.remove('open'); });
+});
+
+
+function makeLayoutDiagram(c) {
+  const fmt = c.format;
+  const isStory = fmt === 'video';
+  const frameClass = isStory ? 'story' : 'square';
+  const zones = c.brief.visualZones || [];
+
+  // Parse top/mid/bottom from zones
+  const topZ  = zones[0] || 'Top zone';
+  const midZ  = zones[1] || 'Middle zone';
+  const botZ  = zones[2] || 'Bottom zone';
+
+  if (fmt === 'carousel') {
+    return `<div class="lc-label">Slide layout</div>
+      <div style="display:flex;gap:3px">
+        ${[1,2,3,4,5].map(n => `<div style="display:flex;flex-direction:column;gap:0;width:19px;">
+          <div style="background:#f0ebe3;height:16px;border:1.5px solid #1a1a1a;border-radius:3px 3px 0 0;display:flex;align-items:center;justify-content:center;font-size:0.45rem;color:#888;font-weight:700">${n}</div>
+          <div style="background:${n===4?'#fde68a':n===5?'#dcfce7':'#faf7f2'};height:36px;border:1.5px solid #1a1a1a;border-top:0;border-radius:0 0 3px 3px;display:flex;align-items:center;justify-content:center;font-size:0.42rem;color:#555;font-weight:700;text-align:center;padding:1px;">${n===1?'chaos':n===4?'REVEAL':n===5?'CTA':'...'}</div>
+        </div>`).join('')}
+      </div>`;
+  }
+
+  return `<div class="lc-label">${isStory ? '9:16 Story' : '1:1 Square'}</div>
+    <div class="lc-frame ${frameClass}">
+      <div class="lc-zone z-top">${topZ.split(':')[0] || 'Top'}</div>
+      <div class="lc-zone z-mid">${midZ.split(':')[0] || 'Middle — HERO'}</div>
+      <div class="lc-zone z-bot">${botZ.split(':')[0] || 'Bottom'}</div>
+    </div>`;
+}
+
+function makeFormatThumbs(variations) {
+  const seen = new Set();
+  const fmts = [];
+  variations.forEach(v => {
+    if (!seen.has(v.format)) { seen.add(v.format); fmts.push(v.format); }
+  });
+  return fmts.map(f => {
+    const isStory = f.includes('1920');
+    const isSq = f.includes('1080×1080');
+    const isHz = f.includes('1200×628') || f.includes('horizontal');
+    const cls = isStory ? 'st' : isSq ? 'sq' : isHz ? 'hz' : 'rect';
+    const lbl = isStory ? '1080×1920' : isSq ? '1080×1080' : isHz ? '1200×628' : f.split(' ')[0];
+    const name = isStory ? 'Story / Reels' : isSq ? 'Feed Square' : isHz ? 'FB Banner' : 'Other';
+    return `<div class="fmt-thumb">
+      <div class="fmt-box ${cls}"><span>${lbl}</span></div>
+      <div class="fmt-thumb-label">${name}</div>
+    </div>`;
+  }).join('');
+}
+
+function makeRefsHTML(c) {
+  if (!c.refs) return '';
+  const imgs = c.refs.concat(c.notRefs||[]).map(r => {
+    const isBad = r.cap.startsWith('✗');
+    return `<div class="ref-item ${isBad?'bad':'good'}">
+      <img src="${r.url}" alt="" loading="lazy" onerror="this.parentElement.style.display='none'">
+      <div class="ref-cap">${r.cap}</div>
+    </div>`;
+  }).join('');
+  return `<div class="vb-refs">
+    <div class="vb-section-label">🎨 Visual tone — aim for this</div>
+    <div class="ref-grid">${imgs}</div>
+  </div>`;
+}
+
+function makeDoDontGrid(dos, donts) {
+  const doCards  = dos.map(d  => `<div class="dd-card do"><div class="dd-icon">✅</div><div class="dd-text">${d}</div></div>`).join('');
+  const dontCards= donts.map(d => `<div class="dd-card dont"><div class="dd-icon">❌</div><div class="dd-text">${d}</div></div>`).join('');
+  return `<div class="do-dont-grid">${doCards}${dontCards}</div>`;
+}
+
+renderStats();
+renderKanban();
+</script>
+</body>
+</html>

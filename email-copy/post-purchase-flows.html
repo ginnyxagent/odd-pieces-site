@@ -1,0 +1,1000 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces - Post-Purchase Flows</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+  :root {
+    --bg: #08080f;
+    --panel: #0d0d1a;
+    --panel-2: #10101d;
+    --border: #171726;
+    --border-strong: #23233a;
+    --text: #ececf1;
+    --muted: #8c8ca3;
+    --soft: #4d4d66;
+    --accent: #F5C842;
+    --accent-soft: rgba(245, 200, 66, 0.12);
+    --green: #75d9a1;
+    --blue: #87b8ff;
+    --pink: #ff9bc9;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(245, 200, 66, 0.09), transparent 28%),
+      radial-gradient(circle at 0% 20%, rgba(255, 255, 255, 0.04), transparent 22%),
+      var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  .page {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 56px 24px 80px;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+
+  .back {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+  }
+
+  .back:hover { color: var(--accent); }
+
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .brand-name {
+    color: var(--accent);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: 1.4fr 0.8fr;
+    gap: 18px;
+    margin-bottom: 26px;
+  }
+
+  .hero-card,
+  .note-card,
+  .track-card,
+  .email-card {
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+    border: 1px solid var(--border);
+    border-radius: 18px;
+  }
+
+  .hero-card {
+    padding: 28px;
+  }
+
+  h1 {
+    font-size: clamp(2.1rem, 4vw, 3.4rem);
+    line-height: 0.96;
+    letter-spacing: -0.05em;
+    max-width: 10ch;
+    margin-bottom: 14px;
+  }
+
+  .hero-copy {
+    color: var(--muted);
+    font-size: 0.98rem;
+    line-height: 1.75;
+    max-width: 58ch;
+  }
+
+  .chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .chip {
+    border: 1px solid var(--border-strong);
+    background: var(--panel);
+    color: var(--text);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 0.76rem;
+  }
+
+  .chip strong { color: var(--accent); }
+
+  .note-card {
+    padding: 24px;
+    background:
+      linear-gradient(180deg, rgba(245, 200, 66, 0.08), rgba(245, 200, 66, 0.02)),
+      var(--panel);
+  }
+
+  .eyebrow {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .note-card p,
+  .track-meta,
+  .field-copy,
+  .body-copy {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  .track-card {
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .track-card::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: -20px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.03);
+  }
+
+  .track-card h2 {
+    font-size: 1.15rem;
+    margin-bottom: 6px;
+  }
+
+  .track-card a {
+    color: var(--text);
+    text-decoration: none;
+  }
+
+  .track-card a:hover { color: var(--accent); }
+
+  .track-a h2 { color: var(--green); }
+  .track-b h2 { color: var(--accent); }
+  .track-c h2 { color: var(--blue); }
+
+  .track-meta {
+    font-size: 0.88rem;
+    margin-bottom: 14px;
+  }
+
+  .track-card ul {
+    list-style: none;
+    color: var(--soft);
+    font-size: 0.8rem;
+    line-height: 1.8;
+  }
+
+  .track {
+    margin-top: 42px;
+  }
+
+  .track-header {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 20px;
+    margin-bottom: 18px;
+  }
+
+  .track-title {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .track-index {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--accent-soft);
+    color: var(--accent);
+    font-weight: 800;
+    font-size: 0.92rem;
+  }
+
+  .track h3 {
+    font-size: 1.7rem;
+    letter-spacing: -0.04em;
+  }
+
+  .track-sub {
+    color: var(--soft);
+    font-size: 0.83rem;
+    max-width: 40ch;
+    line-height: 1.6;
+  }
+
+  .email-list {
+    display: grid;
+    gap: 16px;
+  }
+
+  .email-card {
+    padding: 22px;
+    background: linear-gradient(180deg, rgba(16, 16, 29, 0.9), rgba(13, 13, 26, 0.98));
+  }
+
+  .email-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    margin-bottom: 18px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .email-kicker {
+    color: var(--accent);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .email-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .timing {
+    flex-shrink: 0;
+    border: 1px solid var(--border-strong);
+    border-radius: 999px;
+    padding: 8px 12px;
+    font-size: 0.76rem;
+    color: var(--muted);
+    background: rgba(255,255,255,0.02);
+  }
+
+  .email-grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 18px;
+  }
+
+  .field-label {
+    color: var(--soft);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .field-copy {
+    font-size: 0.95rem;
+  }
+
+  .body-copy {
+    white-space: pre-line;
+    font-size: 0.96rem;
+  }
+
+  .body-copy strong,
+  .field-copy strong {
+    color: var(--text);
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    background: var(--accent);
+    color: #101010;
+    font-size: 0.82rem;
+    font-weight: 800;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .logic-note {
+    margin-top: 12px;
+    padding: 12px 14px;
+    background: rgba(135, 184, 255, 0.08);
+    border: 1px solid rgba(135, 184, 255, 0.16);
+    border-radius: 12px;
+    color: #a8c7ff;
+    font-size: 0.82rem;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 920px) {
+    .hero,
+    .summary-grid,
+    .email-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .track-header,
+    .email-head {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="page">
+    <div class="topbar">
+      <a class="back" href="../email-hub.html">← Back to Email Hub</a>
+    </div>
+
+    <div class="brand-mark">
+      <div class="brand-dot"></div>
+      <div class="brand-name">Odd Pieces</div>
+    </div>
+
+    <div class="hero">
+      <section class="hero-card">
+        <div class="eyebrow">Post-Purchase Flow Reference</div>
+        <h1>15 emails for people who are already puzzle-curious.</h1>
+        <p class="hero-copy">
+          Built for three tracks: self-buyers, gifters, and gift recipients. Voice stays clever, slightly feral, and aggressively anti-corporate. Every sell points toward bundles first, because a single puzzle plus shipping is a tragic use of everyone's time.
+        </p>
+        <div class="chips">
+          <div class="chip"><strong>Bundle rule:</strong> push 3-pack, 6-pack, 9-pack only</div>
+          <div class="chip"><strong>Core promise:</strong> mystery image, hidden Easter eggs, secret endings</div>
+          <div class="chip"><strong>Audience:</strong> 30-45, gift-heavy, appreciates weird</div>
+        </div>
+      </section>
+
+      <aside class="note-card">
+        <div class="eyebrow">Series Cheat Sheet</div>
+        <p><strong>Series 1:</strong> Snack Attack, Beyond the Kelp, Turbo 3000</p>
+        <p><strong>Series 2:</strong> Astrogastro, Glitch, Shutterbug</p>
+        <p><strong>Series 3:</strong> Snack Attack 1, 2, 3</p>
+        <p><strong>Series 4:</strong> Time Keepers, Mushroom Mayhem, Silver Lining</p>
+        <div class="logic-note">
+          Use dynamic content where noted: <strong>{{series_name}}</strong>, <strong>{{remaining_puzzles}}</strong>, <strong>{{bundle_price}}</strong>, <strong>{{completed_count}}</strong>, <strong>{{received_puzzle}}</strong>, <strong>{{recommended_bundle}}</strong>.
+        </div>
+      </aside>
+    </div>
+
+    <div class="summary-grid">
+      <section class="track-card track-a">
+        <div class="eyebrow">Track A</div>
+        <h2><a href="#track-a">Self-Buyer</a></h2>
+        <p class="track-meta">6 emails. Confirm the purchase, build anticipation, then graduate them into finishing a series and moving up to bigger bundles.</p>
+        <ul>
+          <li>Day 0, 3, 14, 18, 30, 45</li>
+          <li>Mystery tease first, bundle logic second</li>
+          <li>Ends on a 6-pack / 9-pack savings push</li>
+        </ul>
+      </section>
+
+      <section class="track-card track-b">
+        <div class="eyebrow">Track B</div>
+        <h2><a href="#track-b">Gifter</a></h2>
+        <p class="track-meta">5 emails. Make the buyer feel smart, thoughtful, and dangerously good at gift-giving. Then sell them bundles for the next round.</p>
+        <ul>
+          <li>Day 0, 3, 14, 21, 45</li>
+          <li>Position Odd Pieces as the memorable gift move</li>
+          <li>Bundle offers framed around future occasions</li>
+        </ul>
+      </section>
+
+      <section class="track-card track-c">
+        <div class="eyebrow">Track C</div>
+        <h2><a href="#track-c">Gift Recipient</a></h2>
+        <p class="track-meta">4 emails. Warm welcome, explain the mystery, then turn intrigue into a first bundle order with a gift-recipient discount code.</p>
+        <ul>
+          <li>Day 0, 3, 7, 14</li>
+          <li>Includes code: GIFTED10</li>
+          <li>Push series completion or cross-series 3-pack</li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="track" id="track-a">
+      <div class="track-header">
+        <div>
+          <div class="track-title">
+            <span class="track-index">A</span>
+            <h3>Self-Buyer</h3>
+          </div>
+          <p class="track-sub">For people who bought themselves a mystery and are one suspiciously good unboxing away from becoming bundle people.</p>
+        </div>
+      </div>
+
+      <div class="email-list">
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 1</div>
+              <div class="email-title">Order Confirmation</div>
+            </div>
+            <div class="timing">Day 0</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Your mystery is officially in motion.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">A box with secrets is heading your way. Excellent decision.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Odd Pieces shipping box on dark background, slightly glowing like it knows something you do not.]
+
+Your order is in. Somewhere in the near future, a box is going to arrive and refuse to tell you what you're building. We love that for you.
+
+Inside: 1000 oddly satisfying pieces, hidden Easter eggs, and a final reveal that is much more fun when you don't cheat.
+
+We'll send tracking as soon as your puzzle escapes the warehouse. Until then, enjoy the rare thrill of not knowing exactly what's coming.
+
+If you're already thinking, "one mystery seems irresponsible," you're correct. Bundles are where the better deals live, especially once shipping gets involved.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">View Your Order</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 2</div>
+              <div class="email-title">What to Expect</div>
+            </div>
+            <div class="timing">Day 3</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">A few notes before the weird little pieces arrive</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">How to enjoy the mystery, avoid spoilers, and spot the sneaky stuff.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Close-up of puzzle pieces spilling out, with a few intriguing shapes and no visible full image.]
+
+Here's the fun part: the box does not show what you're building. So the experience is less "copy the picture" and more "become mildly obsessed."
+
+Three quick rules for maximum delight:
+1. Don't peek at product photos once you start.
+2. Let the image reveal itself piece by piece.
+3. Keep an eye out for the little oddities. Every Odd Pieces puzzle hides Easter eggs, and some of them are extremely smug about it.
+
+This is not a speed run. This is a tiny mystery with cardboard.
+
+And if you already know you'll want more than one world to get lost in, the smartest move is always a bundle. Three puzzles, one excellent spiral.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">See Bundle Options</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 3</div>
+              <div class="email-title">Finished Yet?</div>
+            </div>
+            <div class="timing">Day 14</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">So... did you crack it?</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Finished? We have questions. Still building? We have encouragement.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Split visual with a finished puzzle on one side and a half-built table scene on the other.]
+
+We need to know: where are you at?
+
+If yes:
+You beautiful maniac. Congrats on making it to the ending. Important follow-up question: did you catch the Easter eggs, or did they slip by you wearing tiny disguises?
+
+If no:
+No stress. The best reveals are worth taking your time with. Leave it out. Circle back. Let your brain do that strange background-processing thing it loves.
+
+Either way, tell us where you landed so we can send the right next move. No generic nonsense. Just better puzzle recommendations and more mystery.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Yes, I Finished</span> <span class="cta" style="margin-left:8px;background:#1a1a28;color:var(--text);">Not Yet</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 4</div>
+              <div class="email-title">Series Completion Upsell</div>
+            </div>
+            <div class="timing">Day 18</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">You started {{series_name}}. Might as well finish the story.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Your next {{remaining_puzzles}} puzzles are waiting, and the 3-pack is the smart move.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: The three puzzles from {{series_name}} arranged like a collector set, with the unowned puzzles highlighted.]
+
+You already stepped into {{series_name}}. Stopping now would be like reading one chapter and then wandering off to alphabetize your spice rack.
+
+Complete the full run with the {{series_name}} 3-pack and get the rest of the series in one clean shot:
+
+- Your starting point: {{received_puzzle}}
+- Still missing: {{remaining_puzzles}}
+- Bundle price: {{bundle_price}}
+
+Same mystery-first experience. New world details. More hidden nonsense tucked into the art. Much better value than trying to piece it together one puzzle at a time.
+
+Finish the set. Future you has excellent taste.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Complete {{series_name}}</span></div>
+
+            <div class="field-label">Logic Note</div>
+            <div class="field-copy logic-note">Populate the series based on the purchased SKU. If customer already owns 2 in a series, show the final missing puzzle names but still send to the 3-pack bundle PDP if that is the main commercial priority.</div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 5</div>
+              <div class="email-title">Cross-Series Bundle</div>
+            </div>
+            <div class="timing">Day 30</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Ready for a whole new world to overthink?</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">{{completed_count}} puzzlers already finished this series. You should see what the fuss is about.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Alternate series 3-pack laid out as a cinematic set, with distinct vibe from the series they bought.]
+
+You've had a taste. Now pick your next rabbit hole.
+
+Meet {{recommended_bundle}}: a 3-pack built for people who like their puzzles with more atmosphere, more hidden details, and at least one moment of "wait... what am I looking at?"
+
+{{completed_count}} puzzlers have already made it through this series, which means two things:
+1. It's wildly replayable as a gift recommendation.
+2. You can join a very niche club of people who willingly buy mysteries in cardboard form.
+
+New setting. New surprises. Same deeply satisfying reveal.
+
+And yes, the 3-pack is the move. Better deal, better shipping math, better weekend plans.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Explore {{recommended_bundle}}</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 6</div>
+              <div class="email-title">The Big Bundle Push</div>
+            </div>
+            <div class="timing">Day 45</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">You're officially hooked. Let's stop pretending otherwise.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Go bigger with a 6-pack or 9-pack. Best savings, least restraint.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Dramatic stack of Odd Pieces bundle boxes with 6-pack and 9-pack savings badges.]
+
+At this point, buying one puzzle at a time feels a little fake.
+
+If you're the kind of person who likes having the next mystery ready before finishing the current one, welcome. You belong in the big-bundle section.
+
+Why go bigger?
+- Best savings live in the 6-pack and 9-pack
+- Your shelf starts looking suspiciously impressive
+- You always have a gift on hand for the next birthday, dinner party, or "I panicked and needed a present by tomorrow" situation
+
+The 6-pack is the crowd-pleaser.
+The 9-pack is for people who have accepted their fate.
+
+Either way: more puzzles, better deal, no sad single-puzzle shipping math.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Shop 6-Pack &amp; 9-Pack</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="track" id="track-b">
+      <div class="track-header">
+        <div>
+          <div class="track-title">
+            <span class="track-index">B</span>
+            <h3>Gifter</h3>
+          </div>
+          <p class="track-sub">For people who bought a present and deserve immediate recognition for having unusually strong taste.</p>
+        </div>
+      </div>
+
+      <div class="email-list">
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 1</div>
+              <div class="email-title">Order Confirmation</div>
+            </div>
+            <div class="timing">Day 0</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Great choice. You're about to blow someone's mind.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">This is not a normal gift, which is exactly why it works.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Gift-ready Odd Pieces box with subtle ribbon styling, still keeping the mystery intact.]
+
+Your order is in, and frankly, this is a strong gift move.
+
+Most presents get a polite "oh wow, thanks."
+This one gets curiosity, confusion, and eventually a full-table obsession.
+
+You're sending them a 1000-piece mystery puzzle with no final image on the box, hidden Easter eggs, and a reveal they have to earn. Which means you've successfully avoided being boring.
+
+We'll send tracking as soon as it ships. Until then, enjoy knowing you've chosen the gift equivalent of a plot twist.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">View Your Order</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 2</div>
+              <div class="email-title">Here's What They're In For</div>
+            </div>
+            <div class="timing">Day 3</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">A quick preview of the chaos you just gifted</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Mystery image, Easter eggs, secret ending. You picked well.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Sequence showing unopened box, puzzle-in-progress, and finished reveal without spoiling the art.]
+
+In case you want the short version of why this gift lands:
+
+Odd Pieces puzzles don't show the final image on the box. So instead of following a picture, they discover the artwork as they build it.
+
+That means:
+- more curiosity
+- more "wait, what is this becoming?"
+- more table talk if they're puzzling with someone else
+- more delight when the hidden Easter eggs start showing up
+
+You didn't just send a puzzle. You sent them an experience with a payoff.
+
+If this becomes your signature gift move, we support that fully. Bundles make that move even smarter.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Browse Gift Bundles</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 3</div>
+              <div class="email-title">Did They Love It?</div>
+            </div>
+            <div class="timing">Day 14</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Be honest: did you absolutely nail the gift?</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Tell us how it went. We collect good gift stories like tiny trophies.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Happy recipient mid-build or reacting to a reveal, candid and warm.]
+
+So, how'd it go?
+
+Did they rip the box open immediately?
+Did they get weirdly competitive about finishing it?
+Did they text you halfway through with "this thing is incredible" and validate your excellent instincts?
+
+Tell us. Leave a note. Forward a photo. Brag a little.
+
+Plenty of gift buyers come back because they accidentally set the bar too high the first time. We can help with that.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Share How It Went</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 4</div>
+              <div class="email-title">Gift Again?</div>
+            </div>
+            <div class="timing">Day 21</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">You might be their go-to gift person now</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Birthdays, housewarmings, holidays: bundles make repeat brilliance easier.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Bundle assortment styled as a ready-made gift shelf with occasion tags.]
+
+Here's the risk with giving a genuinely good gift: people remember.
+
+Which means the next birthday, host gift, holiday, thank-you, or "I should bring something nicer than a bottle of wine" moment is now your problem.
+
+Fortunately, bundles exist.
+
+Pick up a 3-pack if you're buying with intent.
+Go 6-pack if you like having gifts ready before the calendar ambushes you.
+Go 9-pack if you enjoy looking unreasonably prepared.
+
+You're not overspending. You're becoming efficient and admired.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Stock Up On Bundles</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 5</div>
+              <div class="email-title">Occasion Reminder</div>
+            </div>
+            <div class="timing">Day 45</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Future-you would like a word about gift planning</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Holiday season, birthdays, and last-minute panic all love a bundle.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Seasonal gift stack with subtle holiday or occasion styling, anchored by bundle boxes.]
+
+This is your friendly reminder that gift occasions do not stop happening just because you're tired.
+
+If you've got birthdays coming up, a holiday season looming, or relatives who are impossible to shop for, this is where the bigger bundles earn their keep.
+
+The 6-pack covers you nicely.
+The 9-pack is best-value territory and turns you into the calm person who already has gifts handled.
+
+Mystery puzzles make people pause, laugh, and get invested. That's a much better outcome than another candle pretending to have a personality.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Shop Best-Value Bundles</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="track" id="track-c">
+      <div class="track-header">
+        <div>
+          <div class="track-title">
+            <span class="track-index">C</span>
+            <h3>Gift Recipient</h3>
+          </div>
+          <p class="track-sub">For people who just got introduced to the brand by someone with suspiciously good taste and now need a clean path into bundle buying.</p>
+        </div>
+      </div>
+
+      <div class="email-list">
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 1</div>
+              <div class="email-title">Welcome</div>
+            </div>
+            <div class="timing">Day 0</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Someone thinks you're cool enough for this.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Welcome to Odd Pieces. Here's 10% off your first bundle: GIFTED10.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Warm welcome visual with Odd Pieces box, confetti-level intrigue, and code callout.]
+
+Someone sent you an Odd Pieces puzzle, which tells us two things:
+1. They know you well.
+2. They are better at gifts than most people.
+
+We're Odd Pieces. We make 1000-piece mystery puzzles where the box doesn't show the image you're building. So the fun is in the figuring-it-out, the hidden Easter eggs, and the ending you only get once you've earned it.
+
+If this sounds like your kind of thing, here's a little welcome gift:
+
+Code: GIFTED10
+Use it on a bundle, because bundles are where the real value lives and we'd hate to introduce ourselves with bad shipping economics.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Use GIFTED10 On A Bundle</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 2</div>
+              <div class="email-title">The Mystery Experience</div>
+            </div>
+            <div class="timing">Day 3</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Why this puzzle feels different from the first piece</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">No box image. Hidden jokes. Secret ending. Very normal behavior from us.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Odd Pieces puzzle journey from scattered pieces to finished reveal, with Easter egg callouts.]
+
+Most puzzles hand you the answer before you start.
+We find that deeply uninteresting.
+
+Odd Pieces puzzles keep the image hidden, so you discover the artwork while you're building it. Along the way, there are Easter eggs tucked into the scene and a reveal that lands much harder because nobody spoiled it for you on the lid.
+
+It's slower in the best way. More curious. More "just one more section" at midnight.
+
+If you're already eyeing your next one, skip the single. Start with a 3-pack. Better deal, better experience, less restraint.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Shop 3-Pack Bundles</span></div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 3</div>
+              <div class="email-title">Series Showcase</div>
+            </div>
+            <div class="timing">Day 7</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Pick your next universe</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">All 4 series, all weird in different ways, and one especially good 3-pack waiting for you.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Four-panel series overview with one panel per series and a highlighted bundle frame around the recipient's series.]
+
+You've met one puzzle. Here's the broader neighborhood:
+
+Series 1: Snack Attack, Beyond the Kelp, Turbo 3000
+Series 2: Astrogastro, Glitch, Shutterbug
+Series 3: Snack Attack 1, 2, 3
+Series 4: Time Keepers, Mushroom Mayhem, Silver Lining
+
+If you received {{received_puzzle}}, the best next move is simple: grab the 3-pack for {{series_name}} and complete the full set in one go.
+
+That gets you the whole arc, the best pricing entry point, and a much stronger answer to "what should I do this weekend?"</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Get The {{series_name}} 3-Pack</span></div>
+
+            <div class="field-label">Logic Note</div>
+            <div class="field-copy logic-note">Hero the series they received, but keep all four series visible so the designer can show range and support cross-sell browsing.</div>
+          </div>
+        </article>
+
+        <article class="email-card">
+          <div class="email-head">
+            <div>
+              <div class="email-kicker">Email 4</div>
+              <div class="email-title">What's Next?</div>
+            </div>
+            <div class="timing">Day 14</div>
+          </div>
+          <div class="email-grid">
+            <div class="field-label">Subject Line</div>
+            <div class="field-copy">Finished it? Excellent. Here's your next bad idea.</div>
+
+            <div class="field-label">Preview Text</div>
+            <div class="field-copy">Complete your series or jump to a new one. Either way, do it with a bundle.</div>
+
+            <div class="field-label">Email Body Copy</div>
+            <div class="body-copy">[IMAGE: Completion moment with finished puzzle beside two paths: complete the series or start a new world.]
+
+If you finished your puzzle: congratulations, you now understand why people get weirdly loyal to these.
+
+From here, you have two excellent options:
+
+Option 1: Stay in {{series_name}} and complete the set with the remaining puzzles.
+Option 2: Jump to {{recommended_bundle}} and see how strange the next world gets.
+
+Either way, the answer is a bundle, not a lonely one-off. Better pricing, better shipping, more mysteries lined up before your current one is even back in the box.
+
+Use GIFTED10 if you haven't already. We're not monsters.</div>
+
+            <div class="field-label">CTA Button Text</div>
+            <div class="field-copy"><span class="cta">Choose Your Next Bundle</span></div>
+          </div>
+        </article>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

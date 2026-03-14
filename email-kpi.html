@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Odd Pieces — Email KPI Dashboard</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#faf7f2;color:#1a1a1a;padding:20px 16px;min-height:100vh}
+    .container{max-width:1000px;margin:0 auto}
+    header{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:20px;border-bottom:2px solid #1a1a1a;padding-bottom:16px;flex-wrap:wrap;gap:10px}
+    header h1{font-size:18px;font-weight:800;letter-spacing:-0.5px}
+    header p{font-size:11px;color:#999;margin-top:3px}
+    .live-badge{display:inline-flex;align-items:center;gap:6px;background:#e8f5ee;border:1px solid #a3d9b8;color:#1a7a45;font-size:11px;padding:5px 12px;border-radius:99px;font-weight:600}
+    .live-dot{width:6px;height:6px;border-radius:50%;background:#22c55e;animation:pulse 2s infinite}
+    @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+    /* Tabs */
+    .tabs{display:flex;gap:0;margin-bottom:20px;border-bottom:2px solid #e8e2d9;padding-bottom:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+    .tab{padding:10px 14px;font-size:12px;font-weight:700;color:#aaa;cursor:pointer;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .15s;letter-spacing:.2px;white-space:nowrap}
+    .tab:hover{color:#555}
+    .tab.active{color:#1a1a1a;border-bottom-color:#f97316}
+    .tab-panel{display:none}.tab-panel.active{display:block}
+
+    /* Section titles */
+    .section-title{font-size:11px;text-transform:uppercase;letter-spacing:1.5px;color:#f97316;margin-bottom:14px;margin-top:28px;font-weight:800}
+    .section-title:first-child{margin-top:0}
+
+    /* KPI grid */
+    .kpi-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+    @media(min-width:640px){.kpi-grid{grid-template-columns:repeat(4,1fr)}}
+    .kpi-card{background:#fff;border:1.5px solid #ede8e0;border-radius:14px;padding:18px 16px;cursor:pointer;position:relative;box-shadow:0 1px 4px rgba(0,0,0,.04);transition:box-shadow .15s}
+    .kpi-card:hover{box-shadow:0 4px 16px rgba(0,0,0,.08)}
+    .kpi-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;display:flex;align-items:center;gap:6px;font-weight:800}
+    .kpi-label .help{width:14px;height:14px;border-radius:50%;background:#f0ebe3;color:#bbb;font-size:9px;display:inline-flex;align-items:center;justify-content:center;font-style:normal;flex-shrink:0}
+    .kpi-value{font-size:30px;font-weight:800;margin-bottom:3px;letter-spacing:-1px}
+    .kpi-target{font-size:11px;color:#aaa;margin-bottom:9px;font-weight:500}
+    .bar-bg{background:#f0ebe3;border-radius:99px;height:5px;overflow:hidden}
+    .bar-fill{height:100%;border-radius:99px;transition:width .8s ease}
+    .kpi-status{font-size:11px;margin-top:7px;font-weight:600}
+    .tooltip{display:none;position:absolute;bottom:calc(100% + 8px);left:0;right:0;background:#1a1a1a;border-radius:10px;padding:14px;font-size:12px;color:#e0dbd3;line-height:1.75;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.18);min-width:220px}
+    .tooltip::after{content:'';position:absolute;top:100%;left:20px;border:6px solid transparent;border-top-color:#1a1a1a}
+    .tooltip.open{display:block}
+    .kpi-card:hover .tooltip{display:block}
+    .help{cursor:pointer;transition:background .15s}
+    .help:hover,.help.active{background:#f97316!important;color:#fff!important}
+    .good{color:#16a34a}.warn{color:#d97706}.bad{color:#dc2626}.neutral{color:#ccc}
+    .bar-good{background:#16a34a}.bar-warn{background:#f59e0b}.bar-bad{background:#ef4444}.bar-neutral{background:#e0d9ce}
+
+    /* Tables */
+    .filter-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+    .filter-btn{background:#fff;border:1.5px solid #ede8e0;color:#aaa;padding:5px 14px;border-radius:99px;cursor:pointer;font-size:12px;font-weight:600;transition:all .15s}
+    .filter-btn:hover{border-color:#ccc;color:#555}
+    .filter-btn.active{background:#1a1a1a;border-color:#1a1a1a;color:#fff}
+    .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:12px;border:1.5px solid #ede8e0;margin-bottom:20px}
+    table{width:100%;border-collapse:collapse;font-size:13px;background:#fff;min-width:580px}
+    @media(max-width:640px){table{font-size:12px}}
+    thead th{text-align:left;padding:11px 12px;border-bottom:1.5px solid #ede8e0;font-size:10px;text-transform:uppercase;letter-spacing:1.2px;color:#555;font-weight:800;background:#f5f0e8}
+    thead th .th-hint{display:block;font-size:9px;color:#f97316;text-transform:none;letter-spacing:0;font-weight:600;margin-top:2px}
+    thead th{position:relative}
+    .th-tip{display:none;position:fixed;background:#1a1a1a;color:#e0dbd3;font-size:12px;line-height:1.75;padding:12px 14px;border-radius:10px;z-index:9999;box-shadow:0 8px 32px rgba(0,0,0,.25);min-width:220px;max-width:280px;font-weight:400;text-transform:none;letter-spacing:0;white-space:normal;pointer-events:none}
+    th:hover .th-tip{display:block}
+    tbody tr{border-bottom:1px solid #f5f0e8}
+    tbody tr:hover{background:#fdf9f4}
+    tbody td{padding:11px 12px;vertical-align:middle}
+    .row-name{font-weight:700;font-size:13px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#1a1a1a}
+    .row-sub{font-size:10px;color:#999;margin-top:2px}
+    .badge{display:inline-block;padding:3px 9px;border-radius:99px;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+    .badge-Sent,.badge-live{background:#dcfce7;color:#15803d}
+    .badge-Scheduled,.badge-manual{background:#fef3c7;color:#b45309}
+    .badge-Draft,.badge-draft{background:#f5f0e8;color:#ccc}
+    .metric{font-weight:700;color:#1a1a1a}
+    .metric.bad{background:#fee2e2;color:#dc2626;padding:3px 8px;border-radius:6px;display:inline-block}
+    .metric.warn{background:#fef3c7;color:#b45309;padding:3px 8px;border-radius:6px;display:inline-block}
+    .metric.good{background:#dcfce7;color:#15803d;padding:3px 8px;border-radius:6px;display:inline-block}
+    .metric.neutral{color:#999}
+    .tbd{color:#e0dbd3;font-style:italic;font-weight:400}
+    .alert-row td{background:#fff8f0!important}
+
+    /* Diagnosis drawer */
+    .diag-row{display:none;background:#fdfaf6}
+    .diag-row.open{display:table-row}
+    .diag-cell{padding:16px 16px 20px;border-bottom:2px solid #ede8e0}
+    .diag-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:1px;color:#f97316;margin-bottom:12px}
+    .diag-grid{display:flex;flex-wrap:wrap;gap:10px}
+    .diag-issue{background:#fff;border:1.5px solid #ede8e0;border-radius:10px;padding:12px 14px;flex:1;min-width:180px}
+    .diag-issue.bad{border-color:#fca5a5;background:#fff5f5}
+    .diag-issue.warn{border-color:#fcd34d;background:#fffdf0}
+    .diag-issue.good{border-color:#86efac;background:#f0fff4}
+    .diag-metric{font-size:18px;font-weight:800;margin-bottom:2px}
+    .diag-metric.bad{color:#dc2626}.diag-metric.warn{color:#b45309}.diag-metric.good{color:#15803d}
+    .diag-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#aaa;margin-bottom:6px}
+    .diag-fix{font-size:12px;color:#555;line-height:1.6;margin-top:6px;border-top:1px solid #f0ebe3;padding-top:6px}
+    .diag-fix strong{color:#1a1a1a}
+    .expand-btn{cursor:pointer;font-size:11px;color:#f97316;font-weight:700;background:none;border:none;padding:0;margin-top:4px;text-decoration:underline}
+    tbody tr.data-row{cursor:pointer}
+    tbody tr.data-row:hover .row-name{color:#f97316}
+
+    /* Flow health flags */
+    .flag{display:inline-block;font-size:10px;padding:3px 8px;border-radius:6px;font-weight:700}
+    .flag-warn{background:#fef3c7;color:#b45309}
+    .flag-bad{background:#fee2e2;color:#dc2626}
+    .flag-good{background:#dcfce7;color:#15803d}
+
+    /* Summary compare */
+    .compare-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+    @media(max-width:500px){.compare-grid{grid-template-columns:1fr}}
+    .compare-card{background:#fff;border:1.5px solid #ede8e0;border-radius:14px;padding:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .compare-card h3{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#f97316;margin-bottom:14px;font-weight:800}
+    .compare-row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #f5f0e8;font-size:13px}
+    .compare-row:last-child{border-bottom:none}
+    .compare-row .label{color:#777}
+    .compare-row .val{font-weight:800}
+
+    /* Trends */
+    .yoy-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:20px}
+    @media(min-width:640px){.yoy-grid{grid-template-columns:repeat(4,1fr)}}
+    .yoy-card{background:#fff;border:1.5px solid #ede8e0;border-radius:14px;padding:18px 16px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .yoy-label{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:8px;font-weight:800}
+    .yoy-compare{display:flex;align-items:flex-end;gap:10px;margin-bottom:8px}
+    .yoy-this{font-size:26px;font-weight:800;color:#1a1a1a;letter-spacing:-1px}
+    .yoy-last{font-size:13px;color:#bbb;font-weight:600;padding-bottom:3px}
+    .yoy-delta{display:inline-flex;align-items:center;gap:3px;font-size:12px;font-weight:800;padding:3px 8px;border-radius:99px}
+    .yoy-delta.up-good{background:#dcfce7;color:#15803d}
+    .yoy-delta.up-bad{background:#fee2e2;color:#dc2626}
+    .yoy-delta.down-good{background:#dcfce7;color:#15803d}
+    .yoy-delta.down-bad{background:#fee2e2;color:#dc2626}
+    .yoy-delta.neutral{background:#f5f0e8;color:#888}
+    .yoy-context{font-size:11px;color:#aaa;margin-top:4px}
+    .chart-wrap{background:#fff;border:1.5px solid #ede8e0;border-radius:14px;padding:20px;margin-bottom:20px;box-shadow:0 1px 4px rgba(0,0,0,.04)}
+    .chart-title{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;color:#f97316;font-weight:800;margin-bottom:16px}
+    .chart-select{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
+    .chart-btn{background:#f5f0e8;border:none;color:#888;padding:5px 12px;border-radius:99px;cursor:pointer;font-size:12px;font-weight:600}
+    .chart-btn.active{background:#1a1a1a;color:#fff}
+    .bar-chart{display:flex;align-items:flex-end;gap:4px;height:120px;margin-bottom:6px}
+    .bar-col{flex:1;display:flex;flex-direction:column;align-items:center;gap:3px}
+    .bar-bar{width:100%;border-radius:4px 4px 0 0;transition:height .4s ease;min-height:2px;cursor:pointer;position:relative}
+    .bar-bar:hover::after{content:attr(data-val);position:absolute;bottom:calc(100% + 4px);left:50%;transform:translateX(-50%);background:#1a1a1a;color:#fff;font-size:10px;padding:3px 6px;border-radius:4px;white-space:nowrap;font-weight:700}
+    .bar-label{font-size:9px;color:#bbb;font-weight:600;text-align:center}
+    .chart-legend{display:flex;gap:16px;margin-top:8px;flex-wrap:wrap}
+    .legend-item{display:flex;align-items:center;gap:5px;font-size:11px;color:#888}
+    .legend-dot{width:8px;height:8px;border-radius:2px}
+
+    /* Calendar */
+    .cal-grid{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+    .cal-event{background:#fff;border:1.5px solid #ede8e0;border-radius:12px;padding:16px 18px;display:flex;align-items:flex-start;gap:16px;position:relative;overflow:hidden}
+    .cal-event::before{content:'';position:absolute;left:0;top:0;bottom:0;width:4px}
+    .cal-event.fire::before{background:#ef4444}
+    .cal-event.hot::before{background:#f97316}
+    .cal-event.warm::before{background:#f59e0b}
+    .cal-event.cool::before{background:#6366f1}
+    .cal-event.cold::before{background:#94a3b8}
+    .cal-date{min-width:52px;text-align:center}
+    .cal-day{font-size:24px;font-weight:800;line-height:1;color:#1a1a1a}
+    .cal-month{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#aaa;margin-top:2px}
+    .cal-countdown{font-size:10px;font-weight:700;padding:3px 7px;border-radius:99px;margin-top:6px;display:inline-block}
+    .fire .cal-countdown{background:#fee2e2;color:#dc2626}
+    .hot .cal-countdown{background:#ffedd5;color:#c2410c}
+    .warm .cal-countdown{background:#fef3c7;color:#92400e}
+    .cool .cal-countdown{background:#ede9fe;color:#5b21b6}
+    .cold .cal-countdown{background:#f1f5f9;color:#64748b}
+    .cal-body{flex:1}
+    .cal-name{font-size:15px;font-weight:800;color:#1a1a1a;margin-bottom:4px;display:flex;align-items:center;gap:8px}
+    .cal-emoji{font-size:18px}
+    .cal-angle{font-size:13px;color:#555;line-height:1.6;margin-bottom:8px}
+    .cal-tags{display:flex;gap:6px;flex-wrap:wrap}
+    .cal-tag{font-size:10px;font-weight:700;padding:2px 8px;border-radius:99px;background:#f5f0e8;color:#888;text-transform:uppercase;letter-spacing:.5px}
+    .cal-brief-due{font-size:11px;color:#f97316;font-weight:700;margin-top:6px}
+    .past{opacity:.45}
+
+    .loading{color:#ddd;text-align:center;padding:40px;font-size:14px}
+    .error-msg{color:#dc2626;background:#fff0f0;border:1.5px solid #fecaca;padding:12px 16px;border-radius:10px;font-size:13px;margin-bottom:20px}
+    a.back{display:inline-block;font-size:12px;color:#ccc;text-decoration:none;margin-bottom:22px;font-weight:600}
+    a.back:hover{color:#555}
+    footer{font-size:11px;color:#aaa;text-align:center;padding-top:20px;border-top:1.5px solid #ede8e0;margin-top:8px}
+  </style>
+</head>
+<body>
+<div class="container">
+  <a href="index.html" class="back">← Back to Hub</a>
+  <header>
+    <div>
+      <h1>🧩 Email KPI Dashboard</h1>
+      <p>Odd Pieces · Live from Klaviyo · Last 12 months · <span id="lastUpdated">Loading…</span></p>
+    </div>
+    <div class="live-badge"><div class="live-dot"></div> Live Klaviyo</div>
+  </header>
+
+  <div id="errorBox" style="display:none" class="error-msg"></div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('overview',this)">Overview</div>
+    <div class="tab" onclick="switchTab('campaigns',this)">Campaigns</div>
+    <div class="tab" onclick="switchTab('flows',this)">Flows</div>
+    <div class="tab" onclick="switchTab('trends',this)">📈 Trends</div>
+    <div class="tab" onclick="switchTab('calendar',this)">📅 Calendar</div>
+  </div>
+
+  <!-- OVERVIEW TAB -->
+  <div class="tab-panel active" id="tab-overview">
+    <div class="compare-grid" id="compareGrid">
+      <div class="loading" style="grid-column:1/-1">Loading…</div>
+    </div>
+    <div class="section-title">📣 Campaign KPIs — Last 12 months (sent only)</div>
+    <div class="kpi-grid" id="campaignKpiGrid"><div class="loading" style="grid-column:1/-1">Loading…</div></div>
+    <div class="section-title">⚡ Flow KPIs — Last 12 months (live flows only)</div>
+    <div class="kpi-grid" id="flowKpiGrid"><div class="loading" style="grid-column:1/-1">Loading…</div></div>
+  </div>
+
+  <!-- CAMPAIGNS TAB -->
+  <div class="tab-panel" id="tab-campaigns">
+    <div class="filter-bar">
+      <button class="filter-btn active" onclick="setCFilter('all',this)">All</button>
+      <button class="filter-btn" onclick="setCFilter('Sent',this)">Sent</button>
+      <button class="filter-btn" onclick="setCFilter('Scheduled',this)">Scheduled</button>
+      <button class="filter-btn" onclick="setCFilter('Draft',this)">Drafts</button>
+      <span style="margin-left:8px;border-left:1.5px solid #ede8e0;padding-left:12px"></span>
+      <button class="filter-btn" onclick="setCYear('all',this)">All Years</button>
+      <button class="filter-btn" onclick="setCYear('2025',this)">2025</button>
+      <button class="filter-btn" onclick="setCYear('2024',this)">2024</button>
+    </div>
+    <div id="campaign-year-note" style="display:none;font-size:12px;color:#f97316;margin-bottom:12px;padding:10px 14px;background:#fff8f0;border-radius:8px;border:1.5px solid #f97316">
+      📊 2024 metrics not available in last-12-months view. Open rate, CTOR and revenue shown as "—" for 2024 campaigns. Full 2024 data is in the <strong>📈 Trends</strong> tab.
+    </div>
+    <div class="table-scroll"><table>
+      <thead><tr>
+        <th>Campaign</th>
+        <th>Status</th>
+        <th>Recipients<div class="th-tip">Total number of people the email was sent to.</div></th>
+        <th>Open Rate<span class="th-hint">Target ≥ 40%</span><div class="th-tip">% of recipients who opened the email. Low = subject line is weak or email is landing in spam. Fix: A/B test 3 subject lines every send.</div></th>
+        <th>CTOR<span class="th-hint">Target ≥ 10%</span><div class="th-tip"><strong>Click-to-Open Rate</strong> — of people who OPENED, how many clicked? Better than raw click rate because it measures content quality, not just reach. Low CTOR = the email content isn't compelling enough. Fix: stronger hook, single CTA, less clutter.</div></th>
+        <th>Click Rate<span class="th-hint">Target ≥ 2.5%</span><div class="th-tip">% of ALL recipients who clicked. Affected by both subject line (opens) and content quality (CTOR). Use alongside CTOR for full picture.</div></th>
+        <th>Rev / Email<span class="th-hint">Higher = better</span><div class="th-tip">Revenue generated divided by emails sent. The north star metric — every decision should move this number up. Typical range: $0.05–$0.30+ per email.</div></th>
+        <th>Unsub<span class="th-hint">Target ≤ 0.2%</span><div class="th-tip">% who unsubscribed after receiving this email. High unsub = content is irrelevant or sending too frequently. Damages deliverability over time.</div></th>
+      </tr></thead>
+      <tbody id="campaignBody"><tr><td colspan="8" class="loading">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <!-- FLOWS TAB -->
+  <div class="tab-panel" id="tab-flows">
+    <p style="font-size:13px;color:#888;margin-bottom:18px;line-height:1.7">Flows are automated sequences triggered by behaviour (signup, purchase, cart abandon). They run 24/7 and should generate <strong style="color:#1a1a1a">30–50% of total email revenue</strong>. Drafts are turned off — they're making $0.</p>
+    <div class="table-scroll"><table>
+      <thead><tr>
+        <th>Flow</th>
+        <th>Status<div class="th-tip"><strong>Live</strong> = running and sending automatically.<br><strong>Draft</strong> = turned OFF — earning $0. These need to be activated.<br><strong>Manual</strong> = requires manual trigger.</div></th>
+        <th>Recipients<div class="th-tip">Total people who entered this flow in the last 12 months.</div></th>
+        <th>Open Rate<span class="th-hint">Target ≥ 40%</span><div class="th-tip">Flows should have HIGHER open rates than campaigns because they're triggered by behaviour (high intent moments). Low = email timing or subject line is off.</div></th>
+        <th>CTOR<span class="th-hint">Target ≥ 10%</span><div class="th-tip"><strong>Click-to-Open Rate</strong> — of people who opened, how many clicked? Flows should outperform campaigns here because recipients just did something (bought, abandoned cart, etc). Low = content doesn't match their intent.</div></th>
+        <th>Rev / Recipient<span class="th-hint">Higher = better</span><div class="th-tip">Revenue generated per person who entered this flow. Flows should generate 3–5× more than campaigns per recipient. Key metric for prioritising which flows to improve first.</div></th>
+        <th>Total Revenue<span class="th-hint">Last 12 months</span><div class="th-tip">Total revenue this flow has generated in the past year. Use this to prioritise — fix high-traffic low-revenue flows first.</div></th>
+        <th>Health<div class="th-tip">Quick flag based on open rate, CTOR, and revenue per recipient. <strong>Draft flows are always flagged</strong> — they are off and earning nothing.</div></th>
+      </tr></thead>
+      <tbody id="flowBody"><tr><td colspan="8" class="loading">Loading…</td></tr></tbody>
+    </table></div>
+  </div>
+
+  <!-- TRENDS TAB -->
+  <div class="tab-panel" id="tab-trends">
+    <div id="trendsContent"><div class="loading">Loading 2024 vs 2025 comparison…</div></div>
+  </div>
+
+  <!-- CALENDAR TAB -->
+  <div class="tab-panel" id="tab-calendar">
+    <p style="font-size:13px;color:#777;margin-bottom:20px;line-height:1.7">Key dates for Odd Pieces campaigns. Brief the agency <strong style="color:#1a1a1a">7–10 days before send</strong>. The bar on the left = urgency. Click any event to copy a draft brief.</p>
+    <div class="cal-grid" id="calGrid"></div>
+  </div>
+
+  <footer>Odd Pieces · Targets: Open ≥40% · CTOR ≥10% · Click ≥2.5% · Unsub ≤0.2% · Refreshes every 5 min</footer>
+</div>
+
+<script>
+// Track mouse for fixed th-tip positioning
+document.addEventListener('mousemove', e => {
+  document.querySelectorAll('.th-tip').forEach(tip => {
+    if (tip.style.display !== 'none') {
+      tip.style.left = Math.min(e.clientX + 12, window.innerWidth - 300) + 'px';
+      tip.style.top = (e.clientY + 20) + 'px';
+    }
+  });
+});
+
+// Tooltip click toggle
+document.addEventListener('click', e => {
+  const btn = e.target.closest('.help');
+  if (btn) {
+    e.stopPropagation();
+    const tip = btn.closest('.kpi-card')?.querySelector('.tooltip');
+    if (!tip) return;
+    const isOpen = tip.classList.contains('open');
+    document.querySelectorAll('.tooltip.open').forEach(t => t.classList.remove('open'));
+    document.querySelectorAll('.help.active').forEach(h => h.classList.remove('active'));
+    if (!isOpen) { tip.classList.add('open'); btn.classList.add('active'); }
+    return;
+  }
+  // click outside closes all
+  document.querySelectorAll('.tooltip.open').forEach(t => t.classList.remove('open'));
+  document.querySelectorAll('.help.active').forEach(h => h.classList.remove('active'));
+});
+
+let allCampaigns = [], allFlows = [], cFilter = 'all', cYear = 'all';
+
+function toggleDiag(id) {
+  const row = document.getElementById(id);
+  if (!row) return;
+  const isOpen = row.classList.contains('open');
+  document.querySelectorAll('.diag-row.open').forEach(r => r.classList.remove('open'));
+  if (!isOpen) row.classList.add('open');
+}
+
+let yoyLoaded = false;
+function switchTab(id, el) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  el.classList.add('active');
+  document.getElementById('tab-' + id).classList.add('active');
+  if (id === 'trends' && !yoyLoaded) loadYOY();
+}
+function setCFilter(f, btn) {
+  cFilter = f;
+  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => { if (['all','Sent','Scheduled','Draft'].includes(b.textContent.trim())) b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderCampaignTable(allCampaigns);
+}
+function setCYear(y, btn) {
+  cYear = y;
+  btn.closest('.filter-bar').querySelectorAll('.filter-btn').forEach(b => { if (['All Years','2025','2024'].includes(b.textContent.trim())) b.classList.remove('active'); });
+  btn.classList.add('active');
+  const note = document.getElementById('campaign-year-note');
+  note.style.display = (y === '2024') ? 'block' : 'none';
+  renderCampaignTable(allCampaigns);
+}
+
+function color(v, target, lower) {
+  if (v === null || v === undefined) return 'neutral';
+  const n = parseFloat(v);
+  if (lower) return n <= target ? 'good' : 'bad';
+  return n >= target ? 'good' : n >= target * 0.7 ? 'warn' : 'bad';
+}
+function barColor(c) { return 'bar-' + c; }
+function barPct(v, target, lower) {
+  if (!v || !target) return 0;
+  const n = parseFloat(v);
+  if (lower) return Math.min(100, (target / Math.max(n, 0.001)) * 100);
+  return Math.min(100, (n / target) * 100);
+}
+function fmt(v, suffix, prefix) {
+  if (v === null || v === undefined) return '<span class="tbd">—</span>';
+  return (prefix||'') + v + (suffix||'');
+}
+function fmtMoney(v) {
+  if (!v) return '<span class="tbd">—</span>';
+  return '$' + parseFloat(v).toLocaleString('en-US',{minimumFractionDigits:0,maximumFractionDigits:0});
+}
+
+const KPI_DEFS = {
+  campaigns: [
+    { key:'openRate', label:'Open Rate', unit:'%', target:40, lower:false, targetLabel:'Target ≥ 40%',
+      tip:'% of recipients who opened the email. Low open rate = subject lines are weak or we\'re landing in spam. Fix: test 3 subject lines every send, avoid spam trigger words.' },
+    { key:'ctor', label:'CTOR', unit:'%', target:10, lower:false, targetLabel:'Target ≥ 10%',
+      tip:'Click-to-Open Rate: of people who OPENED, how many clicked? More honest than raw click rate. Low CTOR = content inside the email isn\'t compelling. Fix: sharper hook, clearer single CTA, less clutter.' },
+    { key:'revenuePerRecipient', label:'Rev / Email', unit:'', prefix:'$', target:null, targetLabel:'Higher = better',
+      tip:'How much revenue each email sent generates on average. The north star metric. Campaigns typically $0.05–$0.30+. Low = wrong offer, wrong audience, or weak CTA.' },
+    { key:'unsubRate', label:'Unsub Rate', unit:'%', target:0.2, lower:true, targetLabel:'Target ≤ 0.2%',
+      tip:'% who unsubscribed. High unsub = emails are irrelevant or too frequent. Damages list health and deliverability over time. Fix: better segmentation, reduce send frequency.' },
+  ],
+  flows: [
+    { key:'openRate', label:'Open Rate', unit:'%', target:40, lower:false, targetLabel:'Target ≥ 40%',
+      tip:'% of recipients who opened. Flows should outperform campaigns since they\'re triggered by behaviour (high intent). If low, the email timing or subject line is off.' },
+    { key:'ctor', label:'CTOR', unit:'%', target:10, lower:false, targetLabel:'Target ≥ 10%',
+      tip:'Of people who opened, how many clicked through? Flows should have higher CTOR than campaigns because recipients are warm (they just did something). Low = content doesn\'t match their intent.' },
+    { key:'revenuePerRecipient', label:'Rev / Recipient', unit:'', prefix:'$', target:null, targetLabel:'Higher = better',
+      tip:'Revenue per person who entered the flow. Flows should generate 3–5x more revenue per recipient than campaigns because they catch people at peak intent moments.' },
+    { key:'unsubRate', label:'Unsub Rate', unit:'%', target:0.2, lower:true, targetLabel:'Target ≤ 0.2%',
+      tip:'High unsubs in a flow = emails are poorly timed, irrelevant, or there are too many in the sequence. Review delays and number of emails.' },
+  ]
+};
+
+function renderKPIGrid(containerId, summary, type) {
+  const defs = KPI_DEFS[type];
+  const grid = document.getElementById(containerId);
+  grid.innerHTML = defs.map(k => {
+    const v = summary[k.key];
+    const hasV = v !== null && v !== undefined;
+    const c = hasV && k.target ? color(v, k.target, k.lower) : 'neutral';
+    const pct = hasV && k.target ? barPct(v, k.target, k.lower) : 0;
+    const status = !hasV ? 'No data' : !k.target ? '' :
+      c === 'good' ? '✓ On target' : c === 'warn' ? '⚠ Below target' : '✗ Needs work';
+    const display = hasV ? ((k.prefix||'') + v + (k.unit||'')) : '—';
+    return `<div class="kpi-card">
+      <div class="tooltip">${k.tip}</div>
+      <div class="kpi-label">${k.label} <i class="help">?</i></div>
+      <div class="kpi-value ${c}">${display}</div>
+      <div class="kpi-target">${k.targetLabel}</div>
+      <div class="bar-bg"><div class="bar-fill ${barColor(c)}" style="width:${pct}%"></div></div>
+      <div class="kpi-status ${c}">${status}</div>
+    </div>`;
+  }).join('');
+}
+
+function renderCompare(summary) {
+  const cg = document.getElementById('compareGrid');
+  const c = summary.campaigns, f = summary.flows;
+  cg.innerHTML = `
+    <div class="compare-card">
+      <h3>📣 Campaigns (${c.count} sent)</h3>
+      <div class="compare-row"><span class="label">Total Revenue</span><span class="val">${fmtMoney(c.totalRevenue)}</span></div>
+      <div class="compare-row"><span class="label">Rev / Email Sent</span><span class="val ${color(c.revenuePerEmail,0.05,false)}">${c.revenuePerEmail !== null ? '$'+c.revenuePerEmail : '—'}</span></div>
+      <div class="compare-row"><span class="label">Avg Open Rate</span><span class="val ${color(c.openRate,40,false)}">${fmt(c.openRate,'%')}</span></div>
+      <div class="compare-row"><span class="label">Avg CTOR</span><span class="val ${color(c.ctor,10,false)}">${fmt(c.ctor,'%')}</span></div>
+    </div>
+    <div class="compare-card">
+      <h3>⚡ Flows (${f.liveCount} live · ${f.draftCount} drafts off)</h3>
+      <div class="compare-row"><span class="label">Total Revenue</span><span class="val">${fmtMoney(f.totalRevenue)}</span></div>
+      <div class="compare-row"><span class="label">Rev / Recipient</span><span class="val ${color(f.revenuePerRecipient,0.05,false)}">${f.revenuePerRecipient !== null ? '$'+f.revenuePerRecipient : '—'}</span></div>
+      <div class="compare-row"><span class="label">Avg Open Rate</span><span class="val ${color(f.openRate,40,false)}">${fmt(f.openRate,'%')}</span></div>
+      <div class="compare-row"><span class="label">Avg CTOR</span><span class="val ${color(f.ctor,10,false)}">${fmt(f.ctor,'%')}</span></div>
+    </div>`;
+}
+
+function diagnoseCampaign(c) {
+  const issues = [];
+  if (c.openRate !== null) {
+    const cl = color(c.openRate,40,false);
+    const fix = cl==='bad' ? '<strong>Fix:</strong> Rewrite subject lines. Test 3 options every send. Use curiosity gaps, avoid spam words. Check sending domain reputation.' :
+                cl==='warn' ? '<strong>Fix:</strong> A/B test subject lines. Try shorter lines (30–45 chars), add personalisation or urgency.' : null;
+    issues.push({label:'Open Rate',val:c.openRate+'%',cl,fix: fix || '<strong>✓ Healthy</strong> — subject lines are working.'});
+  }
+  if (c.ctor !== null) {
+    const cl = color(c.ctor,10,false);
+    const fix = cl==='bad' ? '<strong>Fix:</strong> Simplify the email — one message, one CTA. Remove anything that\'s not the main point. Make the CTA button bigger and more specific (not "Shop Now" — try "See the puzzle").' :
+                cl==='warn' ? '<strong>Fix:</strong> Strengthen the hook in the first paragraph. Make the CTA more specific and action-oriented.' : null;
+    issues.push({label:'CTOR',val:c.ctor+'%',cl,fix: fix || '<strong>✓ Healthy</strong> — content is compelling.'});
+  }
+  if (c.unsubRate !== null) {
+    const cl = color(c.unsubRate,0.2,true);
+    const fix = cl==='bad' ? '<strong>Fix:</strong> Audience mismatch — wrong message to wrong segment, or sending too frequently. Review segment targeting. Consider reducing send frequency.' :
+                cl==='warn' ? '<strong>Fix:</strong> Check if this campaign targeted a broad/cold segment. Consider warming them up with brand content first.' : null;
+    issues.push({label:'Unsub Rate',val:c.unsubRate+'%',cl,fix: fix || '<strong>✓ Healthy</strong> — list engagement is good.'});
+  }
+  if (c.revenuePerRecipient !== null) {
+    const cl = c.revenuePerRecipient >= 0.10 ? 'good' : c.revenuePerRecipient >= 0.03 ? 'warn' : 'bad';
+    const fix = cl==='bad' ? '<strong>Fix:</strong> Weak offer or no urgency. Add a clear reason to buy NOW (scarcity, deadline, exclusive). Check if CTA lands on a relevant page (not just homepage).' :
+                cl==='warn' ? '<strong>Fix:</strong> Tighten the offer. Add social proof near the CTA. Consider a limited-time angle.' : null;
+    issues.push({label:'Rev / Email',val:'$'+c.revenuePerRecipient,cl,fix: fix || '<strong>✓ Healthy</strong> — strong revenue conversion.'});
+  }
+  return issues;
+}
+
+function metricPill(val, suffix, tgt, lower) {
+  if (val === null || val === undefined) return '<span class="tbd">—</span>';
+  const cl = tgt !== null ? color(val, tgt, lower) : 'neutral';
+  return `<span class="metric ${cl}">${val}${suffix||''}</span>`;
+}
+
+function renderCampaignTable(campaigns) {
+  let filtered = cFilter === 'all' ? campaigns : campaigns.filter(c => c.status === cFilter);
+  if (cYear !== 'all') filtered = filtered.filter(c => c.sendTime && c.sendTime.startsWith(cYear));
+  const body = document.getElementById('campaignBody');
+  if (!filtered.length) { body.innerHTML = `<tr><td colspan="8" class="loading">No campaigns.</td></tr>`; return; }
+  let html = '';
+  filtered.forEach((c,i) => {
+    const date = c.sendTime ? new Date(c.sendTime).toLocaleDateString('en-CA',{month:'short',day:'numeric',year:'numeric'}) : '—';
+    const diagId = 'cd-'+i;
+    const issues = diagnoseCampaign(c);
+    const hasIssues = issues.some(x => x.cl === 'bad' || x.cl === 'warn');
+    const issueCount = issues.filter(x=>x.cl==='bad').length;
+    html += `<tr class="data-row${hasIssues?' alert-row':''}" onclick="toggleDiag('${diagId}')">
+      <td><div class="row-name" title="${c.name}">${c.name}</div><div class="row-sub">${date} · <span style="color:${issueCount>0?'#dc2626':'#15803d'};font-weight:700">${issueCount>0?issueCount+' issue'+(issueCount>1?'s':''):issues.length?'✓ On target':'—'}</span></div></td>
+      <td><span class="badge badge-${c.status}">${c.status}</span></td>
+      <td class="metric neutral">${c.recipients ? c.recipients.toLocaleString() : '<span class="tbd">—</span>'}</td>
+      <td>${metricPill(c.openRate,'%',40,false)}</td>
+      <td>${metricPill(c.ctor,'%',10,false)}</td>
+      <td>${metricPill(c.clickRate,'%',2.5,false)}</td>
+      <td>${c.revenuePerRecipient!=null?'<span class="metric neutral">$'+c.revenuePerRecipient+'</span>':'<span class="tbd">—</span>'}</td>
+      <td>${metricPill(c.unsubRate,'%',0.2,true)}</td>
+    </tr>
+    <tr class="diag-row" id="${diagId}"><td colspan="8" class="diag-cell">
+      <div class="diag-title">📊 Diagnosis — ${c.name}</div>
+      <div class="diag-grid">${issues.map(iss=>`
+        <div class="diag-issue ${iss.cl}">
+          <div class="diag-label">${iss.label}</div>
+          <div class="diag-metric ${iss.cl}">${iss.val}</div>
+          ${iss.fix ? `<div class="diag-fix">${iss.fix}</div>` : ''}
+        </div>`).join('')}</div>
+    </td></tr>`;
+  });
+  body.innerHTML = html;
+}
+
+// Flow health label
+function flowHealth(f) {
+  if (f.status === 'draft') return '<span class="flag flag-bad">OFF — $0 earned</span>';
+  if (!f.recipients) return '<span class="flag flag-warn">No data</span>';
+  const issues = [];
+  if (f.openRate !== null && f.openRate < 30) issues.push('low opens');
+  if (f.ctor !== null && f.ctor < 5) issues.push('low CTOR');
+  if (f.revenuePerRecipient !== null && f.revenuePerRecipient < 0.01) issues.push('low revenue');
+  if (issues.length === 0) return '<span class="flag flag-good">Healthy</span>';
+  return `<span class="flag flag-warn">${issues.join(', ')}</span>`;
+}
+
+function diagnoseFlow(f) {
+  if (f.status === 'draft') return [{label:'Status',val:'DRAFT — OFF',cl:'bad',fix:'<strong>Fix:</strong> This flow is turned off and generating $0. Review the content and activate it. Even a basic version running is better than nothing.'}];
+  const issues = [];
+  if (f.openRate !== null) {
+    const cl = color(f.openRate,40,false);
+    issues.push({label:'Open Rate',val:f.openRate+'%',cl,
+      fix: cl==='bad' ? '<strong>Fix:</strong> Flow subject lines should be behaviour-triggered and personal. Try: "You left something behind…" or "Still thinking it over?" — match the subject to what triggered the flow.' :
+           cl==='warn' ? '<strong>Fix:</strong> Test more curiosity-driven subject lines. Flows should feel personal, not like a broadcast.' :
+           '<strong>✓ Healthy</strong>'});
+  }
+  if (f.ctor !== null) {
+    const cl = color(f.ctor,10,false);
+    issues.push({label:'CTOR',val:f.ctor+'%',cl,
+      fix: cl==='bad' ? '<strong>Fix:</strong> Content doesn\'t match the trigger intent. Someone who abandoned cart needs to see THAT product with a reason to return (social proof, urgency). Not a generic email.' :
+           cl==='warn' ? '<strong>Fix:</strong> Tighten the connection between trigger behaviour and email content. Make the CTA hyper-specific.' :
+           '<strong>✓ Healthy</strong>'});
+  }
+  if (f.revenuePerRecipient !== null) {
+    const cl = f.revenuePerRecipient >= 0.15 ? 'good' : f.revenuePerRecipient >= 0.05 ? 'warn' : 'bad';
+    issues.push({label:'Rev / Recipient',val:'$'+f.revenuePerRecipient,cl,
+      fix: cl==='bad' ? '<strong>Fix:</strong> Flow isn\'t converting. Review the offer — do emails have a clear incentive to purchase? Check CTA destination pages. Add urgency/scarcity to the sequence.' :
+           cl==='warn' ? '<strong>Fix:</strong> Add a stronger offer in later emails in the sequence. Test a discount or bonus for cart abandoners.' :
+           '<strong>✓ Healthy</strong> — strong flow revenue.'});
+  }
+  if (f.unsubRate !== null) {
+    const cl = color(f.unsubRate,0.2,true);
+    issues.push({label:'Unsub Rate',val:f.unsubRate+'%',cl,
+      fix: cl==='bad' ? '<strong>Fix:</strong> Too many emails in sequence, or poorly timed. Review delays between flow emails. Consider reducing sequence length or adding a delay before sending.' :
+           cl==='warn' ? '<strong>Fix:</strong> Check timing between emails. Most flows send too frequently — space them out more.' :
+           '<strong>✓ Healthy</strong>'});
+  }
+  return issues;
+}
+
+function renderFlowTable(flows) {
+  const body = document.getElementById('flowBody');
+  const sorted = [...flows].sort((a,b) => (b.revenue||0) - (a.revenue||0));
+  let html = '';
+  sorted.forEach((f,i) => {
+    const updated = f.updated ? new Date(f.updated).toLocaleDateString('en-CA',{month:'short',year:'numeric'}) : '—';
+    const diagId = 'fd-'+i;
+    const issues = diagnoseFlow(f);
+    const issueCount = issues.filter(x=>x.cl==='bad').length;
+    html += `<tr class="data-row${f.status==='draft'||issueCount>0?' alert-row':''}" onclick="toggleDiag('${diagId}')">
+      <td><div class="row-name" title="${f.name}">${f.name}</div><div class="row-sub">${f.triggerType} · updated ${updated} · <span style="color:${issueCount>0?'#dc2626':'#15803d'};font-weight:700">${issueCount>0?issueCount+' issue'+(issueCount>1?'s':''):f.recipients?'✓ Healthy':'—'}</span></div></td>
+      <td><span class="badge badge-${f.status}">${f.status}</span></td>
+      <td class="metric neutral">${f.recipients ? f.recipients.toLocaleString() : '<span class="tbd">—</span>'}</td>
+      <td>${metricPill(f.openRate,'%',40,false)}</td>
+      <td>${metricPill(f.ctor,'%',10,false)}</td>
+      <td>${f.revenuePerRecipient!=null?'<span class="metric neutral">$'+f.revenuePerRecipient+'</span>':'<span class="tbd">—</span>'}</td>
+      <td class="metric neutral">${fmtMoney(f.revenue)}</td>
+      <td>${flowHealth(f)}</td>
+    </tr>
+    <tr class="diag-row" id="${diagId}"><td colspan="8" class="diag-cell">
+      <div class="diag-title">📊 Diagnosis — ${f.name}</div>
+      <div class="diag-grid">${issues.map(iss=>`
+        <div class="diag-issue ${iss.cl}">
+          <div class="diag-label">${iss.label}</div>
+          <div class="diag-metric ${iss.cl}">${iss.val}</div>
+          ${iss.fix ? `<div class="diag-fix">${iss.fix}</div>` : ''}
+        </div>`).join('')}</div>
+    </td></tr>`;
+  });
+  body.innerHTML = html;
+}
+
+async function load() {
+  try {
+    const res = await fetch('/api/klaviyo');
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    allCampaigns = data.campaigns;
+    allFlows = data.flows;
+    monthlyData = data.monthly || [];
+    renderCompare(data.summary);
+    renderKPIGrid('campaignKpiGrid', data.summary.campaigns, 'campaigns');
+    renderKPIGrid('flowKpiGrid', data.summary.flows, 'flows');
+    renderCampaignTable(allCampaigns);
+    renderFlowTable(allFlows);
+    if (data.yoy) renderYOY(data.yoy);
+    document.getElementById('lastUpdated').textContent = 'updated ' + new Date().toLocaleTimeString();
+  } catch(err) {
+    const box = document.getElementById('errorBox');
+    box.style.display = 'block';
+    box.innerHTML = `<strong>Klaviyo data unavailable.</strong> ${err.message.includes('throttled') || err.message.includes('429') ? 'API rate limit hit — data will return automatically within a few hours. This won\'t happen again (fixed to 6 calls per load).' : err.message}`;
+    document.getElementById('lastUpdated').textContent = 'unavailable';
+  }
+}
+
+// ---- TRENDS ----
+let currentMetric = 'openRate';
+let monthlyData = [];
+
+const METRIC_CONFIG = {
+  openRate:       { label:'Open Rate', unit:'%', color:'#6366f1', goodDir:'up', target:40 },
+  ctor:           { label:'CTOR',      unit:'%', color:'#f97316', goodDir:'up', target:10 },
+  revenuePerEmail:{ label:'Rev/Email', unit:'$', color:'#16a34a', goodDir:'up', prefix:true },
+  unsubRate:      { label:'Unsub Rate',unit:'%', color:'#ef4444', goodDir:'down', target:0.2 },
+};
+
+function pctDelta(curr, prev) {
+  if (curr === null || prev === null || !prev) return null;
+  return +(((curr - prev) / prev) * 100).toFixed(1);
+}
+
+function deltaClass(delta, goodDir) {
+  if (delta === null) return 'neutral';
+  if (goodDir === 'up') return delta >= 0 ? 'up-good' : 'up-bad';
+  return delta <= 0 ? 'down-good' : 'down-bad';
+}
+
+function yoyMetricCard(label, v2025, v2024, unit, goodDir, prefix) {
+  const delta = pctDelta(v2025, v2024);
+  const dc = deltaClass(delta, goodDir);
+  const arrow = delta === null ? '' : delta >= 0 ? '↑' : '↓';
+  const fmt = v => v !== null ? (prefix?'$':'')+v+(prefix?'':unit) : '—';
+  return `<div class="yoy-card">
+    <div class="yoy-label">${label}</div>
+    <div class="yoy-compare">
+      <div class="yoy-this">${fmt(v2025)}</div>
+      <div class="yoy-last">2024: ${fmt(v2024)}</div>
+    </div>
+    <span class="yoy-delta ${dc}">${arrow} ${delta !== null ? Math.abs(delta)+'%' : 'No data'}</span>
+    <div class="yoy-context">${delta !== null ? (dc.includes('good') ? '✓ Improved' : '✗ Declined') : ''} year-over-year</div>
+  </div>`;
+}
+
+async function loadYOY() {
+  const container = document.getElementById('trendsContent');
+  container.innerHTML = '<div class="loading" style="padding:40px;text-align:center">⏳ Fetching 2024 vs 2025 data from Klaviyo…<br><span style="font-size:11px;color:#bbb;margin-top:8px;display:block">Takes about 12 seconds — hang tight</span></div>';
+  try {
+    const res = await fetch('/api/klaviyo-yoy');
+    const data = await res.json();
+    if (data.error) throw new Error(data.error);
+    yoyLoaded = true;
+    renderYOY2425(data);
+  } catch(err) {
+    container.innerHTML = `<div class="error-msg"><strong>Could not load YoY data.</strong> ${err.message}</div>`;
+  }
+}
+
+function renderYOY2425(data) {
+  const c25 = data.campaigns['2025'], c24 = data.campaigns['2024'];
+  const f25 = data.flows['2025'], f24 = data.flows['2024'];
+
+  const html = `
+    <div style="background:#fff8f0;border:1.5px solid #f97316;border-radius:12px;padding:14px 18px;margin-bottom:20px;font-size:12px;line-height:1.7;color:#555">
+      <strong style="color:#f97316">⚠️ Kickstarter Attribution Note</strong><br>
+      July 2024 campaign revenue (~$77K) and November 2025 campaign revenue (~$121K) are inflated by Kickstarter backer orders uploaded to Shopify. These show in campaign totals below. CTOR and open rate are unaffected.
+    </div>
+
+    <div class="section-title">📣 Campaigns — 2025 (Agency) vs 2024 (In-House)</div>
+    <div style="font-size:11px;color:#aaa;margin-bottom:14px">Agency took over campaigns Feb 4, 2025. All 2024 campaigns were in-house.</div>
+    <div class="yoy-grid">
+      ${yoyMetricCard('Open Rate', c25.openRate, c24.openRate, '%', 'up')}
+      ${yoyMetricCard('CTOR', c25.ctor, c24.ctor, '%', 'up')}
+      ${yoyMetricCard('Rev / Recipient', c25.revenuePerRecipient, c24.revenuePerRecipient, '', 'up', true)}
+      ${yoyMetricCard('Unsub Rate', c25.unsubRate, c24.unsubRate, '%', 'down')}
+    </div>
+    <div class="yoy-card" style="margin-bottom:28px">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div class="yoy-label">2025 Campaign Revenue (raw)</div>
+          <div class="yoy-this">$${(c25.totalRevenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="yoy-context">${c25.recipients?.toLocaleString()} recipients · ${c25.clicks?.toLocaleString()} total clicks</div>
+        </div>
+        <div style="text-align:right">
+          <div class="yoy-label">2024 Campaign Revenue (raw)</div>
+          <div class="yoy-this">$${(c24.totalRevenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="yoy-context">${c24.recipients?.toLocaleString()} recipients · ${c24.clicks?.toLocaleString()} total clicks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">⚡ Flows — 2025 (Agency) vs 2024 (Mixed)</div>
+    <div style="font-size:11px;color:#aaa;margin-bottom:14px">Agency (PB) flows launched May 29, 2024. In-house (LPB) flows also ran in 2024 — 2024 flow data is mixed.</div>
+    <div class="yoy-grid">
+      ${yoyMetricCard('Open Rate', f25.openRate, f24.openRate, '%', 'up')}
+      ${yoyMetricCard('CTOR', f25.ctor, f24.ctor, '%', 'up')}
+      ${yoyMetricCard('Rev / Recipient', f25.revenuePerRecipient, f24.revenuePerRecipient, '', 'up', true)}
+      ${yoyMetricCard('Unsub Rate', f25.unsubRate, f24.unsubRate, '%', 'down')}
+    </div>
+    <div class="yoy-card" style="margin-bottom:28px">
+      <div style="display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px">
+        <div>
+          <div class="yoy-label">2025 Flow Revenue</div>
+          <div class="yoy-this">$${(f25.totalRevenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="yoy-context">${f25.recipients?.toLocaleString()} recipients · ${f25.clicks?.toLocaleString()} clicks</div>
+        </div>
+        <div style="text-align:right">
+          <div class="yoy-label">2024 Flow Revenue</div>
+          <div class="yoy-this">$${(f24.totalRevenue||0).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="yoy-context">${f24.recipients?.toLocaleString()} recipients · ${f24.clicks?.toLocaleString()} clicks</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="section-title">📊 Monthly Trend — Last 12 Months (Campaigns)</div>
+    ${renderMonthlyChartHTML()}`;
+
+  document.getElementById('trendsContent').innerHTML = html;
+  renderBarChart(currentMetric);
+}
+
+// Keep old renderYOY as fallback (used if api/klaviyo still returns yoy)
+function renderYOY(yoy) {
+  // no-op — trends tab now uses loadYOY() / renderYOY2425()
+}
+
+function renderMonthlyChartHTML() {
+  return `
+    <div class="section-title">Monthly Trend — Last 12 months</div>
+    <div class="chart-wrap">
+      <div class="chart-select">
+        ${Object.entries(METRIC_CONFIG).map(([k,v]) =>
+          `<button class="chart-btn${k===currentMetric?' active':''}" onclick="setMetric('${k}',this)">${v.label}</button>`
+        ).join('')}
+      </div>
+      <div class="bar-chart" id="barChart"></div>
+      <div class="bar-labels" id="barLabels" style="display:flex;gap:4px"></div>
+    </div>`;
+}
+
+function setMetric(metric, btn) {
+  currentMetric = metric;
+  document.querySelectorAll('.chart-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  renderBarChart(metric);
+}
+
+function renderBarChart(metric) {
+  const chart = document.getElementById('barChart');
+  const labels = document.getElementById('barLabels');
+  if (!chart || !monthlyData.length) return;
+  const cfg = METRIC_CONFIG[metric];
+  const values = monthlyData.map(m => m[metric]);
+  const maxVal = Math.max(...values.filter(v=>v!==null), cfg.target || 0, 0.001);
+
+  chart.innerHTML = monthlyData.map((m, i) => {
+    const v = m[metric];
+    const pct = v !== null ? Math.min(100, (v / maxVal) * 100) : 0;
+    const display = v !== null ? (cfg.prefix?'$':'')+v+(cfg.prefix?'':cfg.unit) : '—';
+    const isGood = v === null ? false : cfg.goodDir === 'up' ? (cfg.target ? v >= cfg.target : true) : (cfg.target ? v <= cfg.target : true);
+    const barColor = v === null ? '#e8e2d9' : isGood ? '#16a34a' : '#ef4444';
+    const mo = m.month.slice(0,7);
+    const label = new Date(mo+'-15').toLocaleDateString('en-US',{month:'short', year:'2-digit'});
+    return `<div class="bar-col">
+      <div class="bar-bar" style="height:${pct}%;background:${barColor}" data-val="${display}" title="${label}: ${display}"></div>
+    </div>`;
+  }).join('');
+
+  labels.innerHTML = monthlyData.map(m => {
+    const label = new Date(m.month+'-15').toLocaleDateString('en-US',{month:'short'});
+    return `<div style="flex:1;text-align:center;font-size:9px;color:#bbb;font-weight:600">${label}</div>`;
+  }).join('');
+
+  // Draw target line if applicable
+  if (cfg.target) {
+    const targetPct = Math.min(100, (cfg.target / maxVal) * 100);
+    chart.style.position = 'relative';
+    const existing = chart.querySelector('.target-line');
+    if (existing) existing.remove();
+    const line = document.createElement('div');
+    line.className = 'target-line';
+    line.style.cssText = `position:absolute;left:0;right:0;bottom:${targetPct}%;border-top:1.5px dashed #f97316;pointer-events:none`;
+    line.title = `Target: ${cfg.target}${cfg.unit||''}`;
+    chart.appendChild(line);
+  }
+}
+
+// ---- CAMPAIGN CALENDAR ----
+const EVENTS = [
+  { date:'2025-04-01', emoji:'🃏', name:"April Fools' Day", heat:'fire',
+    angle:"Our absolute moment. Odd, unexpected, genius. Tease a fake product drop. Tell people we added a 2000-piece version (we didn't). Reveal it's a prank — then show them something real and amazing. This is the one send where we get to be fully unhinged.",
+    tags:['Brand','Awareness','Engagement'], segment:'All', briefDue:'Mar 22' },
+  { date:'2025-04-20', emoji:'🐣', name:"Easter", heat:'hot',
+    angle:"Gift angle. A puzzle is the perfect Easter basket upgrade for grown adults. 'For people who've outgrown chocolate eggs.' Target gift-buyers and past buyers.",
+    tags:['Gift','Purchase'], segment:'All', briefDue:'Apr 10' },
+  { date:'2025-05-11', emoji:'💐', name:"Mother's Day", heat:'hot',
+    angle:"Puzzles are the gift that says 'I know you're interesting.' Not a candle. Not a mug. Target people who've bought before + lapsed buyers.",
+    tags:['Gift','Purchase'], segment:'All + Lapsed', briefDue:'Apr 30' },
+  { date:'2025-05-01', emoji:'🧠', name:"May: Brain Month", heat:'warm',
+    angle:"Lean into the cognitive angle. 'The puzzle people who take their brain seriously.' Educational, curious tone. Good for brand content + engaged list.",
+    tags:['Brand','Engagement'], segment:'Engaged', briefDue:'Apr 21' },
+  { date:'2025-06-15', emoji:'🔧', name:"Father's Day", heat:'hot',
+    angle:"'He's done with socks.' A puzzle for the dad who thinks he's seen everything. Witty, confident. Not sentimental.",
+    tags:['Gift','Purchase'], segment:'All', briefDue:'Jun 5' },
+  { date:'2025-07-04', emoji:'🎆', name:"4th of July (US)", heat:'warm',
+    angle:"Long weekend = puzzle weekend. 'What else are you going to do with 3 days off?' Casual, low-key tone. Good for US segment.",
+    tags:['Occasion','Purchase'], segment:'US Buyers', briefDue:'Jun 24' },
+  { date:'2025-09-29', emoji:'🧩', name:"World Jigsaw Puzzle Day", heat:'fire',
+    angle:"This is literally our holiday. Go all out. Celebrate the community. Share stats, fun facts, UGC. Maybe a limited-time offer. Make it feel like an event.",
+    tags:['Brand','Community','Purchase'], segment:'All', briefDue:'Sep 19' },
+  { date:'2025-10-31', emoji:'🎃', name:"Halloween", heat:'warm',
+    angle:"'Puzzles that are scarier than your costume.' Lean into mystery — our puzzles are already mysterious. Dark, odd, clever. Perfect fit.",
+    tags:['Brand','Seasonal'], segment:'Engaged', briefDue:'Oct 21' },
+  { date:'2025-11-28', emoji:'🦃', name:"Black Friday", heat:'fire',
+    angle:"Biggest send of the year. Plan 3 emails: teaser (Tue), launch (Fri), last chance (Sun). Don't just do a generic sale — make the offer feel like an Odd Pieces thing.",
+    tags:['Purchase','Sale'], segment:'All', briefDue:'Nov 14' },
+  { date:'2025-12-01', emoji:'💻', name:"Cyber Monday", heat:'hot',
+    angle:"Follow up to Black Friday. Urgency: 'Last chance before it's gone.' Short, punchy, one CTA.",
+    tags:['Purchase','Sale'], segment:'All', briefDue:'Nov 21' },
+  { date:'2025-12-25', emoji:'🎁', name:"Christmas / Holiday Gifting", heat:'fire',
+    angle:"3-email sequence: gift guide (Dec 10), last shipping date (Dec 18), digital gift cards (Dec 23). Gifting angle is huge — lean into 'the gift for someone who has everything.'",
+    tags:['Gift','Purchase'], segment:'All', briefDue:'Nov 28' },
+  { date:'2026-01-29', emoji:'🧩', name:"National Puzzle Day", heat:'hot',
+    angle:"Our second-biggest brand moment. Celebrate with something fun — stats, community, a special puzzle. Good for reactivating lapsed customers.",
+    tags:['Brand','Reactivation'], segment:'All + Lapsed', briefDue:'Jan 19' },
+  { date:'2026-02-14', emoji:'❤️', name:"Valentine's Day", heat:'hot',
+    angle:"'A puzzle is the most interesting thing you can give someone.' Anti-roses angle. For couples who actually like each other's company.",
+    tags:['Gift','Purchase'], segment:'All', briefDue:'Feb 4' },
+  { date:'2026-03-14', emoji:'🥧', name:"Pi Day (3.14)", heat:'cool',
+    angle:"Nerdy, clever, very us. '3.14159 reasons to buy a puzzle.' Small but perfectly on-brand for our audience. Great for engaged segment.",
+    tags:['Brand','Quirky'], segment:'Engaged', briefDue:'Mar 7' },
+];
+
+function renderCalendar() {
+  const grid = document.getElementById('calGrid');
+  const now = new Date();
+  const sorted = [...EVENTS].sort((a,b) => new Date(a.date)-new Date(b.date));
+  grid.innerHTML = sorted.map(ev => {
+    const d = new Date(ev.date);
+    const isPast = d < now;
+    const daysAway = Math.round((d - now) / 86400000);
+    const countdown = isPast ? 'Past' : daysAway === 0 ? 'TODAY' : daysAway + 'd away';
+    const briefDaysAway = ev.briefDue ? Math.round((new Date(ev.date + ' 2025').setDate(new Date(ev.date).getDate()-10) - now)/86400000) : null;
+    const month = d.toLocaleDateString('en-US',{month:'short'});
+    const day = d.getDate();
+    const urgency = isPast ? '' : daysAway <= 7 ? '🔥 Brief OVERDUE' : daysAway <= 14 ? '⚠️ Brief due now' : `Brief by ${ev.briefDue}`;
+    return `<div class="cal-event ${ev.heat}${isPast?' past':''}">
+      <div class="cal-date">
+        <div class="cal-day">${day}</div>
+        <div class="cal-month">${month}</div>
+        <div class="cal-countdown">${countdown}</div>
+      </div>
+      <div class="cal-body">
+        <div class="cal-name"><span class="cal-emoji">${ev.emoji}</span>${ev.name}</div>
+        <div class="cal-angle">${ev.angle}</div>
+        <div class="cal-tags">${ev.tags.map(t=>`<span class="cal-tag">${t}</span>`).join('')}<span class="cal-tag">Segment: ${ev.segment}</span></div>
+        ${!isPast ? `<div class="cal-brief-due">📋 ${urgency}</div>` : ''}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+load();
+setInterval(load, 30 * 60 * 1000); // 30 min — don't hammer Klaviyo
+renderCalendar();
+</script>
+</body>
+</html>

@@ -1,0 +1,291 @@
+{
+  "savedAt": "2026-03-09-v2",
+  "themes": {
+    "tax-refund": {
+      "decision": "rejected",
+      "note": "most of them probably won't get a tax refund. instead, they will be paying taxes."
+    }
+  },
+  "emails": {
+    "2": {
+      "decision": "rejected",
+      "note": "Towel Day not relevant to audience"
+    },
+    "3": {
+      "decision": "rejected"
+    },
+    "5": {
+      "decision": "rejected"
+    },
+    "6": {
+      "decision": "rejected",
+      "note": "most of them probably won't get a tax refund. instead, they will be paying taxes."
+    },
+    "7": {
+      "decision": "rejected",
+      "note": "most of them probably won't get a tax refund. instead, they will be paying taxes."
+    },
+    "8": {
+      "decision": "approved"
+    },
+    "9": {
+      "decision": "approved"
+    },
+    "10": {
+      "decision": "approved"
+    },
+    "11": {
+      "decision": "rejected"
+    },
+    "12": {
+      "decision": "rejected"
+    },
+    "13": {
+      "decision": "rejected"
+    },
+    "14": {
+      "decision": "rejected"
+    },
+    "15": {
+      "decision": "approved"
+    },
+    "16": {
+      "decision": "approved"
+    },
+    "17": {
+      "decision": "approved"
+    },
+    "18": {
+      "decision": "approved"
+    },
+    "19": {
+      "decision": "approved"
+    },
+    "20": {
+      "decision": "rejected"
+    },
+    "21": {
+      "decision": "rejected",
+      "note": "already repeated"
+    },
+    "22": {
+      "decision": "approved"
+    },
+    "23": {
+      "decision": "approved"
+    },
+    "24": {
+      "decision": "approved"
+    },
+    "25": {
+      "decision": "approved"
+    },
+    "26": {
+      "decision": "approved"
+    },
+    "27": {
+      "decision": "rejected"
+    },
+    "28": {
+      "decision": "rejected"
+    },
+    "29": {
+      "decision": "rejected"
+    },
+    "30": {
+      "decision": "approved"
+    },
+    "31": {
+      "decision": "rejected"
+    },
+    "32": {
+      "decision": "rejected"
+    },
+    "33": {
+      "decision": "approved"
+    },
+    "34": {
+      "decision": "approved"
+    },
+    "35": {
+      "decision": "approved"
+    },
+    "36": {
+      "decision": "approved"
+    },
+    "37": {
+      "decision": "approved"
+    },
+    "38": {
+      "decision": "rejected"
+    },
+    "39": {
+      "decision": "approved"
+    },
+    "40": {
+      "decision": "approved"
+    },
+    "41": {
+      "decision": "approved"
+    },
+    "42": {
+      "decision": "rejected"
+    },
+    "43": {
+      "decision": "approved"
+    },
+    "44": {
+      "decision": "approved"
+    },
+    "45": {
+      "decision": "approved"
+    },
+    "46": {
+      "decision": "approved"
+    },
+    "47": {
+      "decision": "approved"
+    },
+    "48": {
+      "decision": "rejected"
+    },
+    "49": {
+      "decision": "approved"
+    },
+    "50": {
+      "decision": "rejected"
+    },
+    "51": {
+      "decision": "approved"
+    },
+    "52": {
+      "decision": "approved"
+    },
+    "53": {
+      "decision": "approved"
+    },
+    "54": {
+      "decision": "approved"
+    },
+    "55": {
+      "decision": "approved"
+    },
+    "56": {
+      "decision": "approved"
+    },
+    "57": {
+      "decision": "approved"
+    },
+    "58": {
+      "decision": "approved"
+    },
+    "59": {
+      "decision": "approved"
+    },
+    "60": {
+      "decision": "approved"
+    },
+    "61": {
+      "decision": "approved"
+    },
+    "62": {
+      "decision": "approved"
+    },
+    "63": {
+      "decision": "rejected"
+    },
+    "64": {
+      "decision": "approved"
+    },
+    "65": {
+      "decision": "approved"
+    },
+    "66": {
+      "decision": "approved"
+    },
+    "67": {
+      "decision": "approved"
+    },
+    "68": {
+      "decision": "approved"
+    },
+    "69": {
+      "decision": "approved"
+    },
+    "70": {
+      "decision": "approved"
+    },
+    "71": {
+      "decision": "approved"
+    },
+    "72": {
+      "decision": "approved"
+    },
+    "73": {
+      "decision": "approved"
+    },
+    "74": {
+      "decision": "approved"
+    },
+    "75": {
+      "decision": "approved"
+    },
+    "76": {
+      "decision": "approved"
+    },
+    "77": {
+      "decision": "approved"
+    },
+    "78": {
+      "decision": "approved"
+    },
+    "79": {
+      "decision": "approved"
+    },
+    "80": {
+      "decision": "approved"
+    },
+    "81": {
+      "decision": "approved"
+    },
+    "82": {
+      "decision": "approved"
+    },
+    "83": {
+      "decision": "approved"
+    },
+    "84": {
+      "decision": "approved"
+    },
+    "85": {
+      "decision": "rejected"
+    },
+    "86": {
+      "decision": "approved"
+    },
+    "87": {
+      "decision": "approved"
+    },
+    "88": {
+      "decision": "approved"
+    },
+    "89": {
+      "decision": "approved"
+    },
+    "90": {
+      "decision": "approved"
+    },
+    "91": {
+      "decision": "approved"
+    },
+    "92": {
+      "decision": "approved"
+    },
+    "93": {
+      "decision": "approved"
+    },
+    "94": {
+      "decision": "approved"
+    }
+  }
+}

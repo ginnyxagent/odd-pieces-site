@@ -1,0 +1,1556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NEW ICONIC BRAND ELEMENTS — Odd Pieces</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --yellow: #FEE000;
+      --teal: #C1E3E8;
+      --orange: #FC9C1C;
+      --red-orange: #FF4016;
+      --black: #1A1A1A;
+      --cream: #FFFBF0;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      background: var(--black);
+      color: var(--cream);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* ──────────────────── HEADER ──────────────────── */
+    .page-header {
+      background: var(--yellow);
+      color: var(--black);
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(circle, var(--black) 1px, transparent 1px);
+      background-size: 24px 24px;
+      opacity: 0.06;
+    }
+    .header-eyebrow {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      opacity: 0.5;
+      margin-bottom: 12px;
+    }
+    .page-header h1 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(36px, 6vw, 72px);
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: -1px;
+    }
+    .page-header h1 em {
+      color: var(--red-orange);
+      font-style: normal;
+    }
+    .header-sub {
+      font-family: 'Inter', sans-serif;
+      font-size: 17px;
+      margin-top: 16px;
+      opacity: 0.7;
+      max-width: 540px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .header-badges {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 28px;
+    }
+    .header-badge {
+      background: var(--black);
+      color: var(--yellow);
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+      padding: 6px 14px;
+      border-radius: 100px;
+      text-transform: uppercase;
+    }
+
+    /* ──────────────────── SECTION LAYOUT ──────────────────── */
+    .section {
+      padding: 80px 40px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-divider {
+      width: 100%;
+      height: 4px;
+      background: var(--yellow);
+      opacity: 0.08;
+    }
+
+    .element-number {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      opacity: 0.5;
+      margin-bottom: 8px;
+    }
+    .element-name {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.05;
+      text-transform: uppercase;
+      color: var(--cream);
+    }
+    .element-tagline {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      color: var(--yellow);
+      margin-top: 6px;
+    }
+    .element-desc {
+      font-size: 15px;
+      color: rgba(255,251,240,0.65);
+      max-width: 640px;
+      margin-top: 14px;
+      line-height: 1.7;
+    }
+    .why-iconic {
+      margin-top: 18px;
+      padding: 14px 18px;
+      background: rgba(254,224,0,0.06);
+      border-left: 3px solid var(--yellow);
+      border-radius: 0 8px 8px 0;
+      font-size: 14px;
+      color: rgba(255,251,240,0.7);
+    }
+    .why-iconic strong {
+      color: var(--yellow);
+    }
+    .usage-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-top: 24px;
+      margin-bottom: 10px;
+    }
+    .usage-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .usage-tag {
+      background: rgba(193,227,232,0.1);
+      border: 1px solid rgba(193,227,232,0.25);
+      color: var(--teal);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 12px;
+      border-radius: 100px;
+    }
+
+    .showcase-area {
+      margin-top: 40px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+    .showcase-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,251,240,0.3);
+      margin-bottom: 10px;
+    }
+
+    /* ──────────────────── 1. REVEAL SPLIT ──────────────────── */
+    .reveal-split {
+      width: 100%;
+      border-radius: 16px;
+      overflow: hidden;
+      border: 3px solid rgba(255,251,240,0.1);
+      display: flex;
+      height: 260px;
+      position: relative;
+      cursor: pointer;
+    }
+    .reveal-split .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: flex 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal-split:hover .panel-before { flex: 0.6; }
+    .reveal-split:hover .panel-after  { flex: 1.4; }
+
+    .panel-before {
+      background: linear-gradient(135deg, #b8d4c8 0%, #8fb8b0 100%);
+    }
+    .panel-before::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse at 60% 40%, rgba(255,255,255,0.3) 0%, transparent 60%);
+    }
+    .panel-after {
+      background: linear-gradient(135deg, #ff7a4a 0%, #ff4016 40%, #fc9c1c 100%);
+    }
+    .panel-after::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 70%, rgba(254,224,0,0.4) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255,255,255,0.2) 0%, transparent 40%);
+    }
+
+    .panel-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 13px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 6px 16px;
+      border-radius: 100px;
+      position: relative;
+      z-index: 2;
+    }
+    .panel-before .panel-label {
+      background: rgba(255,255,255,0.6);
+      color: #3a6b60;
+    }
+    .panel-after .panel-label {
+      background: rgba(0,0,0,0.5);
+      color: var(--yellow);
+    }
+    .panel-flavor {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 18px;
+      color: rgba(255,255,255,0.5);
+      margin-top: 8px;
+      position: relative;
+      z-index: 2;
+    }
+    .panel-after .panel-flavor {
+      color: rgba(255,224,0,0.7);
+      font-size: 22px;
+    }
+
+    /* Split line + timer badge */
+    .split-line {
+      position: absolute;
+      left: 50%;
+      top: 0;
+      bottom: 0;
+      width: 6px;
+      background: var(--black);
+      transform: translateX(-50%);
+      z-index: 10;
+      transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal-split:hover .split-line { left: 43%; }
+
+    .split-badge {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 52px;
+      height: 52px;
+      background: var(--yellow);
+      border-radius: 50%;
+      border: 4px solid var(--black);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      z-index: 20;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+      transition: left 0.5s cubic-bezier(0.4,0,0.2,1);
+    }
+    .reveal-split:hover .split-badge { left: 43%; }
+
+    .split-hint {
+      position: absolute;
+      bottom: 12px;
+      right: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+      z-index: 20;
+    }
+
+    /* Scene elements (decorative shapes) */
+    .before-shapes, .after-shapes {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
+    .shape {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.15;
+    }
+
+    /* ──────────────────── 2. SKIP CHARACTER ──────────────────── */
+    .skip-showcase {
+      display: flex;
+      align-items: flex-end;
+      gap: 48px;
+      flex-wrap: wrap;
+    }
+    .skip-size {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+    .skip-size-label {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: rgba(255,251,240,0.3);
+    }
+
+    /* Skip in puzzle context mockup */
+    .puzzle-context {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #2a4a6b 0%, #1a3a5a 100%);
+      border-radius: 12px;
+      position: relative;
+      overflow: hidden;
+      border: 2px solid rgba(255,255,255,0.08);
+    }
+    .puzzle-context::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 30px 30px;
+    }
+    .puzzle-find-label {
+      position: absolute;
+      top: 14px;
+      left: 16px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: rgba(255,255,255,0.3);
+      text-transform: uppercase;
+    }
+    .puzzle-skip-hidden {
+      position: absolute;
+      bottom: 28px;
+      right: 48px;
+    }
+
+    /* Crowd shapes in puzzle */
+    .crowd-dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.08);
+    }
+
+    /* ──────────────────── 3. WARNING STAMP ──────────────────── */
+    .stamp-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: flex-start;
+    }
+    .bg-black-demo { background: var(--black); padding: 30px; border-radius: 12px; border: 1px solid rgba(255,255,255,0.06); }
+    .bg-yellow-demo { background: var(--yellow); padding: 30px; border-radius: 12px; }
+    .bg-teal-demo   { background: var(--teal);   padding: 30px; border-radius: 12px; }
+
+    .warning-stamp {
+      background: var(--red-orange);
+      border: 4px solid var(--black);
+      border-radius: 8px;
+      padding: 14px 22px;
+      display: inline-block;
+      transform: rotate(-3deg);
+      box-shadow: 4px 4px 0 rgba(0,0,0,0.3);
+      max-width: 280px;
+    }
+    .warning-stamp .warn-top {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      color: var(--white);
+      letter-spacing: 1px;
+      line-height: 1;
+    }
+    .warning-stamp .warn-sub {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 600;
+      font-size: 10px;
+      color: rgba(255,255,255,0.85);
+      margin-top: 5px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      line-height: 1.4;
+    }
+    .warning-stamp.sm {
+      padding: 8px 14px;
+      border-width: 3px;
+      transform: rotate(2deg);
+    }
+    .warning-stamp.sm .warn-top { font-size: 15px; }
+    .warning-stamp.sm .warn-sub { font-size: 8px; }
+    .warning-stamp.lg {
+      padding: 20px 32px;
+      border-width: 5px;
+      border-radius: 10px;
+      transform: rotate(-2deg);
+      max-width: 360px;
+    }
+    .warning-stamp.lg .warn-top { font-size: 32px; }
+    .warning-stamp.lg .warn-sub { font-size: 12px; margin-top: 8px; }
+
+    /* ──────────────────── 4. WAIT WHAT MARK ──────────────────── */
+    .wait-what-hero {
+      background: var(--yellow);
+      border-radius: 16px;
+      padding: 50px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .wait-what-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+    }
+    .wait-what-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: clamp(42px, 8vw, 88px);
+      color: var(--black);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      position: relative;
+      z-index: 1;
+      text-transform: uppercase;
+    }
+    .wait-what-text .dash { color: var(--red-orange); }
+    .wait-what-text .puzzle-q {
+      display: inline-block;
+      position: relative;
+    }
+
+    .wait-what-sticker {
+      display: inline-block;
+      background: var(--black);
+      border-radius: 100px;
+      padding: 18px 36px;
+      position: relative;
+    }
+    .wait-what-sticker .ww-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--yellow);
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+    }
+    .wait-what-sticker::before {
+      content: '';
+      position: absolute;
+      inset: -4px;
+      border: 3px dashed var(--yellow);
+      border-radius: 100px;
+      opacity: 0.4;
+    }
+
+    .wait-what-row {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-top: 8px;
+    }
+
+    /* ──────────────────── 5. TIMESTAMP BAR ──────────────────── */
+    .timestamp-bars {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .ts-bar {
+      width: 100%;
+      padding: 14px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+    }
+    .ts-bar::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 5px;
+      background: rgba(0,0,0,0.2);
+    }
+    .ts-bar.yellow { background: var(--yellow); }
+    .ts-bar.teal   { background: var(--teal);   }
+    .ts-bar.black  { background: #2a2a2a; border: 1px solid rgba(255,255,255,0.08); }
+
+    .ts-text {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      white-space: nowrap;
+    }
+    .ts-bar.yellow .ts-text { color: var(--black); }
+    .ts-bar.teal   .ts-text { color: var(--black); }
+    .ts-bar.black  .ts-text { color: var(--yellow); }
+
+    .ts-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .ts-bar.yellow .ts-dot { background: var(--black); opacity: 0.3; }
+    .ts-bar.teal   .ts-dot { background: var(--black); opacity: 0.3; }
+    .ts-bar.black  .ts-dot { background: var(--yellow); opacity: 0.4; }
+
+    /* ──────────────────── 6. UNIVERSE STAMP ──────────────────── */
+    .universe-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .universe-badge-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    /* ──────────────────── 7. PUZZLE PATTERN ──────────────────── */
+    .pattern-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .pattern-tile {
+      height: 220px;
+      border-radius: 12px;
+      overflow: hidden;
+      position: relative;
+      border: 2px solid rgba(255,255,255,0.06);
+    }
+    .pattern-colorway-label {
+      position: absolute;
+      bottom: 12px;
+      left: 14px;
+      font-family: 'Poppins', sans-serif;
+      font-weight: 700;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+    .colorway-dark .pattern-colorway-label { background: var(--yellow); color: var(--black); }
+    .colorway-light .pattern-colorway-label { background: var(--black); color: var(--cream); }
+
+    /* ──────────────────── FOOTER ──────────────────── */
+    .page-footer {
+      background: var(--yellow);
+      color: var(--black);
+      padding: 40px;
+      text-align: center;
+    }
+    .page-footer h3 {
+      font-family: 'Poppins', sans-serif;
+      font-weight: 900;
+      font-size: 22px;
+      text-transform: uppercase;
+    }
+    .page-footer p {
+      font-size: 14px;
+      opacity: 0.6;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     HEADER
+════════════════════════════════════════ -->
+<div class="page-header">
+  <div class="header-eyebrow">Odd Pieces — Brand System 2025</div>
+  <h1>New <em>Iconic</em><br>Brand Elements</h1>
+  <p class="header-sub">Seven visual devices that make Odd Pieces unmistakable. These aren't just design choices — they're how fans recognize us from three feet away.</p>
+  <div class="header-badges">
+    <span class="header-badge">✦ The Reveal Split</span>
+    <span class="header-badge">✦ Skip the Character</span>
+    <span class="header-badge">✦ Warning Stamp</span>
+    <span class="header-badge">✦ Wait — What?!</span>
+    <span class="header-badge">✦ 15 Seconds Later</span>
+    <span class="header-badge">✦ Universe Badge</span>
+    <span class="header-badge">✦ Puzzle Pattern</span>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     01 — THE REVEAL SPLIT
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">01 — Visual Device</div>
+  <div class="element-name">The Reveal Split</div>
+  <div class="element-tagline">Left: calm. Right: chaos. Always.</div>
+  <p class="element-desc">Every Odd Pieces marketing asset lives in this format. Two panels, one split line, a ⏱ at the center. Left side shows the "before" — serene, muted, normal. Right side shows what happened 15 seconds later. The visual language becomes the brand.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> This is bigger than a layout choice — it IS the product idea made visual. Before/after is universal. But our version has chaos, humor, and a secret. The diagonal split becomes shorthand for "something's about to go very wrong."</div>
+
+  <div class="usage-label">Used on</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Social posts</span>
+    <span class="usage-tag">Product listings</span>
+    <span class="usage-tag">Ads</span>
+    <span class="usage-tag">Website hero</span>
+    <span class="usage-tag">Unboxing videos</span>
+    <span class="usage-tag">Email headers</span>
+  </div>
+
+  <div class="showcase-area">
+    <div>
+      <div class="showcase-label">Hover to activate →</div>
+      <div class="reveal-split">
+        <!-- Before panel -->
+        <div class="panel panel-before">
+          <div class="before-shapes">
+            <div class="shape" style="width:120px;height:120px;top:-30px;left:20px;background:rgba(255,255,255,0.15)"></div>
+            <div class="shape" style="width:60px;height:60px;bottom:20px;right:30px;background:rgba(255,255,255,0.1)"></div>
+            <div class="shape" style="width:200px;height:200px;bottom:-80px;left:-60px;background:rgba(255,255,255,0.06)"></div>
+          </div>
+          <div class="panel-label">BEFORE</div>
+          <div class="panel-flavor">☀️ Everything is fine.</div>
+        </div>
+
+        <!-- Split line -->
+        <div class="split-line">
+          <div class="split-badge">⏱</div>
+        </div>
+
+        <!-- After panel -->
+        <div class="panel panel-after">
+          <div class="after-shapes">
+            <div class="shape" style="width:80px;height:80px;top:10px;right:10px;background:rgba(254,224,0,0.25)"></div>
+            <div class="shape" style="width:140px;height:140px;bottom:-40px;left:10px;background:rgba(255,255,255,0.1)"></div>
+            <div class="shape" style="width:40px;height:40px;top:60px;left:40px;background:rgba(254,224,0,0.2)"></div>
+          </div>
+          <div class="panel-label">15 SECONDS LATER</div>
+          <div class="panel-flavor">🔥💥 OH NO.</div>
+        </div>
+
+        <div class="split-hint">hover to reveal →</div>
+      </div>
+    </div>
+
+    <!-- Mini versions -->
+    <div>
+      <div class="showcase-label">Compact format (social / ad unit)</div>
+      <div style="display:flex; gap:16px; flex-wrap:wrap;">
+        <div style="display:flex; border-radius:10px; overflow:hidden; border:2px solid rgba(255,255,255,0.1); height:100px; width:300px;">
+          <div style="flex:1; background:#8fb8b0; display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Poppins',sans-serif; font-weight:800; font-size:10px; color:rgba(255,255,255,0.7); letter-spacing:1px;">BEFORE</span>
+          </div>
+          <div style="width:3px; background:var(--black); position:relative; display:flex; align-items:center; justify-content:center;">
+            <span style="background:var(--yellow); width:22px; height:22px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:10px; border:2px solid var(--black); position:absolute;">⏱</span>
+          </div>
+          <div style="flex:1; background:linear-gradient(135deg,#ff7a4a,#ff4016); display:flex; align-items:center; justify-content:center;">
+            <span style="font-family:'Poppins',sans-serif; font-weight:800; font-size:8px; color:var(--yellow); letter-spacing:0.5px; text-align:center; line-height:1.4;">15 SECONDS<br>LATER</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     02 — SKIP (THE HIDDEN ONE)
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">02 — Recurring Secret Character</div>
+  <div class="element-name">Skip</div>
+  <div class="element-tagline">The character you weren't supposed to find. They're in every puzzle. Nobody told you.</div>
+  <p class="element-desc">Skip wears a yellow raincoat and carries a blue umbrella. They're hiding somewhere in every single Odd Pieces illustration — tiny, quiet, watching the chaos. Find Skip, win nothing. But post about it, and the internet loses its mind.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> Where's Waldo built an empire on one mechanic. Skip does the same but with the mystique of a secret — we never announce it. The community discovers it, then becomes detectives. Every new puzzle release triggers a hunt. That's free engagement, forever.</div>
+
+  <div class="usage-label">Used in</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Every puzzle illustration</span>
+    <span class="usage-tag">Brand pattern</span>
+    <span class="usage-tag">Packaging</span>
+    <span class="usage-tag">Community challenges</span>
+    <span class="usage-tag">Merch (secretly)</span>
+  </div>
+
+  <div class="showcase-area">
+    <!-- Skip character at various sizes -->
+    <div>
+      <div class="showcase-label">Skip — three scales</div>
+      <div class="skip-showcase">
+        <!-- Large Skip -->
+        <div class="skip-size">
+          <svg width="120" height="150" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Umbrella -->
+            <path d="M28 58 Q60 20 92 58" stroke="#4FA8D5" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <line x1="60" y1="58" x2="60" y2="95" stroke="#4FA8D5" stroke-width="4" stroke-linecap="round"/>
+            <path d="M60 93 Q68 93 68 88" stroke="#4FA8D5" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M28 58 Q60 50 92 58" fill="#6BC4F0" opacity="0.9"/>
+            <!-- Raincoat body -->
+            <rect x="38" y="88" width="44" height="48" rx="10" fill="#FEE000"/>
+            <!-- Hood/Head -->
+            <ellipse cx="60" cy="78" rx="24" ry="22" fill="#FEE000"/>
+            <!-- Face -->
+            <ellipse cx="53" cy="76" rx="3.5" ry="4" fill="#1A1A1A"/>
+            <ellipse cx="67" cy="76" rx="3.5" ry="4" fill="#1A1A1A"/>
+            <ellipse cx="54.5" cy="75" rx="1.5" ry="2" fill="white" opacity="0.6"/>
+            <ellipse cx="68.5" cy="75" rx="1.5" ry="2" fill="white" opacity="0.6"/>
+            <path d="M52 85 Q60 91 68 85" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <!-- Cheeks -->
+            <ellipse cx="45" cy="82" rx="5" ry="3" fill="#FC9C1C" opacity="0.5"/>
+            <ellipse cx="75" cy="82" rx="5" ry="3" fill="#FC9C1C" opacity="0.5"/>
+            <!-- Hood brim -->
+            <path d="M36 70 Q60 58 84 70" stroke="#FC9C1C" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <!-- Arms -->
+            <rect x="18" y="92" width="22" height="10" rx="5" fill="#FEE000"/>
+            <rect x="80" y="92" width="22" height="10" rx="5" fill="#FEE000"/>
+            <!-- Hand holding umbrella -->
+            <circle cx="60" cy="96" r="6" fill="#FC9C1C"/>
+            <!-- Boots -->
+            <ellipse cx="49" cy="138" rx="12" ry="8" fill="#FC9C1C"/>
+            <ellipse cx="71" cy="138" rx="12" ry="8" fill="#FC9C1C"/>
+            <!-- Coat hem -->
+            <rect x="38" y="128" width="44" height="14" rx="7" fill="#FEE000"/>
+          </svg>
+          <div class="skip-size-label">Full (hero art)</div>
+        </div>
+
+        <!-- Medium Skip -->
+        <div class="skip-size">
+          <svg width="60" height="75" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 58 Q60 20 92 58" stroke="#4FA8D5" stroke-width="5" fill="none" stroke-linecap="round"/>
+            <line x1="60" y1="58" x2="60" y2="95" stroke="#4FA8D5" stroke-width="4" stroke-linecap="round"/>
+            <path d="M60 93 Q68 93 68 88" stroke="#4FA8D5" stroke-width="4" fill="none" stroke-linecap="round"/>
+            <path d="M28 58 Q60 50 92 58" fill="#6BC4F0" opacity="0.9"/>
+            <rect x="38" y="88" width="44" height="48" rx="10" fill="#FEE000"/>
+            <ellipse cx="60" cy="78" rx="24" ry="22" fill="#FEE000"/>
+            <ellipse cx="53" cy="76" rx="3.5" ry="4" fill="#1A1A1A"/>
+            <ellipse cx="67" cy="76" rx="3.5" ry="4" fill="#1A1A1A"/>
+            <path d="M52 85 Q60 91 68 85" stroke="#1A1A1A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+            <ellipse cx="45" cy="82" rx="5" ry="3" fill="#FC9C1C" opacity="0.5"/>
+            <ellipse cx="75" cy="82" rx="5" ry="3" fill="#FC9C1C" opacity="0.5"/>
+            <path d="M36 70 Q60 58 84 70" stroke="#FC9C1C" stroke-width="3" fill="none" stroke-linecap="round"/>
+            <rect x="18" y="92" width="22" height="10" rx="5" fill="#FEE000"/>
+            <rect x="80" y="92" width="22" height="10" rx="5" fill="#FEE000"/>
+            <circle cx="60" cy="96" r="6" fill="#FC9C1C"/>
+            <ellipse cx="49" cy="138" rx="12" ry="8" fill="#FC9C1C"/>
+            <ellipse cx="71" cy="138" rx="12" ry="8" fill="#FC9C1C"/>
+            <rect x="38" y="128" width="44" height="14" rx="7" fill="#FEE000"/>
+          </svg>
+          <div class="skip-size-label">Medium (pattern)</div>
+        </div>
+
+        <!-- Tiny Skip -->
+        <div class="skip-size">
+          <svg width="24" height="30" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 58 Q60 20 92 58" stroke="#4FA8D5" stroke-width="6" fill="none"/>
+            <path d="M28 58 Q60 50 92 58" fill="#6BC4F0"/>
+            <line x1="60" y1="58" x2="60" y2="100" stroke="#4FA8D5" stroke-width="5"/>
+            <rect x="36" y="86" width="48" height="50" rx="8" fill="#FEE000"/>
+            <ellipse cx="60" cy="76" rx="26" ry="24" fill="#FEE000"/>
+            <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+            <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+            <rect x="38" y="126" width="44" height="16" rx="8" fill="#FEE000"/>
+          </svg>
+          <div class="skip-size-label">Tiny (in-puzzle)</div>
+        </div>
+
+        <!-- Name badge -->
+        <div style="display:flex; flex-direction:column; gap:12px; margin-left:20px;">
+          <div style="background:var(--yellow); color:var(--black); padding:14px 20px; border-radius:12px; display:inline-block;">
+            <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:28px; line-height:1;">"SKIP"</div>
+            <div style="font-family:'Poppins',sans-serif; font-weight:600; font-size:11px; margin-top:4px; opacity:0.6; text-transform:uppercase; letter-spacing:1px;">Hidden in every puzzle</div>
+          </div>
+          <div style="font-size:13px; color:rgba(255,251,240,0.4); line-height:1.6; max-width:200px;">As in: <em style="color:rgba(255,251,240,0.65);">"skip to the ending."</em> Skip already knows what happens. That's why they're watching.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Puzzle context mockup -->
+    <div>
+      <div class="showcase-label">Skip hidden in puzzle context — can you find them? →</div>
+      <div class="puzzle-context">
+        <div class="puzzle-find-label">🔍 Find Skip in the illustration</div>
+        <!-- Crowd of shapes simulating busy illustration -->
+        <div class="crowd-dot" style="width:40px;height:40px;top:40px;left:80px;background:rgba(100,160,200,0.4);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:25px;height:35px;top:35px;left:140px;background:rgba(200,100,80,0.3);"></div>
+        <div class="crowd-dot" style="width:50px;height:30px;top:70px;left:200px;background:rgba(100,180,100,0.3);border-radius:6px;"></div>
+        <div class="crowd-dot" style="width:20px;height:50px;top:30px;left:280px;background:rgba(220,180,60,0.3);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:60px;height:25px;top:90px;left:320px;background:rgba(180,100,180,0.25);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:30px;height:40px;top:50px;left:400px;background:rgba(100,150,220,0.35);"></div>
+        <div class="crowd-dot" style="width:45px;height:20px;top:105px;left:460px;background:rgba(240,100,80,0.3);border-radius:3px;"></div>
+        <div class="crowd-dot" style="width:20px;height:30px;top:40px;left:550px;background:rgba(80,200,160,0.3);"></div>
+        <div class="crowd-dot" style="width:35px;height:45px;top:30px;left:620px;background:rgba(200,80,80,0.3);border-radius:6px;"></div>
+        <div class="crowd-dot" style="width:25px;height:25px;top:80px;left:700px;background:rgba(220,200,80,0.35);border-radius:50%;"></div>
+        <div class="crowd-dot" style="width:40px;height:35px;top:50px;left:760px;background:rgba(100,120,220,0.3);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:55px;height:20px;top:100px;left:820px;background:rgba(80,180,100,0.3);border-radius:3px;"></div>
+        <div class="crowd-dot" style="width:25px;height:40px;top:35px;left:880px;background:rgba(200,120,60,0.35);"></div>
+        <!-- Row 2 -->
+        <div class="crowd-dot" style="width:30px;height:30px;top:130px;left:60px;background:rgba(160,100,200,0.3);border-radius:50%;"></div>
+        <div class="crowd-dot" style="width:50px;height:25px;top:140px;left:160px;background:rgba(80,160,200,0.3);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:20px;height:45px;top:120px;left:250px;background:rgba(240,200,80,0.3);"></div>
+        <div class="crowd-dot" style="width:40px;height:30px;top:145px;left:360px;background:rgba(200,80,120,0.3);border-radius:6px;"></div>
+        <div class="crowd-dot" style="width:25px;height:35px;top:125px;left:480px;background:rgba(80,200,160,0.25);"></div>
+        <div class="crowd-dot" style="width:45px;height:20px;top:155px;left:580px;background:rgba(220,160,80,0.3);border-radius:3px;"></div>
+        <div class="crowd-dot" style="width:30px;height:40px;top:130px;left:680px;background:rgba(100,100,220,0.3);border-radius:4px;"></div>
+        <div class="crowd-dot" style="width:20px;height:25px;top:150px;left:800px;background:rgba(180,80,80,0.3);border-radius:50%;"></div>
+        <div class="crowd-dot" style="width:35px;height:30px;top:135px;left:900px;background:rgba(100,200,120,0.3);border-radius:4px;"></div>
+
+        <!-- SKIP — tiny, hidden bottom-right area -->
+        <div class="puzzle-skip-hidden">
+          <svg width="18" height="22" viewBox="0 0 120 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M28 58 Q60 20 92 58" stroke="#4FA8D5" stroke-width="6" fill="none"/>
+            <path d="M28 58 Q60 50 92 58" fill="#6BC4F0"/>
+            <line x1="60" y1="58" x2="60" y2="100" stroke="#4FA8D5" stroke-width="5"/>
+            <rect x="36" y="86" width="48" height="50" rx="8" fill="#FEE000"/>
+            <ellipse cx="60" cy="76" rx="26" ry="24" fill="#FEE000"/>
+            <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+            <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+            <rect x="38" y="126" width="44" height="16" rx="8" fill="#FEE000"/>
+          </svg>
+        </div>
+
+        <!-- Hint arrow -->
+        <div style="position:absolute; bottom:8px; right:8px; font-size:9px; color:rgba(255,255,255,0.2); font-family:'Poppins',sans-serif; font-weight:600; letter-spacing:1px; text-transform:uppercase;">↑ there</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     03 — THE WARNING STAMP
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">03 — Signature Brand Moment</div>
+  <div class="element-name">The Warning Stamp</div>
+  <div class="element-tagline">A sticker, a card, a social post, a state of mind.</div>
+  <p class="element-desc">Red-orange. Tilted. Threatening. The Warning stamp appears on every box insert, every listing image, and every first social post about a new puzzle. It sets the tone before anyone opens a box. We're not warning you. We're daring you.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> Warning labels are universal. Everyone knows that red stamp energy. We're borrowing that psychological trigger and flipping it — the warning isn't about danger, it's about discovery. It's a promise: something unexpected is inside.</div>
+
+  <div class="usage-label">Used on</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Box inserts</span>
+    <span class="usage-tag">Listing images</span>
+    <span class="usage-tag">Stickers</span>
+    <span class="usage-tag">Social posts</span>
+    <span class="usage-tag">Website banners</span>
+    <span class="usage-tag">Email subject lines</span>
+  </div>
+
+  <div class="showcase-area">
+    <div>
+      <div class="showcase-label">The stamp — three sizes, multiple backgrounds</div>
+      <div class="stamp-row">
+        <!-- On black -->
+        <div class="bg-black-demo">
+          <div class="warning-stamp lg">
+            <div class="warn-top">⚠ WARNING</div>
+            <div class="warn-sub">THIS PUZZLE CONTAINS<br>THINGS YOU WEREN'T<br>SUPPOSED TO FIND.</div>
+          </div>
+        </div>
+
+        <!-- On yellow -->
+        <div class="bg-yellow-demo" style="display:flex; flex-direction:column; gap:16px; align-items:flex-start;">
+          <div class="warning-stamp">
+            <div class="warn-top">⚠ WARNING</div>
+            <div class="warn-sub">THIS PUZZLE CONTAINS THINGS<br>YOU WEREN'T SUPPOSED TO FIND.</div>
+          </div>
+          <div class="warning-stamp sm" style="transform:rotate(1.5deg);">
+            <div class="warn-top">⚠ WARNING</div>
+            <div class="warn-sub">YOU WEREN'T SUPPOSED TO FIND THIS.</div>
+          </div>
+        </div>
+
+        <!-- On teal -->
+        <div class="bg-teal-demo">
+          <div class="warning-stamp" style="transform:rotate(-4deg);">
+            <div class="warn-top">⚠ WARNING</div>
+            <div class="warn-sub">THIS PUZZLE CONTAINS THINGS<br>YOU WEREN'T SUPPOSED TO FIND.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- As sticker -->
+    <div>
+      <div class="showcase-label">Sticker format (die-cut oval)</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap; align-items:center;">
+        <div style="background:#222; padding:20px; border-radius:10px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="background:var(--red-orange); border:3px solid var(--black); border-radius:50px; padding:10px 20px; display:inline-block; transform:rotate(-2deg); box-shadow: 3px 3px 0 rgba(0,0,0,0.4);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:14px; color:white; letter-spacing:1px;">⚠ WARNING</div>
+            <div style="font-family:'Poppins',sans-serif; font-weight:600; font-size:8px; color:rgba(255,255,255,0.8); letter-spacing:0.5px; text-align:center; margin-top:3px;">YOU WEREN'T SUPPOSED<br>TO FIND THIS</div>
+          </div>
+        </div>
+        <div style="background:var(--cream); padding:20px; border-radius:10px;">
+          <div style="background:var(--red-orange); border:3px solid var(--black); border-radius:50px; padding:10px 20px; display:inline-block; transform:rotate(2.5deg); box-shadow: 3px 3px 0 rgba(0,0,0,0.25);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:14px; color:white; letter-spacing:1px;">⚠ WARNING</div>
+            <div style="font-family:'Poppins',sans-serif; font-weight:600; font-size:8px; color:rgba(255,255,255,0.8); letter-spacing:0.5px; text-align:center; margin-top:3px;">YOU WEREN'T SUPPOSED<br>TO FIND THIS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     04 — WAIT — WHAT?!
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">04 — Brand Exclamation</div>
+  <div class="element-name">The "Wait — What?!" Mark</div>
+  <div class="element-tagline">The sound you make when you flip the puzzle reveal. Designed.</div>
+  <p class="element-desc">Fredoka bold, maximum size, puzzle-piece punctuation. This phrase is our brand's emotional signature — it's what every customer feels when they open the envelope. We made it a graphic. Now it sells the feeling before they even buy.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> Three words. Zero explanation needed. "Wait — What?!" is the reaction, the promise, and the product description simultaneously. On a social post it stops the scroll. On packaging it creates curiosity. On a sticker it becomes identity.</div>
+
+  <div class="usage-label">Used on</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Social reveal posts</span>
+    <span class="usage-tag">Packaging inserts</span>
+    <span class="usage-tag">Stickers & merch</span>
+    <span class="usage-tag">Website headings</span>
+    <span class="usage-tag">Ad creative</span>
+  </div>
+
+  <div class="showcase-area">
+    <!-- Hero treatment -->
+    <div>
+      <div class="showcase-label">Hero — black on yellow</div>
+      <div class="wait-what-hero">
+        <div class="wait-what-text">
+          WAIT
+          <span class="dash"> — </span>
+          WHAT
+          <!-- Custom puzzle-piece ? -->
+          <span class="puzzle-q">
+            <svg viewBox="0 0 60 80" style="display:inline-block; width:0.65em; height:0.85em; vertical-align:-0.05em; overflow:visible;">
+              <!-- ? body -->
+              <path d="M30 8 C14 8 8 22 8 30 C8 38 14 44 22 46 L22 54 L38 54 L38 44 C46 42 52 36 52 30 C52 18 42 8 30 8 Z" fill="#1A1A1A"/>
+              <!-- ? dot -->
+              <ellipse cx="30" cy="66" rx="7" ry="7" fill="#1A1A1A"/>
+              <!-- puzzle tab on top of ? -->
+              <circle cx="30" cy="2" r="8" fill="#FF4016"/>
+              <circle cx="30" cy="2" r="5" fill="#FF4016"/>
+            </svg>
+          </span>
+          <span style="color:var(--red-orange);">!</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Row of variants -->
+    <div class="wait-what-row">
+      <!-- Sticker badge -->
+      <div>
+        <div class="showcase-label">Sticker badge</div>
+        <div style="background:var(--black); padding:20px; border-radius:12px;">
+          <div class="wait-what-sticker">
+            <span class="ww-text">WAIT — WHAT?!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Teal on black -->
+      <div>
+        <div class="showcase-label">Teal accent variant</div>
+        <div style="background:var(--black); padding:20px; border-radius:12px; border:1px solid rgba(255,255,255,0.06);">
+          <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:38px; line-height:1; text-transform:uppercase; letter-spacing:-1px;">
+            <span style="color:var(--cream);">WAIT </span>
+            <span style="color:var(--teal);">—</span>
+            <span style="color:var(--cream);"> WHAT</span>
+            <span style="color:var(--red-orange);">?!</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Red-orange stamp version -->
+      <div>
+        <div class="showcase-label">Over red-orange</div>
+        <div style="background:var(--red-orange); padding:20px; border-radius:12px; transform:rotate(-1.5deg);">
+          <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:30px; color:white; line-height:1; text-transform:uppercase; letter-spacing:-0.5px;">WAIT — WHAT?!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     05 — 15 SECONDS LATER
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">05 — Copy Device</div>
+  <div class="element-name">The "15 Seconds Later" Bar</div>
+  <div class="element-tagline">SpongeBob energy. Brand-level execution.</div>
+  <p class="element-desc">A full-width horizontal bar that acts as a transition device in any content format. The yellow bar signals: chaos incoming. The teal version is slightly more ominous. The black version is for late-game reveals. All three have the same energy: something is about to shift.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> The SpongeBob title card is one of the most remixed internet formats ever. We borrowed the structure, kept the humor, and made it ours. Anyone who's watched SpongeBob (everyone under 40) will feel the reference. That's free cultural credit.</div>
+
+  <div class="usage-label">Used in</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Social carousels</span>
+    <span class="usage-tag">Email dividers</span>
+    <span class="usage-tag">Packaging inserts</span>
+    <span class="usage-tag">TikTok / Reels transitions</span>
+    <span class="usage-tag">Website sections</span>
+  </div>
+
+  <div class="showcase-area">
+    <div>
+      <div class="showcase-label">All variants — full width</div>
+      <div class="timestamp-bars">
+        <div class="ts-bar yellow">
+          <div class="ts-dot"></div>
+          <div class="ts-text">15 SECONDS LATER →</div>
+          <div class="ts-dot"></div>
+        </div>
+        <div class="ts-bar teal">
+          <div class="ts-dot"></div>
+          <div class="ts-text">PLOT TWIST →</div>
+          <div class="ts-dot"></div>
+        </div>
+        <div class="ts-bar black">
+          <div class="ts-dot"></div>
+          <div class="ts-text">YOU WEREN'T SUPPOSED TO FIND THIS →</div>
+          <div class="ts-dot"></div>
+        </div>
+        <div class="ts-bar yellow" style="opacity:0.7;">
+          <div class="ts-dot"></div>
+          <div class="ts-text" style="font-size:16px;">MEANWHILE, IN ANOTHER PUZZLE... →</div>
+          <div class="ts-dot"></div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="showcase-label">In context — between a before/after email section</div>
+      <div style="background:#222; border-radius:12px; overflow:hidden; border:1px solid rgba(255,255,255,0.06);">
+        <div style="padding:24px 28px; background:#2a2a2a;">
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:rgba(255,251,240,0.5); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">Sunday morning. Normal family. Puzzle night planned.</div>
+          <div style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(255,251,240,0.4);">The box said "Silver Lining." A peaceful mountain scene. Clouds parting. Very relaxing. Exactly what everyone wanted.</div>
+        </div>
+        <div class="ts-bar yellow" style="border-radius:0;">
+          <div class="ts-dot"></div>
+          <div class="ts-text">15 SECONDS LATER →</div>
+          <div class="ts-dot"></div>
+        </div>
+        <div style="padding:24px 28px; background:#2a2a2a;">
+          <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:14px; color:var(--yellow); text-transform:uppercase; letter-spacing:1px; margin-bottom:8px;">The finished puzzle was not what was on the box.</div>
+          <div style="font-family:'Inter',sans-serif; font-size:14px; color:rgba(255,251,240,0.55);">Something was happening in those clouds. Something the box cover <em>didn't show</em>. Dad opened the envelope. Nobody was relaxed anymore.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     06 — THE UNIVERSE STAMP
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">06 — Metauniverse Badge</div>
+  <div class="element-name">The Universe Stamp</div>
+  <div class="element-tagline">Every puzzle is part of something bigger. The stamp proves it.</div>
+  <p class="element-desc">A circular seal — like a government stamp or a movie universe badge — that appears on every piece of Odd Pieces content. It signals: this isn't just a puzzle. It's a world. Mushroom Mayhem, Time Keepers, Silver Lining — they're all connected. The stamp is proof.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> Marvel spent 15 years building their universe. We announce ours from day one. The badge makes collectors feel like they're part of something. "I have three puzzles from the Odd Pieces Universe" hits different than "I have three puzzles." That's the goal.</div>
+
+  <div class="usage-label">Used on</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Every box (bottom-right)</span>
+    <span class="usage-tag">Listing images</span>
+    <span class="usage-tag">Social posts</span>
+    <span class="usage-tag">Insert cards</span>
+    <span class="usage-tag">Website</span>
+  </div>
+
+  <div class="showcase-area">
+    <div>
+      <div class="showcase-label">Universe badge — multiple sizes & backgrounds</div>
+      <div class="universe-row">
+        <!-- Large badge -->
+        <div class="universe-badge-wrap">
+          <svg width="180" height="180" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- Outer ring background -->
+            <circle cx="100" cy="100" r="96" fill="#1A1A1A" stroke="#FEE000" stroke-width="5"/>
+            <!-- Stars around ring -->
+            <g fill="#FEE000" opacity="0.7">
+              <polygon points="100,10 102,16 108,16 103,20 105,26 100,22 95,26 97,20 92,16 98,16" transform="rotate(0,100,100)"/>
+              <circle cx="100" cy="14" r="2.5" fill="none" stroke="#FEE000" stroke-width="1.5"/>
+              <!-- dots around ring -->
+              <circle cx="138" cy="22" r="2.5"/>
+              <circle cx="168" cy="50" r="2"/>
+              <circle cx="178" cy="86" r="2.5"/>
+              <circle cx="168" cy="150" r="2"/>
+              <circle cx="138" cy="178" r="2.5"/>
+              <circle cx="100" cy="186" r="2"/>
+              <circle cx="62" cy="178" r="2.5"/>
+              <circle cx="32" cy="150" r="2"/>
+              <circle cx="22" cy="114" r="2.5"/>
+              <circle cx="22" cy="86" r="2"/>
+              <circle cx="32" cy="50" r="2.5"/>
+              <circle cx="62" cy="22" r="2"/>
+            </g>
+            <!-- Inner circle -->
+            <circle cx="100" cy="100" r="62" fill="#2a2a2a" stroke="#FEE000" stroke-width="2" stroke-dasharray="4 3"/>
+            <!-- P Emblem center -->
+            <!-- Bowl of the P (D shape) -->
+            <rect x="82" y="74" width="10" height="52" rx="3" fill="#FEE000"/>
+            <path d="M92 74 Q122 74 122 98 Q122 104 92 106" stroke="#FEE000" stroke-width="0" fill="#FEE000"/>
+            <ellipse cx="107" cy="90" rx="15" ry="16" fill="#FEE000"/>
+            <ellipse cx="107" cy="90" rx="7" ry="8" fill="#2a2a2a"/>
+            <!-- Blue dot (the secret) -->
+            <circle cx="107" cy="90" r="4" fill="#4FA8D5"/>
+
+            <!-- Circular text - ODD PIECES UNIVERSE -->
+            <defs>
+              <path id="topArc" d="M 26,100 A 74,74 0 0,1 174,100" />
+              <path id="botArc" d="M 174,100 A 74,74 0 0,1 26,100" />
+            </defs>
+            <text font-family="Poppins, sans-serif" font-weight="800" font-size="13" fill="#FEE000" letter-spacing="3">
+              <textPath href="#topArc" startOffset="8%">ODD PIECES UNIVERSE</textPath>
+            </text>
+            <text font-family="Poppins, sans-serif" font-weight="700" font-size="11" fill="#FEE000" letter-spacing="4" opacity="0.6">
+              <textPath href="#botArc" startOffset="12%">✦ EST. 2024 ✦</textPath>
+            </text>
+          </svg>
+          <div class="skip-size-label">Large (box art)</div>
+        </div>
+
+        <!-- Medium badge on yellow bg -->
+        <div class="universe-badge-wrap">
+          <div style="background:var(--yellow); padding:20px; border-radius:12px;">
+            <svg width="90" height="90" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="96" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="5"/>
+              <circle cx="100" cy="100" r="62" fill="#2a2a2a" stroke="#FEE000" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="82" y="74" width="10" height="52" rx="3" fill="#FEE000"/>
+              <ellipse cx="107" cy="90" rx="15" ry="16" fill="#FEE000"/>
+              <ellipse cx="107" cy="90" rx="7" ry="8" fill="#2a2a2a"/>
+              <circle cx="107" cy="90" r="4" fill="#4FA8D5"/>
+              <defs>
+                <path id="topArc2" d="M 26,100 A 74,74 0 0,1 174,100" />
+                <path id="botArc2" d="M 174,100 A 74,74 0 0,1 26,100" />
+              </defs>
+              <text font-family="Poppins, sans-serif" font-weight="800" font-size="13" fill="#FEE000" letter-spacing="3">
+                <textPath href="#topArc2" startOffset="8%">ODD PIECES UNIVERSE</textPath>
+              </text>
+              <text font-family="Poppins, sans-serif" font-weight="700" font-size="11" fill="#FEE000" letter-spacing="4" opacity="0.6">
+                <textPath href="#botArc2" startOffset="12%">✦ EST. 2024 ✦</textPath>
+              </text>
+              <g fill="#FEE000" opacity="0.6">
+                <circle cx="138" cy="22" r="2.5"/>
+                <circle cx="168" cy="50" r="2"/>
+                <circle cx="178" cy="86" r="2.5"/>
+                <circle cx="168" cy="150" r="2"/>
+                <circle cx="138" cy="178" r="2.5"/>
+                <circle cx="62" cy="22" r="2"/>
+                <circle cx="32" cy="50" r="2.5"/>
+              </g>
+            </svg>
+          </div>
+          <div class="skip-size-label">On yellow bg</div>
+        </div>
+
+        <!-- Small badge on teal -->
+        <div class="universe-badge-wrap">
+          <div style="background:var(--teal); padding:16px; border-radius:12px;">
+            <svg width="60" height="60" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="100" cy="100" r="96" fill="#1A1A1A" stroke="#1A1A1A" stroke-width="5"/>
+              <circle cx="100" cy="100" r="62" fill="#2a2a2a" stroke="#FEE000" stroke-width="2" stroke-dasharray="4 3"/>
+              <rect x="82" y="74" width="10" height="52" rx="3" fill="#FEE000"/>
+              <ellipse cx="107" cy="90" rx="15" ry="16" fill="#FEE000"/>
+              <ellipse cx="107" cy="90" rx="7" ry="8" fill="#2a2a2a"/>
+              <circle cx="107" cy="90" r="4" fill="#4FA8D5"/>
+              <defs>
+                <path id="topArc3" d="M 26,100 A 74,74 0 0,1 174,100" />
+                <path id="botArc3" d="M 174,100 A 74,74 0 0,1 26,100" />
+              </defs>
+              <text font-family="Poppins, sans-serif" font-weight="800" font-size="13" fill="#FEE000" letter-spacing="3">
+                <textPath href="#topArc3" startOffset="8%">ODD PIECES UNIVERSE</textPath>
+              </text>
+              <text font-family="Poppins, sans-serif" font-weight="700" font-size="11" fill="#FEE000" letter-spacing="4" opacity="0.6">
+                <textPath href="#botArc3" startOffset="12%">✦ EST. 2024 ✦</textPath>
+              </text>
+            </svg>
+          </div>
+          <div class="skip-size-label">On teal bg</div>
+        </div>
+
+        <!-- Mockup on a box corner -->
+        <div class="universe-badge-wrap" style="flex:1; min-width:200px;">
+          <div style="background:linear-gradient(135deg, #2a4a6b, #1a3a5a); border-radius:12px; padding:20px; position:relative; min-height:130px; min-width:200px; overflow:hidden; border:2px solid rgba(255,255,255,0.08);">
+            <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:22px; color:rgba(255,255,255,0.15); text-transform:uppercase; line-height:1;">Mushroom<br>Mayhem</div>
+            <div style="font-family:'Poppins',sans-serif; font-weight:600; font-size:10px; color:rgba(255,255,255,0.2); margin-top:6px; text-transform:uppercase; letter-spacing:1px;">1000-Piece Mystery Puzzle</div>
+            <!-- Badge positioned bottom-right -->
+            <div style="position:absolute; bottom:10px; right:10px;">
+              <svg width="50" height="50" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="100" cy="100" r="96" fill="#1A1A1A" stroke="#FEE000" stroke-width="8"/>
+                <circle cx="100" cy="100" r="62" fill="#2a2a2a" stroke="#FEE000" stroke-width="3" stroke-dasharray="5 4"/>
+                <rect x="82" y="74" width="10" height="52" rx="3" fill="#FEE000"/>
+                <ellipse cx="107" cy="90" rx="15" ry="16" fill="#FEE000"/>
+                <ellipse cx="107" cy="90" rx="7" ry="8" fill="#2a2a2a"/>
+                <circle cx="107" cy="90" r="4" fill="#4FA8D5"/>
+                <defs>
+                  <path id="topArc4" d="M 26,100 A 74,74 0 0,1 174,100" />
+                  <path id="botArc4" d="M 174,100 A 74,74 0 0,1 26,100" />
+                </defs>
+                <text font-family="Poppins, sans-serif" font-weight="800" font-size="13" fill="#FEE000" letter-spacing="3">
+                  <textPath href="#topArc4" startOffset="8%">ODD PIECES UNIVERSE</textPath>
+                </text>
+                <text font-family="Poppins, sans-serif" font-weight="700" font-size="11" fill="#FEE000" letter-spacing="4" opacity="0.6">
+                  <textPath href="#botArc4" startOffset="12%">✦ EST. 2024 ✦</textPath>
+                </text>
+              </svg>
+            </div>
+          </div>
+          <div class="skip-size-label">On box mockup (bottom-right)</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     07 — THE PUZZLE PATTERN
+════════════════════════════════════════ -->
+<div class="section">
+  <div class="element-number">07 — Brand Texture</div>
+  <div class="element-name">The Puzzle Pattern</div>
+  <div class="element-tagline">Wrapping paper that tells the whole story. No words needed.</div>
+  <p class="element-desc">A repeating pattern built from the Odd Pieces universe — Skip, puzzle pieces, the P emblem, warning symbols, stars, question marks. Dense enough to be interesting, sparse enough to breathe. The tissue paper inside every box uses this. The website background uses this. It's everywhere.</p>
+
+  <div class="why-iconic"><strong>Why it's iconic:</strong> Unboxing content is king. When someone opens an Odd Pieces box and that yellow-on-black tissue paper spills out — that's a content moment. The pattern IS the brand promise: this is a world, not just a product.</div>
+
+  <div class="usage-label">Used on</div>
+  <div class="usage-tags">
+    <span class="usage-tag">Tissue paper (inside box)</span>
+    <span class="usage-tag">Wrapping paper</span>
+    <span class="usage-tag">Website backgrounds</span>
+    <span class="usage-tag">Social post backgrounds</span>
+    <span class="usage-tag">Tote bags / merch</span>
+  </div>
+
+  <div class="showcase-area">
+    <div>
+      <div class="showcase-label">Two colorways — repeating tile pattern</div>
+      <div class="pattern-row">
+        <!-- Colorway 1: Yellow on Black -->
+        <div class="pattern-tile colorway-dark">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="patternDark" x="0" y="0" width="140" height="140" patternUnits="userSpaceOnUse">
+                <rect width="140" height="140" fill="#1A1A1A"/>
+
+                <!-- Skip character - row 1 col 1 -->
+                <g transform="translate(10,8) scale(0.25)">
+                  <path d="M28 58 Q60 20 92 58" stroke="#FEE000" stroke-width="5" fill="none"/>
+                  <path d="M28 58 Q60 50 92 58" fill="#FEE000" opacity="0.7"/>
+                  <line x1="60" y1="58" x2="60" y2="100" stroke="#FEE000" stroke-width="4"/>
+                  <rect x="36" y="86" width="48" height="50" rx="8" fill="#FEE000"/>
+                  <ellipse cx="60" cy="76" rx="26" ry="24" fill="#FEE000"/>
+                  <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+                  <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+                  <path d="M52 85 Q60 91 68 85" stroke="#1A1A1A" stroke-width="2.5" fill="none"/>
+                </g>
+
+                <!-- Puzzle piece top-right -->
+                <g transform="translate(90,5)" fill="none" stroke="#FEE000" stroke-width="1.5" opacity="0.6">
+                  <path d="M2 10 L2 26 Q6 26 6 30 Q6 34 2 34 L2 48 L30 48 L30 34 Q26 34 26 30 Q26 26 30 26 L30 10 Q26 10 26 6 Q26 2 30 2 L14 2 Q14 6 10 6 Q6 6 6 2 Z" fill="#FEE000" opacity="0.12" stroke="#FEE000" stroke-width="1.2"/>
+                </g>
+
+                <!-- Warning symbol -->
+                <g transform="translate(60,65)" fill="#FEE000" opacity="0.5">
+                  <polygon points="14,2 26,22 2,22" fill="none" stroke="#FEE000" stroke-width="1.5" stroke-linejoin="round"/>
+                  <rect x="13" y="9" width="2" height="7" rx="1"/>
+                  <rect x="13" y="18" width="2" height="2" rx="1"/>
+                </g>
+
+                <!-- P emblem small -->
+                <g transform="translate(8,80)">
+                  <rect x="2" y="2" width="4" height="22" rx="2" fill="#FEE000" opacity="0.5"/>
+                  <ellipse cx="12" cy="10" rx="6" ry="7" fill="#FEE000" opacity="0.5"/>
+                  <ellipse cx="12" cy="10" rx="3" ry="3.5" fill="#1A1A1A"/>
+                  <circle cx="12" cy="10" r="1.5" fill="#4FA8D5" opacity="0.7"/>
+                </g>
+
+                <!-- Stars -->
+                <text x="100" y="90" font-size="14" fill="#FEE000" opacity="0.4">✦</text>
+                <text x="42" y="45" font-size="10" fill="#FEE000" opacity="0.3">★</text>
+                <text x="115" y="40" font-size="8" fill="#FEE000" opacity="0.25">✦</text>
+
+                <!-- ? marks -->
+                <text x="80" y="130" font-family="Poppins, sans-serif" font-weight="900" font-size="18" fill="#FEE000" opacity="0.2">?</text>
+                <text x="5" y="128" font-family="Poppins, sans-serif" font-weight="900" font-size="12" fill="#FEE000" opacity="0.15">?</text>
+
+                <!-- Skip row 2 col 2 - offset -->
+                <g transform="translate(82,78) scale(0.18)">
+                  <path d="M28 58 Q60 20 92 58" stroke="#FEE000" stroke-width="6" fill="none"/>
+                  <path d="M28 58 Q60 50 92 58" fill="#FEE000" opacity="0.7"/>
+                  <line x1="60" y1="58" x2="60" y2="100" stroke="#FEE000" stroke-width="5"/>
+                  <rect x="36" y="86" width="48" height="50" rx="8" fill="#FEE000"/>
+                  <ellipse cx="60" cy="76" rx="26" ry="24" fill="#FEE000"/>
+                  <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+                  <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A"/>
+                </g>
+
+                <!-- Another puzzle piece -->
+                <g transform="translate(48,94) scale(0.7)" fill="none" stroke="#FEE000" stroke-width="1.5" opacity="0.3">
+                  <path d="M2 10 L2 26 Q6 26 6 30 Q6 34 2 34 L2 48 L30 48 L30 34 Q26 34 26 30 Q26 26 30 26 L30 10 Q26 10 26 6 Q26 2 30 2 L14 2 Q14 6 10 6 Q6 6 6 2 Z" fill="#FEE000" opacity="0.08"/>
+                </g>
+
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#patternDark)"/>
+          </svg>
+          <div class="pattern-colorway-label">Yellow on Black</div>
+        </div>
+
+        <!-- Colorway 2: Teal on Cream -->
+        <div class="pattern-tile colorway-light">
+          <svg width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <pattern id="patternLight" x="0" y="0" width="140" height="140" patternUnits="userSpaceOnUse">
+                <rect width="140" height="140" fill="#FFFBF0"/>
+
+                <!-- Skip in teal -->
+                <g transform="translate(10,8) scale(0.25)">
+                  <path d="M28 58 Q60 20 92 58" stroke="#C1E3E8" stroke-width="5" fill="none"/>
+                  <path d="M28 58 Q60 50 92 58" fill="#C1E3E8" opacity="0.8"/>
+                  <line x1="60" y1="58" x2="60" y2="100" stroke="#C1E3E8" stroke-width="4"/>
+                  <rect x="36" y="86" width="48" height="50" rx="8" fill="#C1E3E8"/>
+                  <ellipse cx="60" cy="76" rx="26" ry="24" fill="#C1E3E8"/>
+                  <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A" opacity="0.5"/>
+                  <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A" opacity="0.5"/>
+                  <path d="M52 85 Q60 91 68 85" stroke="#1A1A1A" stroke-width="2.5" fill="none" opacity="0.4"/>
+                </g>
+
+                <!-- Puzzle piece -->
+                <g transform="translate(90,5)" fill="none">
+                  <path d="M2 10 L2 26 Q6 26 6 30 Q6 34 2 34 L2 48 L30 48 L30 34 Q26 34 26 30 Q26 26 30 26 L30 10 Q26 10 26 6 Q26 2 30 2 L14 2 Q14 6 10 6 Q6 6 6 2 Z" fill="#C1E3E8" opacity="0.4" stroke="#C1E3E8" stroke-width="1.2"/>
+                </g>
+
+                <!-- Warning -->
+                <g transform="translate(60,65)" opacity="0.35">
+                  <polygon points="14,2 26,22 2,22" fill="none" stroke="#FC9C1C" stroke-width="1.5" stroke-linejoin="round"/>
+                  <rect x="13" y="9" width="2" height="7" rx="1" fill="#FC9C1C"/>
+                  <rect x="13" y="18" width="2" height="2" rx="1" fill="#FC9C1C"/>
+                </g>
+
+                <!-- P emblem -->
+                <g transform="translate(8,80)">
+                  <rect x="2" y="2" width="4" height="22" rx="2" fill="#1A1A1A" opacity="0.2"/>
+                  <ellipse cx="12" cy="10" rx="6" ry="7" fill="#1A1A1A" opacity="0.2"/>
+                  <ellipse cx="12" cy="10" rx="3" ry="3.5" fill="#FFFBF0"/>
+                  <circle cx="12" cy="10" r="1.5" fill="#4FA8D5" opacity="0.6"/>
+                </g>
+
+                <!-- Stars -->
+                <text x="100" y="90" font-size="14" fill="#C1E3E8" opacity="0.5">✦</text>
+                <text x="42" y="45" font-size="10" fill="#1A1A1A" opacity="0.15">★</text>
+                <text x="115" y="40" font-size="8" fill="#C1E3E8" opacity="0.35">✦</text>
+
+                <!-- ? -->
+                <text x="80" y="130" font-family="Poppins, sans-serif" font-weight="900" font-size="18" fill="#C1E3E8" opacity="0.3">?</text>
+                <text x="5" y="128" font-family="Poppins, sans-serif" font-weight="900" font-size="12" fill="#1A1A1A" opacity="0.1">?</text>
+
+                <!-- Skip 2 -->
+                <g transform="translate(82,78) scale(0.18)">
+                  <path d="M28 58 Q60 20 92 58" stroke="#C1E3E8" stroke-width="6" fill="none"/>
+                  <path d="M28 58 Q60 50 92 58" fill="#C1E3E8" opacity="0.7"/>
+                  <line x1="60" y1="58" x2="60" y2="100" stroke="#C1E3E8" stroke-width="5"/>
+                  <rect x="36" y="86" width="48" height="50" rx="8" fill="#C1E3E8"/>
+                  <ellipse cx="60" cy="76" rx="26" ry="24" fill="#C1E3E8"/>
+                  <ellipse cx="52" cy="74" rx="4" ry="5" fill="#1A1A1A" opacity="0.4"/>
+                  <ellipse cx="68" cy="74" rx="4" ry="5" fill="#1A1A1A" opacity="0.4"/>
+                </g>
+
+                <!-- Another puzzle piece -->
+                <g transform="translate(48,94) scale(0.7)" fill="none">
+                  <path d="M2 10 L2 26 Q6 26 6 30 Q6 34 2 34 L2 48 L30 48 L30 34 Q26 34 26 30 Q26 26 30 26 L30 10 Q26 10 26 6 Q26 2 30 2 L14 2 Q14 6 10 6 Q6 6 6 2 Z" fill="#C1E3E8" opacity="0.25"/>
+                </g>
+
+              </pattern>
+            </defs>
+            <rect width="100%" height="100%" fill="url(#patternLight)"/>
+          </svg>
+          <div class="pattern-colorway-label">Teal on Cream</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pattern elements legend -->
+    <div>
+      <div class="showcase-label">Pattern elements</div>
+      <div style="display:flex; gap:20px; flex-wrap:wrap;">
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <svg width="20" height="25" viewBox="0 0 120 150" fill="none">
+            <path d="M28 58 Q60 20 92 58" stroke="#FEE000" stroke-width="6" fill="none"/>
+            <path d="M28 58 Q60 50 92 58" fill="#FEE000"/>
+            <line x1="60" y1="58" x2="60" y2="100" stroke="#FEE000" stroke-width="5"/>
+            <rect x="36" y="86" width="48" height="50" rx="8" fill="#FEE000"/>
+            <ellipse cx="60" cy="76" rx="26" ry="24" fill="#FEE000"/>
+          </svg>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">Skip</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <svg width="22" height="22" viewBox="0 0 40 40" fill="none" stroke="#FEE000" stroke-width="2">
+            <path d="M4 14 L4 28 Q8 28 8 32 Q8 36 4 36 L4 36 L36 36 L36 28 Q32 28 32 32 Q32 36 36 36 L36 14 Q32 14 32 10 Q32 6 36 6 L20 6 Q20 10 16 10 Q12 10 12 6 Z" fill="#FEE000" opacity="0.15"/>
+          </svg>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">Puzzle piece</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <svg width="20" height="18" viewBox="0 0 28 24" fill="none">
+            <polygon points="14,2 26,22 2,22" stroke="#FF4016" stroke-width="2" stroke-linejoin="round"/>
+            <rect x="13" y="8" width="2" height="7" rx="1" fill="#FF4016"/>
+            <rect x="13" y="17" width="2" height="2" rx="1" fill="#FF4016"/>
+          </svg>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">⚠ Warning</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <svg width="20" height="20" viewBox="0 0 30 30">
+            <rect x="2" y="4" width="5" height="22" rx="2.5" fill="#FEE000" opacity="0.7"/>
+            <ellipse cx="16" cy="13" rx="7" ry="8" fill="#FEE000" opacity="0.7"/>
+            <ellipse cx="16" cy="13" rx="3.5" ry="4" fill="#1A1A1A"/>
+            <circle cx="16" cy="13" r="2" fill="#4FA8D5" opacity="0.8"/>
+          </svg>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">P emblem</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <span style="font-size:16px; color:var(--yellow); opacity:0.6;">✦ ★ ✦</span>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">Stars</span>
+        </div>
+        <div style="display:flex; align-items:center; gap:10px; background:rgba(255,255,255,0.04); padding:10px 16px; border-radius:8px;">
+          <span style="font-family:'Poppins',sans-serif; font-weight:900; font-size:20px; color:var(--yellow); opacity:0.4;">?</span>
+          <span style="font-size:12px; font-weight:600; color:rgba(255,251,240,0.5);">? marks</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ═══════════════════════════════════════
+     CLOSING SUMMARY
+════════════════════════════════════════ -->
+<div class="section" style="text-align:center; padding-bottom:40px;">
+  <div style="max-width:700px; margin:0 auto;">
+    <div style="font-family:'Poppins',sans-serif; font-weight:900; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--yellow); opacity:0.5; margin-bottom:14px;">SYSTEM SUMMARY</div>
+    <h2 style="font-family:'Poppins',sans-serif; font-weight:900; font-size:clamp(26px,4vw,44px); line-height:1.1; text-transform:uppercase;">Seven elements.<br><span style="color:var(--yellow);">One unmistakable brand.</span></h2>
+    <p style="font-size:15px; color:rgba(255,251,240,0.5); margin-top:16px; line-height:1.7;">The Reveal Split makes the concept visual. Skip makes the community a detective agency. The Warning Stamp makes the brand provocative. Wait — What?! is the emotional hook. 15 Seconds Later is the narrative device. The Universe Stamp is the long game. The Pattern is the texture of the world.</p>
+    <p style="font-size:15px; color:rgba(255,251,240,0.5); margin-top:12px; line-height:1.7;">Together, they're a system. Each element reinforces the others. Use them consistently and they compound. That's how brands become inevitable.</p>
+
+    <!-- Puzzle titles reference -->
+    <div style="margin-top:32px; padding:20px; background:rgba(254,224,0,0.05); border:1px solid rgba(254,224,0,0.1); border-radius:12px;">
+      <div style="font-family:'Poppins',sans-serif; font-weight:700; font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--yellow); opacity:0.6; margin-bottom:12px;">The Odd Pieces Universe</div>
+      <div style="display:flex; flex-wrap:wrap; gap:8px; justify-content:center;">
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Mushroom Mayhem</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Time Keepers</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Silver Lining</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Glitch</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Shutterbug</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Astrogastro</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">Snack Attack</span>
+        <span style="background:rgba(254,224,0,0.1); border:1px solid rgba(254,224,0,0.2); color:var(--yellow); font-family:'Poppins',sans-serif; font-weight:700; font-size:12px; padding:5px 14px; border-radius:100px;">TURBO 3000</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<div class="page-footer">
+  <h3>Odd Pieces Universe — Brand System</h3>
+  <p>These elements are alive. They'll evolve. But the bones are set. Guard them accordingly.</p>
+</div>
+
+</body>
+</html>

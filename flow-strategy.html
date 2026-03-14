@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Klaviyo Flow Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #08080f;
+    --panel: #111111;
+    --panel-2: #15151d;
+    --line: #23232d;
+    --line-2: #2d2d38;
+    --text: #f5f5f7;
+    --muted: #9a9aaa;
+    --soft: #686877;
+    --accent: #F5C842;
+    --green: #56d39b;
+    --blue: #88b8ff;
+    --pink: #f294c2;
+    --orange: #f79d65;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background:
+      radial-gradient(circle at top right, rgba(245, 200, 66, 0.14), transparent 28%),
+      linear-gradient(180deg, #0b0b12 0%, #08080f 100%);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  a { color: inherit; }
+  .wrap { max-width: 1240px; margin: 0 auto; padding: 32px 24px 96px; }
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 0.84rem;
+    margin-bottom: 28px;
+  }
+  .back:hover { color: var(--text); }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(280px, 0.8fr);
+    gap: 24px;
+    align-items: stretch;
+    margin-bottom: 28px;
+  }
+  .hero-main,
+  .hero-side,
+  .panel,
+  .track-card,
+  .timeline-card,
+  .check-card,
+  .logic-card,
+  .matrix-card {
+    background: linear-gradient(180deg, rgba(21,21,29,0.96), rgba(15,15,21,0.96));
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  }
+  .hero-main {
+    padding: 36px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-main::after {
+    content: "";
+    position: absolute;
+    inset: auto -10% -20% auto;
+    width: 320px;
+    height: 320px;
+    background: radial-gradient(circle, rgba(245, 200, 66, 0.24), transparent 65%);
+    pointer-events: none;
+  }
+  .eyebrow,
+  .section-label,
+  .kicker {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.74rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+  .eyebrow { color: var(--accent); margin-bottom: 14px; }
+  h1, h2, h3, h4 {
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 0.98;
+  }
+  h1 {
+    font-size: clamp(2.7rem, 6vw, 5.2rem);
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    max-width: 10ch;
+  }
+  .hero-copy {
+    color: #c8c8d3;
+    font-size: 1rem;
+    line-height: 1.75;
+    max-width: 62ch;
+    margin-bottom: 24px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+  .stat {
+    padding: 16px;
+    border: 1px solid var(--line-2);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .stat strong {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.6rem;
+    color: var(--accent);
+  }
+  .stat span {
+    color: var(--muted);
+    font-size: 0.82rem;
+    line-height: 1.5;
+  }
+  .hero-side {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+  }
+  .hero-side h2 { font-size: 1.55rem; text-transform: uppercase; }
+  .summary-list {
+    display: grid;
+    gap: 12px;
+    color: #d6d6de;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+  .summary-item {
+    padding: 14px 16px;
+    border-radius: 14px;
+    border: 1px solid var(--line-2);
+    background: rgba(245, 200, 66, 0.04);
+  }
+  .summary-item strong { color: var(--accent); }
+
+  .section { margin-top: 52px; }
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: end;
+    margin-bottom: 18px;
+  }
+  .section-label { color: var(--accent); margin-bottom: 10px; display: block; }
+  .section-head h2 { font-size: clamp(2rem, 4vw, 3.2rem); text-transform: uppercase; }
+  .section-intro {
+    color: var(--muted);
+    max-width: 72ch;
+    line-height: 1.7;
+    font-size: 0.96rem;
+  }
+
+  .tracks {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+  .track-card { padding: 24px; }
+  .track-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+  }
+  .buyer { color: var(--green); background: rgba(86, 211, 155, 0.1); }
+  .gifter { color: var(--blue); background: rgba(136, 184, 255, 0.1); }
+  .recipient { color: var(--pink); background: rgba(242, 148, 194, 0.1); }
+  .track-card h3 { font-size: 1.6rem; margin-bottom: 8px; text-transform: uppercase; }
+  .track-card p { color: var(--muted); font-size: 0.9rem; line-height: 1.65; margin-bottom: 18px; }
+  .flow-steps {
+    display: grid;
+    gap: 12px;
+  }
+  .step {
+    padding: 14px;
+    border-radius: 16px;
+    border: 1px solid var(--line-2);
+    background: rgba(255, 255, 255, 0.02);
+  }
+  .step-day {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--accent);
+  }
+  .step strong {
+    display: block;
+    font-size: 0.98rem;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+  .step span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .two-up,
+  .three-up {
+    display: grid;
+    gap: 18px;
+  }
+  .two-up { grid-template-columns: 1.1fr 0.9fr; }
+  .three-up { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .panel { padding: 24px; }
+  .panel h3,
+  .logic-card h3,
+  .check-card h3,
+  .timeline-card h3,
+  .matrix-card h3 {
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .panel p,
+  .logic-card p,
+  .check-card p,
+  .timeline-card p {
+    color: var(--muted);
+    line-height: 1.7;
+    font-size: 0.92rem;
+  }
+
+  .logic-list,
+  .check-list,
+  .timeline-list {
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+  .logic-item,
+  .check-item,
+  .timeline-item {
+    padding: 12px 14px;
+    border: 1px solid var(--line-2);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+  }
+  .logic-item strong,
+  .timeline-item strong {
+    display: block;
+    color: #fff;
+    margin-bottom: 5px;
+    font-size: 0.92rem;
+  }
+  .logic-item span,
+  .timeline-item span,
+  .check-item {
+    color: var(--muted);
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .matrix-card { padding: 26px; overflow: hidden; }
+  .matrix-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 14px;
+    min-width: 760px;
+  }
+  .matrix-table th,
+  .matrix-table td {
+    text-align: left;
+    padding: 14px 12px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  .matrix-table th {
+    color: var(--accent);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .matrix-table td {
+    color: #d8d8e2;
+    font-size: 0.88rem;
+    line-height: 1.55;
+  }
+  .matrix-table td strong {
+    display: block;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .table-scroll { overflow-x: auto; }
+
+  .bundle-strip {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+    margin-top: 16px;
+  }
+  .bundle-strip .stat strong { font-size: 1.35rem; }
+
+  .button-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+  }
+  .button-demo {
+    border: 1px solid var(--line-2);
+    border-radius: 999px;
+    padding: 9px 16px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-weight: 700;
+  }
+  .yes { background: rgba(86, 211, 155, 0.12); color: var(--green); }
+  .no { background: rgba(242, 148, 194, 0.12); color: var(--pink); }
+
+  @media (max-width: 1080px) {
+    .hero,
+    .tracks,
+    .two-up,
+    .three-up { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 700px) {
+    .wrap { padding: 24px 16px 72px; }
+    .hero-main,
+    .hero-side,
+    .track-card,
+    .panel,
+    .logic-card,
+    .check-card,
+    .timeline-card,
+    .matrix-card { padding: 20px; }
+    .hero-grid,
+    .bundle-strip { grid-template-columns: 1fr; }
+    h1 { max-width: none; }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <a href="index.html" class="back">← Back to Team Hub</a>
+
+    <section class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">Email Flows &amp; Strategy</div>
+        <h1>Klaviyo Flow Strategy</h1>
+        <p class="hero-copy">
+          Post-purchase branching, gift-recipient capture, and SKU-specific bundle upsells for Odd Pieces. This document keeps the mystery alive, segments buyers correctly, and pushes every conversion path toward bundles only.
+        </p>
+        <div class="hero-grid">
+          <div class="stat">
+            <strong>3</strong>
+            <span>post-purchase audience tracks</span>
+          </div>
+          <div class="stat">
+            <strong>8</strong>
+            <span>core send windows across the buyer journey</span>
+          </div>
+          <div class="stat">
+            <strong>3x</strong>
+            <span>upsell ladder: 3-pack to 6-pack to 9-pack</span>
+          </div>
+        </div>
+      </div>
+      <aside class="hero-side">
+        <div>
+          <div class="section-label">Goal</div>
+          <h2>Turn Every Completed Puzzle Into The Next Bundle Purchase</h2>
+        </div>
+        <div class="summary-list">
+          <div class="summary-item"><strong>Track split:</strong> self-buyer, gifter, and gift recipient all need different emotional framing.</div>
+          <div class="summary-item"><strong>Offer rule:</strong> always upsell to bundles, never individual SKUs.</div>
+          <div class="summary-item"><strong>Data rule:</strong> capture recipient emails via QR / landing page so gifting can become an owned channel.</div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Flow Map</span>
+          <h2>Post-Purchase Flow</h2>
+        </div>
+      </div>
+      <p class="section-intro">
+        Start every purchaser in a common order-confirmation node, then route into the right messaging track based on self-use vs gifting intent. Recipients enter through QR capture or forwarded gift messaging and receive their own shorter nurture ladder with a first-purchase incentive.
+      </p>
+
+      <div class="tracks">
+        <article class="track-card">
+          <div class="track-chip buyer">Self-Buyer Track</div>
+          <h3>Collector Momentum</h3>
+          <p>Assume they bought for themselves, want the mystery protected, and are most likely to buy deeper into the catalog once they finish.</p>
+          <div class="flow-steps">
+            <div class="step">
+              <div class="step-day">Day 0</div>
+              <strong>Order confirm</strong>
+              <span>Reassure purchase, confirm shipping, keep spoilers hidden, set expectation that something strange is on the way.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 3</div>
+              <strong>What to expect mystery hype</strong>
+              <span>Subject direction: cryptic anticipation, weird welcome, no spoilers. Copy theme: unboxing vibe, secret details, “do not Google the ending.”</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 14</div>
+              <strong>Finished yet? survey</strong>
+              <span>Subject direction: direct progress check. Copy theme: two-button branch with “Yes, I finished it” / “Not yet” to sort timing and readiness.</span>
+              <div class="button-row">
+                <div class="button-demo yes">Yes, I finished it</div>
+                <div class="button-demo no">Not yet</div>
+              </div>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 18</div>
+              <strong>Series completion bundle upsell</strong>
+              <span>Subject direction: continue the arc. Copy theme: complete the series with a 3-pack entry bundle, framed as the cleanest next move.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 30</div>
+              <strong>Cross-series bundle</strong>
+              <span>Subject direction: same weird energy, different world. Copy theme: broaden taste, introduce adjacent series, lead with a 6-pack value anchor.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 45</div>
+              <strong>Different series bundle</strong>
+              <span>Subject direction: ready for a new obsession? Copy theme: novelty, escalation, and best-value 9-pack framing for collectors.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="track-card">
+          <div class="track-chip gifter">Gifter Track</div>
+          <h3>Gift Loop</h3>
+          <p>Talk to the purchaser like a thoughtful insider who made a smart pick. Reward them for gifting well and make future gifting occasions easy.</p>
+          <div class="flow-steps">
+            <div class="step">
+              <div class="step-day">Day 0</div>
+              <strong>Order confirm</strong>
+              <span>Delivery reassurance, gifting confidence, zero friction. Mention that the experience starts the moment the box opens.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 3</div>
+              <strong>Great choice, here's what they're in for</strong>
+              <span>Subject direction: “you picked well.” Copy theme: spoiler-safe hype, memorable gifting angle, easy way to talk about the product.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 14</div>
+              <strong>Did they love it? + share</strong>
+              <span>Subject direction: soft check-in. Copy theme: ask if the gift landed, invite story/photo sharing, optionally prompt forwarding the recipient offer page.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 21</div>
+              <strong>Gift again? bundle upsell</strong>
+              <span>Subject direction: easy repeat gifting. Copy theme: bundle-first gifting shortcuts for birthdays, hosts, teams, and “I need a good gift fast.”</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 45</div>
+              <strong>Next occasion reminder</strong>
+              <span>Subject direction: occasion-led memory jog. Copy theme: upcoming reasons to gift, saved effort, 3-pack or 6-pack convenience framing.</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="track-card">
+          <div class="track-chip recipient">Gift Recipient Track</div>
+          <h3>Recipient Conversion</h3>
+          <p>Customer-facing nurture for people who discover Odd Pieces through a gift. Lead with warmth, weirdness, and a simple 10% first-purchase offer.</p>
+          <div class="flow-steps">
+            <div class="step">
+              <div class="step-day">Day 0</div>
+              <strong>Welcome + 10% off</strong>
+              <span>Subject direction: “you were chosen.” Copy theme: thanks for joining, explain the brand in one line, deliver first-purchase code clearly.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 3</div>
+              <strong>Mystery puzzle experience</strong>
+              <span>Subject direction: odd, intriguing, playful. Copy theme: what makes Odd Pieces different from regular jigsaws without spoiling reveals.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 7</div>
+              <strong>Series showcase + bundle</strong>
+              <span>Subject direction: choose your next weird adventure. Copy theme: introduce the line-up, anchor on starter bundle value.</span>
+            </div>
+            <div class="step">
+              <div class="step-day">Day 14</div>
+              <strong>Finished? here's what's next</strong>
+              <span>Subject direction: progress-based next step. Copy theme: post-completion momentum, 3-pack or 6-pack bundle CTA, no single-SKU detours.</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="section-head">
+        <div>
+          <span class="section-label">Offer Architecture</span>
+          <h2>SKU-Specific Upsell Flow Matrix</h2>
+        </div>
+      </div>
+      <div class="matrix-card">
+        <p class="section-intro" style="margin-bottom:0;">
+          Trigger the upsell ladder based on the SKU or series purchased. Every branch uses the same timing cadence and escalates bundle size over time: Email 1 on Day 18, Email 2 on Day 25, Email 3 on Day 35. Do not send single-puzzle recommendations.
+        </p>
+        <div class="bundle-strip">
+          <div class="stat">
+            <strong>Day 18</strong>
+            <span>3-pack entry bundle, finish the arc, lowest-friction next buy</span>
+          </div>
+          <div class="stat">
+            <strong>Day 25</strong>
+            <span>6-pack bundle, broader value story, strongest margin middle tier</span>
+          </div>
+          <div class="stat">
+            <strong>Day 35</strong>
+            <span>9-pack bundle, collector language, best-value anchor</span>
+          </div>
+        </div>
+        <div class="table-scroll">
+          <table class="matrix-table">
+            <thead>
+              <tr>
+                <th>Series</th>
+                <th>Included SKUs</th>
+                <th>Email 1 · Day 18</th>
+                <th>Email 2 · Day 25</th>
+                <th>Email 3 · Day 35</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Series 1</strong>Starter weirdness arc</td>
+                <td>Snack Attack, Beyond the Kelp, Turbo 3000</td>
+                <td><strong>3-pack bundle</strong>Complete Series 1 with all three titles as the clean next move.</td>
+                <td><strong>6-pack bundle</strong>Expand from Series 1 into a mixed-series 6-pack for people ready to binge.</td>
+                <td><strong>9-pack bundle</strong>Pitch the full catalog ladder for collectors who want maximum variety.</td>
+              </tr>
+              <tr>
+                <td><strong>Series 2</strong>Escalated mystery / visual twist</td>
+                <td>Astrogastro, Glitch, Shutterbug</td>
+                <td><strong>3-pack bundle</strong>Finish Series 2 as a complete set, emphasize paired reveals and deeper immersion.</td>
+                <td><strong>6-pack bundle</strong>Cross-series bundle that combines Series 2 favorites with proven bestsellers.</td>
+                <td><strong>9-pack bundle</strong>“Own the whole weird universe” framing for superfans.</td>
+              </tr>
+              <tr>
+                <td><strong>Series 3 / Trilogy</strong>Snack Attack 1, 2, 3</td>
+                <td>Snack Attack 1, Snack Attack 2, Snack Attack 3</td>
+                <td><strong>3-pack bundle</strong>Complete the trilogy if they entered with a single installment.</td>
+                <td><strong>6-pack bundle</strong>Pair the trilogy with adjacent fan-favorite titles in one larger bundle.</td>
+                <td><strong>9-pack bundle</strong>Full collector pack for the customer who likes serialized completion.</td>
+              </tr>
+              <tr>
+                <td><strong>Series 4</strong>New-world exploration set</td>
+                <td>Time Keepers, Mushroom Mayhem, Silver Lining</td>
+                <td><strong>3-pack bundle</strong>Position as the easiest way to experience the whole Series 4 storyline.</td>
+                <td><strong>6-pack bundle</strong>Upgrade to a mixed 6-pack once curiosity is proven.</td>
+                <td><strong>9-pack bundle</strong>Best-value catalog bundle with stronger urgency and collector framing.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section two-up">
+      <div class="logic-card panel">
+        <span class="section-label">Klaviyo Setup</span>
+        <h3>Trigger / Filter Logic</h3>
+        <p>Use flow entry rules aggressively so each contact gets one coherent narrative. Branch by event properties, tag updates, survey clicks, and recipient capture source.</p>
+        <div class="logic-list">
+          <div class="logic-item">
+            <strong>Post-purchase parent flow trigger</strong>
+            <span>Metric: `Placed Order` at least once. Flow filter: exclude cancelled or refunded orders where available; suppress if customer already entered same series flow in last 60 days.</span>
+          </div>
+          <div class="logic-item">
+            <strong>Self-buyer branch</strong>
+            <span>Enter when `gift_flag` is false, no gift-message attribute is present, and order is not tagged as gift. Skip if recipient profile has already been tied to the order.</span>
+          </div>
+          <div class="logic-item">
+            <strong>Gifter branch</strong>
+            <span>Enter when order includes gift wrap, gift message, or a checkout property / Shopify tag indicating gift purchase. Suppress if same contact also purchased identical bundle in prior 30 days.</span>
+          </div>
+          <div class="logic-item">
+            <strong>Gift recipient flow trigger</strong>
+            <span>Form submit from QR landing page or profile property `recipient_source = qr_gift_box`. Optional split by the gifted series if that data is passed in hidden fields later.</span>
+          </div>
+          <div class="logic-item">
+            <strong>Finished yet? split</strong>
+            <span>Day 14 email click split: `finished_status = yes` sends immediately to upsell cadence; `finished_status = not_yet` waits 7 to 14 days before next bundle message and skips urgency framing.</span>
+          </div>
+          <div class="logic-item">
+            <strong>SKU-specific upsell flow trigger</strong>
+            <span>Trigger from `Placed Order` where `item SKU` equals one of the mapped series SKUs. Add flow filter so bundle purchasers do not receive smaller-bundle offers.</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="check-card panel">
+        <span class="section-label">Dependencies</span>
+        <h3>Checklist Before Build</h3>
+        <div class="check-list">
+          <div class="check-item">Order data must expose gift-identification logic: gift tag, gift wrap flag, or custom checkout attribute.</div>
+          <div class="check-item">QR codes in boxes must point to `gift-landing.html` or its production URL equivalent.</div>
+          <div class="check-item">Recipient capture form needs Klaviyo embed / submit wiring later; placeholder form action is acceptable for this page build.</div>
+          <div class="check-item">Profile properties required: `gift_flag`, `recipient_source`, `gifted_series`, `finished_status`, `last_series_purchased`.</div>
+          <div class="check-item">Bundle product URLs and discount code logic must exist for 3-pack, 6-pack, and 9-pack offers.</div>
+          <div class="check-item">Suppression rules should exclude recent bundle purchasers, refunded orders, and active customer support issue contacts.</div>
+          <div class="check-item">Creative assets needed: order-confirm visuals, mystery-hype art, series comparison module, bundle value table.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section three-up">
+      <div class="timeline-card panel">
+        <span class="section-label">Implementation</span>
+        <h3>Week 1</h3>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <strong>Data and logic mapping</strong>
+            <span>Finalize SKU groupings, define gift-detection logic, confirm hidden properties passed from QR experience.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Offer scaffolding</strong>
+            <span>Create 3-pack, 6-pack, and 9-pack destination URLs and coupon handling for recipient discount.</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-card panel">
+        <span class="section-label">Implementation</span>
+        <h3>Week 2</h3>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <strong>Flow build in Klaviyo</strong>
+            <span>Build parent post-purchase branches, survey split, and recipient capture flow; wire basic suppression and timing delays.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Email production</strong>
+            <span>Draft subject line variants and modules for each send, keeping copy spoiler-safe and bundle-first.</span>
+          </div>
+        </div>
+      </div>
+      <div class="timeline-card panel">
+        <span class="section-label">Implementation</span>
+        <h3>Week 3</h3>
+        <div class="timeline-list">
+          <div class="timeline-item">
+            <strong>QA and launch</strong>
+            <span>Test trigger entry, click splits, exclusion filters, and bundle links. Validate mobile rendering and profile-property writes.</span>
+          </div>
+          <div class="timeline-item">
+            <strong>Measurement baseline</strong>
+            <span>Track recipient capture rate, self-buyer completion survey clicks, and bundle revenue by series within first 30 days.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

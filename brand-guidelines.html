@@ -1,0 +1,1704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Brand Guidelines v5</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── TYPOGRAPHY UTILS ─── */
+  .display {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  .headline {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+  .body { font-family: 'Inter', sans-serif; font-weight: 400; }
+  .body-medium { font-family: 'Inter', sans-serif; font-weight: 500; }
+
+  /* ─── LAYOUT ─── */
+  .section {
+    padding: 80px 40px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 80px 40px;
+  }
+  .section-full .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 32px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 24px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 20px; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+    .section, .section-full { padding: 48px 24px; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--ink);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 52px;
+    overflow-x: auto;
+  }
+  nav a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--orange); }
+  nav .nav-logo {
+    color: var(--orange);
+    font-size: 13px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: var(--cream);
+    padding: 100px 40px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🧩';
+    position: absolute;
+    font-size: 400px;
+    opacity: 0.07;
+    right: -60px;
+    top: -60px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .hero .inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+  }
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    opacity: 0.5;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, 8vw, 112px);
+    text-transform: uppercase;
+    color: var(--ink);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+  }
+  .hero h1 span {
+    display: block;
+  }
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    color: var(--ink);
+    max-width: 560px;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin-bottom: 40px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    padding: 8px 16px;
+    background: rgba(0,0,0,0.08);
+    border-radius: 4px;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-tag {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 32px;
+  }
+  .section-intro {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.6;
+    max-width: 680px;
+    margin-bottom: 48px;
+    opacity: 0.8;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    height: 6px;
+    background: var(--yellow);
+    width: 48px;
+    margin: 24px 0;
+    border-radius: 3px;
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--orange); }
+  .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 18px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  /* ─── BLUE BAND ─── */
+  .blue-band {
+    background: var(--blue);
+  }
+  .yellow-band {
+    background: var(--cream);
+  }
+  .ink-band {
+    background: var(--ink);
+    color: var(--white);
+  }
+  .ink-band .section-tag { color: var(--blue); }
+  .ink-band .section-title { color: var(--white); }
+  .ink-band .section-intro { color: rgba(255,255,255,0.75); }
+  .ink-band .divider { background: var(--blue); }
+
+  /* ─── QUOTE BLOCK ─── */
+  .quote-block {
+    background: var(--yellow);
+    border-radius: 12px;
+    padding: 40px;
+    margin: 48px 0;
+  }
+  .quote-block p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(22px, 3vw, 36px);
+    text-transform: none;
+    color: var(--ink);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+  }
+  .quote-mark {
+    font-size: 64px;
+    line-height: 0.5;
+    display: block;
+    margin-bottom: 16px;
+    opacity: 0.3;
+    font-family: serif;
+  }
+
+  /* ─── COLOR SWATCHES ─── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .swatch {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch-color {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-info {
+    padding: 16px;
+    background: var(--white);
+  }
+  .swatch-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: none;
+    margin-bottom: 4px;
+  }
+  .swatch-hex {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #666;
+    font-variant-numeric: tabular-nums;
+  }
+  .swatch-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+  }
+
+  /* ─── TYPE SPECIMENS ─── */
+  .type-specimen {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 16px;
+  }
+  .type-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  /* ─── LOGO DEMO ─── */
+  .logo-demos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .logo-demo {
+    border-radius: 12px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 180px;
+  }
+  @media (max-width: 768px) {
+    .logo-demos { grid-template-columns: 1fr; }
+  }
+
+  /* ─── COPY EXAMPLES ─── */
+  .copy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  @media (max-width: 768px) {
+    .copy-grid { grid-template-columns: 1fr; }
+  }
+  .copy-card-do {
+    background: var(--blue);
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .copy-card-dont {
+    background: #FFE8E4;
+    border-radius: 12px;
+    padding: 32px;
+  }
+  .copy-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .copy-label.do { color: #0A5C47; }
+  .copy-label.dont { color: var(--red-orange); }
+  .copy-line {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .copy-line:last-child { border-bottom: none; }
+
+  /* ─── STEP CARDS ─── */
+  .step-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-card::before {
+    content: attr(data-num);
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 120px;
+    top: -20px;
+    right: 16px;
+    line-height: 1;
+    color: var(--orange);
+    opacity: 0.4;
+  }
+  .step-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    text-transform: none;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .step-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: #444;
+    position: relative;
+  }
+
+  /* ─── PUZZLE UNIVERSE CARDS ─── */
+  .universe-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 24px;
+    border-left: 4px solid var(--yellow);
+  }
+  .universe-card h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .universe-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* ─── PERSONALITY PILLS ─── */
+  .pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .pill {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    border-radius: 40px;
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .pill.blue { background: var(--blue); }
+  .pill.orange { background: var(--orange); }
+  .pill.red { background: var(--red-orange); color: white; }
+  .pill.ink { background: var(--ink); color: white; }
+
+  /* ─── CHANNEL CARDS ─── */
+  .channel-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 32px;
+  }
+  .channel-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .channel-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    margin-bottom: 16px;
+  }
+  .channel-rule {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    gap: 8px;
+  }
+  .channel-rule:last-child { border-bottom: none; }
+  .channel-rule::before {
+    content: '→';
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--orange);
+    flex-shrink: 0;
+  }
+
+  /* ─── DO / DONT TABLE ─── */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 40px;
+    border: 2px solid var(--ink);
+  }
+  @media (max-width: 768px) { .do-dont { grid-template-columns: 1fr; } }
+  .do-col { background: var(--blue); }
+  .dont-col { background: #FFE8E4; }
+  .do-dont-header {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+  }
+  .do-col .do-dont-header { color: #0A5C47; }
+  .dont-col .do-dont-header { color: var(--red-orange); }
+  .do-dont-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .do-dont-item:last-child { border-bottom: none; }
+
+  /* ─── HUMAN BRAND SECTION ─── */
+  .human-card {
+    background: var(--yellow);
+    border-radius: 16px;
+    padding: 40px;
+    display: flex;
+    gap: 32px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .human-card-icon {
+    font-size: 48px;
+    flex-shrink: 0;
+    line-height: 1;
+    margin-top: 4px;
+  }
+  .human-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    margin-bottom: 8px;
+  }
+  .human-card p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(0,0,0,0.75);
+  }
+
+  /* ─── PACKAGING ─── */
+  .pkg-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 16px;
+    margin-top: 32px;
+  }
+  .pkg-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+  }
+  .pkg-item-icon { font-size: 40px; margin-bottom: 12px; display: block; }
+  .pkg-item h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: none;
+    margin-bottom: 8px;
+  }
+  .pkg-item p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* ─── AUDIENCE ─── */
+  .audience-band {
+    background: var(--ink);
+    color: white;
+    border-radius: 16px;
+    padding: 40px;
+    margin-bottom: 24px;
+  }
+  .audience-band h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    text-transform: none;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .audience-band p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 40px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  footer strong {
+    color: var(--orange);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  /* ─── ILLUSTRATION CARDS ─── */
+  .illus-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .illus-card h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .illus-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* ─── BIG TAGLINE ─── */
+  .big-tagline {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 96px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  /* ─── SCROLL ANCHOR OFFSET ─── */
+  [id] { scroll-margin-top: 60px; }
+
+  /* ─── INLINE CODE ─── */
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: rgba(0,0,0,0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* ─── LOGO SVG ─── */
+  .logo-wordmark {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 24px;
+  }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    border-left: 4px solid var(--orange);
+    padding: 16px 20px;
+    background: rgba(252,156,28,0.1);
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    margin: 24px 0;
+  }
+  .callout strong {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: none;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--orange);
+  }
+
+  /* ─── TAG STRIPE ─── */
+  .tag-stripe {
+    background: var(--ink);
+    padding: 10px 40px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .tag-stripe-inner {
+    display: inline-block;
+    animation: marquee 40s linear infinite;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+  }
+  .tag-stripe-inner span { margin: 0 32px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Highlight bar treatment — bold text with black bar accent */
+  .highlight-bar {
+    display: inline;
+    background: var(--ink);
+    color: var(--blue) !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .big-statement {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  /* No uppercase on copy — only on short labels and h1/h2 headlines */
+  .section-intro, .quote-block p, .callout, .card-text, .copy-card,
+  .sig-line, .personality-text, p { text-transform: none !important; }
+  /* Keep uppercase only on section-tag labels and h-tags with explicit class */
+  .section-tag, .section-title, .nav-item, h1 { text-transform: uppercase; }
+  h2, h3 { text-transform: none; }
+
+
+  /* TYPOGRAPHY RULE: Nunito = headlines only. Inter = everything readable. */
+  p, li, .section-intro, .callout, .card-text, .card-body,
+  .quote-block p, .copy-card, .sig-line, .personality-text,
+  .grid-2 p, .vibe-text, .note, blockquote, .intro-text, .body-copy,
+  .human-card p, .step-desc, .channel-note, .do-dont p,
+  .universe-desc, .audience-desc, td, th {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  /* Nunito stays on headlines, nav, labels, short UI text */
+  h1, h2, h3, h4, .section-title, .section-tag, .nav-item,
+  .opt-num, .step-num, .card-title, .human-card-title,
+  .color-name, .font-name, .channel-title { 
+    font-family: 'Nunito', sans-serif !important; 
+  }
+
+
+  /* Branded section labels — Nunito, bold, uppercase */
+  .copy-label, .label, .section-label-pill, .copy-label.do, .copy-label.dont,
+  .voice-principle-title, .step-label, .human-label, .channel-label {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+  }
+  /* Think: callout label */
+  .think-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: block;
+  }
+  /* WARNING stamp */
+  .warning-stamp {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--red-orange);
+    border: 3px solid var(--ink);
+    padding: 12px 24px;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 var(--ink);
+    max-width: 320px;
+  }
+  .warning-stamp-head {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+  }
+  .warning-stamp-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+    text-align: center;
+  }
+  /* 15 seconds later bar */
+  .timestamp-bar {
+    background: var(--ink);
+    padding: 12px 48px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0;
+  }
+  .timestamp-bar span {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+  .timestamp-bar .ts-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+  /* WAIT WHAT mark */
+  .wait-what {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 96px);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+  /* Universe badge */
+  .universe-badge {
+    width: 100px;
+    height: 100px;
+  }
+
+
+  /* ── HARD SHADOW SYSTEM ──
+     Rule: shadow only works when text colour contrasts with shadow colour.
+     Light text (yellow/white) on dark bg = black shadow ✓
+     Dark text on light bg = NO shadow (invisible otherwise) */
+
+  /* Yellow text on dark backgrounds — black shadow works */
+  .ink-band .section-title,
+  .ink-band h2,
+  .wait-what span[style*="color:var(--yellow)"],
+  .wait-what span[style*="color:var(--orange)"] {
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+  }
+  /* Dark text on light backgrounds — no shadow */
+  .blue-band h2, .blue-band .section-title,
+  section.section h2.section-title,
+  .hero h1 {
+    text-shadow: none;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nav-logo">🧩</a>
+  <a href="#story">Story</a>
+  <a href="#experience">Experience</a>
+  <a href="#universe">Universe</a>
+  <a href="#audience">Audience</a>
+  <a href="#personality">Personality</a>
+  <a href="#voice">Voice</a>
+  <a href="#logo">Logo</a>
+  <a href="#colors">Colors</a>
+  <a href="#type">Type</a>
+  <a href="#illustration">Illustration</a>
+  <a href="#packaging">Packaging</a>
+  <a href="#channels">Channels</a>
+  <a href="#human">Human Brand</a>
+  <a href="#dodont">Do / Don't</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="inner">
+    <p class="hero-eyebrow">Brand Guidelines — Version 5</p>
+    <h1>
+      <span>Odd</span>
+      <span>Pieces</span>
+    </h1>
+    <p class="hero-sub">Not your ordinary puzzles. 1000 pieces, a hidden twist, and a secret ending that makes people gasp, laugh, and point across the table.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">1000 Pieces</span>
+      <span class="hero-meta-item">$39 Each</span>
+      <span class="hero-meta-item">Shopify · Amazon · B&N · Kickstarter</span>
+      <span class="hero-meta-item">Premium Cardboard Box</span>
+      <span class="hero-meta-item">Connected Universe</span>
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="tag-stripe">
+  <div class="tag-stripe-inner">
+    <span>NOT YOUR ORDINARY PUZZLES</span>
+    <span style="opacity:0.3">·</span>
+    <span>1000 PIECES. ZERO CONTEXT. GOOD LUCK.</span>
+    <span style="opacity:0.3">·</span>
+    <span>WILDLY FUN & TOTALLY UNEXPECTED</span>
+    <span style="opacity:0.3">·</span>
+    <span>THINK YOU'VE FIGURED IT ALL OUT? NOT SO FAST.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THREE GENERATIONS OF FUN.</span>
+    <span style="opacity:0.3">·</span>
+    <span>NOT YOUR ORDINARY PUZZLES</span>
+    <span style="opacity:0.3">·</span>
+    <span>1000 PIECES. ZERO CONTEXT. GOOD LUCK.</span>
+    <span style="opacity:0.3">·</span>
+    <span>WILDLY FUN & TOTALLY UNEXPECTED</span>
+    <span style="opacity:0.3">·</span>
+    <span>THINK YOU'VE FIGURED IT ALL OUT? NOT SO FAST.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THREE GENERATIONS OF FUN.</span>
+    <span style="opacity:0.3">·</span>
+  </div>
+</div>
+
+<!-- ─── BRAND STORY ─── -->
+<section class="section" id="story">
+  <span class="section-tag" style="color: var(--orange);">01 — Who We Are</span>
+  <h2 class="section-title">The Brand Story</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Odd Pieces started with a simple, slightly unhinged idea: what if a puzzle was actually a story? Not a pretty landscape you assemble and forget. A story you <em>live inside</em>.</p>
+
+  <div class="grid-2">
+    <div>
+      <p style="font-size:16px; line-height:1.8; color:#333;">We make 1000-piece jigsaw puzzles for people who hate boring things. Every Odd Pieces puzzle has a twist — a before and after hidden inside the same image — and a Secret Ending Envelope that gets opened only once you're done. The reveal is the whole point.</p>
+      <br>
+      <p style="font-size:16px; line-height:1.8; color:#333;">We're not a faceless puzzle company. We're a small, passionate team who genuinely believes a cardboard box can make two adults put their phones down, open a bottle of wine, and lose 4 hours they'll never regret. That's the whole mission.</p>
+      <br>
+      <p style="font-size:16px; line-height:1.8; color:#333;">Our puzzles exist in a connected universe. Hidden Easter eggs in every title reference the others. Characters reappear. There's a metanarrative if you're paying attention. Most people aren't. That's fine — the payoff is even bigger when they finally notice.</p>
+    </div>
+    <div>
+      <div style="padding:32px; background:var(--ink); border-radius:12px;">
+        <p class="big-statement" style="color:white; font-size:24px; line-height:1.4;">"The gift that surprises everyone — <span style="color:var(--blue);">even the person who has everything.</span>"</p>
+      </div>
+      <div class="callout">
+        <strong>Reference Brands</strong>
+        Areaware's aesthetic sensibility (design-store premium, indie cool, slightly offbeat) + Exploding Kittens' wit (irreverent, genius, fun). NOT Magic Puzzle Company. NOT a generic puzzle brand.
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── THE EXPERIENCE ─── -->
+<div class="section-full blue-band" id="experience">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">02 — How It Works</span>
+    <h2 class="section-title">The 3-Step Experience</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Every Odd Pieces puzzle is a three-act story. This is the product experience — the thing that makes people buy it, gift it, and post about it at 1am.</p>
+
+    <div class="grid-3">
+      <div class="step-card" data-num="1">
+        <h3>Step Inside a Story</h3>
+        <p>The box cover is a dense Wimmelbilder illustration — Where's Waldo-level density, micro-stories everywhere. A <strong>before comic</strong> inside sets the scene. You know what's happening. For now.</p>
+      </div>
+      <div class="step-card" data-num="2">
+        <h3>Build What Happens After</h3>
+        <p>The puzzle you actually assemble is the <em>same scene</em>, 15 seconds later. Hundreds of changes. You discover them piece by piece. The twist is what makes people gasp, laugh, and point across the table.</p>
+      </div>
+      <div class="step-card" data-num="3">
+        <h3>Unlock the Secret Ending</h3>
+        <p>A sealed <strong>SECRET ENDING ENVELOPE</strong> is waiting inside. Open it only after completing the puzzle. Inside: the <em>after comic</em> revealing the shocking why + a final riddle. The grand reveal.</p>
+      </div>
+    </div>
+
+    <div class="quote-block" style="margin-top:48px; background: var(--ink);">
+      <p style="color: var(--orange);">You'll find things in here you weren't supposed to find.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PUZZLE UNIVERSE ─── -->
+
+
+<!-- ─── AUDIENCE ─── -->
+<div class="section-full" style="background: var(--ink);" id="audience">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">04 — Who It's For</span>
+    <h2 class="section-title" style="color: white;">Our Audience</h2>
+    <div class="divider"></div>
+    <p class="section-intro" style="color: rgba(255,255,255,0.7);">Not your grandma's puzzle. (Unless she's cool.) Odd Pieces is for adults who want something genuinely fun to do at home — mostly with their partner, sometimes solo, occasionally with the whole crew.</p>
+
+    <div class="grid-3" style="margin-bottom:32px;">
+      <div class="audience-band">
+        <h3>Primary Buyer</h3>
+        <p>Adults 30–45 who are done with Netflix and need something to do with their hands. High income, has taste, wants fun that doesn't feel childish. Most do it with their partner over wine. FUNDULT / KIDULT energy. Not everyone has kids — and that's the point.</p>
+      </div>
+      <div class="audience-band">
+        <h3>The Table</h3>
+        <p>Adults who want a challenge. Solo puzzlers who put on a podcast and disappear for 4 hours. Couples who need a reason to put their phones down. The kind of person who reads the instruction manual because they actually enjoy it.</p>
+      </div>
+      <div class="audience-band">
+        <h3>The Gift Person</h3>
+        <p>Gifting is a bonus, not the pitch. But when someone does gift it — the reaction is always "HOW DID YOU FIND THIS." Not another candle. Not another generic game. Something that makes people go wait... what is this?</p>
+      </div>
+    </div>
+
+    <div style="background: var(--cream); border: 3px solid var(--ink); border-radius: 16px; padding: 40px; display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;">
+      <div>
+        <p class="label" style="color: rgba(0,0,0,0.5); margin-bottom:12px;">The Keyword That Drives Everything</p>
+        <p class="big-tagline" style="color: var(--ink);">Fundult / Kidult</p>
+      </div>
+      <div>
+        <p style="font-size:17px; line-height:1.7; color: rgba(0,0,0,0.75);">Grown adults who still love fun. Who haven't decided that joy is something you age out of. Who want something clever, surprising, and worth doing. Our entire brand voice is written for them.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── BRAND PERSONALITY ─── -->
+<section class="section" id="personality">
+  <span class="section-tag" style="color: var(--orange);">05 — Energy</span>
+  <h2 class="section-title">Brand Personality</h2>
+    <div style="margin:32px 0; display:flex; align-items:baseline; gap:0;">
+      <div class="wait-what">WAIT —</div>
+      <div class="wait-what" style="color:var(--orange);">&nbsp;WHAT?!</div>
+    </div>
+    <p style="font-family:'Inter',sans-serif;font-size:14px;color:#888;margin-bottom:40px;font-style:italic;">That reaction. Every single time. That's the goal.</p>
+  <div class="divider"></div>
+  <p class="section-intro">The energy is simple: WAIT — WHAT?! That's the feeling we're always chasing. Shocking, fun, genius, and odd. Not dry. Not corporate. Not calm.</p>
+
+  <div class="pill-grid" style="margin-bottom:48px;">
+    <span class="pill">FUN</span>
+    <span class="pill orange">PLAYFUL</span>
+    <span class="pill red">SHOCKING</span>
+    <span class="pill blue">UNEXPECTED</span>
+    <span class="pill ink">GENIUS</span>
+    <span class="pill orange">ODD</span>
+    <span class="pill">CLEVER</span>
+    <span class="pill red">NOT NORMAL</span>
+    <span class="pill blue">SLIGHTLY CHAOTIC</span>
+    <span class="pill ink">SELF-AWARE</span>
+    <span class="pill">IRREVERENT</span>
+    <span class="pill orange">HUMAN</span>
+  </div>
+
+  <div class="grid-2">
+    <div>
+      <div style="background: var(--blue); border-radius:12px; padding:32px; margin-bottom:16px;">
+        <h3 class="headline" style="font-size:18px; margin-bottom:16px;">We Are</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> Exploding Kittens' irreverence and wit</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> Areaware's design-store premium aesthetic</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> Something you'd find at MoMA Design Store</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> Clean but with character. Premium but playful</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> The "WAIT — WHAT?!" moment, every time</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">✓</span> Design objects that make you laugh</li>
+        </ul>
+      </div>
+    </div>
+    <div>
+      <div style="background: #FFE8E4; border-radius:12px; padding:32px; margin-bottom:16px;">
+        <h3 class="headline" style="font-size:18px; margin-bottom:16px;">We Are Not</h3>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Magic Puzzle Company (direct competitor — feel distinctly different)</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Adult luxury editorial</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Family board game brand (too sanitized)</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Children's activity (too low-energy)</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Corporate / dry / stiff</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Generic e-commerce</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="quote-block" style="margin-top:32px;">
+    <p>Think: Exploding Kittens' genius energy + Areaware's design credibility. Clean but with character. Premium but with personality. Oddly perfect.</p>
+  </div>
+</section>
+
+<!-- ─── VOICE & COPY ─── -->
+<div class="section-full blue-band" id="voice">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">06 — Words</span>
+    <h2 class="section-title">Voice & Copy</h2>
+    <div class="divider"></div>
+    <p class="section-intro">The copy is a character. It should feel like a person you'd actually want to hang out with — smart, funny, slightly unhinged, and always surprising you.</p>
+
+    <div style="background:var(--ink); border-radius:16px; padding:40px; margin-bottom:40px;">
+      <p class="label" style="color: var(--orange); margin-bottom:24px;">Signature Lines — Use These Verbatim</p>
+      <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"Not your ordinary puzzles."</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"1000 pieces. Zero context. Good luck."</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"Not for everyone. Probably for you though."</div>
+        <div style="background:var(--yellow); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:var(--ink);  letter-spacing:-0.01em;">"The twist is what makes people gasp, laugh, and point across the table."</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"Think you've figured it all out? Not so fast."</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"Not your grandma's puzzle. (Unless she's cool.)"</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"Wildly fun & totally unexpected."</div>
+        <div style="background:rgba(255,255,255,0.05); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:16px; color:white;  letter-spacing:-0.01em;">"You'll find things in here you weren't supposed to find."</div>
+        <div style="grid-column: 1/-1; background:var(--orange); border-radius:8px; padding:16px 20px; font-family:'Nunito',sans-serif; font-weight:800; font-size:18px; color:white;  letter-spacing:-0.01em;">"The gift that surprises everyone — even the person who has everything."</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:40px; display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
+  <div class="warning-stamp">
+    <div class="warning-stamp-head">⚠ Warning</div>
+    <div class="warning-stamp-body">This puzzle contains things<br>you weren't supposed to find.</div>
+  </div>
+  <div class="warning-stamp" style="transform:rotate(1.5deg); background:var(--ink);">
+    <div class="warning-stamp-head" style="color:var(--yellow);">⚠ Warning</div>
+    <div class="warning-stamp-body" style="color:rgba(255,255,255,0.7);">The ending will shock you.<br>You've been warned.</div>
+  </div>
+</div>
+<div class="copy-grid">
+      <div class="copy-card-do">
+        <p class="copy-label do" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;">✓ Sound Like This</p>
+        <div class="copy-line">Shocking before it's cute</div>
+        <div class="copy-line">Fun before it's refined</div>
+        <div class="copy-line">Playful before it's serious</div>
+        <div class="copy-line">Irreverent / slightly unhinged</div>
+        <div class="copy-line">Direct, punchy, no filler words</div>
+        <div class="copy-line">Calls the reader in, doesn't talk down</div>
+        <div class="copy-line">Humor that comes from being genuinely clever</div>
+        <div class="copy-line">Urgency without desperation</div>
+      </div>
+      <div class="copy-card-dont">
+        <p class="copy-label dont" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;">✗ Never Sound Like This</p>
+        <div class="copy-line">"For the whole family!" (too generic, too Walmart)</div>
+        <div class="copy-line">"Immersive puzzle experience" (dry corporate)</div>
+        <div class="copy-line">"The perfect gift this holiday season" (zzz)</div>
+        <div class="copy-line">"Hours of entertainment" (box copy from 1992)</div>
+        <div class="copy-line">"Premium quality guaranteed" (says nothing)</div>
+        <div class="copy-line">Luxury editorial tone (too stiff)</div>
+        <div class="copy-line">Children's activity copy (too soft)</div>
+        <div class="copy-line">Mysterious / dark / cryptic (wrong vibe)</div>
+      </div>
+    </div>
+
+    <div style="margin-top:40px; background:white; border-radius:12px; padding:40px;">
+      <p class="label" style="color:var(--orange); margin-bottom:24px;">Voice Principles</p>
+      <div class="grid-3">
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Shock First, Explain Later</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">Lead with the surprising, weird, funny thing. Let curiosity do the work. Don't front-load context.</p>
+        </div>
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Confident, Not Arrogant</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">We know we're different. We don't need to yell about it. Confidence is quiet. Arrogance is loud.</p>
+        </div>
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Play It Straight</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">The best humor is delivered deadpan. Don't wink too hard. Say the absurd thing like it's obvious.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── LOGO SYSTEM ─── -->
+<section class="section" id="logo">
+  <span class="section-tag" style="color: var(--orange);">07 — Identity</span>
+  <h2 class="section-title">Logo System</h2>
+  <div class="divider"></div>
+  <p class="section-intro">The logo is a P-shaped puzzle piece emblem paired with a clean Nunito wordmark. Flat. No drop shadows. No stacked offset copies. No outlines. Just form.</p>
+
+  <!-- SVG Logo Examples -->
+  <div class="logo-demos">
+    <!-- On Yellow -->
+    <div class="logo-demo" style="background: var(--yellow);">
+      <svg width="140" height="60" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- P-piece emblem -->
+        <g>
+          <!-- Vertical stem -->
+          <rect x="8" y="8" width="14" height="44" fill="#1A1A1A"/>
+          <!-- D-bowl top -->
+          <path d="M8 8 H20 Q38 8 38 22 Q38 36 20 36 H8 Z" fill="#FEE000" stroke="#1A1A1A" stroke-width="2.5"/>
+          <!-- Light blue dot at stem bottom -->
+          <circle cx="15" cy="55" r="5" fill="#C1E3E8" stroke="#1A1A1A" stroke-width="2"/>
+        </g>
+        <!-- Wordmark -->
+        <text x="50" y="27" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="#1A1A1A" letter-spacing="1">ODD</text>
+        <text x="50" y="50" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="#1A1A1A" letter-spacing="1">PIECES</text>
+      </svg>
+      <p class="label" style="font-size:10px; color:rgba(0,0,0,0.45);">Logo on Yellow</p>
+    </div>
+    <!-- On Dark -->
+    <div class="logo-demo" style="background: var(--ink);">
+      <svg width="140" height="60" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect x="8" y="8" width="14" height="44" fill="#FEE000"/>
+          <path d="M8 8 H20 Q38 8 38 22 Q38 36 20 36 H8 Z" fill="#FEE000" stroke="#FEE000" stroke-width="2.5"/>
+          <circle cx="15" cy="55" r="5" fill="#C1E3E8"/>
+        </g>
+        <text x="50" y="27" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="white" letter-spacing="1">ODD</text>
+        <text x="50" y="50" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="white" letter-spacing="1">PIECES</text>
+      </svg>
+      <p class="label" style="font-size:10px; color:rgba(255,255,255,0.35);">Logo on Dark</p>
+    </div>
+    <!-- On Blue -->
+    <div class="logo-demo" style="background: var(--blue);">
+      <svg width="140" height="60" viewBox="0 0 140 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <g>
+          <rect x="8" y="8" width="14" height="44" fill="#1A1A1A"/>
+          <path d="M8 8 H20 Q38 8 38 22 Q38 36 20 36 H8 Z" fill="#FEE000" stroke="#1A1A1A" stroke-width="2.5"/>
+          <circle cx="15" cy="55" r="5" fill="#C1E3E8" stroke="#1A1A1A" stroke-width="2"/>
+        </g>
+        <text x="50" y="27" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="#1A1A1A" letter-spacing="1">ODD</text>
+        <text x="50" y="50" font-family="'Nunito', sans-serif" font-weight="900" font-size="18" fill="#1A1A1A" letter-spacing="1">PIECES</text>
+      </svg>
+      <p class="label" style="font-size:10px; color:rgba(0,0,0,0.45);">Logo on Blue</p>
+    </div>
+  </div>
+
+  <!-- Logo Anatomy -->
+  <div style="background: white; border-radius:16px; padding:40px; margin-top:32px;">
+    <p class="label" style="color:var(--orange); margin-bottom:24px;">Logo Anatomy</p>
+    <div class="grid-2">
+      <div>
+        <h4 class="headline" style="font-size:16px; margin-bottom:16px;">The Emblem</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:15px; display:flex; gap:12px; align-items:flex-start;"><span style="width:16px; height:16px; background:#C1E3E8; border:2px solid #1A1A1A; border-radius:3px; flex-shrink:0; margin-top:2px;"></span>Yellow bowl: <code>#FEE000</code> — the D-shaped arc of the P</li>
+          <li style="font-size:15px; display:flex; gap:12px; align-items:flex-start;"><span style="width:16px; height:16px; background:#1A1A1A; border-radius:3px; flex-shrink:0; margin-top:2px;"></span>Ink outline: <code>#1A1A1A</code> — clean black, no softening</li>
+          <li style="font-size:15px; display:flex; gap:12px; align-items:flex-start;"><span style="width:16px; height:16px; background:#C1E3E8; border:2px solid #1A1A1A; border-radius:50%; flex-shrink:0; margin-top:2px;"></span>Light blue circle: <code>#C1E3E8</code> — bottom of the stem. The detail that rewards close looking.</li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="headline" style="font-size:16px; margin-bottom:16px;">The Wordmark</h4>
+        <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> Nunito, weight 900, UPPERCASE</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> No outlines. No drop shadows. No effects.</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> FLAT. The previous version had 3–4 stacked offset copies of every letter. That's gone.</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> On dark: white wordmark. On yellow/light: black wordmark.</li>
+          <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Never stretch, rotate, recolor, or deconstruct the lockup.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COLORS ─── -->
+<div class="section-full" style="background: var(--blue);" id="colors">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">08 — Palette</span>
+    <h2 class="section-title">Color System</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Six colors. Two heroes. Four accents. Use them boldly — especially the blue, which lives everywhere on the website and is just as essential as yellow.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FEE000;">
+          <span style="font-family:'Nunito'; font-weight:900; font-size:13px;  color:rgba(0,0,0,0.4);">HERO</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Odd Yellow</div>
+          <div class="swatch-hex">#FEE000</div>
+          <div class="swatch-role">Hero color. Own it. Lead with it.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #C1E3E8;">
+          <span style="font-family:'Nunito'; font-weight:900; font-size:13px;  color:rgba(0,0,0,0.4);">HERO</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Light Blue</div>
+          <div class="swatch-hex">#C1E3E8</div>
+          <div class="swatch-role">Background anchor. Used heavily on website. Equal to yellow in presence.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FC9C1C;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Orange</div>
+          <div class="swatch-hex">#FC9C1C</div>
+          <div class="swatch-role">Accent. CTAs, highlights, arrows.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FF4016;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Red-Orange</div>
+          <div class="swatch-hex">#FF4016</div>
+          <div class="swatch-role">Urgency, warnings, "WAIT" moments.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #1A1A1A; display:flex; align-items:center; justify-content:center;">
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ink Black</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-role">Primary text. Outlines. Dark backgrounds.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FFFBF0; border:1px solid rgba(0,0,0,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Clean Cream</div>
+          <div class="swatch-hex">#FFFBF0</div>
+          <div class="swatch-role">Warm page background. Softer than pure white.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:12px; padding:32px; margin-top:32px;">
+      <p class="label" style="color:var(--orange); margin-bottom:20px;">Usage Combinations</p>
+      <div class="grid-3">
+        <div style="background:var(--yellow); padding:20px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--ink); margin-bottom:4px;">Yellow + Ink</p>
+          <p style="font-size:12px; color:rgba(0,0,0,0.6);">Primary combo. Hero moments.</p>
+        </div>
+        <div style="background:var(--blue); padding:20px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--ink); margin-bottom:4px;">Blue + Ink</p>
+          <p style="font-size:12px; color:rgba(0,0,0,0.6);">Background sections. Secondary UI.</p>
+        </div>
+        <div style="background:var(--ink); padding:20px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--yellow); margin-bottom:4px;">Ink + Yellow</p>
+          <p style="font-size:12px; color:rgba(255,255,255,0.6);">Dark sections. High contrast.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="callout" style="background: rgba(255,64,22,0.08); border-left-color: var(--red-orange); margin-top:24px;">
+      <strong>Color Rule</strong>
+      Yellow and blue are both dominant colors — not yellow hero, blue secondary. Both should appear heavily throughout any design. The website uses blue as a primary background across entire sections. Follow that.
+    </div>
+  </div>
+</div>
+
+<!-- ─── TYPOGRAPHY ─── -->
+<section class="section" id="type">
+  <span class="section-tag" style="color: var(--orange);">09 — Typography</span>
+  <h2 class="section-title">Type System</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Two fonts. No exceptions. Nunito owns the personality. Inter handles the rest. Together they're punchy, clean, and unmistakably Odd Pieces.</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-bottom:32px;">
+    <div class="type-specimen">
+      <p class="type-meta">Nunito · Google Fonts · Display / Headlines / UI Labels</p>
+      <p style="font-family:'Nunito'; font-weight:900; font-size:52px; text-transform: none; line-height:0.9; letter-spacing:-0.02em; color:var(--ink); margin-bottom:16px;">Nunito 900</p>
+      <p style="font-family:'Nunito'; font-weight:800; font-size:32px; text-transform: none; color:var(--ink); margin-bottom:12px;">Headline 800</p>
+      <p style="font-family:'Nunito'; font-weight:700; font-size:20px; text-transform: none; color:var(--ink); margin-bottom:8px;">Subheader 700</p>
+      <p style="font-family:'Nunito'; font-weight:800; font-size:11px;  letter-spacing:0.18em; color:#999;">Section Tag / Label · 11px · 800 · +0.18em tracking</p>
+    </div>
+    <div class="type-specimen">
+      <p class="type-meta">Inter · Google Fonts · Body / Functional Copy</p>
+      <p style="font-family:'Inter'; font-weight:400; font-size:17px; line-height:1.7; color:#333; margin-bottom:12px;">Inter Regular 400 — body copy, descriptions, longer reads. This is where the voice of the brand lives in paragraph form. Keep it warm, direct, and never boring.</p>
+      <p style="font-family:'Inter'; font-weight:500; font-size:15px; line-height:1.6; color:#555; margin-bottom:12px;">Inter Medium 500 — callouts, emphasized body, UI text.</p>
+      <p style="font-family:'Inter'; font-weight:600; font-size:13px; color:#777;">Inter SemiBold 600 — small labels, metadata, button text.</p>
+    </div>
+  </div>
+
+  <div style="background: var(--ink); border-radius:12px; padding:32px; color:white;">
+    <p class="label" style="color:var(--yellow); margin-bottom:20px;">Type Rules — Non-Negotiable</p>
+    <div class="grid-3">
+      <div>
+        <h4 style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--yellow); margin-bottom:8px;">No Outlined Text</h4>
+        <p style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.5;">No text with outlined/hollow strokes. Flat filled letterforms only.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--yellow); margin-bottom:8px;">No Drop Shadows on Type</h4>
+        <p style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.5;">No CSS text-shadow or Illustrator drop shadows on any letterforms.</p>
+      </div>
+      <div>
+        <h4 style="font-family:'Nunito'; font-weight:900; font-size:15px;  color:var(--yellow); margin-bottom:8px;">No Gradients on Type</h4>
+        <p style="font-size:14px; color:rgba(255,255,255,0.65); line-height:1.5;">No gradient fills on letterforms. Flat color only. Always.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── ILLUSTRATION ─── -->
+<div class="section-full yellow-band" id="illustration">
+  <div class="inner">
+    <span class="section-tag" style="color: rgba(0,0,0,0.45);">10 — Art Direction</span>
+    <h2 class="section-title">Illustration Direction</h2>
+    <div class="divider" style="background: var(--ink);"></div>
+    <p class="section-intro" style="color: rgba(0,0,0,0.7);">Each puzzle has its own illustration style. That's intentional. What's consistent isn't the style — it's the philosophy. Maximum density. Hidden stories. Comedic payoffs. Wimmelbilder soul.</p>
+
+    <div class="grid-3" style="margin-bottom:40px;">
+      <div class="illus-card">
+        <h4>🔍 Maximum Density</h4>
+        <p>Every inch of the illustration is packed with micro-stories. A character in the bottom-left corner has their own subplot. Find it if you can. Wimmelbilder — Where's Waldo-level layering.</p>
+      </div>
+      <div class="illus-card">
+        <h4>🎭 Comedic Payoffs</h4>
+        <p>Humor lives in the details. The thing you spot after three hours of puzzling. The absurdist twist you weren't expecting. Never mean-spirited. Always landing.</p>
+      </div>
+      <div class="illus-card">
+        <h4>🎮 Pop Culture References</h4>
+        <p>Layered, witty, earned. Not forced. Think: something that makes one person at the table gasp and the others feel like they missed a joke they'd love once explained.</p>
+      </div>
+      <div class="illus-card">
+        <h4>🪄 Before → After</h4>
+        <p>Every illustration must work as a before scene AND imply the chaos that follows. The box cover is the before. The puzzle is the after. They must be legible as a pair.</p>
+      </div>
+      <div class="illus-card">
+        <h4>🎨 Style Varies Per Title</h4>
+        <p>Pixel art for one puzzle. Clean vector isometric for another. Painterly for the next. The brand doesn't lock one illustration style — each title can look distinct while sharing the Odd Pieces philosophy.</p>
+      </div>
+      <div class="illus-card">
+        <h4>🧵 Metauniverse Threads</h4>
+        <p>Every illustration must hide at least one Easter egg referencing another Odd Pieces title. A character, an object, a logo, a detail. The universe is connected. Show it.</p>
+      </div>
+    </div>
+
+    <div class="callout" style="background: rgba(0,0,0,0.06); border-left-color: var(--ink);">
+      <strong>On AI vs. Human Artists</strong>
+      Odd Pieces works with real artists from around the world. Not AI-generated art. This is brand gospel — the human authorship behind each illustration is part of the product's soul and a key differentiator in how we talk about the work.
+    </div>
+
+    <div style="background: var(--ink); border-radius:12px; padding:32px; margin-top:24px;">
+      <p class="label" style="color:var(--yellow); margin-bottom:16px;">Humor Tone for Illustrations</p>
+      <div class="grid-3">
+        <div>
+          <p style="font-family:'Nunito'; font-weight:800; font-size:14px;  color:white; margin-bottom:6px;">Absurdist ✓</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5;">Situations that escalate beyond reason. Vacuum cleaner destroys a city. Mushrooms go full chaos. The premise is weird and the execution commits.</p>
+        </div>
+        <div>
+          <p style="font-family:'Nunito'; font-weight:800; font-size:14px;  color:white; margin-bottom:6px;">Irreverent ✓</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5;">Characters that seem to know they're in a puzzle. Winking references. Meta moments that reward the attentive.</p>
+        </div>
+        <div>
+          <p style="font-family:'Nunito'; font-weight:800; font-size:14px;  color:var(--red-orange); margin-bottom:6px;">Never Mean ✗</p>
+          <p style="font-size:13px; color:rgba(255,255,255,0.6); line-height:1.5;">Humor punches up or punches sideways. Never down. The comedy is about situations, not mocking people.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── PACKAGING ─── -->
+<section class="section" id="packaging">
+  <span class="section-tag" style="color: var(--orange);">11 — Product</span>
+  <h2 class="section-title">Packaging</h2>
+  <div class="divider"></div>
+  <p class="section-intro">The unboxing is the first touchpoint. It should feel like an Apple box crossed with a comic book. Premium cardboard. Tight, satisfying, slow-open. Every insert earns its place.</p>
+
+  <div class="pkg-row">
+    <div class="pkg-item">
+      <span class="pkg-item-icon">📦</span>
+      <h4>The Box</h4>
+      <p>Premium cardboard. Tight lid. Slow, satisfying open. The weight is right. The cover illustration is the before scene — dense, full-bleed, no dead space.</p>
+    </div>
+    <div class="pkg-item" style="background: var(--yellow);">
+      <span class="pkg-item-icon">📜</span>
+      <h4>Before Comic</h4>
+      <p>Sets the scene. You know what's happening before you start. Makes the twist land harder when you discover what changed.</p>
+    </div>
+    <div class="pkg-item">
+      <span class="pkg-item-icon">🧩</span>
+      <h4>1000 Puzzle Pieces</h4>
+      <p>Premium cut. The assembled image is the after scene — same frame, 15 seconds later. Hundreds of differences. You find them as you go.</p>
+    </div>
+    <div class="pkg-item" style="background: var(--blue);">
+      <span class="pkg-item-icon">🔒</span>
+      <h4>Secret Ending Envelope</h4>
+      <p><strong>Sealed.</strong> "Open after completing." Contains the after comic + final riddle. This is the product's climax. Don't open early. The envelope design should feel consequential.</p>
+    </div>
+    <div class="pkg-item">
+      <span class="pkg-item-icon">⚠️</span>
+      <h4>Warning Insert Card</h4>
+      <p>Signature brand moment. "This puzzle contains things you weren't supposed to find." Sets tone. Primes the hunt. Should feel like a prop from the puzzle universe.</p>
+    </div>
+    <div class="pkg-item" style="background: var(--orange);">
+      <span class="pkg-item-icon">🌟</span>
+      <h4>Sticker Sheet</h4>
+      <p>Extra delighter. Branded, in-world, collectible-feeling. Characters from the puzzle universe. Something people actually use.</p>
+    </div>
+  </div>
+
+  <div style="background: var(--ink); border-radius:12px; padding:32px; margin-top:32px; display:grid; grid-template-columns:1fr 1fr; gap:40px;">
+    <div>
+      <p class="label" style="color:var(--yellow); margin-bottom:16px;">Box Design Principles</p>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+        <li style="font-size:15px; color:rgba(255,255,255,0.75); display:flex; gap:10px;"><span style="color:var(--orange);">→</span> Full-bleed illustration — no white borders or obvious branding frames</li>
+        <li style="font-size:15px; color:rgba(255,255,255,0.75); display:flex; gap:10px;"><span style="color:var(--orange);">→</span> Title treatment in Nunito 900, uppercase, integrated into the illustration</li>
+        <li style="font-size:15px; color:rgba(255,255,255,0.75); display:flex; gap:10px;"><span style="color:var(--orange);">→</span> Small Odd Pieces logo emblem, not competing with the art</li>
+        <li style="font-size:15px; color:rgba(255,255,255,0.75); display:flex; gap:10px;"><span style="color:var(--orange);">→</span> "1000 PIECES" callout — visible, confident, not apologetic</li>
+      </ul>
+    </div>
+    <div>
+      <p class="label" style="color:var(--yellow); margin-bottom:16px;">The Apple Comparison</p>
+      <p style="font-size:15px; color:rgba(255,255,255,0.65); line-height:1.7;">The unboxing should feel premium before the puzzle does. The lid should have resistance — that satisfying slow peel. Every insert should feel intentional and placed. Nothing rattles. Nothing feels like it was an afterthought. First impression = lasting impression.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CHANNELS ─── -->
+<div class="section-full blue-band" id="channels">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">12 — Distribution</span>
+    <h2 class="section-title">Channel Guidance</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Each channel has its own rules. Same brand, different contexts. Know which game you're playing.</p>
+
+    <div class="grid-2">
+      <div class="channel-card">
+        <div class="channel-icon" style="background: var(--yellow);">🛍️</div>
+        <h3>Shopify — oddpieces.com</h3>
+        <div class="channel-rule">Lead with blue and yellow — it's the brand's home, full expression</div>
+        <div class="channel-rule">Hero section: the 3-step experience front and center</div>
+        <div class="channel-rule">Product pages: illustration detail shots that reward close inspection</div>
+        <div class="channel-rule">Tone: full brand voice, unfiltered</div>
+        <div class="channel-rule">Show the metauniverse — cross-sell is lore, not just sales</div>
+        <div class="channel-rule">The Secret Ending Envelope should be teased, never spoiled</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-icon" style="background: #F5F5F5;">📦</div>
+        <h3>Amazon</h3>
+        <div class="channel-rule">Main image: puzzle box on white background — clean, no clutter</div>
+        <div class="channel-rule">Secondary images: illustration close-ups, lifestyle in-play shots</div>
+        <div class="channel-rule">A+ content: tell the 3-step story with imagery</div>
+        <div class="channel-rule">7-image sequence: box → illustration detail → unboxing → in-play → Secret Envelope → after reveal → full family shot</div>
+        <div class="channel-rule">Title: lead with the puzzle name, then "1000-Piece Jigsaw Puzzle"</div>
+        <div class="channel-rule">Bullets: experience-first. Not "300gsm premium board."</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-icon" style="background: #28a745; color: white; font-size:20px; font-weight:900; font-family:'Nunito';">K</div>
+        <h3>Kickstarter</h3>
+        <div class="channel-rule">Campaign page should feel like a manifesto, not a product page</div>
+        <div class="channel-rule">Lead with the "WAIT — WHAT?!" energy upfront</div>
+        <div class="channel-rule">Backer tiers: name them like they're part of the universe (not "Early Bird Tier 2")</div>
+        <div class="channel-rule">Updates: talk to backers like insiders, not customers</div>
+        <div class="channel-rule">Show the team. Show the process. Human brand, all the way.</div>
+        <div class="channel-rule">Stretch goals = puzzle universe expansion moments</div>
+      </div>
+      <div class="channel-card">
+        <div class="channel-icon" style="background: #2C5F2E; color: white; font-size:18px; font-weight:900; font-family:'Nunito';">B&N</div>
+        <h3>Barnes & Noble — Retail</h3>
+        <div class="channel-rule">Shelf rule: make someone pick it up from 3 feet away</div>
+        <div class="channel-rule">Box cover must read at a distance — bold, dense, visually arresting</div>
+        <div class="channel-rule">Title treatment: large, uppercase, Nunito 900 — no elegance, just presence</div>
+        <div class="channel-rule">Side panel: "NOT YOUR ORDINARY PUZZLES" — hook before they even flip it</div>
+        <div class="channel-rule">Back panel: the 3-step experience, scannable bullets, the reveal tease</div>
+        <div class="channel-rule">No price war positioning — shelf presence is about being unmissable</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HUMAN BRAND ─── -->
+<section class="section" id="human">
+  <span class="section-tag" style="color: var(--orange);">13 — What Makes Us Different</span>
+  <h2 class="section-title">The Human Brand</h2>
+  <div class="divider"></div>
+  <p class="section-intro">This is the stuff that can't be faked. The things that separate Odd Pieces from every puzzle company that's just printing cardboard. These aren't features — they're personality.</p>
+
+  <div class="human-card">
+    <div class="human-card-icon">✉️</div>
+    <div>
+      <h3>They Mail Puzzle Pieces</h3>
+      <p>If a customer emails about a missing piece, someone on the team literally grabs a puzzle piece and mails it to them. Not a form. Not a replacement box. An actual puzzle piece in an actual envelope. This is the brand in action.</p>
+    </div>
+  </div>
+
+  <div class="human-card" style="background: var(--blue);">
+    <div class="human-card-icon">🤫</div>
+    <div>
+      <h3>Clues, Not Answers</h3>
+      <p>When someone emails asking for the answer to the final riddle, they get clues — not the solution. The experience is sacred. Spoiling it would be a betrayal. The team actively protects the mystery, even when customers beg.</p>
+    </div>
+  </div>
+
+  <div class="human-card" style="background: var(--ink);">
+    <div class="human-card-icon">🎨</div>
+    <div>
+      <h3>Real Artists, Real People</h3>
+      <p style="color: rgba(255,255,255,0.75);">Every illustration is made by a real human artist from somewhere in the world. Not AI-generated. Not templated. The artists are credited, supported, and part of the brand story. When you buy Odd Pieces, you're also buying someone's work.</p>
+    </div>
+  </div>
+
+  <div class="human-card" style="background: var(--orange);">
+    <div class="human-card-icon">🏃</div>
+    <div>
+      <h3>Small, Passionate Team</h3>
+      <p>Not a faceless corporation. A small team that genuinely believes in what they're building. This comes through in everything — the copy, the packaging details, the customer service. The brand has a pulse because the team does.</p>
+    </div>
+  </div>
+
+  <div class="callout">
+    <strong>The Rule</strong>
+    Every brand decision should feel like it was made by a human for a human. If it feels automated, templated, or corporate — it's wrong. The human brand is not a marketing strategy. It's who Odd Pieces actually is.
+  </div>
+</section>
+
+<!-- ─── DO / DON'T ─── -->
+<div class="section-full" style="background: var(--ink);" id="dodont">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">14 — Rules</span>
+    <h2 class="section-title" style="color: white;">Do / Don't</h2>
+    <div class="divider" style="background: var(--yellow);"></div>
+    <p class="section-intro" style="color: rgba(255,255,255,0.65);">The short version of everything above. Print this out. Put it on the wall. Check every design against it.</p>
+
+    <div class="do-dont">
+      <div class="do-col">
+        <div class="do-dont-header">✓ Do</div>
+        <div class="do-dont-item">Use Odd Yellow (#FEE000) and Blue (#C1E3E8) heavily — both are hero colors</div>
+        <div class="do-dont-item">Use Nunito 900 uppercase for all headlines and display text</div>
+        <div class="do-dont-item">Lead with the twist, the shock, the "WAIT — WHAT?!" moment</div>
+        <div class="do-dont-item">Make the document / design itself feel fun and energetic</div>
+        <div class="do-dont-item">Let illustration styles vary per title — the philosophy is what's consistent</div>
+        <div class="do-dont-item">Credit and celebrate the artists behind each illustration</div>
+        <div class="do-dont-item">Keep the Secret Ending sacred — tease, never spoil</div>
+        <div class="do-dont-item">Write copy that sounds like a smart, irreverent human</div>
+        <div class="do-dont-item">Use the Wimmelbilder philosophy — maximum density, everywhere</div>
+        <div class="do-dont-item">Hide metauniverse Easter eggs in every illustration</div>
+        <div class="do-dont-item">Make the flat logo system — no stacked layers, no outlines</div>
+        <div class="do-dont-item">The small light blue circle at the bottom of the P — always there</div>
+      </div>
+      <div class="dont-col">
+        <div class="do-dont-header">✗ Don't</div>
+        <div class="do-dont-item">Add drop shadows, gradients, or outlines to typography</div>
+        <div class="do-dont-item">Use the stacked-offset multi-copy logo (that's the old version)</div>
+        <div class="do-dont-item">Sound like Magic Puzzle Company — differentiate actively</div>
+        <div class="do-dont-item">Use luxury editorial tone ("an immersive puzzle experience")</div>
+        <div class="do-dont-item">Sound like a children's activity brand (too soft, too safe)</div>
+        <div class="do-dont-item">Use AI-generated art for puzzle illustrations</div>
+        <div class="do-dont-item">Spoil the Secret Ending in any marketing material</div>
+        <div class="do-dont-item">Automate customer service in ways that feel robotic</div>
+        <div class="do-dont-item">Let any channel feel generic, corporate, or templated</div>
+        <div class="do-dont-item">Use only yellow and ignore blue (both are dominant)</div>
+        <div class="do-dont-item">Position as "for kids" OR "adults only" — it's both, always</div>
+        <div class="do-dont-item">Create new puzzle titles that don't connect to the metauniverse</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── CLOSING MARQUEE ─── -->
+<div class="tag-stripe" style="background: var(--ink);">
+  <div class="tag-stripe-inner" style="color: var(--orange);">
+    <span>ODD PIECES ™</span>
+    <span style="opacity:0.3">·</span>
+    <span>NOT FOR EVERYONE. PROBABLY FOR YOU THOUGH.</span>
+    <span style="opacity:0.3">·</span>
+    <span>1000 PIECES. ZERO CONTEXT. GOOD LUCK.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THE GIFT FOR PEOPLE WHO HAVE EVERYTHING EXCEPT A REAL HOBBY.</span>
+    <span style="opacity:0.3">·</span>
+    <span>ODD PIECES ™</span>
+    <span style="opacity:0.3">·</span>
+    <span>NOT FOR EVERYONE. PROBABLY FOR YOU THOUGH.</span>
+    <span style="opacity:0.3">·</span>
+    <span>1000 PIECES. ZERO CONTEXT. GOOD LUCK.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THE GIFT FOR PEOPLE WHO HAVE EVERYTHING EXCEPT A REAL HOBBY.</span>
+    <span style="opacity:0.3">·</span>
+  </div>
+</div>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <strong>ODD PIECES</strong>
+  <p style="margin-top:12px;">Brand Guidelines v5 · Not your ordinary puzzles. · oddpieces.com</p>
+  <p style="margin-top:6px; font-size:11px; opacity:0.4;">This document is for internal use and approved agency partners only. All illustration content is the work of human artists. Please protect the metauniverse.</p>
+</footer>
+
+</body>
+</html>

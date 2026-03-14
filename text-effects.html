@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Text Effects</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{--yellow:#FEE000;--black:#1A1A1A;--cream:#FFFBF0;--blue:#C1E3E8;--orange:#FC9C1C;--red:#FF4016;}
+body{font-family:'Inter',sans-serif;background:#E8E2D4;color:var(--black);}
+
+.header{background:var(--black);padding:28px 48px;border-bottom:3px solid var(--blue);}
+.header h1{font-family:'Inter',sans-serif;font-weight:700;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);margin-bottom:6px;}
+.header p{font-size:16px;color:rgba(255,255,255,.6);}
+
+.section-divider{padding:16px 48px;background:var(--black);}
+.section-divider p{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.4);}
+
+.row{display:grid;gap:3px;background:#C8C2B4;padding:3px;margin-bottom:3px;}
+.row-2{grid-template-columns:1fr 1fr;}
+.row-3{grid-template-columns:1fr 1fr 1fr;}
+.row-1{grid-template-columns:1fr;}
+
+.cell{padding:52px 48px;display:flex;flex-direction:column;gap:20px;}
+.bg-cream{background:var(--cream);}
+.bg-blue{background:var(--blue);}
+.bg-yellow{background:var(--yellow);}
+.bg-white{background:white;}
+
+.tag{display:inline-flex;align-items:center;gap:6px;font-family:'Nunito',sans-serif;font-weight:900;font-size:10px;letter-spacing:.15em;text-transform:uppercase;padding:3px 10px;margin-bottom:4px;}
+.tag-yes{background:var(--blue);color:var(--black);}
+.tag-no{background:var(--red);color:white;}
+.tag-maybe{background:var(--orange);color:white;}
+
+.desc{font-size:13px;color:#666;line-height:1.6;max-width:380px;font-family:'Inter',sans-serif;}
+.bg-blue .desc{color:rgba(0,0,0,.5);}
+.bg-yellow .desc{color:rgba(0,0,0,.5);}
+
+/* ── TEXT EFFECT STYLES ── */
+.hed{font-family:'Nunito',sans-serif;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;font-size:clamp(52px,7vw,84px);}
+
+/* Hard shadow — the good one */
+.hard{text-shadow:3px 3px 0 var(--black);}
+.hard-red{text-shadow:3px 3px 0 var(--black);}
+.hard-orange{text-shadow:3px 3px 0 var(--black);}
+
+/* Soft shadow — the bad one */
+.soft{text-shadow:0 6px 20px rgba(0,0,0,.5);}
+
+/* Outline */
+.outline{color:transparent;-webkit-text-stroke:3px currentColor;}
+.outline-black{color:transparent;-webkit-text-stroke:3px var(--black);}
+.outline-yellow{color:transparent;-webkit-text-stroke:3px var(--yellow);}
+
+/* Verdict cards at bottom */
+.verdict-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;background:#C8C2B4;padding:3px;}
+.verdict-card{padding:32px 36px;}
+.vc-label{font-family:'Nunito',sans-serif;font-weight:900;font-size:11px;letter-spacing:.15em;text-transform:uppercase;margin-bottom:10px;}
+.vc-body{font-size:14px;line-height:1.6;font-family:'Inter',sans-serif;}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Odd Pieces · Text Effects</h1>
+  <p>Hard shadow vs soft shadow vs outline — side by side on the same background.</p>
+</div>
+
+<!-- HARD VS SOFT — SAME BACKGROUND, SIDE BY SIDE -->
+<div class="section-divider" style="margin-top:3px;"><p>The treatment — exactly like the reference</p></div>
+<div class="row row-1">
+  <div class="cell bg-yellow" style="padding:60px 80px;">
+    <div style="line-height:1.1;">
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);text-transform:uppercase;letter-spacing:-.01em;color:#1A1A1A;">NOT YOUR ORDINARY PUZZLES</div>
+      <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(40px,6vw,76px);text-transform:uppercase;letter-spacing:-.01em;color:white;-webkit-text-stroke:3px #1A1A1A;text-shadow:4px 4px 0 #1A1A1A;">&amp; YOU'LL LOVE IT</div>
+    </div>
+    <p class="desc" style="color:rgba(0,0,0,.5);margin-top:24px;">Line 1: plain bold black. Line 2: white fill + 3px black stroke + 4px bottom-right black shadow. Shadow direction: positive X (right) + positive Y (down).</p>
+  </div>
+</div>
+<div class="row row-3">
+  <div class="cell bg-blue">
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(14px,2.5vw,22px);text-transform:uppercase;letter-spacing:-.01em;color:#1A1A1A;margin-bottom:4px;">NOT YOUR ORDINARY PUZZLES</div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);text-transform:uppercase;letter-spacing:-.01em;color:white;-webkit-text-stroke:2.5px #1A1A1A;text-shadow:4px 4px 0 #1A1A1A;">&amp; YOU'LL LOVE IT</div>
+  </div>
+  <div class="cell bg-cream">
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(14px,2.5vw,22px);text-transform:uppercase;letter-spacing:-.01em;color:#1A1A1A;margin-bottom:4px;">NOT YOUR ORDINARY PUZZLES</div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);text-transform:uppercase;letter-spacing:-.01em;color:white;-webkit-text-stroke:2.5px #1A1A1A;text-shadow:4px 4px 0 #1A1A1A;">&amp; YOU'LL LOVE IT</div>
+  </div>
+  <div class="cell" style="background:#1A1A1A;">
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(14px,2.5vw,22px);text-transform:uppercase;letter-spacing:-.01em;color:rgba(255,255,255,0.6);margin-bottom:4px;">NOT YOUR ORDINARY PUZZLES</div>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(28px,4vw,52px);text-transform:uppercase;letter-spacing:-.01em;color:white;-webkit-text-stroke:2.5px rgba(255,255,255,0.3);text-shadow:4px 4px 0 rgba(255,255,255,0.15);">&amp; YOU'LL LOVE IT</div>
+  </div>
+</div>
+<div class="section-divider" style="margin-top:3px;"><p>Hard shadow vs soft shadow — same background, same font, same size</p></div>
+<div class="row row-2">
+  <div class="cell bg-blue">
+    <span class="tag tag-yes">✓ Hard Shadow</span>
+    <div class="hed" style="color:var(--black);font-family:'Nunito',sans-serif;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;font-size:clamp(52px,7vw,84px);text-shadow:3px 3px 0 #1a5a60;">NOT YOUR<br>ORDINARY<br>PUZZLES.</div>
+    <p class="desc">4px offset, zero blur, solid red-orange colour. Looks deliberate. Like a label was stamped onto it.</p>
+  </div>
+  <div class="cell bg-blue">
+    <span class="tag tag-no">✗ Soft Shadow</span>
+    <div class="hed soft" style="color:var(--black);">NOT YOUR<br>ORDINARY<br>PUZZLES.</div>
+    <p class="desc">Blurred shadow. Looks like it's floating off the page — not in a good way. Immediately feels cheaper.</p>
+  </div>
+</div>
+
+<div class="row row-2">
+  <div class="cell bg-cream">
+    <span class="tag tag-yes">✓ Hard Shadow on Cream</span>
+    <div class="hed" style="color:var(--black);font-family:'Nunito',sans-serif;font-weight:900;text-transform:uppercase;line-height:.95;letter-spacing:-.01em;font-size:clamp(52px,7vw,84px);text-shadow:3px 3px 0 #1a2a3a;">WAIT —<br>WHAT?!</div>
+    <p class="desc">Black text, orange shadow on cream. Clean, graphic, punchy. The shadow adds dimension without blurring anything.</p>
+  </div>
+  <div class="cell bg-cream">
+    <span class="tag tag-no">✗ Soft Shadow on Cream</span>
+    <div class="hed soft" style="color:var(--black);">WAIT —<br>WHAT?!</div>
+    <p class="desc">Same background, same text — but blurred. Feels muddy and unintentional.</p>
+  </div>
+</div>
+
+<!-- OUTLINE SECTION -->
+<div class="section-divider"><p>Outline text — for hero moments only</p></div>
+<div class="row row-2">
+  <div class="cell bg-cream">
+    <span class="tag tag-maybe">◎ Outline — Selective Use</span>
+    <div class="hed outline-black">ODD<br>PIECES.</div>
+    <p class="desc">Hollow letters on cream. Very editorial, very clean. Use for one big hero moment per layout — the brand name massive on a box, a campaign poster.</p>
+  </div>
+  <div class="cell bg-blue">
+    <span class="tag tag-yes">✓ Filled + Outline Mix</span>
+    <div class="hed" style="color:var(--black);">ODD</div>
+    <div class="hed outline-black">PIECES.</div>
+    <p class="desc">One word filled, one word outlined. The most ownable Odd Pieces treatment — depth and contrast in a single headline.</p>
+  </div>
+</div>
+
+<div class="row row-2">
+  <div class="cell bg-yellow">
+    <span class="tag tag-yes">✓ Hard Shadow on Yellow</span>
+    <div class="hed hard-red" style="color:var(--black);">1000<br>PIECES.</div>
+    <p class="desc">Yellow background, black text, red-orange hard shadow. The shadow needs contrast to show — never use black-on-black.</p>
+  </div>
+  <div class="cell" style="background:var(--orange);">
+    <span class="tag" style="background:var(--black);color:white;">Orange Background</span>
+    <div class="hed" style="color:white;text-shadow:3px 3px 0 var(--black);">ZERO<br>CONTEXT.</div>
+    <p class="desc" style="color:rgba(255,255,255,.7);">White text + black hard shadow on orange. Bold and energetic.</p>
+  </div>
+  <div class="cell" style="background:var(--orange);">
+    <span class="tag" style="background:var(--black);color:white;">Orange Background</span>
+    <div class="hed" style="color:var(--black);text-shadow:3px 3px 0 white;">ZERO<br>CONTEXT.</div>
+    <p class="desc" style="color:rgba(0,0,0,.5);">Black text + white hard shadow on orange. Slightly softer, still punchy.</p>
+  </div>
+</div>
+
+<!-- VERDICT -->
+
+<div class="section-divider"><p>White text + black outline + black shadow — like the original</p></div>
+<div class="row row-3">
+  <div class="cell bg-blue">
+    <span class="tag tag-yes">✓ On Blue</span>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(48px,7vw,80px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:white;-webkit-text-stroke:2px black;text-shadow:3px 3px 0 black;">NOT YOUR<br>ORDINARY<br>PUZZLES.</div>
+    <p class="desc" style="color:rgba(0,0,0,.5);">White fill, black stroke, black shadow. Pops on any background.</p>
+  </div>
+  <div class="cell bg-cream">
+    <span class="tag tag-yes">✓ On Cream</span>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(48px,7vw,80px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:white;-webkit-text-stroke:2px black;text-shadow:3px 3px 0 black;">WAIT —<br>WHAT?!</div>
+    <p class="desc">Same treatment on cream. The outline is the key — separates white text from any light background.</p>
+  </div>
+  <div class="cell bg-yellow">
+    <span class="tag tag-yes">✓ On Yellow</span>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(48px,7vw,80px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:white;-webkit-text-stroke:2px black;text-shadow:3px 3px 0 black;">1000<br>PIECES.</div>
+    <p class="desc" style="color:rgba(0,0,0,.5);">Finally works on yellow too — the black outline does the heavy lifting.</p>
+  </div>
+</div>
+<div class="row row-2">
+  <div class="cell" style="background:var(--orange);">
+    <span class="tag" style="background:var(--black);color:white;">✓ On Orange</span>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(48px,7vw,80px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:white;-webkit-text-stroke:2px black;text-shadow:3px 3px 0 black;">ZERO<br>CONTEXT.</div>
+    <p class="desc" style="color:rgba(255,255,255,.7);">Works on orange too. Universally readable.</p>
+  </div>
+  <div class="cell" style="background:var(--black);">
+    <span class="tag" style="background:var(--teal, #C1E3E8);color:black;">✓ On Black</span>
+    <div style="font-family:'Nunito',sans-serif;font-weight:900;font-size:clamp(48px,7vw,80px);text-transform:uppercase;line-height:.95;letter-spacing:-.01em;color:white;-webkit-text-stroke:2px black;text-shadow:3px 3px 0 rgba(255,255,255,0.15);">ODD<br>PIECES.</div>
+    <p class="desc" style="color:rgba(255,255,255,.4);">On black, swap shadow to white — same technique, same rules.</p>
+  </div>
+</div>
+<div class="section-divider"><p>The verdict</p></div>
+<div class="verdict-grid">
+  <div class="verdict-card bg-blue">
+    <div class="vc-label">Use Always</div>
+    <div class="vc-body">Hard shadow (4px, no blur) on display headlines. This is the Odd Pieces signature move. Blue or cream backgrounds. Shadow colour rotates: black, orange, or red.</div>
+  </div>
+  <div class="verdict-card bg-cream">
+    <div class="vc-label">Use Sparingly</div>
+    <div class="vc-body">Outline or filled+outlined mix — once per layout maximum. Reserve it for the biggest moment on the page: box cover, hero banner, campaign poster.</div>
+  </div>
+  <div class="verdict-card" style="background:var(--red);">
+    <div class="vc-label" style="color:white;">Never Use</div>
+    <div class="vc-body" style="color:rgba(255,255,255,.85);">Soft blurred shadow. On anything. Ever. That's the rule. Not a guideline.</div>
+  </div>
+</div>
+
+</body>
+</html>

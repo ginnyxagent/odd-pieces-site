@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odd Pieces — Visual System</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #FFFBF0;
+            color: #1A1A1A;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.7;
+        }
+
+        header {
+            padding: 120px 60px 80px;
+            text-align: center;
+            border-bottom: 1px solid #E0E0E0;
+        }
+
+        h1 {
+            font-family: 'Nunito', sans-serif;
+            font-size: 64px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+            letter-spacing: -2px;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            font-weight: 500;
+            color: #666;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+        }
+
+        .section {
+            padding: 80px 60px;
+            border-bottom: 1px solid #E0E0E0;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            align-items: start;
+        }
+
+        .section:last-of-type {
+            border-bottom: none;
+        }
+
+        .section-number {
+            font-family: 'Nunito', sans-serif;
+            font-size: 120px;
+            font-weight: 900;
+            color: #E8E8E8;
+            line-height: 1;
+            margin-bottom: 20px;
+        }
+
+        .section-header {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: #1A1A1A;
+        }
+
+        .section-desc {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #FC9C1C;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        .section-text {
+            font-size: 16px;
+            line-height: 1.7;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .usage-rules {
+            background-color: #F5F5F5;
+            border-left: 3px solid #1A1A1A;
+            padding: 20px;
+            margin-top: 30px;
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .usage-rules strong {
+            color: #1A1A1A;
+        }
+
+        .visual-examples {
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+        }
+
+        .example {
+            background: white;
+            border: 1px solid #E0E0E0;
+            padding: 30px;
+        }
+
+        .example-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #999;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        /* SECTION 1: THE SPLIT */
+        .split-container {
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .split-mockup {
+            border: 1px solid #E0E0E0;
+            background: white;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        .split-social {
+            aspect-ratio: 1;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            position: relative;
+        }
+
+        .split-half {
+            padding: 40px 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            align-items: center;
+            position: relative;
+        }
+
+        .split-before {
+            background: linear-gradient(135deg, #C1E3E8 0%, #A0D4E8 100%);
+            opacity: 0.7;
+        }
+
+        .split-after {
+            background: linear-gradient(135deg, #FEE000 0%, #FC9C1C 50%, #FF4016 100%);
+        }
+
+        .split-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            font-weight: 800;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        .split-divider {
+            position: absolute;
+            width: 4px;
+            height: 100%;
+            background: #1A1A1A;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+        }
+
+        .split-timer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border: 2px solid #1A1A1A;
+        }
+
+        .split-email {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            gap: 0;
+            min-height: 250px;
+            position: relative;
+        }
+
+        .split-email-before {
+            background: linear-gradient(to bottom, #C1E3E8 0%, #A0D4E8 100%);
+            opacity: 0.7;
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .split-email-after {
+            background: linear-gradient(to bottom, #FEE000 0%, #FC9C1C 100%);
+            padding: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .split-email-divider {
+            height: 40px;
+            background: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: 'Nunito', sans-serif;
+            font-size: 12px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+        }
+
+        .split-web {
+            height: 200px;
+            background: linear-gradient(to right, #C1E3E8 0%, #C1E3E8 50%, #FEE000 50%, #FEE000 100%);
+            position: relative;
+            border: 1px solid #E0E0E0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .split-web::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: #1A1A1A;
+        }
+
+        .split-web-label {
+            position: absolute;
+            font-family: 'Nunito', sans-serif;
+            font-size: 10px;
+            text-transform: uppercase;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+        }
+
+        .split-web-left {
+            left: 25%;
+        }
+
+        .split-web-right {
+            right: 25%;
+        }
+
+        /* SECTION 2: WARNING STAMPS */
+        .stamps-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .stamp {
+            width: 140px;
+            height: 140px;
+            border: 3px solid #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 10px;
+            text-transform: uppercase;
+            color: white;
+            transform: rotate(-3deg);
+            padding: 12px;
+            line-height: 1.2;
+            letter-spacing: 0.08em;
+        }
+
+        .stamp-warning {
+            background: #FF4016;
+        }
+
+        .stamp-spoiler {
+            background: #FC9C1C;
+        }
+
+        .stamp-classified {
+            background: #1A1A1A;
+            color: white;
+        }
+
+        .stamp-caution {
+            background: #C1E3E8;
+            color: #1A1A1A;
+        }
+
+        .stamps-sizes {
+            margin-top: 30px;
+            display: flex;
+            align-items: flex-end;
+            gap: 20px;
+        }
+
+        .stamp-small {
+            width: 80px;
+            height: 80px;
+            font-size: 8px;
+        }
+
+        .stamp-large {
+            width: 180px;
+            height: 180px;
+            font-size: 12px;
+        }
+
+        .stamps-applications {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .stamp-app {
+            position: relative;
+            background: white;
+            border: 1px solid #E0E0E0;
+            padding: 30px;
+            min-height: 150px;
+        }
+
+        .stamp-positioned {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            transform: rotate(-3deg);
+        }
+
+        /* SECTION 3: PATTERN */
+        .pattern-swatches {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .pattern-swatch {
+            min-height: 400px;
+            border: 1px solid #E0E0E0;
+            background-size: 80px 80px;
+            position: relative;
+        }
+
+        .pattern-dark {
+            background-color: #1A1A1A;
+        }
+
+        .pattern-light {
+            background-color: #FFFBF0;
+        }
+
+        .pattern-mockups {
+            margin-top: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .pattern-mockup {
+            background: white;
+            border: 1px solid #E0E0E0;
+            padding: 20px;
+            min-height: 120px;
+            position: relative;
+        }
+
+        .pattern-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .pattern-content {
+            position: relative;
+            z-index: 2;
+            padding: 20px;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        /* SECTION 4: THE FRAME */
+        .frames-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .frame {
+            border: 3px solid #1A1A1A;
+            position: relative;
+            background: white;
+            overflow: hidden;
+        }
+
+        .frame-corner-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 40px;
+            height: 40px;
+            background: #FC9C1C;
+            border: 2px solid #1A1A1A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            z-index: 10;
+            transform: rotate(10deg);
+        }
+
+        .frame-bottom-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 45px;
+            background: #1A1A1A;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Nunito', sans-serif;
+            color: white;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .frame-square {
+            aspect-ratio: 1;
+        }
+
+        .frame-story {
+            aspect-ratio: 9 / 16;
+        }
+
+        .frame-email {
+            aspect-ratio: 16 / 9;
+        }
+
+        .frame-product {
+            aspect-ratio: 4 / 5;
+        }
+
+        .frame-content {
+            padding-bottom: 45px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #C1E3E8 0%, #FEE000 100%);
+        }
+
+        .frame-label {
+            font-family: 'Nunito', sans-serif;
+            font-size: 12px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: white;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+
+        /* SECTION 5: TYPOGRAPHY */
+        .typography-example {
+            background: white;
+            border: 1px solid #E0E0E0;
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .hero-headline {
+            font-family: 'Nunito', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: white;
+            text-shadow: 
+                -2px -2px 0 #1A1A1A,
+                2px -2px 0 #1A1A1A,
+                -2px 2px 0 #1A1A1A,
+                2px 2px 0 #1A1A1A,
+                -2px 0 0 #1A1A1A,
+                2px 0 0 #1A1A1A,
+                0 -2px 0 #1A1A1A,
+                0 2px 0 #1A1A1A,
+                4px 4px 0 #1A1A1A;
+            line-height: 1.1;
+            margin-bottom: 20px;
+        }
+
+        .section-label {
+            font-family: 'Inter', sans-serif;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #FC9C1C;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .body-copy {
+            font-family: 'Inter', sans-serif;
+            font-size: 16px;
+            color: #333;
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .pull-quote {
+            font-family: 'Nunito', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: #1A1A1A;
+            margin: 30px 0;
+            padding-left: 20px;
+            border-left: 4px solid #FC9C1C;
+        }
+
+        .cta-button {
+            display: inline-block;
+            font-family: 'Nunito', sans-serif;
+            font-size: 14px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 14px 32px;
+            margin-right: 12px;
+            margin-bottom: 12px;
+            border: 2px solid #1A1A1A;
+        }
+
+        .cta-black-yellow {
+            background: #1A1A1A;
+            color: #FEE000;
+        }
+
+        .cta-blue-black {
+            background: #C1E3E8;
+            color: #1A1A1A;
+        }
+
+        .caption {
+            font-family: 'Inter', sans-serif;
+            font-size: 12px;
+            color: #888;
+            font-weight: 500;
+            margin-top: 16px;
+        }
+
+        /* SECTION 6: COLOR SYSTEM */
+        .color-combos {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+
+        .color-card {
+            border: 1px solid #E0E0E0;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 200px 1fr;
+        }
+
+        .color-bg {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .color-content {
+            padding: 40px;
+            background: white;
+        }
+
+        .color-title {
+            font-family: 'Nunito', sans-serif;
+            font-size: 18px;
+            font-weight: 800;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 16px;
+            color: #1A1A1A;
+        }
+
+        .color-headline {
+            font-family: 'Nunito', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            text-transform: uppercase;
+            margin-bottom: 12px;
+            color: inherit;
+        }
+
+        .color-body {
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            color: inherit;
+            margin-bottom: 20px;
+        }
+
+        .primary-combo-bg {
+            background: #C1E3E8;
+        }
+
+        .primary-combo-headline {
+            color: #1A1A1A;
+        }
+
+        .primary-combo-body {
+            color: #1A1A1A;
+        }
+
+        .primary-combo-accent {
+            color: #FEE000;
+        }
+
+        .secondary-combo-bg {
+            background: #FFFBF0;
+            border: 1px solid #E0E0E0;
+        }
+
+        .secondary-combo-headline {
+            color: #1A1A1A;
+        }
+
+        .secondary-combo-body {
+            color: #666;
+        }
+
+        .secondary-combo-accent {
+            color: #FC9C1C;
+        }
+
+        .dark-combo-bg {
+            background: #1A1A1A;
+        }
+
+        .dark-combo-headline {
+            color: white;
+        }
+
+        .dark-combo-body {
+            color: #E8E8E8;
+        }
+
+        .dark-combo-accent {
+            color: #C1E3E8;
+        }
+
+        .alert-combo-bg {
+            background: #FF4016;
+        }
+
+        .alert-combo-headline {
+            color: white;
+        }
+
+        .alert-combo-body {
+            color: white;
+        }
+
+        .alert-combo-accent {
+            color: #1A1A1A;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 1024px) {
+            .section {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            h1 {
+                font-size: 48px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .section-number {
+                font-size: 80px;
+            }
+
+            header, .section {
+                padding: 60px 40px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Odd Pieces</h1>
+        <p class="subtitle">Visual System</p>
+    </header>
+
+    <!-- SECTION 1: THE SPLIT -->
+    <section class="section">
+        <div>
+            <div class="section-number">01</div>
+            <div class="section-header">
+                <h2 class="section-title">The Split</h2>
+                <p class="section-desc">Signature BEFORE/AFTER Layout</p>
+            </div>
+            <p class="section-text">The BEFORE/AFTER split is the core brand device used across all marketing materials. It visualizes the core concept: "what happens 15 seconds after the box cover." The split creates immediate visual drama and positions Odd Pieces as the brand that disrupts the mundane.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Left half: muted/desaturated blue tones, calm
+                Right half: saturated yellow/orange/red, chaos
+                Always include divider (black, 3-4px)
+                Timer icon at split point for emphasis
+                Works at any aspect ratio (square, wide, vertical)
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="example">
+                <div class="example-label">Social Post (Square)</div>
+                <div class="split-mockup">
+                    <div class="split-social">
+                        <div class="split-half split-before">
+                            <div class="split-label">Before</div>
+                        </div>
+                        <div class="split-half split-after">
+                            <div class="split-label">15 Seconds Later</div>
+                        </div>
+                        <div class="split-divider"></div>
+                        <div class="split-timer">⏱</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-label">Email Header (Wide)</div>
+                <div class="split-mockup">
+                    <div class="split-email">
+                        <div class="split-email-before">
+                            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">Before</span>
+                        </div>
+                        <div class="split-email-divider">15 Seconds Later →</div>
+                        <div class="split-email-after">
+                            <span style="font-size: 12px; text-transform: uppercase; letter-spacing: 0.1em;">After</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-label">Website Banner (Full Width)</div>
+                <div class="split-web">
+                    <span class="split-web-label split-web-left">Calm</span>
+                    <span class="split-web-label split-web-right">Chaos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: WARNING STAMPS -->
+    <section class="section">
+        <div>
+            <div class="section-number">02</div>
+            <div class="section-header">
+                <h2 class="section-title">The Warning System</h2>
+                <p class="section-desc">Brand Stamps & Badges</p>
+            </div>
+            <p class="section-text">A system of rotated stamps used across packaging, emails, social posts, and point-of-sale. Each stamp carries a distinct message and attitude, reinforcing the brand's mysterious, playful energy. The 3-degree rotation and thick black borders make them instantly recognizable.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Always rotate 2-3 degrees for energy
+                3px minimum black border
+                Use white text for high contrast
+                Apply to corners, overlays, and content areas
+                Can be layered or used individually
+                Scale from 80px to 200px+
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="example">
+                <div class="example-label">The Four Stamps</div>
+                <div class="stamps-container">
+                    <div class="stamp stamp-warning">This Puzzle Contains Things You Weren't Supposed to Find</div>
+                    <div class="stamp stamp-spoiler">Do Not Open Until Puzzle Is Complete</div>
+                    <div class="stamp stamp-classified">Secret Ending Enclosed—No Peeking</div>
+                    <div class="stamp stamp-caution">May Cause: Arguments, Laughter, Wine Spills</div>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-label">Size Variations</div>
+                <div class="stamps-sizes">
+                    <div class="stamp stamp-small stamp-warning">WARNING</div>
+                    <div class="stamp stamp-warning">Standard</div>
+                    <div class="stamp stamp-large stamp-warning">LARGE</div>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-label">Applications</div>
+                <div class="stamps-applications">
+                    <div class="stamp-app" style="background: #C1E3E8;">
+                        <div class="stamp stamp-small stamp-warning" style="position: relative; transform: rotate(-3deg); width: 60px; height: 60px; margin: 0;">WARNING</div>
+                        <p style="margin-left: 80px; font-family: Inter; font-size: 12px; color: #666;">Email header with corner stamp</p>
+                    </div>
+                    <div class="stamp-app" style="background: linear-gradient(135deg, #FEE000 0%, #FC9C1C 100%);">
+                        <div class="stamp stamp-small stamp-classified" style="position: relative; margin: 0; width: 60px; height: 60px;"></div>
+                        <p style="margin-left: 80px; font-family: Inter; font-size: 12px; color: #1A1A1A;">Social post with classified stamp</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: THE PATTERN -->
+    <section class="section">
+        <div>
+            <div class="section-number">03</div>
+            <div class="section-header">
+                <h2 class="section-title">The Pattern</h2>
+                <p class="section-desc">Brand Texture & Signature Background</p>
+            </div>
+            <p class="section-text">A repeating, geometric texture that feels uniquely Odd Pieces. Contains puzzle pieces, warning triangles, question marks, exclamation marks, magnifying glasses, timers, and the letter P. Two colorways: dark (black bg, light icons) and light (cream bg, dark icons). Used on tissue paper, social backgrounds, emails, and website sections.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Dark version: 15% icon opacity on black
+                Light version: 8% icon opacity on cream
+                Scale as needed, maintains geometric quality
+                Typically 80px tile size
+                Works as wallpaper or accent sections
+                Never use as primary content background
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="example">
+                <div class="example-label">Pattern Swatches</div>
+                <div class="pattern-swatches">
+                    <div class="pattern-swatch pattern-dark" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><g fill=%22%23FEE000%22 opacity=%220.15%22><rect x=%2210%22 y=%2210%22 width=%2215%22 height=%2215%22/><path d=%22M40 20L45 30L35 30Z%22/><text x=%2250%22 y=%2235%22 font-size=%2212%22>?</text><text x=%2260%22 y=%2250%22 font-size=%2212%22>!</text><circle cx=%2725%27 cy=%2750%27 r=%225%27/></g></svg>'); background-size: 80px 80px;"></div>
+                    <div class="pattern-swatch pattern-light" style="background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><g fill=%22%231A1A1A%22 opacity=%220.08%22><rect x=%2210%22 y=%2210%22 width=%2215%22 height=%2215%22/><path d=%22M40 20L45 30L35 30Z%22/><text x=%2250%22 y=%2235%22 font-size=%2212%22>?</text><text x=%2260%22 y=%2250%22 font-size=%2212%22>!</text><circle cx=%2725%27 cy=%2750%27 r=%275%27/></g></svg>'); background-size: 80px 80px;"></div>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-label">Pattern Applications</div>
+                <div class="pattern-mockups">
+                    <div class="pattern-mockup">
+                        <div class="pattern-bg" style="background-color: #1A1A1A; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><g fill=%22%23FEE000%22 opacity=%220.15%22><rect x=%2210%22 y=%2210%22 width=%2215%22 height=%2215%22/><path d=%22M40 20L45 30L35 30Z%22/></g></svg>'); background-size: 80px 80px;"></div>
+                        <div class="pattern-content">Tissue Paper Wrap</div>
+                    </div>
+                    <div class="pattern-mockup">
+                        <div class="pattern-bg" style="background-color: #C1E3E8; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><g fill=%22%231A1A1A%22 opacity=%220.08%22><path d=%22M40 20L45 30L35 30Z%22/><text x=%2250%22 y=%2235%22 font-size=%2212%22>?</text></g></svg>'); background-size: 80px 80px;"></div>
+                        <div class="pattern-content">Social Background</div>
+                    </div>
+                    <div class="pattern-mockup">
+                        <div class="pattern-bg" style="background-color: #FFFBF0; background-image: url('data:image/svg+xml;utf8,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2280%22 height=%2280%22><g fill=%22%231A1A1A%22 opacity=%220.08%22><text x=%2250%22 y=%2235%22 font-size=%2212%22>!</text><circle cx=%2725%27 cy=%2750%27 r=%275%27/></g></svg>'); background-size: 80px 80px;"></div>
+                        <div class="pattern-content">Email Section Fill</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: THE FRAME -->
+    <section class="section">
+        <div>
+            <div class="section-number">04</div>
+            <div class="section-header">
+                <h2 class="section-title">The Frame</h2>
+                <p class="section-desc">Content Container Treatment</p>
+            </div>
+            <p class="section-text">A consistent border/container treatment that makes any content instantly recognizable as Odd Pieces. Features a 3px black border, small orange corner badge (top-right), and a black bottom bar with white Nunito text. This frame unifies social posts, ads, emails, and product listings.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Always: 3px black border
+                Always: orange corner badge (top-right)
+                Always: black bottom bar with white text
+                Bottom bar height: 45px minimum
+                Works with any aspect ratio
+                Content area padding: 20px minimum
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="example">
+                <div class="example-label">Frame Formats</div>
+                <div class="frames-container">
+                    <div class="frame frame-square">
+                        <div class="frame-corner-badge">⚠</div>
+                        <div class="frame-content"></div>
+                        <div class="frame-bottom-bar"><span class="frame-label">Social Post</span></div>
+                    </div>
+
+                    <div class="frame frame-story">
+                        <div class="frame-corner-badge">P</div>
+                        <div class="frame-content"></div>
+                        <div class="frame-bottom-bar"><span class="frame-label">Story Format</span></div>
+                    </div>
+
+                    <div class="frame frame-email">
+                        <div class="frame-corner-badge">⚠</div>
+                        <div class="frame-content"></div>
+                        <div class="frame-bottom-bar"><span class="frame-label">Email Header</span></div>
+                    </div>
+
+                    <div class="frame frame-product">
+                        <div class="frame-corner-badge">P</div>
+                        <div class="frame-content"></div>
+                        <div class="frame-bottom-bar"><span class="frame-label">Product Listing</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: TYPOGRAPHY -->
+    <section class="section">
+        <div>
+            <div class="section-number">05</div>
+            <div class="section-header">
+                <h2 class="section-title">Typography Hierarchy</h2>
+                <p class="section-desc">Font Scale & Usage in Context</p>
+            </div>
+            <p class="section-text">Nunito (800-900) for headlines and labels only. Inter (400-600) for all body copy. Hero headlines feature white text with black outline and hard shadow. This creates maximum legibility and brand personality across all sizes.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Nunito: Headlines, labels, CTAs only
+                Inter: Body, captions, copy
+                Hero effects: white + 2-3px black stroke + 4px shadow
+                Line height: 1.7 minimum for body
+                Letter spacing: 0.15em for caps labels
+                Maintain hierarchy at all sizes
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="typography-example">
+                <div class="hero-headline">This Puzzle Will Destroy Your Week</div>
+
+                <div class="section-label">What Happens Next</div>
+
+                <div class="body-copy">
+                    You open the box. The cover shows a pristine living room. But the puzzle reveals what happens exactly 15 seconds later. Chaos. Hidden details. Things you weren't supposed to find.
+                </div>
+
+                <div class="pull-quote">
+                    "The kind of puzzle that sparks arguments and laughter in equal measure."
+                </div>
+
+                <div class="body-copy">
+                    Each Odd Pieces puzzle is hand-illustrated with Wimmelbilder-style density. Thousands of details hide in plain sight. A secret ending envelope arrives inside the box. Premium materials. Premium price. Premium puzzle.
+                </div>
+
+                <div style="margin: 30px 0;">
+                    <button class="cta-button cta-black-yellow">Solve It Now</button>
+                    <button class="cta-button cta-blue-black">Learn More</button>
+                </div>
+
+                <div class="caption">
+                    Available now on Shopify, Amazon, and Kickstarter. Each puzzle includes a 500-piece edition and premium 1000-piece edition.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 6: COLOR SYSTEM -->
+    <section class="section">
+        <div>
+            <div class="section-number">06</div>
+            <div class="section-header">
+                <h2 class="section-title">Color System</h2>
+                <p class="section-desc">Color Combinations in Real Use</p>
+            </div>
+            <p class="section-text">Six colors work together in specific combinations, never bumblebee mode (yellow on black in large areas). Primary combination: blue + black + yellow. Secondary: cream + black + orange. Dark mode uses blue accents on black. Alert moments use red-orange.</p>
+            <div class="usage-rules">
+                <strong>Usage Rules:</strong>
+                Primary: Blue bg + Black text + Yellow accents
+                Secondary: Cream bg + Black text + Orange accents
+                Dark: Black bg + White text + Blue accents
+                Alert: Red-Orange bg + White text
+                NEVER: Yellow bg + Black text (bumblebee)
+                Test all combos at 12pt minimum for accessibility
+            </div>
+        </div>
+
+        <div class="visual-examples">
+            <div class="color-combos">
+                <div class="color-card">
+                    <div class="color-bg primary-combo-bg">
+                        <div class="color-headline" style="color: #1A1A1A;">
+                            Blue + Black + Yellow
+                        </div>
+                    </div>
+                    <div class="color-content">
+                        <div class="color-title">Primary Signature</div>
+                        <div class="color-body">
+                            This is your hero combination. Blue background with black headlines and yellow accents. Use for major announcements, hero sections, and moments that demand attention.
+                        </div>
+                        <button class="cta-button cta-black-yellow">Learn More</button>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-bg secondary-combo-bg">
+                        <div class="color-headline" style="color: #1A1A1A;">
+                            Cream + Black + Orange
+                        </div>
+                    </div>
+                    <div class="color-content">
+                        <div class="color-title">Secondary Signature</div>
+                        <div class="color-body">
+                            Cream background with black text and orange accents. Use for secondary CTAs, supporting sections, and content that needs to breathe while maintaining brand presence.
+                        </div>
+                        <button class="cta-button cta-blue-black" style="background: #FC9C1C; color: #1A1A1A;">Explore Now</button>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-bg dark-combo-bg">
+                        <div class="color-headline" style="color: white;">
+                            Black + White + Blue
+                        </div>
+                    </div>
+                    <div class="color-content">
+                        <div class="color-title">Dark Mode</div>
+                        <div class="color-body">
+                            Black background with white text and blue accents. Perfect for night-mode content, premium dark emails, and late-night discovery. No yellow allowed here.
+                        </div>
+                        <button class="cta-button" style="background: #C1E3E8; color: #1A1A1A;">Discover</button>
+                    </div>
+                </div>
+
+                <div class="color-card">
+                    <div class="color-bg alert-combo-bg">
+                        <div class="color-headline" style="color: white;">
+                            Red-Orange Alert
+                        </div>
+                    </div>
+                    <div class="color-content">
+                        <div class="color-title">Urgent & Alert Moments</div>
+                        <div class="color-body">
+                            Red-orange background with white text and black accents. Reserved for urgent announcements, spoiler warnings, limited-time offers, and moments that demand immediate attention.
+                        </div>
+                        <button class="cta-button cta-black-yellow">Act Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 80px 60px; text-align: center; border-top: 1px solid #E0E0E0; background: #F5F5F5;">
+        <p style="font-family: 'Inter', sans-serif; font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 0.15em;">
+            Odd Pieces Visual System | Premium Mystery Puzzles
+        </p>
+    </footer>
+</body>
+</html>
