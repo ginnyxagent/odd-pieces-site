@@ -7,12 +7,22 @@
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap');
 
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+  }
+
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #FFFBF0;
-    color: #1A1A1A;
+    background: var(--cream);
+    color: var(--ink);
     min-height: 100vh;
     padding: 0;
   }
@@ -36,7 +46,7 @@
   .brand-dot {
     width: 8px;
     height: 8px;
-    background: #FEE000;
+    background: var(--yellow);
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -45,13 +55,13 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #FEE000;
+    color: var(--yellow);
   }
   h1 {
     font-size: 1.8rem;
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    color: #1A1A1A;
+    color: var(--ink);
     letter-spacing: -0.02em;
     line-height: 1.2;
     margin-bottom: 8px;
@@ -59,7 +69,7 @@
   }
   .header-sub {
     font-size: 0.9rem;
-    color: #666;
+    color: #888;
     font-weight: 400;
   }
 
@@ -73,9 +83,9 @@
     margin-bottom: 14px;
     margin-top: 48px;
   }
-  .section-label.team { color: #FC9C1C; }
-  .section-label.brand { color: #C1E3E8; }
-  .section-label.marketing { color: #FF4016; }
+  .section-label.team { color: var(--orange); }
+  .section-label.brand { color: var(--blue); }
+  .section-label.marketing { color: var(--red-orange); }
 
   /* ── NAV ITEMS ── */
   .nav-list {
@@ -92,23 +102,23 @@
     border-radius: 12px;
     text-decoration: none;
     border: 1px solid #E8E0D0;
-    background: #FFFFFF;
+    background: var(--white);
     transition: all 0.15s ease;
     gap: 16px;
   }
 
   a.nav-item:hover {
-    background: #FEE000;
-    border-color: #FEE000;
+    background: var(--yellow);
+    border-color: var(--yellow);
     box-shadow: 0 4px 12px rgba(254, 224, 0, 0.15);
   }
 
   a.nav-item:hover .nav-title {
-    color: #1A1A1A;
+    color: var(--ink);
   }
 
   a.nav-item:hover .nav-arrow {
-    color: #1A1A1A;
+    color: var(--ink);
     transform: translateX(4px);
   }
 
@@ -130,7 +140,7 @@
   .nav-title {
     font-size: 0.95rem;
     font-weight: 600;
-    color: #1A1A1A;
+    color: var(--ink);
     margin-bottom: 3px;
     transition: color 0.15s ease;
   }
@@ -142,7 +152,7 @@
 
   .nav-arrow {
     font-size: 1rem;
-    color: #FEE000;
+    color: var(--yellow);
     flex-shrink: 0;
     transition: color 0.15s, transform 0.15s;
   }
@@ -158,7 +168,7 @@
   .footer {
     margin-top: 56px;
     font-size: 0.75rem;
-    color: #AAA;
+    color: #999;
     text-transform: uppercase;
     letter-spacing: 0.08em;
   }
