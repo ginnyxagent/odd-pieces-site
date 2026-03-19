@@ -98,7 +98,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 18px 20px;
+    padding: 16px 20px;
     border-radius: 12px;
     text-decoration: none;
     border: 1px solid #E8E0D0;
@@ -124,30 +124,29 @@
 
   .nav-left {
     display: flex;
-    align-items: center;
-    gap: 14px;
+    align-items: flex-start;
+    gap: 0;
     min-width: 0;
+    flex-direction: column;
   }
 
   .nav-icon {
-    font-size: 1.2rem;
-    flex-shrink: 0;
-    width: 24px;
-    text-align: center;
+    display: none;
   }
 
   .nav-text {}
   .nav-title {
     font-size: 0.95rem;
-    font-weight: 600;
+    font-weight: 700;
     color: var(--ink);
-    margin-bottom: 3px;
+    margin-bottom: 4px;
     transition: color 0.15s ease;
   }
   .nav-desc {
     font-size: 0.75rem;
-    color: #888;
+    color: #999;
     line-height: 1.4;
+    font-weight: 400;
   }
 
   .nav-arrow {
