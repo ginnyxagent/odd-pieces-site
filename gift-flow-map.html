@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gift Flow Map — Odd Pieces</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap');
+
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red: #FF4016;
+    --green: #10B981;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --light-gray: #F3F0EB;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    padding: 40px 20px;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.2rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #666;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* ── FLOWS ── */
+  .flows {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-bottom: 80px;
+  }
+
+  .flow {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 32px;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+
+  .flow-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .flow-emoji {
+    font-size: 2rem;
+    margin-bottom: 12px;
+  }
+
+  .flow-subtitle {
+    font-size: 0.85rem;
+    color: #666;
+    margin-bottom: 24px;
+  }
+
+  /* ── STEPS ── */
+  .steps {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .step {
+    background: var(--light-gray);
+    padding: 16px;
+    border-radius: 10px;
+    border-left: 4px solid var(--orange);
+  }
+
+  .step-number {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .step-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+    color: var(--ink);
+  }
+
+  .step-desc {
+    font-size: 0.8rem;
+    color: #666;
+    line-height: 1.5;
+  }
+
+  .arrow {
+    text-align: center;
+    color: var(--orange);
+    font-size: 1.2rem;
+    margin: 8px 0;
+  }
+
+  /* ── EMAILS ── */
+  .emails-section {
+    background: var(--blue);
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 60px;
+  }
+
+  .emails-section h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .email-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+  }
+
+  .email-card {
+    background: var(--white);
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #E8E0D0;
+  }
+
+  .email-trigger {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .email-subject {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+
+  .email-cta {
+    font-size: 0.8rem;
+    color: var(--red);
+    font-weight: 600;
+    margin-top: 12px;
+  }
+
+  /* ── PAGES ── */
+  .pages-section {
+    background: var(--yellow);
+    padding: 40px;
+    border-radius: 16px;
+    margin-bottom: 60px;
+  }
+
+  .pages-section h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .pages-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .page-link {
+    background: var(--white);
+    padding: 16px;
+    border-radius: 10px;
+    border: 1px solid var(--ink);
+    text-decoration: none;
+    color: var(--ink);
+    transition: all 0.15s;
+  }
+
+  .page-link:hover {
+    background: var(--ink);
+    color: var(--white);
+    box-shadow: 4px 4px 0 var(--ink);
+    transform: translate(-2px, -2px);
+  }
+
+  .page-link-name {
+    font-weight: 700;
+    font-size: 0.95rem;
+    margin-bottom: 4px;
+  }
+
+  .page-link-desc {
+    font-size: 0.75rem;
+    opacity: 0.7;
+    line-height: 1.4;
+  }
+
+  /* ── DATA ── */
+  .data-section {
+    background: var(--light-gray);
+    padding: 40px;
+    border-radius: 16px;
+  }
+
+  .data-section h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 900;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+
+  .data-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+  }
+
+  .data-card {
+    background: var(--white);
+    padding: 16px;
+    border-radius: 10px;
+    border-left: 4px solid var(--green);
+  }
+
+  .data-metric {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--green);
+    margin-bottom: 6px;
+  }
+
+  .data-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    .flows {
+      grid-template-columns: 1fr;
+    }
+    h1 {
+      font-size: 1.6rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="container">
+
+  <header>
+    <h1>Gift Flow Map</h1>
+    <p class="subtitle">3 customer journeys, email sequences, and data collection points</p>
+  </header>
+
+  <!-- FLOWS -->
+  <div class="flows">
+    
+    <!-- GIFTER FLOW -->
+    <div class="flow">
+      <div class="flow-emoji">🎁</div>
+      <h2 class="flow-title">Gifter Flow</h2>
+      <p class="flow-subtitle">Someone buying a puzzle to gift</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">Step 1</div>
+          <div class="step-title">Browse & Buy</div>
+          <div class="step-desc">Find puzzle on Shopify → add gift message → checkout</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 2</div>
+          <div class="step-title">Send Gift Link</div>
+          <div class="step-desc">Email sent to recipient with gift link + gifter's message</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 3</div>
+          <div class="step-title">Track Completion</div>
+          <div class="step-desc">Know when recipient solves puzzle, triggered notifications</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 4</div>
+          <div class="step-title">Re-Engagement</div>
+          <div class="step-desc">Email: "They solved it! Want to gift another?" → repeat buyer</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- RECIPIENT FLOW -->
+    <div class="flow">
+      <div class="flow-emoji">🎉</div>
+      <h2 class="flow-title">Recipient Flow</h2>
+      <p class="flow-subtitle">Someone receiving a gift puzzle</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">Step 1</div>
+          <div class="step-title">Receive Gift Email</div>
+          <div class="step-desc">Get notification + message from gifter</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 2</div>
+          <div class="step-title">Go to Landing Page</div>
+          <div class="step-desc">Click link → gift landing form (email + puzzle select)</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 3</div>
+          <div class="step-title">Solve & Reveal</div>
+          <div class="step-desc">Submit → see answer + unique discount code on-screen</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 4</div>
+          <div class="step-title">Welcome Email</div>
+          <div class="step-desc">Follow-up: "You did it. Series [X] is next."</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PUZZLER FLOW -->
+    <div class="flow">
+      <div class="flow-emoji">🧩</div>
+      <h2 class="flow-title">Puzzler Flow</h2>
+      <p class="flow-subtitle">Self-purchased puzzle solver</p>
+      <div class="steps">
+        <div class="step">
+          <div class="step-number">Step 1</div>
+          <div class="step-title">Buy on Shopify</div>
+          <div class="step-desc">Purchase puzzle for themselves</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 2</div>
+          <div class="step-title">Go to Landing Page</div>
+          <div class="step-desc">Email + puzzle select (self-purchased toggle)</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 3</div>
+          <div class="step-title">Solve & Reveal</div>
+          <div class="step-desc">Submit → see answer + unique discount code</div>
+        </div>
+        <div class="arrow">↓</div>
+        <div class="step">
+          <div class="step-number">Step 4</div>
+          <div class="step-title">Progression Email</div>
+          <div class="step-desc">Follow-up: "Ready for harder? Try Series [X]."</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- EMAIL SEQUENCES -->
+  <div class="emails-section">
+    <h2>Email Sequences (TBD)</h2>
+    <div class="email-grid">
+      <div class="email-card">
+        <div class="email-trigger">Trigger: Day 0</div>
+        <div class="email-subject">Welcome (Gift Recipients)</div>
+        <div class="email-desc" style="font-size: 0.8rem; color: #666; margin: 8px 0;">You did it. Someone believed you would.</div>
+        <div class="email-cta">CTA: Get Series [X]</div>
+      </div>
+      <div class="email-card">
+        <div class="email-trigger">Trigger: Day 0</div>
+        <div class="email-subject">You Solved It (Puzzlers)</div>
+        <div class="email-desc" style="font-size: 0.8rem; color: #666; margin: 8px 0;">That felt good. Ready for harder?</div>
+        <div class="email-cta">CTA: Get Series [X]</div>
+      </div>
+      <div class="email-card">
+        <div class="email-trigger">Trigger: Day 7 (No Purchase)</div>
+        <div class="email-subject">Re-engagement</div>
+        <div class="email-desc" style="font-size: 0.8rem; color: #666; margin: 8px 0;">You solved it. Now what?</div>
+        <div class="email-cta">CTA: Browse Series</div>
+      </div>
+      <div class="email-card">
+        <div class="email-trigger">Trigger: Recipient Solves</div>
+        <div class="email-subject">Gifter Notification</div>
+        <div class="email-desc" style="font-size: 0.8rem; color: #666; margin: 8px 0;">[Name] just crushed your gift.</div>
+        <div class="email-cta">CTA: Gift Another</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIVE PAGES -->
+  <div class="pages-section">
+    <h2>Live Pages</h2>
+    <div class="pages-list">
+      <a href="gift-landing.html" class="page-link">
+        <div class="page-link-name">Gift Landing Form</div>
+        <div class="page-link-desc">Email + puzzle select. Handles gift/self toggle.</div>
+      </a>
+      <a href="gift-answer-reveal.html" class="page-link">
+        <div class="page-link-name">Answer Reveal Page</div>
+        <div class="page-link-desc">Answer + unique code + share buttons + upsell.</div>
+      </a>
+    </div>
+  </div>
+
+  <!-- DATA COLLECTION -->
+  <div class="data-section">
+    <h2>Data Collection Points</h2>
+    <div class="data-grid">
+      <div class="data-card">
+        <div class="data-metric">Event</div>
+        <div class="data-title">Puzzle Completed</div>
+        <div style="font-size: 0.8rem; color: #666; margin-top: 8px;">email, puzzle_id, code_generated, timestamp</div>
+      </div>
+      <div class="data-card">
+        <div class="data-metric">Tracking</div>
+        <div class="data-title">Code Redeemed</div>
+        <div style="font-size: 0.8rem; color: #666; margin-top: 8px;">Which customer used code? When?</div>
+      </div>
+      <div class="data-card">
+        <div class="data-metric">Segment</div>
+        <div class="data-title">Gifter vs Recipient</div>
+        <div style="font-size: 0.8rem; color: #666; margin-top: 8px;">Flag on puzzle completion</div>
+      </div>
+      <div class="data-card">
+        <div class="data-metric">Analysis</div>
+        <div class="data-title">Repeat Behavior</div>
+        <div style="font-size: 0.8rem; color: #666; margin-top: 8px;">After 30-60 days: who repeats?</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
