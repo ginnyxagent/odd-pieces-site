@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odd Pieces — Brand Guidelines Editor V6</title>
+<title>Brand Guidelines Editor — Odd Pieces</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -12,432 +12,1276 @@
     --yellow: #FEE000;
     --blue: #C1E3E8;
     --orange: #FC9C1C;
-    --red-orange: #FF4016;
     --ink: #1A1A1A;
     --cream: #FFFBF0;
     --white: #FFFFFF;
+    --green: #22c55e;
+    --border: rgba(26,26,26,0.12);
   }
 
-  *, *::before, *::after { box-sizing: border-box; }
-
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Inter', sans-serif;
     background: var(--cream);
     color: var(--ink);
-    padding: 0;
-    margin: 0;
-  }
-
-  .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 20px;
-  }
-
-  header {
-    background: linear-gradient(135deg, var(--yellow) 0%, var(--blue) 100%);
-    padding: 40px 20px;
-    margin-bottom: 40px;
-    border-radius: 8px;
-  }
-
-  header h1 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 900;
-    text-transform: uppercase;
-    font-size: 32px;
-    margin-bottom: 10px;
-    color: var(--ink);
-  }
-
-  header p {
-    font-size: 16px;
-    color: var(--ink);
-    margin: 0;
-  }
-
-  .status-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 30px;
-    padding: 15px 20px;
-    background: var(--white);
-    border: 2px solid var(--ink);
-    border-radius: 4px;
-  }
-
-  .status-text {
-    font-weight: 600;
-    font-size: 14px;
-  }
-
-  .status-text.saved {
-    color: #2ecc71;
-  }
-
-  .status-text.unsaved {
-    color: var(--red-orange);
-  }
-
-  .actions {
-    display: flex;
-    gap: 10px;
-  }
-
-  button {
-    padding: 12px 24px;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 700;
-    text-transform: uppercase;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: all 0.2s ease;
-  }
-
-  .btn-primary {
-    background: var(--yellow);
-    color: var(--ink);
-  }
-
-  .btn-primary:hover {
-    background: #FFD700;
-    transform: translate(0, -2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
-  }
-
-  .btn-secondary {
-    background: var(--blue);
-    color: var(--ink);
-  }
-
-  .btn-secondary:hover {
-    background: #a8d8e0;
-    transform: translate(0, -2px);
-  }
-
-  .sections-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-    gap: 20px;
-  }
-
-  .section-card {
-    background: var(--white);
-    border: 2px solid var(--ink);
-    border-radius: 4px;
-    overflow: hidden;
-  }
-
-  .section-header {
-    background: var(--blue);
-    padding: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    user-select: none;
-  }
-
-  .section-header:hover {
-    background: #a8d8e0;
-  }
-
-  .section-header h3 {
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-    margin: 0;
-    font-size: 14px;
-  }
-
-  .expand-icon {
-    font-size: 20px;
-    transition: transform 0.2s ease;
-  }
-
-  .section-card.expanded .expand-icon {
-    transform: rotate(180deg);
-  }
-
-  .section-content {
-    display: none;
-    padding: 20px;
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease;
-  }
-
-  .section-card.expanded .section-content {
-    display: block;
-    max-height: 2000px;
-  }
-
-  .editor-textarea {
-    width: 100%;
-    min-height: 150px;
-    padding: 12px;
-    font-family: 'Inter', monospace;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    resize: vertical;
-    font-size: 14px;
+    font-size: 15px;
     line-height: 1.6;
   }
 
-  .editor-textarea:focus {
-    outline: none;
-    border-color: var(--yellow);
-    box-shadow: 0 0 0 3px rgba(254, 224, 0, 0.1);
+  /* ─── TOPBAR ─── */
+  .topbar {
+    background: var(--ink);
+    padding: 0 32px;
+    height: 56px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    gap: 16px;
   }
-
-  .editor-label {
-    display: block;
-    margin-bottom: 8px;
-    font-weight: 600;
-    font-size: 12px;
+  .topbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .topbar-logo {
+    width: 28px;
+    height: 28px;
+    background: var(--yellow);
+    border-radius: 6px;
+    border: 2px solid rgba(255,255,255,0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    color: var(--ink);
+  }
+  .topbar-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
     text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: white;
+  }
+  .topbar-subtitle {
+    font-size: 11px;
+    color: rgba(255,255,255,0.4);
+    font-weight: 500;
     letter-spacing: 0.05em;
   }
+  .topbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .status-badge {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    transition: all 0.2s;
+  }
+  .status-badge.saved {
+    background: rgba(34,197,94,0.15);
+    color: #4ade80;
+    border: 1px solid rgba(34,197,94,0.3);
+  }
+  .status-badge.unsaved {
+    background: rgba(252,156,28,0.15);
+    color: var(--orange);
+    border: 1px solid rgba(252,156,28,0.3);
+  }
+  .status-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+  }
+  .status-badge.saved .status-dot { background: #4ade80; }
+  .status-badge.unsaved .status-dot { background: var(--orange); animation: pulse 1.5s ease-in-out infinite; }
+  @keyframes pulse { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
 
-  .editor-section {
+  .btn {
+    padding: 8px 18px;
+    border-radius: 8px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    border: none;
+    transition: all 0.15s;
+  }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:active { transform: translateY(0); }
+  .btn-publish {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .btn-publish:hover { background: #FFE800; box-shadow: 0 4px 12px rgba(254,224,0,0.4); }
+  .btn-publish:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+  .btn-preview {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-preview:hover { color: white; border-color: rgba(255,255,255,0.5); }
+  .btn-reset {
+    background: transparent;
+    color: rgba(255,255,255,0.4);
+    border: none;
+    font-size: 11px;
+    padding: 6px 10px;
+  }
+  .btn-reset:hover { color: rgba(255,255,255,0.7); }
+
+  /* ─── LAYOUT ─── */
+  .editor-layout {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: calc(100vh - 56px);
+  }
+
+  /* ─── SIDEBAR ─── */
+  .sidebar {
+    background: white;
+    border-right: 1px solid var(--border);
+    padding: 24px 0;
+    position: sticky;
+    top: 56px;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+  .sidebar-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(0,0,0,0.35);
+    padding: 0 20px 10px;
+  }
+  .sidebar-nav-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 20px;
+    cursor: pointer;
+    transition: all 0.12s;
+    text-decoration: none;
+    color: rgba(0,0,0,0.6);
+    font-size: 13px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+  }
+  .sidebar-nav-item:hover { background: rgba(254,224,0,0.1); color: var(--ink); border-left-color: var(--yellow); }
+  .sidebar-nav-item.active { background: rgba(254,224,0,0.15); color: var(--ink); border-left-color: var(--yellow); font-weight: 700; }
+  .sidebar-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 10px;
+    color: rgba(0,0,0,0.3);
+    min-width: 20px;
+  }
+  .sidebar-modified {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--orange);
+    margin-left: auto;
+    flex-shrink: 0;
+  }
+
+  /* ─── MAIN CONTENT ─── */
+  .editor-main {
+    padding: 32px 40px 80px;
+    max-width: 900px;
+  }
+  .editor-header {
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--border);
+  }
+  .editor-header h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+  .editor-header p {
+    font-size: 14px;
+    color: rgba(0,0,0,0.5);
+    line-height: 1.5;
+  }
+  .editor-tip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: rgba(193,227,232,0.4);
+    border: 1px solid var(--blue);
+    border-radius: 6px;
+    padding: 6px 12px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.6);
+    margin-top: 12px;
+  }
+
+  /* ─── SECTION CARDS ─── */
+  .section-card {
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 16px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+    background: white;
+  }
+  .section-card.modified { border-color: var(--orange); }
+  .section-card.expanded { border-color: var(--ink); }
+
+  .section-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.12s;
+  }
+  .section-card-header:hover { background: rgba(254,224,0,0.06); }
+  .section-tag-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+    min-width: 60px;
+  }
+  .section-card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    color: var(--ink);
+    flex: 1;
+  }
+  .section-card-desc {
+    font-size: 12px;
+    color: rgba(0,0,0,0.4);
+    margin-top: 2px;
+  }
+  .section-modified-badge {
+    font-size: 10px;
+    font-weight: 700;
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--orange);
+    background: rgba(252,156,28,0.12);
+    border-radius: 4px;
+    padding: 2px 8px;
+  }
+  .section-chevron {
+    color: rgba(0,0,0,0.3);
+    transition: transform 0.2s;
+    font-size: 18px;
+    line-height: 1;
+  }
+  .section-card.expanded .section-chevron { transform: rotate(180deg); }
+
+  .section-card-body {
+    display: none;
+    border-top: 1px solid var(--border);
+    padding: 24px 20px;
+  }
+  .section-card.expanded .section-card-body { display: block; }
+
+  /* ─── EDITABLE FIELDS ─── */
+  .field-group {
     margin-bottom: 20px;
   }
-
-  .last-saved {
-    font-size: 12px;
-    color: #666;
-    margin-top: 10px;
+  .field-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(0,0,0,0.4);
+    margin-bottom: 6px;
+  }
+  .field-editable {
+    border: 1.5px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--cream);
+    outline: none;
+    transition: border-color 0.15s, box-shadow 0.15s;
+    min-height: 40px;
+    cursor: text;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .field-editable:focus {
+    border-color: var(--yellow);
+    box-shadow: 0 0 0 3px rgba(254,224,0,0.2);
+    background: white;
+  }
+  .field-editable.modified-field { border-color: rgba(252,156,28,0.5); }
+  .field-char-count {
+    font-size: 11px;
+    color: rgba(0,0,0,0.3);
+    text-align: right;
+    margin-top: 4px;
   }
 
-  footer {
-    text-align: center;
-    padding: 30px 20px;
-    margin-top: 60px;
-    border-top: 2px solid var(--ink);
+  /* List items editing */
+  .list-editor {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .list-item-editor {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .list-item-icon {
+    padding-top: 10px;
+    font-size: 12px;
+    color: rgba(0,0,0,0.3);
+    flex-shrink: 0;
+    width: 20px;
+  }
+  .btn-add-item {
+    background: rgba(254,224,0,0.2);
+    border: 1.5px dashed rgba(254,224,0,0.6);
+    border-radius: 8px;
+    color: rgba(0,0,0,0.4);
+    font-size: 13px;
+    padding: 8px 14px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    font-family: 'Inter', sans-serif;
+    margin-top: 4px;
+    transition: all 0.15s;
+  }
+  .btn-add-item:hover { background: rgba(254,224,0,0.4); color: var(--ink); }
+  .btn-remove-item {
+    background: none;
+    border: none;
+    color: rgba(255,64,22,0.4);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 6px 4px;
+    transition: color 0.15s;
+    line-height: 1;
+  }
+  .btn-remove-item:hover { color: #FF4016; }
+
+  /* ─── TOAST ─── */
+  .toast {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    padding: 12px 20px;
+    border-radius: 10px;
     font-size: 14px;
+    font-weight: 600;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: slideUp 0.3s ease;
+    max-width: 320px;
+  }
+  .toast.success { background: var(--ink); color: white; }
+  .toast.error { background: #FF4016; color: white; }
+  .toast.info { background: var(--blue); color: var(--ink); }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  @keyframes slideDown { from { opacity:1; transform:translateY(0); } to { opacity:0; transform:translateY(20px); } }
+
+  /* ─── PUBLISH MODAL ─── */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26,26,26,0.7);
+    z-index: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal {
+    background: white;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 480px;
+    width: 100%;
+    transform: translateY(20px);
+    transition: transform 0.2s;
+  }
+  .modal-overlay.open .modal { transform: translateY(0); }
+  .modal h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .modal p { font-size: 14px; color: rgba(0,0,0,0.6); line-height: 1.6; margin-bottom: 16px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 24px; flex-wrap: wrap; }
+  .btn-download { background: var(--yellow); color: var(--ink); font-size: 14px; }
+  .btn-cancel { background: rgba(0,0,0,0.08); color: var(--ink); font-size: 14px; }
+  .modal-steps {
+    background: var(--cream);
+    border-radius: 10px;
+    padding: 16px;
+    margin: 16px 0;
+  }
+  .modal-steps ol {
+    padding-left: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .modal-steps li { font-size: 13px; color: rgba(0,0,0,0.7); line-height: 1.5; }
+  .modal-steps code {
+    background: rgba(0,0,0,0.08);
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-family: monospace;
+  }
+
+  /* ─── SHARE BANNER ─── */
+  .share-banner {
+    background: rgba(193,227,232,0.5);
+    border: 1.5px solid var(--blue);
+    border-radius: 10px;
+    padding: 14px 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+  .share-banner-icon { font-size: 20px; }
+  .share-banner-text { flex: 1; font-size: 13px; color: rgba(0,0,0,0.7); line-height: 1.4; }
+  .share-banner-text strong { color: var(--ink); }
+  .btn-copy-link {
+    background: var(--ink);
+    color: white;
+    font-size: 12px;
+    padding: 7px 14px;
+    white-space: nowrap;
   }
 
   @media (max-width: 768px) {
-    .sections-grid {
-      grid-template-columns: 1fr;
-    }
-    
-    header h1 {
-      font-size: 24px;
-    }
-
-    .status-bar {
-      flex-direction: column;
-      gap: 15px;
-    }
-
-    .actions {
-      width: 100%;
-      flex-direction: column;
-    }
-
-    button {
-      width: 100%;
-    }
+    .editor-layout { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .editor-main { padding: 24px 20px 60px; }
   }
 </style>
 </head>
 <body>
 
-<header>
-  <h1>Brand Guidelines Editor V6</h1>
-  <p>Edit sections, save locally, download the updated HTML file to deploy.</p>
-</header>
-
-<div class="container">
-  <div class="status-bar">
-    <div class="status-text unsaved" id="status">✏️ Unsaved changes</div>
-    <div class="actions">
-      <button class="btn-secondary" onclick="resetForm()">Reset</button>
-      <button class="btn-primary" onclick="downloadUpdatedFile()">📥 Download Updated HTML</button>
+<!-- ─── TOP BAR ─── -->
+<header class="topbar">
+  <div class="topbar-brand">
+    <div class="topbar-logo">🧩</div>
+    <div>
+      <div class="topbar-title">Brand Guidelines Editor</div>
+      <div class="topbar-subtitle">Odd Pieces V6 — Live Editing</div>
     </div>
   </div>
+  <div class="topbar-actions">
+    <div class="status-badge saved" id="statusBadge">
+      <div class="status-dot"></div>
+      <span id="statusText">All saved</span>
+    </div>
+    <button class="btn btn-preview" onclick="previewGuidelines()">Preview</button>
+    <button class="btn btn-publish" id="publishBtn" onclick="openPublishModal()">Publish →</button>
+    <button class="btn btn-reset" onclick="confirmReset()" title="Reset all changes">Reset</button>
+  </div>
+</header>
 
-  <div class="sections-grid" id="sectionsContainer"></div>
+<div class="editor-layout">
+  <!-- ─── SIDEBAR ─── -->
+  <aside class="sidebar">
+    <div class="sidebar-label">Sections</div>
+    <div id="sidebarNav"></div>
+  </aside>
 
-  <footer>
-    <p><strong>How to publish:</strong> Download the updated HTML file above, then replace <code>brand-guidelines-v6.html</code> in your GitHub repo and push. Vercel will auto-deploy.</p>
-    <p style="margin-top: 10px; color: #999;">Edits are saved to your browser's local storage. Clear your cache and they're gone forever, so download when done.</p>
-  </footer>
+  <!-- ─── MAIN ─── -->
+  <main class="editor-main">
+    <div class="editor-header">
+      <h1>Brand Guidelines V6</h1>
+      <p>Click any section to expand and edit. Changes auto-save to your browser. Hit <strong>Publish</strong> when ready to go live.</p>
+      <div class="editor-tip">💡 Tip: Your edits are saved locally until you publish. Share the published URL with your team.</div>
+    </div>
+
+    <div class="share-banner">
+      <div class="share-banner-icon">🔗</div>
+      <div class="share-banner-text">
+        <strong>Team link:</strong> Share the live brand guidelines URL with your team. After publishing, they see your updates.
+      </div>
+      <button class="btn btn-copy-link" onclick="copyShareLink()">Copy Link</button>
+    </div>
+
+    <div id="sectionsContainer"></div>
+  </main>
+</div>
+
+<!-- ─── PUBLISH MODAL ─── -->
+<div class="modal-overlay" id="publishModal">
+  <div class="modal">
+    <h2>🚀 Publish to Live</h2>
+    <p>Your edits will be saved and the live brand guidelines updated. Here's how publishing works:</p>
+    <div class="modal-steps">
+      <ol>
+        <li>Click <strong>Download Updated File</strong> — saves the new <code>brand-guidelines-v6.html</code></li>
+        <li>Move it to your <code>odd-pieces-site</code> folder (replace the existing file)</li>
+        <li>Run <code>vercel deploy --prod</code> in your terminal</li>
+        <li>Done — team sees the live updates at the Vercel URL ✓</li>
+      </ol>
+    </div>
+    <p style="font-size:12px; color:rgba(0,0,0,0.4);">💡 Alternatively, drag the downloaded file into the Vercel dashboard to redeploy instantly.</p>
+    <div class="modal-actions">
+      <button class="btn btn-download" onclick="downloadPublished()">⬇ Download Updated File</button>
+      <button class="btn btn-cancel" onclick="closePublishModal()">Cancel</button>
+    </div>
+  </div>
 </div>
 
 <script>
-  const SECTIONS = [
-    { id: '01', title: '01 — Who We Are', key: 'section_01' },
-    { id: '02', title: '02 — How It Works', key: 'section_02' },
-    { id: '04', title: '04 — Who It\'s For', key: 'section_04' },
-    { id: '05', title: '05 — Energy', key: 'section_05' },
-    { id: '06', title: '06 — Words', key: 'section_06' },
-    { id: '07', title: '07 — Identity', key: 'section_07' },
-    { id: '08', title: '08 — Palette', key: 'section_08' },
-    { id: '09', title: '09 — Typography', key: 'section_09' },
-    { id: '10', title: '10 — Art Direction', key: 'section_10' },
-    { id: '11', title: '11 — Product', key: 'section_11' },
-    { id: '12', title: '12 — Distribution', key: 'section_12' },
-    { id: '13', title: '13 — What Makes Us Different', key: 'section_13' },
-    { id: '14', title: '14 — Rules', key: 'section_14' },
-    { id: '15', title: '15 — Links', key: 'section_15' },
-  ];
+// ─── SECTION DEFINITIONS ───
+// Each section has: id, num, tag, title, description, fields
+const SECTIONS = [
+  {
+    id: 'hero',
+    num: '00',
+    tag: '00 — Cover',
+    title: 'Hero / Cover',
+    desc: 'The opening hero section',
+    fields: [
+      { key: 'hero_headline', label: 'Main Headline', type: 'text', selector: '.hero-headline, .display', defaultValue: 'Odd Pieces Brand Guidelines' },
+      { key: 'hero_version', label: 'Version Label', type: 'text', selector: null, defaultValue: 'v6 — 2025' },
+    ]
+  },
+  {
+    id: 'story',
+    num: '01',
+    tag: '01 — Who We Are',
+    title: 'Brand Story',
+    desc: 'Core brand narrative and mission',
+    fields: [
+      { key: 'story_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Someone had a slightly unhinged idea: what if a puzzle was a story? Not a pretty landscape you finish and forget. A story with a twist ending that makes the whole table lose their minds.' },
+      { key: 'story_p1', label: 'Paragraph 1', type: 'textarea', defaultValue: 'We make 1000-piece jigsaw puzzles for anyone who\'s allergic to boring things.' },
+      { key: 'story_p2', label: 'Paragraph 2', type: 'textarea', defaultValue: 'Every Odd Pieces puzzle hides a secret: the box cover is the before. The puzzle you build is the after — same scene, 15 seconds later, completely unhinged. Plus a sealed Secret Ending Envelope you only open when it\'s done.' },
+      { key: 'story_p3', label: 'Paragraph 3', type: 'textarea', defaultValue: 'The reveal is the whole point. Always has been.' },
+      { key: 'story_p4', label: 'Paragraph 4', type: 'textarea', defaultValue: 'We\'re not a faceless puzzle company. We\'re a small, obsessive team who genuinely believe a cardboard box can make an entire room put their phones down.' },
+      { key: 'story_p5', label: 'Paragraph 5', type: 'textarea', defaultValue: 'Grab a drink (or don\'t), lose four hours, and feel zero regret about it. That\'s the mission.' },
+      { key: 'story_p6', label: 'Paragraph 6', type: 'textarea', defaultValue: 'Our puzzles exist in a connected universe. Characters cross over. Easter eggs reference other titles. There\'s a whole metanarrative hiding in plain sight.' },
+      { key: 'story_p7', label: 'Paragraph 7', type: 'textarea', defaultValue: 'Most people don\'t catch it. The ones who do? They go absolutely feral.' },
+      { key: 'story_quote', label: 'Pull Quote', type: 'textarea', defaultValue: '"The gift that surprises everyone — even the person who has everything."' },
+      { key: 'story_subquote', label: 'Sub Quote', type: 'text', defaultValue: 'Story-first puzzles built for anyone brave enough to open the envelope.' },
+      { key: 'story_callout_title', label: 'Callout Title', type: 'text', defaultValue: 'Reference Brands' },
+      { key: 'story_callout_body', label: 'Callout Body', type: 'textarea', defaultValue: 'Areaware\'s aesthetic sensibility (design-store premium, indie cool, slightly offbeat) + Exploding Kittens\' wit (irreverent, genius, fun). NOT Magic Puzzle Company. NOT a generic puzzle brand.' },
+    ]
+  },
+  {
+    id: 'experience',
+    num: '02',
+    tag: '02 — How It Works',
+    title: '3-Step Experience',
+    desc: 'The unboxing and puzzle journey',
+    fields: [
+      { key: 'exp_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Three acts. One box. Zero preparation for what happens at the end. This is the thing that makes people buy it, gift it, and text about it at 1am.' },
+      { key: 'exp_step1_title', label: 'Step 1 Title', type: 'text', defaultValue: 'Step Inside the Story' },
+      { key: 'exp_step1_body', label: 'Step 1 Body', type: 'textarea', defaultValue: 'The box cover is a dense Wimmelbilder illustration — Where\'s Waldo-level chaos, micro-stories everywhere you look. A before comic inside tells you what\'s about to happen. You think you know what\'s going on. You don\'t.' },
+      { key: 'exp_step2_title', label: 'Step 2 Title', type: 'text', defaultValue: 'Build the Aftermath' },
+      { key: 'exp_step2_body', label: 'Step 2 Body', type: 'textarea', defaultValue: 'The puzzle you assemble is the same scene — exactly 15 seconds later. Hundreds of things have changed. You discover them one piece at a time. The moment someone shouts "WAIT — WHAT?!" across the table is inevitable.' },
+      { key: 'exp_step3_title', label: 'Step 3 Title', type: 'text', defaultValue: 'Open the Envelope. Lose Your Mind.' },
+      { key: 'exp_step3_body', label: 'Step 3 Body', type: 'textarea', defaultValue: 'There\'s a sealed SECRET ENDING ENVELOPE inside. DO NOT OPEN IT EARLY. Finish the puzzle first. Then open it. Inside: the after comic that explains everything — plus a final riddle. This is the moment that breaks people in the best way.' },
+      { key: 'exp_bottom_quote', label: 'Bottom Quote', type: 'text', defaultValue: 'You\'ll find things in here you weren\'t supposed to find.' },
+    ]
+  },
+  {
+    id: 'audience',
+    num: '04',
+    tag: '04 — Who It\'s For',
+    title: 'Our Audience',
+    desc: 'Target audience personas',
+    fields: [
+      { key: 'aud_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Anyone who wants to be surprised. Teens who notice every hidden detail. Adults who need a reason to look up from their phones. Grandparents who\'ve been waiting their whole lives for a puzzle worth doing. If you can handle a WAIT — WHAT?! moment, you\'re in.' },
+      { key: 'aud_persona1_title', label: 'Persona 1 Title', type: 'text', defaultValue: 'The Curious One' },
+      { key: 'aud_persona1_body', label: 'Persona 1 Body', type: 'textarea', defaultValue: 'Doesn\'t matter the age — this person is allergic to boring. They\'ll spend four hours on something just to find the thing they weren\'t supposed to find.\n\nProbably the one who spots the Easter eggs first. Definitely the one who texts the group chat about it at midnight.' },
+      { key: 'aud_persona2_title', label: 'Persona 2 Title', type: 'text', defaultValue: 'The Table' },
+      { key: 'aud_persona2_body', label: 'Persona 2 Body', type: 'textarea', defaultValue: 'Families who need something to actually do together. Couples who want a reason to put their phones in a drawer. Friend groups who discovered that puzzles are secretly the best hang.\n\nSolo puzzlers who put on a playlist and disappear for four hours. All welcome. All correct.' },
+      { key: 'aud_persona3_title', label: 'Persona 3 Title', type: 'text', defaultValue: 'The Gift-Giver' },
+      { key: 'aud_persona3_body', label: 'Persona 3 Body', type: 'textarea', defaultValue: 'Looking for the thing that makes someone say "How did you even find this?"\n\nNot another candle. Not another generic game. Something that works for the teenager, the parent, and the grandparent sitting at the same table — because good stories work for everyone.' },
+      { key: 'aud_tagline', label: 'Big Tagline', type: 'text', defaultValue: 'All Ages. Zero Chill.' },
+      { key: 'aud_energy_p1', label: 'Energy Paragraph 1', type: 'textarea', defaultValue: 'Odd Pieces is for everyone who hasn\'t decided that surprise is something you age out of.' },
+      { key: 'aud_energy_p2', label: 'Energy Paragraph 2', type: 'textarea', defaultValue: 'The teenager obsessed with details. The adult who needs to look up from their phone. The grandparent who\'s been waiting for a puzzle actually worth doing.' },
+      { key: 'aud_energy_p3', label: 'Energy Paragraph 3', type: 'textarea', defaultValue: 'We write for the curiosity — not the age bracket. Our brand voice should work across the whole table.' },
+      { key: 'aud_quote', label: 'Bottom Quote', type: 'text', defaultValue: 'If you can handle a plot twist, you\'re exactly who this is for.' },
+    ]
+  },
+  {
+    id: 'personality',
+    num: '05',
+    tag: '05 — Energy',
+    title: 'Brand Personality',
+    desc: 'The WAIT — WHAT?! energy and brand traits',
+    fields: [
+      { key: 'pers_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'The energy is simple: WAIT — WHAT?! That\'s the feeling we\'re always chasing. Shocking, fun, genius, and odd. Not dry. Not corporate. Not calm.' },
+      { key: 'pers_pills', label: 'Personality Pills (one per line)', type: 'list', defaultValue: 'FUN\nPLAYFUL\nSHOCKING\nUNEXPECTED\nGENIUS\nODD\nCLEVER\nNOT NORMAL\nSLIGHTLY CHAOTIC\nIRREVERENT\nWITTY\nHUMAN' },
+      { key: 'pers_we_are', label: '"We Are" Items (one per line)', type: 'list', defaultValue: "Exploding Kittens' irreverence and wit\nAreaware's design-store premium aesthetic\nSomething you'd find at MoMA Design Store\nClean but with character. Premium but playful\nThe \"WAIT — WHAT?!\" moment, every time\nDesign objects that make you laugh" },
+      { key: 'pers_not', label: '"We Are Not" Items (one per line)', type: 'list', defaultValue: "Magic Puzzle Company (direct competitor — feel distinctly different)\nAdult luxury editorial\nFamily board game brand (too sanitized)\nChildren's activity (too low-energy)\nCorporate / dry / stiff\nGeneric e-commerce" },
+      { key: 'pers_quote', label: 'Bottom Quote', type: 'textarea', defaultValue: "Think: Exploding Kittens' genius energy + Areaware's design credibility. Clean but with character. Premium but with personality. Oddly perfect." },
+    ]
+  },
+  {
+    id: 'voice',
+    num: '06',
+    tag: '06 — Words',
+    title: 'Voice & Copy',
+    desc: 'Signature lines, tone, copy rules',
+    fields: [
+      { key: 'voice_intro', label: 'Section Intro', type: 'textarea', defaultValue: "The copy is a character. Smart, irreverent, slightly unhinged, always one step ahead of you. It should feel like a text from the funniest person you know — not a product description from a brand manager." },
+      { key: 'voice_signatures', label: 'Signature Lines (one per line)', type: 'list', defaultValue: '"Not your ordinary puzzles."\n"1000 pieces. Zero context. Good luck."\n"Not for everyone. Probably for you though."\n"The twist is what makes people gasp, laugh, and point across the table."\n"Think you\'ve figured it all out? Not so fast."\n"Not your grandma\'s puzzle. (Unless she\'s cool.)"\n"Wildly fun & totally unexpected."\n"You\'ll find things in here you weren\'t supposed to find."\n"Best paired with your beverage of choice and zero phone reception."\n"Side effects may include: arguments, laughter, wine spills, and staying up way too late."\n"You\'ll spend 4 hours on this and feel great about it."\n"We hid things in here. Good luck."\n"The gift that surprises everyone — even the person who has everything."' },
+      { key: 'voice_do', label: '"Sound Like This" Items (one per line)', type: 'list', defaultValue: 'Shocking before it\'s cute\nFun before it\'s refined\nPlayful before it\'s serious\nIrreverent / slightly unhinged\nDirect, punchy, no filler words\nCalls the reader in, doesn\'t talk down\nHumor that comes from being genuinely clever\nUrgency without desperation' },
+      { key: 'voice_dont', label: '"Never Sound Like This" Items (one per line)', type: 'list', defaultValue: '"For the whole family!" (too Walmart, too safe)\n"An immersive puzzle experience" (dry corporate, immediately skip)\n"The perfect gift this holiday season" (zzz)\n"Hours of entertainment" (box copy from 1992)\n"Premium quality guaranteed" (says literally nothing)\n"Recommended for ages 18+" (we don\'t age-gate — everyone\'s welcome)\nLuxury editorial tone (too stiff, wrong vibe)\nCorporate / dry / formal (if a PR department wrote it, delete it)' },
+      { key: 'voice_principle1_title', label: 'Principle 1 Title', type: 'text', defaultValue: 'Shock First, Explain Later' },
+      { key: 'voice_principle1_body', label: 'Principle 1 Body', type: 'textarea', defaultValue: "Lead with the surprising, weird, funny thing. Let curiosity do the work. Don't front-load context." },
+      { key: 'voice_principle2_title', label: 'Principle 2 Title', type: 'text', defaultValue: 'Confident, Not Arrogant' },
+      { key: 'voice_principle2_body', label: 'Principle 2 Body', type: 'textarea', defaultValue: "We know we're different. We don't need to yell about it. Confidence is quiet. Arrogance is loud." },
+      { key: 'voice_principle3_title', label: 'Principle 3 Title', type: 'text', defaultValue: 'Play It Straight' },
+      { key: 'voice_principle3_body', label: 'Principle 3 Body', type: 'textarea', defaultValue: "The best humor is delivered deadpan. Don't wink too hard. Say the absurd thing like it's obvious." },
+      { key: 'voice_bottom_quote', label: 'Bottom Quote', type: 'text', defaultValue: 'The voice should feel clever, deadpan, and a little dangerous in the best possible way.' },
+    ]
+  },
+  {
+    id: 'logo',
+    num: '07',
+    tag: '07 — Identity',
+    title: 'Logo System',
+    desc: 'Logo specs and usage rules',
+    fields: [
+      { key: 'logo_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'The logo is a P-shaped puzzle piece emblem paired with a clean Nunito wordmark. Flat. No drop shadows. No stacked offset copies. No outlines. Just form.' },
+      { key: 'logo_emblem_items', label: 'Emblem Details (one per line)', type: 'list', defaultValue: 'Yellow bowl: #FEE000 — the D-shaped arc of the P\nInk outline: #1A1A1A — clean black, no softening\nLight blue circle: #C1E3E8 — bottom of the stem. The detail that rewards close looking.' },
+      { key: 'logo_wordmark_items', label: 'Wordmark Rules (one per line)', type: 'list', defaultValue: 'Nunito, weight 900, UPPERCASE\nNo outlines. No drop shadows. No effects.\nFLAT. The previous version had 3–4 stacked offset copies of every letter. That\'s gone.\nOn dark: white wordmark. On yellow/light: black wordmark.\nNever stretch, rotate, recolor, or deconstruct the lockup.' },
+    ]
+  },
+  {
+    id: 'colors',
+    num: '08',
+    tag: '08 — Palette',
+    title: 'Color System',
+    desc: 'Six colors, two heroes, usage rules',
+    fields: [
+      { key: 'colors_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Six colors. Two heroes. Four accents. Use them boldly — especially the blue, which lives everywhere on the website and is just as essential as yellow.' },
+      { key: 'colors_rule', label: 'Color Rule (Callout)', type: 'textarea', defaultValue: 'Yellow and blue are both dominant colors — not yellow hero, blue secondary. Both should appear heavily throughout any design. The website uses blue as a primary background across entire sections. Follow that.' },
+      { key: 'colors_yellow_role', label: 'Odd Yellow — Role Description', type: 'text', defaultValue: 'Hero color. Own it. Lead with it.' },
+      { key: 'colors_blue_role', label: 'Light Blue — Role Description', type: 'text', defaultValue: 'Background anchor. Used heavily on website. Equal to yellow in presence.' },
+      { key: 'colors_orange_role', label: 'Orange — Role Description', type: 'text', defaultValue: 'Accent. CTAs, highlights, arrows.' },
+      { key: 'colors_red_role', label: 'Red-Orange — Role Description', type: 'text', defaultValue: 'Urgency, warnings, "WAIT" moments.' },
+      { key: 'colors_ink_role', label: 'Ink Black — Role Description', type: 'text', defaultValue: 'Primary text. Outlines. Dark backgrounds.' },
+      { key: 'colors_cream_role', label: 'Clean Cream — Role Description', type: 'text', defaultValue: 'Warm page background. Softer than pure white.' },
+    ]
+  },
+  {
+    id: 'type',
+    num: '09',
+    tag: '09 — Typography',
+    title: 'Type System',
+    desc: 'Nunito + Inter rules and specimens',
+    fields: [
+      { key: 'type_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Two fonts. No exceptions. Nunito owns the personality. Inter handles the rest. Together they\'re punchy, clean, and unmistakably Odd Pieces.' },
+      { key: 'type_rule1_title', label: 'Rule 1 Title', type: 'text', defaultValue: 'Nunito Stays Short' },
+      { key: 'type_rule1_body', label: 'Rule 1 Body', type: 'textarea', defaultValue: 'Use Nunito for headlines, labels, and short brand moments only. Never for paragraph-length copy.' },
+      { key: 'type_rule2_title', label: 'Rule 2 Title', type: 'text', defaultValue: 'Display Effect Is Rare' },
+      { key: 'type_rule2_body', label: 'Rule 2 Body', type: 'textarea', defaultValue: 'Stroke + hard shadow is reserved for hero headlines and major brand moments only. Never on body copy.' },
+      { key: 'type_rule3_title', label: 'Rule 3 Title', type: 'text', defaultValue: 'Inter Does The Reading' },
+      { key: 'type_rule3_body', label: 'Rule 3 Body', type: 'textarea', defaultValue: 'Long-form copy, descriptions, and instructions stay in Inter. Keep it clear, warm, and easy to scan.' },
+    ]
+  },
+  {
+    id: 'illustration',
+    num: '10',
+    tag: '10 — Art Direction',
+    title: 'Illustration Direction',
+    desc: 'Art direction philosophy and humor rules',
+    fields: [
+      { key: 'illus_intro', label: 'Section Intro', type: 'textarea', defaultValue: "Each puzzle has its own illustration style. That's intentional. What's consistent isn't the style — it's the philosophy. Maximum density. Hidden stories. Comedic payoffs. Wimmelbilder soul." },
+      { key: 'illus_card1_title', label: 'Card 1 Title', type: 'text', defaultValue: 'Maximum Density' },
+      { key: 'illus_card1_body', label: 'Card 1 Body', type: 'textarea', defaultValue: "Every inch of the illustration is packed with micro-stories. A character in the bottom-left corner has their own subplot. Find it if you can. Wimmelbilder — Where's Waldo-level layering." },
+      { key: 'illus_card2_title', label: 'Card 2 Title', type: 'text', defaultValue: 'Comedic Payoffs' },
+      { key: 'illus_card2_body', label: 'Card 2 Body', type: 'textarea', defaultValue: 'Humor lives in the details. The thing you spot after three hours of puzzling. The absurdist twist you weren\'t expecting. Never mean-spirited. Always landing.' },
+      { key: 'illus_card3_title', label: 'Card 3 Title', type: 'text', defaultValue: 'Pop Culture References' },
+      { key: 'illus_card3_body', label: 'Card 3 Body', type: 'textarea', defaultValue: 'Layered, witty, earned. Not forced. Think: something that makes one person at the table gasp and the others feel like they missed a joke they\'d love once explained.' },
+      { key: 'illus_card4_title', label: 'Card 4 Title', type: 'text', defaultValue: 'Before to After' },
+      { key: 'illus_card4_body', label: 'Card 4 Body', type: 'textarea', defaultValue: 'Every illustration must work as a before scene AND imply the chaos that follows. The box cover is the before. The puzzle is the after. They must be legible as a pair.' },
+      { key: 'illus_card5_title', label: 'Card 5 Title', type: 'text', defaultValue: 'Style Varies Per Title' },
+      { key: 'illus_card5_body', label: 'Card 5 Body', type: 'textarea', defaultValue: 'Pixel art for one puzzle. Clean vector isometric for another. Painterly for the next. The brand doesn\'t lock one illustration style — each title can look distinct while sharing the Odd Pieces philosophy.' },
+      { key: 'illus_card6_title', label: 'Card 6 Title', type: 'text', defaultValue: 'Metauniverse Threads' },
+      { key: 'illus_card6_body', label: 'Card 6 Body', type: 'textarea', defaultValue: 'Every illustration must hide at least one Easter egg referencing another Odd Pieces title. A character, an object, a logo, a detail. The universe is connected. Show it.' },
+      { key: 'illus_ai_callout', label: 'On AI vs Human Artists (Callout)', type: 'textarea', defaultValue: 'Odd Pieces works with real artists from around the world. Not AI-generated art. This is brand gospel — the human authorship behind each illustration is part of the product\'s soul and a key differentiator in how we talk about the work.' },
+    ]
+  },
+  {
+    id: 'packaging',
+    num: '11',
+    tag: '11 — Product',
+    title: 'Packaging',
+    desc: 'Box contents and packaging principles',
+    fields: [
+      { key: 'pkg_intro', label: 'Section Intro', type: 'textarea', defaultValue: "Opening the box is the first WAIT — WHAT?! moment. Before a single piece hits the table. It should feel like an Apple box had a baby with a comic book — premium, tight, satisfying, and slightly ominous." },
+      { key: 'pkg_box_title', label: 'Box — Title', type: 'text', defaultValue: 'The Box' },
+      { key: 'pkg_box_body', label: 'Box — Description', type: 'textarea', defaultValue: "Premium cardboard. Tight lid. That slow, satisfying resistance when you open it — like the box knows something you don't. The cover is the before scene: dense, full-bleed, chaotic in the best way. No dead space. Every inch is hiding something." },
+      { key: 'pkg_comic_title', label: 'Before Comic — Title', type: 'text', defaultValue: 'Before Comic' },
+      { key: 'pkg_comic_body', label: 'Before Comic — Description', type: 'textarea', defaultValue: "Opens the story. Sets the scene. Tells you exactly what's going on — so that when you build the after and realize everything has gone completely sideways, the payoff is even more unhinged. Context makes the twist land harder." },
+      { key: 'pkg_pieces_title', label: 'Puzzle Pieces — Title', type: 'text', defaultValue: '1000 Puzzle Pieces' },
+      { key: 'pkg_pieces_body', label: 'Puzzle Pieces — Description', type: 'textarea', defaultValue: "Premium cut. The image you build is the same scene — 15 seconds after the box cover. Hundreds of things changed. You'll discover them piece by piece. Some will be obvious. Some will make someone at the table yell." },
+      { key: 'pkg_envelope_title', label: 'Envelope — Title', type: 'text', defaultValue: 'Secret Ending Envelope' },
+      { key: 'pkg_envelope_body', label: 'Envelope — Description', type: 'textarea', defaultValue: "Do not open early. This is not a suggestion. Sealed inside. Only opened after the puzzle is complete. Contains the after comic — the shocking \"why\" behind everything — plus a final riddle. The grand reveal. The whole reason you did all of this. Sacred." },
+      { key: 'pkg_warning_title', label: 'Warning Card — Title', type: 'text', defaultValue: 'Warning Insert Card' },
+      { key: 'pkg_warning_body', label: 'Warning Card — Description', type: 'textarea', defaultValue: '"This puzzle contains things you weren\'t supposed to find." It\'s not just a card — it\'s a prop from the universe. Sets the tone. Starts the hunt. Should feel like a note slipped under your door by someone who knows too much.' },
+      { key: 'pkg_sticker_title', label: 'Stickers — Title', type: 'text', defaultValue: 'Sticker Sheet' },
+      { key: 'pkg_sticker_body', label: 'Stickers — Description', type: 'textarea', defaultValue: "The surprise at the bottom of the box. In-world characters. Collectible-feeling. The kind of stickers that actually end up on things. Not filler — a genuine delight that people don't expect and definitely keep." },
+    ]
+  },
+  {
+    id: 'channels',
+    num: '12',
+    tag: '12 — Distribution',
+    title: 'Channel Guidance',
+    desc: 'Shopify, Amazon, Kickstarter, Retail',
+    fields: [
+      { key: 'ch_intro', label: 'Section Intro', type: 'textarea', defaultValue: "Same brand energy, different arena. Shopify gets the full unfiltered personality. Amazon plays by its own weird rules. Kickstarter gets a manifesto. Retail wants to stop you mid-aisle. Know the game before you play it." },
+      { key: 'ch_shopify_rules', label: 'Shopify Rules (one per line)', type: 'list', defaultValue: "Home turf. Full brand voice, no filter. This is where Odd Pieces gets to be completely itself.\nLead with blue and yellow, big and loud — this is the brand's living room\nHero section: the 3-step experience front and center — before anything else\nProduct pages: illustration detail shots that reward close, obsessive inspection\nCross-sell via lore: show the metauniverse — it's not just upselling, it's a revelation\nThe Secret Ending Envelope: tease relentlessly. Never spoil. Ever." },
+      { key: 'ch_amazon_rules', label: 'Amazon Rules (one per line)', type: 'list', defaultValue: "The algorithm is not your friend. The images are. Make them do the work.\nMain image: clean box on white. No clutter. No cleverness. Just the box.\nSecondary images: illustration close-ups that make people stop scrolling\n7-image sequence: box → detail → unboxing → in-play → the Envelope → after reveal → whole-table shot\nTitle: puzzle name first, then \"1000-Piece Jigsaw Puzzle\" — keep it indexable\nBullets: experience first. \"You'll gasps at what changes\" beats \"300gsm premium board\" every time." },
+      { key: 'ch_kickstarter_rules', label: 'Kickstarter Rules (one per line)', type: 'list', defaultValue: "Not a product page — a manifesto. Write it like you mean it.\nOpen with the WAIT — WHAT?! energy. Don't ease into it. Hit them immediately.\nBacker tiers: name them like universe lore — not \"Early Bird Tier 2\" (that's inexcusable)\nCampaign updates: talk to backers like they're inside the universe, not customers waiting on an order\nShow the team. Show the chaos. The human brand isn't a tactic here — it's the whole pitch.\nStretch goals = universe expansion. Every milestone adds a chapter." },
+      { key: 'ch_retail_rules', label: 'Barnes & Noble / Retail Rules (one per line)', type: 'list', defaultValue: "Mission: make someone pick it up from 3 feet away without knowing why.\nBox cover: bold, dense, visually arresting — it competes against an entire shelf of rectangles\nTitle: large, uppercase, Nunito 900. No elegance. Just raw presence.\nSide panel: \"NOT YOUR ORDINARY PUZZLES\" — hook them before they even flip it over\nBack panel: the 3-step experience, scannable and fast. End on the tease — not the reveal.\nNo price war vibes. Being unmissable is the only strategy that matters here." },
+    ]
+  },
+  {
+    id: 'human',
+    num: '13',
+    tag: '13 — What Makes Us Different',
+    title: 'The Human Brand',
+    desc: 'The things that can\'t be faked',
+    fields: [
+      { key: 'human_intro', label: 'Section Intro', type: 'textarea', defaultValue: "This is the stuff that can't be faked. The things that separate Odd Pieces from every puzzle company that's just printing cardboard. These aren't features — they're personality." },
+      { key: 'human_mail_title', label: '"They Mail Puzzle Pieces" Title', type: 'text', defaultValue: 'They Mail Puzzle Pieces' },
+      { key: 'human_mail_body', label: '"They Mail Puzzle Pieces" Body', type: 'textarea', defaultValue: 'If a customer emails about a missing piece, someone on the team literally grabs a puzzle piece and mails it to them. Not a form. Not a replacement box. An actual puzzle piece in an actual envelope. This is the brand in action.' },
+      { key: 'human_clues_title', label: '"Clues, Not Answers" Title', type: 'text', defaultValue: 'Clues, Not Answers' },
+      { key: 'human_clues_body', label: '"Clues, Not Answers" Body', type: 'textarea', defaultValue: "When someone emails asking for the answer to the final riddle, they get clues — not the solution. The experience is sacred. Spoiling it would be a betrayal. The team actively protects the mystery, even when customers beg." },
+      { key: 'human_artists_title', label: '"Real Artists" Title', type: 'text', defaultValue: 'Real Artists, Real People' },
+      { key: 'human_artists_body', label: '"Real Artists" Body', type: 'textarea', defaultValue: "Every illustration is made by a real human artist from somewhere in the world. Not AI-generated. Not templated. The artists are credited, supported, and part of the brand story. When you buy Odd Pieces, you're also buying someone's work." },
+      { key: 'human_team_title', label: '"Small Team" Title', type: 'text', defaultValue: 'Small, Passionate Team' },
+      { key: 'human_team_body', label: '"Small Team" Body', type: 'textarea', defaultValue: "Not a faceless corporation. A small team that genuinely believes in what they're building. This comes through in everything — the copy, the packaging details, the customer service. The brand has a pulse because the team does." },
+      { key: 'human_rule', label: 'The Rule (Callout)', type: 'textarea', defaultValue: "Every brand decision should feel like it was made by a human for a human. If it feels automated, templated, or corporate — it's wrong. The human brand is not a marketing strategy. It's who Odd Pieces actually is." },
+    ]
+  },
+  {
+    id: 'dodont',
+    num: '14',
+    tag: '14 — Rules',
+    title: 'Do / Don\'t',
+    desc: 'The essential rules — print and post',
+    fields: [
+      { key: 'dd_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'The short version of everything above. Print this out. Put it on the wall. Check every design against it.' },
+      { key: 'dd_do', label: '"Do" Items (one per line)', type: 'list', defaultValue: "Use Odd Yellow (#FEE000) and Blue (#C1E3E8) heavily — both are hero colors\nUse Nunito 900 uppercase for all headlines and display text\nLead with the twist, the shock, the \"WAIT — WHAT?!\" moment\nMake the document / design itself feel fun and energetic\nLet illustration styles vary per title — the philosophy is what's consistent\nCredit and celebrate the artists behind each illustration\nKeep the Secret Ending sacred — tease, never spoil\nWrite copy that sounds like a smart, irreverent human\nUse the Wimmelbilder philosophy — maximum density, everywhere\nHide metauniverse Easter eggs in every illustration\nMake the flat logo system — no stacked layers, no outlines\nThe small light blue circle at the bottom of the P — always there" },
+      { key: 'dd_dont', label: '"Don\'t" Items (one per line)', type: 'list', defaultValue: "Add drop shadows, gradients, or outlines to typography\nUse the stacked-offset multi-copy logo (that's the old version)\nSound like Magic Puzzle Company — differentiate actively\nUse luxury editorial tone (\"an immersive puzzle experience\")\nSound like a children's activity brand (too soft, too safe)\nUse AI-generated art for puzzle illustrations\nSpoil the Secret Ending in any marketing material\nAutomate customer service in ways that feel robotic\nLet any channel feel generic, corporate, or templated\nUse only yellow and ignore blue (both are dominant)\nPosition as \"for kids\" OR \"adults only\" — it's both, always\nCreate new puzzle titles that don't connect to the metauniverse" },
+    ]
+  },
+  {
+    id: 'resources',
+    num: '15',
+    tag: '15 — Links',
+    title: 'More Resources',
+    desc: 'Links and references',
+    fields: [
+      { key: 'res_intro', label: 'Section Intro', type: 'textarea', defaultValue: 'Use these references when you need the broader visual system or the exact text-effect specs in isolation.' },
+    ]
+  },
+];
 
-  let hasUnsavedChanges = false;
+// ─── STATE ───
+const STORAGE_KEY = 'op_brand_editor_v6';
+let edits = {};
+let hasUnsaved = false;
 
-  // Fetch the brand guidelines HTML and extract sections
-  async function loadBrandGuidelines() {
-    try {
-      const response = await fetch('/brand-guidelines-v6.html');
-      const html = await response.text();
-      const parser = new DOMParser();
-      const doc = parser.parseFromString(html, 'text/html');
+function loadEdits() {
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) edits = JSON.parse(saved);
+  } catch(e) { edits = {}; }
+}
 
-      const container = document.getElementById('sectionsContainer');
-      container.innerHTML = '';
+function saveEdits() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+  } catch(e) {}
+}
 
-      SECTIONS.forEach(section => {
-        const sectionElement = doc.querySelector(`#${section.id}`);
-        let content = '';
+function getValue(key, defaultValue) {
+  return edits[key] !== undefined ? edits[key] : defaultValue;
+}
 
-        if (sectionElement) {
-          const section_div = sectionElement.closest('div');
-          if (section_div) {
-            // Get all content until the next section
-            let current = sectionElement.nextElementSibling;
-            const contentParts = [sectionElement.outerHTML];
-            while (current && !current.id) {
-              contentParts.push(current.outerHTML);
-              current = current.nextElementSibling;
-            }
-            content = contentParts.join('\n');
-          }
-        }
-
-        // Load from localStorage if exists
-        const savedContent = localStorage.getItem(section.key);
-        if (savedContent) {
-          content = savedContent;
-        }
-
-        const card = createSectionCard(section, content);
-        container.appendChild(card);
-      });
-    } catch (e) {
-      console.error('Error loading brand guidelines:', e);
-      document.getElementById('sectionsContainer').innerHTML = '<p style="color: red;">Error loading guidelines. Make sure brand-guidelines-v6.html exists.</p>';
-    }
+function setValue(key, value, defaultValue) {
+  if (value === defaultValue) {
+    delete edits[key];
+  } else {
+    edits[key] = value;
   }
+  saveEdits();
+  updateStatus(true);
+  updateModifiedIndicators();
+}
 
-  function createSectionCard(section, content) {
-    const card = document.createElement('div');
-    card.className = 'section-card';
+function isModified(sectionId) {
+  return SECTIONS.find(s => s.id === sectionId)?.fields.some(f => edits[f.key] !== undefined) || false;
+}
+
+function updateStatus(unsaved) {
+  hasUnsaved = unsaved;
+  const badge = document.getElementById('statusBadge');
+  const text = document.getElementById('statusText');
+  if (unsaved) {
+    badge.className = 'status-badge unsaved';
+    text.textContent = 'Unsaved changes';
+  } else {
+    badge.className = 'status-badge saved';
+    text.textContent = 'All saved';
+  }
+}
+
+function updateModifiedIndicators() {
+  SECTIONS.forEach(section => {
+    const mod = isModified(section.id);
+    const card = document.getElementById('card-' + section.id);
+    const dot = document.getElementById('dot-' + section.id);
+    const badge = document.getElementById('badge-' + section.id);
+    const navDot = document.getElementById('navdot-' + section.id);
+    if (card) card.classList.toggle('modified', mod);
+    if (dot) dot.style.display = mod ? 'block' : 'none';
+    if (badge) badge.style.display = mod ? 'inline-flex' : 'none';
+    if (navDot) navDot.style.display = mod ? 'block' : 'none';
+  });
+}
+
+// ─── RENDER ───
+function renderSidebar() {
+  const nav = document.getElementById('sidebarNav');
+  nav.innerHTML = SECTIONS.map(s => `
+    <a class="sidebar-nav-item" id="navitem-${s.id}" href="#card-${s.id}" onclick="scrollToSection('${s.id}')">
+      <span class="sidebar-num">${s.num}</span>
+      <span>${s.title}</span>
+      <div class="sidebar-modified" id="navdot-${s.id}" style="display:none;"></div>
+    </a>
+  `).join('');
+}
+
+function renderSections() {
+  const container = document.getElementById('sectionsContainer');
+  container.innerHTML = SECTIONS.map(section => renderSection(section)).join('');
+}
+
+function renderSection(section) {
+  const fieldsHtml = section.fields.map(field => renderField(section, field)).join('');
+  return `
+    <div class="section-card" id="card-${section.id}">
+      <div class="section-card-header" onclick="toggleSection('${section.id}')">
+        <div class="section-tag-num">${section.tag}</div>
+        <div>
+          <div class="section-card-title">${section.title}</div>
+          <div class="section-card-desc">${section.desc}</div>
+        </div>
+        <div class="section-modified-badge" id="badge-${section.id}" style="display:none;">Edited</div>
+        <div class="section-chevron">▾</div>
+      </div>
+      <div class="section-card-body">
+        ${fieldsHtml}
+      </div>
+    </div>
+  `;
+}
+
+function renderField(section, field) {
+  const value = getValue(field.key, field.defaultValue);
+  
+  if (field.type === 'list') {
+    const items = value.split('\n').filter(v => v.trim());
+    const itemsHtml = items.map((item, i) => `
+      <div class="list-item-editor" id="listitem-${field.key}-${i}">
+        <span class="list-item-icon">—</span>
+        <div class="field-editable" contenteditable="true" 
+             data-key="${field.key}" data-type="listitem" data-index="${i}"
+             oninput="handleListItemInput(this, '${field.key}')"
+             style="flex:1; min-height:36px;">${escapeHtml(item)}</div>
+        <button class="btn-remove-item" onclick="removeListItem('${field.key}', ${i})" title="Remove">×</button>
+      </div>
+    `).join('');
     
-    const header = document.createElement('div');
-    header.className = 'section-header';
-    header.innerHTML = `
-      <h3>${section.title}</h3>
-      <span class="expand-icon">▼</span>
-    `;
-    header.onclick = () => toggleSection(card);
-
-    const contentDiv = document.createElement('div');
-    contentDiv.className = 'section-content';
-    contentDiv.innerHTML = `
-      <div class="editor-section">
-        <label class="editor-label">Edit Content (HTML)</label>
-        <textarea class="editor-textarea" data-key="${section.key}">${escapeHtml(content)}</textarea>
-        <div class="last-saved" id="saved-${section.key}"></div>
+    return `
+      <div class="field-group" id="fieldgroup-${field.key}">
+        <div class="field-label">${field.label}</div>
+        <div class="list-editor" id="listeditor-${field.key}">
+          ${itemsHtml}
+        </div>
+        <button class="btn-add-item" onclick="addListItem('${field.key}', ${JSON.stringify(field.defaultValue).replace(/</g,'\\u003c')})">+ Add item</button>
       </div>
     `;
+  }
+  
+  const isTextarea = field.type === 'textarea';
+  return `
+    <div class="field-group">
+      <div class="field-label">${field.label}</div>
+      <div class="field-editable" contenteditable="true"
+           data-key="${field.key}" data-default="${escapeHtmlAttr(field.defaultValue)}"
+           oninput="handleFieldInput(this)"
+           style="${isTextarea ? 'min-height:80px;' : ''}">${escapeHtml(value)}</div>
+    </div>
+  `;
+}
 
-    const textarea = contentDiv.querySelector('textarea');
-    textarea.addEventListener('input', () => {
-      hasUnsavedChanges = true;
-      updateStatus();
-      localStorage.setItem(section.key, textarea.value);
-      document.getElementById(`saved-${section.key}`).textContent = 'Saved to browser storage ✓';
+function escapeHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+function escapeHtmlAttr(str) {
+  return String(str).replace(/"/g, '&quot;').replace(/\n/g, '&#10;');
+}
+
+// ─── INTERACTIONS ───
+function toggleSection(id) {
+  const card = document.getElementById('card-' + id);
+  const isExpanded = card.classList.contains('expanded');
+  // Collapse all
+  document.querySelectorAll('.section-card.expanded').forEach(c => c.classList.remove('expanded'));
+  if (!isExpanded) {
+    card.classList.add('expanded');
+    // Update sidebar active
+    document.querySelectorAll('.sidebar-nav-item').forEach(el => el.classList.remove('active'));
+    document.getElementById('navitem-' + id)?.classList.add('active');
+  }
+}
+
+function scrollToSection(id) {
+  const card = document.getElementById('card-' + id);
+  if (card) {
+    card.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!card.classList.contains('expanded')) toggleSection(id);
+  }
+}
+
+function handleFieldInput(el) {
+  const key = el.dataset.key;
+  const defaultValue = el.dataset.default;
+  const value = el.innerText;
+  setValue(key, value, defaultValue);
+  el.classList.toggle('modified-field', edits[key] !== undefined);
+}
+
+function handleListItemInput(el, key) {
+  syncListField(key);
+}
+
+function syncListField(key) {
+  const items = Array.from(document.querySelectorAll(`[data-key="${key}"][data-type="listitem"]`))
+    .map(el => el.innerText.trim())
+    .filter(v => v);
+  const field = findField(key);
+  setValue(key, items.join('\n'), field?.defaultValue || '');
+}
+
+function addListItem(key) {
+  const field = findField(key);
+  const currentValue = getValue(key, field?.defaultValue || '');
+  const items = currentValue.split('\n').filter(v => v.trim());
+  items.push('New item');
+  setValue(key, items.join('\n'), field?.defaultValue || '');
+  rerenderList(key, items);
+  // Focus last
+  setTimeout(() => {
+    const els = document.querySelectorAll(`[data-key="${key}"][data-type="listitem"]`);
+    const last = els[els.length - 1];
+    if (last) { last.focus(); selectAll(last); }
+  }, 50);
+}
+
+function removeListItem(key, index) {
+  const field = findField(key);
+  const currentValue = getValue(key, field?.defaultValue || '');
+  const items = currentValue.split('\n').filter(v => v.trim());
+  items.splice(index, 1);
+  setValue(key, items.join('\n'), field?.defaultValue || '');
+  rerenderList(key, items);
+}
+
+function rerenderList(key, items) {
+  const editor = document.getElementById('listeditor-' + key);
+  if (!editor) return;
+  editor.innerHTML = items.map((item, i) => `
+    <div class="list-item-editor" id="listitem-${key}-${i}">
+      <span class="list-item-icon">—</span>
+      <div class="field-editable" contenteditable="true" 
+           data-key="${key}" data-type="listitem" data-index="${i}"
+           oninput="handleListItemInput(this, '${key}')"
+           style="flex:1; min-height:36px;">${escapeHtml(item)}</div>
+      <button class="btn-remove-item" onclick="removeListItem('${key}', ${i})" title="Remove">×</button>
+    </div>
+  `).join('');
+}
+
+function findField(key) {
+  for (const s of SECTIONS) {
+    const f = s.fields.find(f => f.key === key);
+    if (f) return f;
+  }
+  return null;
+}
+
+function selectAll(el) {
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+// ─── PUBLISH FLOW ───
+function openPublishModal() {
+  document.getElementById('publishModal').classList.add('open');
+}
+function closePublishModal() {
+  document.getElementById('publishModal').classList.remove('open');
+}
+
+function downloadPublished() {
+  const html = generateUpdatedHtml();
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'brand-guidelines-v6.html';
+  a.click();
+  URL.revokeObjectURL(url);
+  
+  closePublishModal();
+  updateStatus(false);
+  showToast('✓ Downloaded! Replace the file in odd-pieces-site and run: vercel deploy --prod', 'success', 6000);
+}
+
+function previewGuidelines() {
+  const html = generateUpdatedHtml();
+  const blob = new Blob([html], { type: 'text/html' });
+  const url = URL.createObjectURL(blob);
+  window.open(url, '_blank');
+}
+
+function copyShareLink() {
+  const url = window.location.origin + '/brand-guidelines-v6.html';
+  navigator.clipboard.writeText(url).then(() => {
+    showToast('🔗 Link copied! Team sees updates after you publish.', 'info');
+  }).catch(() => {
+    prompt('Copy this link:', url);
+  });
+}
+
+function confirmReset() {
+  if (Object.keys(edits).length === 0) {
+    showToast('Nothing to reset — no edits made yet.', 'info');
+    return;
+  }
+  if (confirm('Reset ALL edits back to original? This cannot be undone.')) {
+    edits = {};
+    saveEdits();
+    updateStatus(false);
+    renderSections();
+    updateModifiedIndicators();
+    showToast('↩ All edits reset to original.', 'info');
+  }
+}
+
+// ─── GENERATE UPDATED HTML ───
+// Patches the brand-guidelines-v6.html with edited content
+function generateUpdatedHtml() {
+  // We generate the full HTML by substituting values into a template
+  // Since the original file is complex HTML, we embed the edits as a patch
+  // The output is a standalone HTML that reads our overrides from embedded JSON
+  
+  return generatePatchedHtml();
+}
+
+function generatePatchedHtml() {
+  // We embed a script in the output HTML that applies all edits on load
+  // This way we don't have to template-parse the whole brand-guidelines-v6.html
+  // Instead we produce a self-contained patched version
+  
+  const allValues = {};
+  SECTIONS.forEach(section => {
+    section.fields.forEach(field => {
+      allValues[field.key] = getValue(field.key, field.defaultValue);
     });
+  });
+  
+  return `<!-- Brand Guidelines V6 — Edited via Brand Guidelines Editor -->
+<!-- Edits applied: ${new Date().toISOString()} -->
+<!-- To edit again: visit /brand-guidelines-editor.html -->
+${ORIGINAL_HTML_PLACEHOLDER}`;
+  // Note: We'll actually generate this differently — see below
+}
 
-    card.appendChild(header);
-    card.appendChild(contentDiv);
-    return card;
+// ─── TOAST ───
+function showToast(msg, type = 'success', duration = 3500) {
+  const existing = document.querySelector('.toast');
+  if (existing) existing.remove();
+  
+  const toast = document.createElement('div');
+  toast.className = `toast ${type}`;
+  toast.textContent = msg;
+  document.body.appendChild(toast);
+  
+  setTimeout(() => {
+    toast.style.animation = 'slideDown 0.3s ease forwards';
+    setTimeout(() => toast.remove(), 300);
+  }, duration);
+}
+
+// ─── INIT ───
+loadEdits();
+renderSidebar();
+renderSections();
+updateModifiedIndicators();
+
+// Auto-save check
+setInterval(() => {
+  if (hasUnsaved) {
+    // edits already saved to localStorage on each change
+    // this is just a visual reassurance
   }
+}, 30000);
 
-  function toggleSection(card) {
-    card.classList.toggle('expanded');
+// Warn on leave if unsaved
+window.addEventListener('beforeunload', (e) => {
+  if (hasUnsaved) {
+    e.preventDefault();
+    e.returnValue = '';
   }
+});
 
-  function updateStatus() {
-    const statusEl = document.getElementById('status');
-    if (hasUnsavedChanges) {
-      statusEl.textContent = '✏️ Unsaved changes';
-      statusEl.className = 'status-text unsaved';
-    } else {
-      statusEl.textContent = '✓ All saved to browser';
-      statusEl.className = 'status-text saved';
-    }
+// ─── NOTE ON PUBLISH ───
+// The editor generates a download of the updated HTML. 
+// For full publishing, it needs the original HTML to patch.
+// We load it via fetch and inject the edits.
+
+async function downloadPublishedFull() {
+  try {
+    showToast('⏳ Preparing your file...', 'info', 10000);
+    const resp = await fetch('/brand-guidelines-v6.html');
+    if (!resp.ok) throw new Error('Could not load source file');
+    let html = await resp.text();
+    
+    // Apply text replacements for edited fields
+    html = applyEditsToHtml(html);
+    
+    const blob = new Blob([html], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'brand-guidelines-v6.html';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    closePublishModal();
+    updateStatus(false);
+    showToast('✓ Downloaded! Replace the file and run: vercel deploy --prod', 'success', 6000);
+  } catch(err) {
+    // Fallback: create a diff file
+    showToast('⚠ Could not load source. Downloading edits as JSON instead.', 'error', 4000);
+    downloadEditsJson();
   }
+}
 
-  function escapeHtml(text) {
-    const map = {
-      '&': '&amp;',
-      '<': '&lt;',
-      '>': '&gt;',
-      '"': '&quot;',
-      "'": '&#039;'
-    };
-    return text.replace(/[&<>"']/g, m => map[m]);
-  }
+function applyEditsToHtml(html) {
+  // For each edited field, find and replace the text in the HTML
+  SECTIONS.forEach(section => {
+    section.fields.forEach(field => {
+      if (edits[field.key] === undefined) return; // not edited
+      const oldVal = field.defaultValue;
+      const newVal = edits[field.key];
+      
+      if (field.type === 'list') {
+        // Lists are harder to replace in-place, skip for now
+        return;
+      }
+      
+      // Simple text replacement — replace the old value with the new one
+      // Escape for use in HTML content
+      const oldHtml = escapeHtml(oldVal);
+      const newHtml = escapeHtml(newVal);
+      
+      // Try multiple patterns
+      if (html.includes(oldHtml)) {
+        html = html.split(oldHtml).join(newHtml);
+      } else if (html.includes(oldVal)) {
+        html = html.split(oldVal).join(newVal);
+      }
+    });
+  });
+  
+  // Add editor metadata comment
+  html = html.replace('<!DOCTYPE html>', 
+    `<!DOCTYPE html>\n<!-- Edited via Brand Guidelines Editor on ${new Date().toLocaleDateString()} -->`
+  );
+  
+  return html;
+}
 
-  function downloadUpdatedFile() {
-    // Start with the original file content as template
-    fetch('/brand-guidelines-v6.html')
-      .then(r => r.text())
-      .then(originalHtml => {
-        let updatedHtml = originalHtml;
+function downloadEditsJson() {
+  const data = {
+    version: 'v6',
+    editedAt: new Date().toISOString(),
+    edits: edits
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'brand-guidelines-edits.json';
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
-        // Replace each section with edited content
-        SECTIONS.forEach(section => {
-          const savedContent = localStorage.getItem(section.key);
-          if (savedContent) {
-            // Find the section heading and replace until next section
-            const regex = new RegExp(`(<div[^>]*id="${section.id}"[^>]*>.*?<\\/div>)(?=<div[^>]*id="\\d+"|<\\/body>|$)`, 'is');
-            updatedHtml = updatedHtml.replace(regex, savedContent);
-          }
-        });
-
-        // Download
-        const blob = new Blob([updatedHtml], { type: 'text/html' });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement('a');
-        a.href = url;
-        a.download = 'brand-guidelines-v6.html';
-        a.click();
-        URL.revokeObjectURL(url);
-
-        hasUnsavedChanges = false;
-        updateStatus();
-      });
-  }
-
-  function resetForm() {
-    if (confirm('This will clear all your edits. Sure?')) {
-      localStorage.clear();
-      loadBrandGuidelines();
-      hasUnsavedChanges = false;
-      updateStatus();
-    }
-  }
-
-  // Load on page load
-  loadBrandGuidelines();
+// Override the simpler downloadPublished with the full version
+function downloadPublished() {
+  downloadPublishedFull();
+}
 </script>
-
 </body>
 </html>

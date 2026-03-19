@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Perspective Puzzles Brief</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: #08080f;
+    color: #e8e8e8;
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .page {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 72px 24px 80px;
+  }
+
+  /* ── HEADER ── */
+  .header {
+    margin-bottom: 40px;
+  }
+
+  .brand-mark {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+
+  .brand-dot {
+    width: 8px;
+    height: 8px;
+    background: #F5C842;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .brand-name {
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #F5C842;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #ffffff;
+    margin-top: 32px;
+    margin-bottom: 16px;
+  }
+
+  .tagline {
+    font-size: 1rem;
+    color: #aaa;
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid #111120;
+    margin: 24px 0;
+  }
+
+  /* ── CONTENT ── */
+  .content {
+    line-height: 1.7;
+    font-size: 0.95rem;
+  }
+
+  .content p {
+    margin-bottom: 16px;
+    color: #ddd;
+  }
+
+  .content ul {
+    margin-left: 20px;
+    margin-bottom: 16px;
+    color: #ddd;
+  }
+
+  .content li {
+    margin-bottom: 8px;
+  }
+
+  /* ── TABLE ── */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+    font-size: 0.9rem;
+  }
+
+  th {
+    border-bottom: 2px solid #222236;
+    padding: 12px 8px;
+    text-align: left;
+    color: #aaa;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-size: 0.75rem;
+  }
+
+  td {
+    border-bottom: 1px solid #111120;
+    padding: 12px 8px;
+    color: #ddd;
+  }
+
+  tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* ── SECTION CARDS ── */
+  .section-card {
+    background: #0d0d1a;
+    border: 1px solid #141420;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+  }
+
+  .section-card h3 {
+    font-size: 0.9rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .section-card p {
+    margin: 0;
+    font-size: 1rem;
+    color: #e8e8e8;
+  }
+
+  .section-card .divider {
+    margin: 12px 0;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 56px;
+    font-size: 0.72rem;
+    color: #282836;
+  }
+
+  /* ── BACK LINK ── */
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 24px;
+    text-decoration: none;
+    color: #F5C842;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .back:hover {
+    color: #ffd966;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <a href="index.html" class="back">← Back to Hub</a>
+
+  <div class="header">
+    <div class="brand-mark">
+      <div class="brand-dot"></div>
+      <span class="brand-name">Odd Pieces</span>
+    </div>
+    <h1>Perspective Puzzles</h1>
+    <p class="tagline">Product Brief</p>
+  </div>
+
+  <hr class="divider">
+
+  <div class="content">
+
+    <h2>Product Name</h2>
+    <p><strong>Odd Pieces Perspective Puzzles</strong></p>
+
+    <h2>Tagline</h2>
+    <p><em>"A puzzle that changes how you see it."</em></p>
+
+    <h2>What It Is</h2>
+    <p>A 500-piece puzzle built around one deliberate change — a change that makes you think.</p>
+    <p>Each Perspective Puzzle features a complete illustration with one intentional visual difference. That difference carries the artist's message — something they wanted you to feel, question, or see differently.</p>
+    <p>It's not just art. It's a perspective delivered through a puzzle.</p>
+
+    <h2>The Format</h2>
+    
+    <div class="section-card">
+      <h3>Box Image (Before)</h3>
+      <p>The complete illustration as it first appears. A finished, display-worthy image on its own.</p>
+    </div>
+
+    <div class="section-card">
+      <h3>Puzzle Image (After)</h3>
+      <p>The same illustration with one intentional change — the detail that carries the artist's meaning.</p>
+    </div>
+
+    <div class="section-card">
+      <h3>Artist's Note</h3>
+      <p>A short message from the artist read before building. Explains the idea, the intention, and the change. Not a story. A perspective.</p>
+    </div>
+
+    <h2>The Experience</h2>
+    <p>Completable in a single sitting. Meaningful when finished. Worth framing when done.</p>
+
+    <h2>Who It's For</h2>
+    <ul>
+      <li>Adults 30–45</li>
+      <li>Art lovers and thoughtful gift buyers</li>
+      <li>Existing Odd Pieces fans ready for something different</li>
+      <li>New puzzlers looking for more than just a puzzle</li>
+    </ul>
+
+    <h2>How It's Different From Our 1000-Piece Mystery Puzzles</h2>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>—</th>
+          <th>Mystery Puzzle</th>
+          <th>Perspective Puzzle</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Pieces</strong></td>
+          <td>1000</td>
+          <td>500</td>
+        </tr>
+        <tr>
+          <td><strong>Experience</strong></td>
+          <td>Discover as you build</td>
+          <td>Understand as you build</td>
+        </tr>
+        <tr>
+          <td><strong>Image</strong></td>
+          <td>Hidden until the end</td>
+          <td>Known from the start</td>
+        </tr>
+        <tr>
+          <td><strong>Core Feeling</strong></td>
+          <td>Suspense → Surprise</td>
+          <td>Intention → Meaning</td>
+        </tr>
+        <tr>
+          <td><strong>Time</strong></td>
+          <td>Multi-session</td>
+          <td>Single sitting</td>
+        </tr>
+        <tr>
+          <td><strong>The Reward</strong></td>
+          <td>The reveal</td>
+          <td>The connection</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2>Positioning</h2>
+    <p><strong>Not a mystery. Not a game.</strong></p>
+    <p><em>A perspective — delivered through a puzzle.</em></p>
+
+    <h2>Product Specs</h2>
+    <ul>
+      <li>500 pieces</li>
+      <li>Includes artist's note card</li>
+      <li>Box image differs from puzzle image</li>
+      <li>Display-worthy finish</li>
+      <li>Completable in one sitting</li>
+    </ul>
+
+  </div>
+
+  <div class="footer">Odd Pieces internal use only</div>
+
+</div>
+</body>
+</html>

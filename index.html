@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Odd Pieces — Team Hub</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap');
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #08080f;
-    color: #e8e8e8;
+    background: #FFFBF0;
+    color: #1A1A1A;
     min-height: 100vh;
     padding: 0;
   }
@@ -36,7 +36,7 @@
   .brand-dot {
     width: 8px;
     height: 8px;
-    background: #F5C842;
+    background: #FEE000;
     border-radius: 50%;
     flex-shrink: 0;
   }
@@ -45,62 +45,71 @@
     font-weight: 600;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: #F5C842;
+    color: #FEE000;
   }
   h1 {
-    font-size: 1.6rem;
-    font-weight: 700;
-    color: #ffffff;
+    font-size: 1.8rem;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    color: #1A1A1A;
     letter-spacing: -0.02em;
     line-height: 1.2;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    text-transform: uppercase;
   }
   .header-sub {
-    font-size: 0.85rem;
-    color: #444;
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 400;
   }
 
   /* ── SECTION LABELS ── */
   .section-label {
     font-size: 0.65rem;
-    font-weight: 600;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    margin-bottom: 12px;
-    margin-top: 40px;
+    margin-bottom: 14px;
+    margin-top: 48px;
   }
-  .section-label.team { color: #10b981; }
-  .section-label.brand { color: #a78bfa; }
-  .section-label.marketing { color: #f59e0b; }
+  .section-label.team { color: #FC9C1C; }
+  .section-label.brand { color: #C1E3E8; }
+  .section-label.marketing { color: #FF4016; }
 
   /* ── NAV ITEMS ── */
   .nav-list {
     display: flex;
     flex-direction: column;
-    gap: 2px;
+    gap: 8px;
   }
 
   a.nav-item {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 16px 20px;
-    border-radius: 10px;
+    padding: 18px 20px;
+    border-radius: 12px;
     text-decoration: none;
-    border: 1px solid #141420;
-    background: #0d0d1a;
-    transition: background 0.15s, border-color 0.15s;
+    border: 1px solid #E8E0D0;
+    background: #FFFFFF;
+    transition: all 0.15s ease;
     gap: 16px;
   }
 
   a.nav-item:hover {
-    background: #111120;
-    border-color: #222236;
+    background: #FEE000;
+    border-color: #FEE000;
+    box-shadow: 0 4px 12px rgba(254, 224, 0, 0.15);
+  }
+
+  a.nav-item:hover .nav-title {
+    color: #1A1A1A;
   }
 
   a.nav-item:hover .nav-arrow {
-    color: #F5C842;
-    transform: translateX(2px);
+    color: #1A1A1A;
+    transform: translateX(4px);
   }
 
   .nav-left {
@@ -111,28 +120,29 @@
   }
 
   .nav-icon {
-    font-size: 1rem;
+    font-size: 1.2rem;
     flex-shrink: 0;
-    width: 20px;
+    width: 24px;
     text-align: center;
-    opacity: 0.7;
   }
 
   .nav-text {}
   .nav-title {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #ddd;
-    margin-bottom: 2px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #1A1A1A;
+    margin-bottom: 3px;
+    transition: color 0.15s ease;
   }
   .nav-desc {
-    font-size: 0.72rem;
-    color: #3d3d55;
+    font-size: 0.75rem;
+    color: #888;
+    line-height: 1.4;
   }
 
   .nav-arrow {
-    font-size: 0.8rem;
-    color: #2a2a40;
+    font-size: 1rem;
+    color: #FEE000;
     flex-shrink: 0;
     transition: color 0.15s, transform 0.15s;
   }
@@ -140,15 +150,17 @@
   /* ── DIVIDER ── */
   .divider {
     border: none;
-    border-top: 1px solid #111120;
+    border-top: 1px solid #E8E0D0;
     margin: 40px 0;
   }
 
   /* ── FOOTER ── */
   .footer {
     margin-top: 56px;
-    font-size: 0.72rem;
-    color: #282836;
+    font-size: 0.75rem;
+    color: #AAA;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 </style>
 </head>
@@ -218,6 +230,21 @@
         <div class="nav-text">
           <div class="nav-title">Text Effects</div>
           <div class="nav-desc">Hard shadow · Outline · Stroke treatments · Do's & Don'ts</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- PRODUCTS -->
+  <div class="section-label brand">Products</div>
+  <div class="nav-list">
+    <a href="product-brief-perspective-puzzles.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◈</span>
+        <div class="nav-text">
+          <div class="nav-title">Perspective Puzzles</div>
+          <div class="nav-desc">Product brief · Positioning · Specs · Differentiation</div>
         </div>
       </div>
       <span class="nav-arrow">→</span>
