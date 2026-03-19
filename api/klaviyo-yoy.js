@@ -84,36 +84,56 @@ export default async function handler() {
   if (!KEY) return new Response(JSON.stringify({ error: 'Missing API key' }), { status: 500 });
 
   try {
-    // Serialize ALL report calls to avoid Klaviyo 429 throttling
-    const r2025C = await campaignReport({ start: '2025-01-01', end: '2025-12-31' });
-    await sleep(3000);
-    const r2024C = await campaignReport({ start: '2024-01-01', end: '2024-12-31' });
-    await sleep(3000);
-    const r2025F = await flowReport({ start: '2025-01-01', end: '2025-12-31' });
-    await sleep(3000);
-    const r2024F = await flowReport({ start: '2024-01-01', end: '2024-12-31' });
+    // Get last 30 days and last year same period for YoY comparison
+    const now = new Date();
+    const thirtyDaysAgo = new Date();
+    thirtyDaysAgo.setDate(thirtyDaysAgo.getDate() - 30);
+    
+    const yearAgoStart = new Date(thirtyDaysAgo);
+    yearAgoStart.setFullYear(yearAgoStart.getFullYear() - 1);
+    const yearAgoEnd = new Date(now);
+    yearAgoEnd.setFullYear(yearAgoEnd.getFullYear() - 1);
+    
+    const currentStart = thirtyDaysAgo.toISOString().split('T')[0];
+    const currentEnd = now.toISOString().split('T')[0];
+    const yearAgoStartStr = yearAgoStart.toISOString().split('T')[0];
+    const yearAgoEndStr = yearAgoEnd.toISOString().split('T')[0];
 
-    const campaigns2025 = agg(r2025C.data?.attributes?.results);
-    const campaigns2024 = agg(r2024C.data?.attributes?.results);
-    const flows2025     = agg(r2025F.data?.attributes?.results);
-    const flows2024     = agg(r2024F.data?.attributes?.results);
+    console.log(`📅 Current: ${currentStart} to ${currentEnd}`);
+    console.log(`📅 YoY: ${yearAgoStartStr} to ${yearAgoEndStr}`);
+
+    // Serialize ALL report calls to avoid Klaviyo 429 throttling
+    const rCurrentC = await campaignReport({ start: currentStart, end: currentEnd });
+    await sleep(3000);
+    const rYoYC = await campaignReport({ start: yearAgoStartStr, end: yearAgoEndStr });
+    await sleep(3000);
+    const rCurrentF = await flowReport({ start: currentStart, end: currentEnd });
+    await sleep(3000);
+    const rYoYF = await flowReport({ start: yearAgoStartStr, end: yearAgoEndStr });
+
+    const campaignsCurrent = agg(rCurrentC.data?.attributes?.results);
+    const campaignsYoY = agg(rYoYC.data?.attributes?.results);
+    const flowsCurrent     = agg(rCurrentF.data?.attributes?.results);
+    const flowsYoY     = agg(rYoYF.data?.attributes?.results);
 
     // Format individual campaigns/flows for dashboard table
-    const campaignDetails2025 = formatResults(r2025C.data?.attributes?.results);
-    const campaignDetails2024 = formatResults(r2024C.data?.attributes?.results);
-    const flowDetails2025 = formatResults(r2025F.data?.attributes?.results);
-    const flowDetails2024 = formatResults(r2024F.data?.attributes?.results);
+    const campaignDetailsCurrent = formatResults(rCurrentC.data?.attributes?.results);
+    const campaignDetailsYoY = formatResults(rYoYC.data?.attributes?.results);
+    const flowDetailsCurrent = formatResults(rCurrentF.data?.attributes?.results);
+    const flowDetailsYoY = formatResults(rYoYF.data?.attributes?.results);
 
     return new Response(JSON.stringify({
-      campaigns: { '2024': campaigns2024, '2025': campaigns2025 },
-      flows:     { '2024': flows2024,     '2025': flows2025 },
-      campaignDetails: { '2024': campaignDetails2024, '2025': campaignDetails2025 },
-      flowDetails: { '2024': flowDetails2024, '2025': flowDetails2025 },
+      campaigns: { 'current': campaignsCurrent, 'yoy': campaignsYoY },
+      flows:     { 'current': flowsCurrent,     'yoy': flowsYoY },
+      campaignDetails: { 'current': campaignDetailsCurrent, 'yoy': campaignDetailsYoY },
+      flowDetails: { 'current': flowDetailsCurrent, 'yoy': flowDetailsYoY },
+      period: {
+        current: `${currentStart} to ${currentEnd}`,
+        yoy: `${yearAgoStartStr} to ${yearAgoEndStr}`
+      },
       meta: {
-        note2024campaigns: 'In-house. Campaigns started agency handoff Feb 4, 2025.',
-        note2024flows: 'Mixed — agency PB flows launched May 29, 2024; in-house LPB flows ran in parallel.',
-        note2025: 'Agency (PB). Campaigns Feb 4 2025 onwards. Flows primarily PB by 2025.',
-        kickstarterWarning: 'July 2024 campaign revenue (~$77K) and Nov 2025 campaign revenue (~$121K) are inflated by Kickstarter backer uploads to Shopify. Treat those periods with caution.',
+        note: 'Comparing last 30 days current period vs same 30-day period last year',
+        kickstarterWarning: 'Campaigns during Kickstarter periods may have inflated revenue due to backer uploads.',
       }
     }), {
       headers: { 'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*' }

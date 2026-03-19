@@ -427,12 +427,14 @@ async function loadKPIs() {
 
     // Calculate YoY trends
     if (yoyData.campaigns) {
-      const c2024 = yoyData.campaigns['2024'];
-      const c2025 = yoyData.campaigns['2025'];
+      const cYoY = yoyData.campaigns['yoy'];
+      const cCurrent = yoyData.campaigns['current'];
       
-      if (c2024 && c2025) {
-        const openTrend = c2024.openRate > 0 ? (((c2025.openRate - c2024.openRate) / c2024.openRate) * 100).toFixed(0) : 0;
-        const revenueTrend = c2024.totalRevenue > 0 ? (((c2025.totalRevenue - c2024.totalRevenue) / c2024.totalRevenue) * 100).toFixed(0) : 0;
+      if (cYoY && cCurrent) {
+        const openTrend = cYoY.openRate > 0 ? (((cCurrent.openRate - cYoY.openRate) / cYoY.openRate) * 100).toFixed(0) : 0;
+        const revenueTrend = cYoY.totalRevenue > 0 ? (((cCurrent.totalRevenue - cYoY.totalRevenue) / cYoY.totalRevenue) * 100).toFixed(0) : 0;
+        
+        console.log(`💰 Campaign Revenue: ${cYoY.totalRevenue} (YoY) → ${cCurrent.totalRevenue} (Current) = ${revenueTrend}%`);
         
         updateYoYBadge('open-rate-yoy', openTrend);
         updateYoYBadge('revenue-yoy', revenueTrend);
@@ -441,10 +443,10 @@ async function loadKPIs() {
 
     // Populate campaign and flow tables with real data
     if (yoyData.campaignDetails) {
-      populateCampaignTable(yoyData.campaignDetails['2025'] || []);
+      populateCampaignTable(yoyData.campaignDetails['current'] || []);
     }
     if (yoyData.flowDetails) {
-      populateFlowTable(yoyData.flowDetails['2025'] || []);
+      populateFlowTable(yoyData.flowDetails['current'] || []);
     }
 
     // Update last sync timestamp
