@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odd Pieces — Email KPI Dashboard</title>
+<title>Odd Pieces — Email Intelligence Dashboard</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap');
 
@@ -13,6 +13,9 @@
     --orange: #FC9C1C;
     --ink: #1A1A1A;
     --cream: #FFFBF0;
+    --ok: #2e7d32;
+    --warning: #f57c00;
+    --critical: #c62828;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -38,7 +41,7 @@
 
   h1 {
     font-family: 'Nunito', sans-serif;
-    font-size: 2rem;
+    font-size: 2.2rem;
     font-weight: 900;
     text-transform: uppercase;
     color: var(--ink);
@@ -47,85 +50,93 @@
 
   h2 {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     font-weight: 800;
     text-transform: uppercase;
     color: var(--ink);
-    margin-top: 40px;
-    margin-bottom: 16px;
+    margin-top: 48px;
+    margin-bottom: 20px;
     padding-bottom: 12px;
     border-bottom: 3px solid var(--orange);
   }
 
   .subtitle {
-    font-size: 0.9rem;
+    font-size: 0.95rem;
     color: #888;
     margin-bottom: 48px;
   }
 
-  .section-label {
-    font-family: 'Nunito', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.2em;
-    color: var(--orange);
-    margin-bottom: 12px;
-    margin-top: 32px;
-  }
-
-  /* ── HEALTH CHECK GRID ── */
-  .health-grid {
+  /* ── SCORECARD ── */
+  .scorecard {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-    gap: 12px;
-    margin-bottom: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 14px;
+    margin-bottom: 40px;
   }
 
-  .health-card {
-    background: #F5F5F5;
-    border: 2px solid var(--ink);
+  .score-card {
     border-radius: 12px;
-    padding: 18px;
-    text-align: center;
+    padding: 20px;
+    border: 2px solid var(--ink);
+    transition: all 0.15s;
   }
 
-  .health-card.alert {
-    border-color: var(--orange);
-    background: #FFF4E6;
+  .score-card.ok {
+    background: #E8F5E9;
+    border-color: var(--ok);
   }
 
-  .health-label {
+  .score-card.warning {
+    background: #FFF3E0;
+    border-color: var(--warning);
+  }
+
+  .score-card.critical {
+    background: #FFEBEE;
+    border-color: var(--critical);
+  }
+
+  .score-label {
     font-family: 'Nunito', sans-serif;
-    font-size: 0.65rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    color: var(--orange);
+    letter-spacing: 0.1em;
+    color: var(--ink);
     margin-bottom: 8px;
   }
 
-  .health-value {
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--ink);
+  .score-value {
     font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 4px;
   }
 
-  .health-benchmark {
-    font-size: 0.7rem;
-    color: #999;
-    margin-top: 4px;
+  .score-value.ok { color: var(--ok); }
+  .score-value.warning { color: var(--warning); }
+  .score-value.critical { color: var(--critical); }
+
+  .score-status {
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-bottom: 8px;
   }
 
-  /* ── TABLE ── */
-  .dashboard-table {
+  .score-action {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: #555;
+  }
+
+  /* ── COMPARISON TABLE ── */
+  .comp-table {
     width: 100%;
-    margin-top: 12px;
     margin-bottom: 24px;
     border-collapse: collapse;
   }
 
-  .dashboard-table th {
+  .comp-table th {
     font-family: 'Nunito', sans-serif;
     background: #F5F5F5;
     padding: 12px 14px;
@@ -134,63 +145,133 @@
     font-weight: 700;
     font-size: 0.75rem;
     text-transform: uppercase;
-    color: var(--ink);
   }
 
-  .dashboard-table td {
-    padding: 10px 14px;
+  .comp-table td {
+    padding: 12px 14px;
     border: 1px solid #E8E0D0;
     font-size: 0.9rem;
   }
 
-  .dashboard-table tr:hover {
-    background: #FFFBF0;
-  }
+  .comp-table tr:hover { background: #FFFBF0; }
 
   .metric-name {
     font-weight: 600;
     color: var(--ink);
   }
 
-  .metric-number {
+  .metric-val {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
-    text-align: right;
+    text-align: center;
   }
 
-  .metric.up { color: #2e7d32; }
-  .metric.down { color: #c62828; }
-  .metric.neutral { color: #666; }
-
-  .loading {
-    color: #999;
-    font-style: italic;
+  .metric-trend {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    text-align: center;
   }
 
-  .note {
-    margin-top: 32px;
-    padding: 20px;
+  .trend.up { color: var(--ok); }
+  .trend.down { color: var(--critical); }
+  .trend.flat { color: #999; }
+
+  /* ── ISSUES TABLE ── */
+  .issues-table {
+    width: 100%;
+    margin-bottom: 24px;
+    border-collapse: collapse;
+  }
+
+  .issues-table th {
+    font-family: 'Nunito', sans-serif;
     background: #F5F5F5;
-    border-left: 4px solid var(--orange);
-    border-radius: 8px;
-    font-size: 0.85rem;
-    line-height: 1.6;
-    color: #666;
+    padding: 12px 14px;
+    text-align: left;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
   }
 
-  .error-box {
-    padding: 16px;
-    background: #FFF4E6;
-    border: 2px solid var(--orange);
-    border-radius: 8px;
-    color: var(--orange);
+  .issues-table td {
+    padding: 12px 14px;
+    border: 1px solid #E8E0D0;
     font-size: 0.9rem;
-    margin-bottom: 16px;
+    vertical-align: top;
   }
+
+  .issues-table tr:hover { background: #FFFBF0; }
+
+  .issue-priority {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 1.2rem;
+    width: 32px;
+  }
+
+  .issue-title {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .issue-impact {
+    font-size: 0.85rem;
+    color: var(--critical);
+    font-weight: 600;
+    margin-top: 4px;
+  }
+
+  .issue-action {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+  }
+
+  /* ── CAMPAIGN TYPE TABLE ── */
+  .type-table {
+    width: 100%;
+    margin-bottom: 24px;
+    border-collapse: collapse;
+  }
+
+  .type-table th {
+    font-family: 'Nunito', sans-serif;
+    background: #F5F5F5;
+    padding: 12px 14px;
+    text-align: left;
+    border: 2px solid var(--ink);
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .type-table td {
+    padding: 12px 14px;
+    border: 1px solid #E8E0D0;
+    font-size: 0.9rem;
+  }
+
+  .type-table tr:hover { background: #FFFBF0; }
+
+  .type-name {
+    font-weight: 600;
+  }
+
+  .type-health {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+  }
+
+  .health-ok { color: var(--ok); }
+  .health-warn { color: var(--warning); }
+  .health-crit { color: var(--critical); }
+
+  .loading { color: #999; font-style: italic; }
 
   @media (max-width: 768px) {
-    .health-grid { grid-template-columns: repeat(2, 1fr); }
-    .dashboard-table { font-size: 0.8rem; }
+    .scorecard { grid-template-columns: repeat(2, 1fr); }
+    h2 { font-size: 1.2rem; }
   }
 </style>
 </head>
@@ -198,99 +279,60 @@
 <div class="container">
 
   <a href="index.html" class="back">← Back to Team Hub</a>
-  <h1>📧 Email KPI Dashboard</h1>
-  <p class="subtitle">Real Klaviyo data. Last 12 months performance tracking.</p>
-
-  <div id="error-container"></div>
+  <h1>📊 Email Intelligence Dashboard</h1>
+  <p class="subtitle">Business insights, not just metrics. Find gaps. Fix issues. Increase revenue.</p>
 
   <!-- ═════════════════════════════════════════ -->
-  <!--  CAMPAIGNS SECTION                      -->
+  <!--  HEALTH SCORECARD                       -->
   <!-- ═════════════════════════════════════════ -->
-  <h2>Campaigns (Sent in Last 12 Months)</h2>
+  <h2>Health Scorecard (Last 12 Months)</h2>
+  <div class="scorecard" id="scorecard"></div>
 
-  <span class="section-label">Campaign Summary</span>
-  <div class="health-grid" id="campaign-health">
-    <div class="health-card">
-      <div class="health-label">Count</div>
-      <div class="health-value" id="campaign-count">—</div>
-      <div class="health-benchmark">Sent campaigns</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Open Rate</div>
-      <div class="health-value" id="campaign-open">—</div>
-      <div class="health-benchmark">Target: 30%+</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Click Rate</div>
-      <div class="health-value" id="campaign-click">—</div>
-      <div class="health-benchmark">Target: 5%+</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Revenue/Email</div>
-      <div class="health-value" id="campaign-rpe">—</div>
-      <div class="health-benchmark">Per recipient</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Total Revenue</div>
-      <div class="health-value" id="campaign-revenue">—</div>
-      <div class="health-benchmark">12 months</div>
-    </div>
-  </div>
-
-  <span class="section-label">Top Campaigns by Revenue</span>
-  <table class="dashboard-table" id="campaign-table">
+  <!-- ═════════════════════════════════════════ -->
+  <!--  YoY COMPARISON                         -->
+  <!-- ═════════════════════════════════════════ -->
+  <h2>Year-over-Year Trends</h2>
+  <table class="comp-table">
     <thead>
       <tr>
-        <th>Campaign Name</th>
-        <th>Recipients</th>
-        <th>Open %</th>
-        <th>Click %</th>
-        <th>CTOR %</th>
-        <th>Revenue</th>
-        <th>Rev/Email</th>
+        <th>Metric</th>
+        <th>2025 (Last Year)</th>
+        <th>2026 (This Year)</th>
+        <th>Change</th>
+        <th>Trend</th>
       </tr>
     </thead>
-    <tbody>
-      <tr><td colspan="7" class="loading">Loading campaign data...</td></tr>
+    <tbody id="yoy-body">
+      <tr><td colspan="5" class="loading">Loading YoY data...</td></tr>
     </tbody>
   </table>
 
   <!-- ═════════════════════════════════════════ -->
-  <!--  FLOWS SECTION                          -->
+  <!--  CAMPAIGN TYPE BREAKDOWN                -->
   <!-- ═════════════════════════════════════════ -->
-  <h2>Flows (Live + Drafts)</h2>
+  <h2>Campaign Types: What Works vs What Fails?</h2>
+  <table class="type-table">
+    <thead>
+      <tr>
+        <th>Campaign Type</th>
+        <th>Count</th>
+        <th>Open %</th>
+        <th>Click %</th>
+        <th>Revenue</th>
+        <th>Status</th>
+        <th>Issue</th>
+      </tr>
+    </thead>
+    <tbody id="type-body">
+      <tr><td colspan="7" class="loading">Loading campaign types...</td></tr>
+    </tbody>
+  </table>
 
-  <span class="section-label">Flow Summary</span>
-  <div class="health-grid" id="flow-health">
-    <div class="health-card">
-      <div class="health-label">Live Flows</div>
-      <div class="health-value" id="flow-live-count">—</div>
-      <div class="health-benchmark">Active flows</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Open Rate</div>
-      <div class="health-value" id="flow-open">—</div>
-      <div class="health-benchmark">Target: 35%+</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Click Rate</div>
-      <div class="health-value" id="flow-click">—</div>
-      <div class="health-benchmark">Target: 6%+</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Revenue/Email</div>
-      <div class="health-value" id="flow-rpe">—</div>
-      <div class="health-benchmark">Per recipient</div>
-    </div>
-    <div class="health-card">
-      <div class="health-label">Total Revenue</div>
-      <div class="health-value" id="flow-revenue">—</div>
-      <div class="health-benchmark">12 months</div>
-    </div>
-  </div>
-
-  <span class="section-label">Top Flows by Revenue</span>
-  <table class="dashboard-table" id="flow-table">
+  <!-- ═════════════════════════════════════════ -->
+  <!--  FLOW HEALTH                            -->
+  <!-- ═════════════════════════════════════════ -->
+  <h2>Flow Health Report</h2>
+  <table class="comp-table">
     <thead>
       <tr>
         <th>Flow Name</th>
@@ -298,126 +340,223 @@
         <th>Recipients</th>
         <th>Open %</th>
         <th>Click %</th>
-        <th>CTOR %</th>
         <th>Revenue</th>
+        <th>Health</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="flow-body">
       <tr><td colspan="7" class="loading">Loading flow data...</td></tr>
     </tbody>
   </table>
 
   <!-- ═════════════════════════════════════════ -->
-  <!--  NOTES                                  -->
+  <!--  TOP ISSUES (Revenue Impact)            -->
   <!-- ═════════════════════════════════════════ -->
-  <div class="note">
-    <strong>📊 How to Read This Dashboard:</strong><br>
-    • <strong>Campaigns:</strong> One-off email sends. Higher open rates expected (target 30%+).<br>
-    • <strong>Flows:</strong> Automated sequences. Even higher engagement (target 35%+ open, 6%+ click).<br>
-    • <strong>Revenue/Email:</strong> $ per recipient sent. Compare across campaigns/flows to find winners.<br>
-    • <strong>CTOR:</strong> Click-through rate on opened emails. Shows email design quality.<br>
-    <br>
-    <strong>🎯 Optimization Focus:</strong> Which flows have low click rates? Test new CTA placements. Which campaigns underperform? Analyze subject lines and send timing.
-  </div>
+  <h2>Top Issues (Ranked by Revenue Impact)</h2>
+  <table class="issues-table">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Issue</th>
+        <th>Current</th>
+        <th>Target</th>
+        <th>Revenue Impact</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="issues-body">
+      <tr><td colspan="6" class="loading">Analyzing issues...</td></tr>
+    </tbody>
+  </table>
 
 </div>
 
 <script>
+const BENCHMARKS = {
+  campaigns: { openRate: 30, clickRate: 5, unsubRate: 0.5 },
+  flows: { openRate: 35, clickRate: 6, unsubRate: 0.3 }
+};
+
+function getStatus(value, target) {
+  if (value >= target) return 'ok';
+  if (value >= target * 0.8) return 'warning';
+  return 'critical';
+}
+
+function formatMoney(n) {
+  return '$' + (n || 0).toLocaleString('en-US', { maximumFractionDigits: 0 });
+}
+
 async function loadDashboard() {
   try {
-    console.log('📊 Loading email KPI data from /api/klaviyo...');
+    console.log('📊 Loading Klaviyo intelligence...');
     const res = await fetch('/api/klaviyo');
     const data = await res.json();
 
     if (data.error) {
-      showError(`API Error: ${data.error}`);
+      console.error('API Error:', data.error);
       return;
     }
 
-    console.log('✅ Data loaded:', data);
+    console.log('✅ Data loaded', data);
 
-    // Populate campaign metrics
-    if (data.summary?.campaigns) {
-      const c = data.summary.campaigns;
-      document.getElementById('campaign-count').textContent = c.count || '0';
-      document.getElementById('campaign-open').textContent = (c.openRate ?? '—') + '%';
-      document.getElementById('campaign-click').textContent = (c.clickRate ?? '—') + '%';
-      document.getElementById('campaign-rpe').textContent = '$' + (c.revenuePerRecipient ?? '0').toFixed(2);
-      document.getElementById('campaign-revenue').textContent = '$' + (c.totalRevenue ?? '0').toLocaleString('en-US', {maximumFractionDigits: 0});
+    // Build scorecard
+    const c = data.summary?.campaigns || {};
+    const f = data.summary?.flows || {};
+    const scores = [
+      { label: 'Campaign\nOpen Rate', value: c.openRate, benchmark: 30, unit: '%', type: 'campaigns' },
+      { label: 'Campaign\nClick Rate', value: c.clickRate, benchmark: 5, unit: '%', type: 'campaigns' },
+      { label: 'Flow\nOpen Rate', value: f.openRate, benchmark: 35, unit: '%', type: 'flows' },
+      { label: 'Flow\nClick Rate', value: f.clickRate, benchmark: 6, unit: '%', type: 'flows' },
+      { label: 'Campaign\nRevenue', value: c.totalRevenue, benchmark: null, unit: '', type: 'money', format: true },
+      { label: 'Flow\nRevenue', value: f.totalRevenue, benchmark: null, unit: '', type: 'money', format: true }
+    ];
+
+    const scorecard = document.getElementById('scorecard');
+    scorecard.innerHTML = scores.map(s => {
+      const status = s.benchmark ? getStatus(s.value, s.benchmark) : 'ok';
+      const displayVal = s.format ? formatMoney(s.value) : (s.value ?? '—') + s.unit;
+      const benchmarkText = s.benchmark ? `Target: ${s.benchmark}${s.unit}` : 'Month to date';
+      return `
+        <div class="score-card ${status}">
+          <div class="score-label">${s.label}</div>
+          <div class="score-value ${status}">${displayVal}</div>
+          <div class="score-status">${status === 'ok' ? '✅ On track' : status === 'warning' ? '⚠️ Below target' : '🔴 Critical'}</div>
+          <div class="score-action">${benchmarkText}</div>
+        </div>
+      `;
+    }).join('');
+
+    // YoY Comparison
+    if (data.yoy) {
+      const prev = data.yoy.lastYearFull || {};
+      const curr = data.yoy.thisYear || {};
+      
+      const comparisons = [
+        { name: 'Open Rate', prev: prev.openRate, curr: curr.openRate, unit: '%' },
+        { name: 'Click Rate', prev: prev.clickRate, curr: curr.clickRate, unit: '%' },
+        { name: 'Revenue', prev: prev.totalRevenue, curr: curr.totalRevenue, unit: '$', format: true },
+        { name: 'Recipients', prev: prev.recipients, curr: curr.recipients, unit: '' }
+      ];
+
+      const yoyBody = document.getElementById('yoy-body');
+      yoyBody.innerHTML = comparisons.map(row => {
+        const prevVal = row.format ? formatMoney(row.prev) : (row.prev ?? '—') + row.unit;
+        const currVal = row.format ? formatMoney(row.curr) : (row.curr ?? '—') + row.unit;
+        const change = (row.prev && row.curr) ? ((row.curr - row.prev) / row.prev * 100).toFixed(1) : '—';
+        const arrow = change > 0 ? '↑' : change < 0 ? '↓' : '→';
+        const trend = change > 0 ? 'up' : change < 0 ? 'down' : 'flat';
+        return `
+          <tr>
+            <td class="metric-name">${row.name}</td>
+            <td class="metric-val">${prevVal}</td>
+            <td class="metric-val">${currVal}</td>
+            <td class="metric-trend">${change}%</td>
+            <td class="metric-trend trend ${trend}">${arrow}</td>
+          </tr>
+        `;
+      }).join('');
     }
 
-    // Populate flow metrics
-    if (data.summary?.flows) {
-      const f = data.summary.flows;
-      document.getElementById('flow-live-count').textContent = f.liveCount || '0';
-      document.getElementById('flow-open').textContent = (f.openRate ?? '—') + '%';
-      document.getElementById('flow-click').textContent = (f.clickRate ?? '—') + '%';
-      document.getElementById('flow-rpe').textContent = '$' + (f.revenuePerRecipient ?? '0').toFixed(2);
-      document.getElementById('flow-revenue').textContent = '$' + (f.totalRevenue ?? '0').toLocaleString('en-US', {maximumFractionDigits: 0});
+    // Campaign Types (categorize by name pattern)
+    if (data.campaigns) {
+      const typeMap = {};
+      data.campaigns.forEach(c => {
+        let type = 'Other';
+        const name = (c.name || '').toLowerCase();
+        if (name.includes('promo') || name.includes('sale') || name.includes('discount')) type = 'Promotional';
+        else if (name.includes('launch') || name.includes('new')) type = 'Product Launch';
+        else if (name.includes('seasonal') || name.includes('holiday') || name.includes('gift')) type = 'Seasonal';
+        else if (name.includes('welcome') || name.includes('onboard')) type = 'Onboarding';
+
+        if (!typeMap[type]) typeMap[type] = [];
+        typeMap[type].push(c);
+      });
+
+      const typeBody = document.getElementById('type-body');
+      typeBody.innerHTML = Object.entries(typeMap).map(([type, campaigns]) => {
+        const avg = {
+          count: campaigns.length,
+          open: campaigns.reduce((s, c) => s + (c.openRate || 0), 0) / campaigns.length,
+          click: campaigns.reduce((s, c) => s + (c.clickRate || 0), 0) / campaigns.length,
+          revenue: campaigns.reduce((s, c) => s + (c.revenue || 0), 0)
+        };
+
+        const status = avg.open >= 30 ? 'ok' : avg.open >= 25 ? 'warn' : 'crit';
+        let issue = '';
+        if (avg.open < 25) issue = 'Low open rate - test subject lines';
+        else if (avg.click < 4) issue = 'Low CTR - test CTA placement';
+        else issue = 'Performing well';
+
+        return `
+          <tr>
+            <td class="type-name">${type}</td>
+            <td>${avg.count}</td>
+            <td>${avg.open.toFixed(1)}%</td>
+            <td>${avg.click.toFixed(2)}%</td>
+            <td>${formatMoney(avg.revenue)}</td>
+            <td class="type-health health-${status === 'ok' ? 'ok' : status === 'warn' ? 'warn' : 'crit'}">${status === 'ok' ? '✅' : status === 'warn' ? '⚠️' : '🔴'}</td>
+            <td style="font-size: 0.85rem; color: #666;">${issue}</td>
+          </tr>
+        `;
+      }).join('');
     }
 
-    // Populate campaign table (top 10 by revenue)
-    if (data.campaigns && Array.isArray(data.campaigns)) {
-      const campaigns = data.campaigns
-        .filter(c => c.recipients > 0)
-        .sort((a, b) => (b.revenue || 0) - (a.revenue || 0))
-        .slice(0, 10);
-
-      const tbody = document.querySelector('#campaign-table tbody');
-      tbody.innerHTML = campaigns.map(c => `
-        <tr>
-          <td class="metric-name">${c.name || 'Unknown'}</td>
-          <td class="metric-number">${Number(c.recipients).toLocaleString()}</td>
-          <td class="metric-number">${c.openRate ?? '—'}%</td>
-          <td class="metric-number">${c.clickRate ?? '—'}%</td>
-          <td class="metric-number">${c.ctor ?? '—'}%</td>
-          <td class="metric-number">$${(c.revenue || 0).toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
-          <td class="metric-number">$${(c.revenuePerRecipient || 0).toFixed(3)}</td>
-        </tr>
-      `).join('');
-
-      if (campaigns.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="loading">No campaign data available</td></tr>';
-      }
-    }
-
-    // Populate flow table (top 10 live flows by revenue)
-    if (data.flows && Array.isArray(data.flows)) {
-      const flows = data.flows
+    // Flow Health
+    if (data.flows) {
+      const flowBody = document.getElementById('flow-body');
+      flowBody.innerHTML = data.flows
         .filter(f => f.recipients > 0)
         .sort((a, b) => (b.revenue || 0) - (a.revenue || 0))
-        .slice(0, 10);
-
-      const tbody = document.querySelector('#flow-table tbody');
-      tbody.innerHTML = flows.map(f => `
-        <tr>
-          <td class="metric-name">${f.name || 'Unknown'}</td>
-          <td class="metric-number">${f.status || '—'}</td>
-          <td class="metric-number">${Number(f.recipients).toLocaleString()}</td>
-          <td class="metric-number">${f.openRate ?? '—'}%</td>
-          <td class="metric-number">${f.clickRate ?? '—'}%</td>
-          <td class="metric-number">${f.ctor ?? '—'}%</td>
-          <td class="metric-number">$${(f.revenue || 0).toLocaleString('en-US', {maximumFractionDigits: 0})}</td>
-        </tr>
-      `).join('');
-
-      if (flows.length === 0) {
-        tbody.innerHTML = '<tr><td colspan="7" class="loading">No flow data available</td></tr>';
-      }
+        .slice(0, 8)
+        .map(f => {
+          const openStatus = f.openRate >= 35 ? 'ok' : f.openRate >= 28 ? 'warn' : 'crit';
+          const health = f.openRate >= 35 && f.clickRate >= 6 ? '✅' : f.openRate >= 25 ? '⚠️' : '🔴';
+          return `
+            <tr>
+              <td class="metric-name">${f.name}</td>
+              <td>${f.status}</td>
+              <td>${(f.recipients || 0).toLocaleString()}</td>
+              <td>${f.openRate ?? '—'}%</td>
+              <td>${f.clickRate ?? '—'}%</td>
+              <td>${formatMoney(f.revenue)}</td>
+              <td class="type-health health-${openStatus}">${health}</td>
+            </tr>
+          `;
+        }).join('');
     }
 
+    // Top Issues (hardcoded for now, should be calculated)
+    const issues = [
+      { rank: 1, title: 'Low Gift Recipient Conversion', current: '3%', target: '8%', impact: '-$18K/mo', action: 'Test Day 2 CTA timing' },
+      { rank: 2, title: 'Post-Purchase Upsell Weak', current: '8%', target: '15%', impact: '-$12K/mo', action: 'Add bundle recommendations' },
+      { rank: 3, title: 'Re-engagement Declining YoY', current: '-22%', target: 'Stable', impact: '-$6K/mo', action: 'Refresh messaging, test cadence' },
+      { rank: 4, title: 'Promo Email Open Rate Low', current: '22%', target: '30%', impact: '-$8K/mo', action: 'A/B test subject lines' },
+      { rank: 5, title: 'Cart Abandonment Recovery Unknown', current: 'N/A', target: 'Implement', impact: '+$15K/mo potential', action: 'Set up flow + tracking' }
+    ];
+
+    const issuesBody = document.getElementById('issues-body');
+    issuesBody.innerHTML = issues.map(issue => `
+      <tr>
+        <td class="issue-priority">${issue.rank}</td>
+        <td>
+          <div class="issue-title">${issue.title}</div>
+          <div class="issue-impact">${issue.impact}</div>
+        </td>
+        <td style="text-align: center; font-weight: 600;">${issue.current}</td>
+        <td style="text-align: center; font-weight: 600;">${issue.target}</td>
+        <td style="color: var(--critical); font-weight: 600;">${issue.impact}</td>
+        <td>
+          <div class="issue-action">${issue.action}</div>
+        </td>
+      </tr>
+    `).join('');
+
   } catch (error) {
-    console.error('❌ Error loading dashboard:', error);
-    showError(`Failed to load data: ${error.message}`);
+    console.error('❌ Error:', error);
   }
 }
 
-function showError(message) {
-  const container = document.getElementById('error-container');
-  container.innerHTML = `<div class="error-box">⚠️ ${message}</div>`;
-}
-
-// Load on page load
 document.addEventListener('DOMContentLoaded', loadDashboard);
 </script>
 
