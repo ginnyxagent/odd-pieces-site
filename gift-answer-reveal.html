@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Solved It! — Odd Pieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #FEE000;
+    --blue:   #C1E3E8;
+    --orange: #FC9C1C;
+    --red:    #FF4016;
+    --green:  #10B981;
+    --ink:    #1A1A1A;
+    --white:  #FFFFFF;
+    --muted:  #6B6555;
+  }
+
+  body { 
+    font-family: 'Inter', sans-serif; 
+    color: var(--ink); 
+    background: var(--white);
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--yellow);
+    padding: 0 28px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* ── CELEBRATION ── */
+  .celebration {
+    background: var(--yellow);
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .celebration h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2rem, 8vw, 3.2rem);
+    text-transform: uppercase;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 12px;
+  }
+  .celebration-sub {
+    font-size: 1.05rem;
+    color: var(--ink);
+    opacity: 0.7;
+    margin-bottom: 28px;
+  }
+  .emoji-burst {
+    font-size: 3rem;
+    margin-bottom: 16px;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  /* ── ANSWER REVEAL ── */
+  .answer-section {
+    background: var(--blue);
+    padding: 52px 24px;
+  }
+  .answer-wrap {
+    max-width: 540px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 28px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .answer-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .answer-display {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--red);
+    line-height: 1.3;
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .answer-subtext {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  /* ── SHARE BUTTONS ── */
+  .share-section {
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+  .share-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 16px;
+  }
+  .share-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+  .share-btn {
+    padding: 14px 12px;
+    border: 2px solid rgba(0,0,0,0.12);
+    background: #f9f9f6;
+    border-radius: 12px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+  .share-btn:hover {
+    border-color: var(--orange);
+    background: var(--yellow);
+  }
+  .share-icon {
+    font-size: 1.4rem;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  /* ── COUPON ── */
+  .coupon-section {
+    background: var(--ink);
+    padding: 52px 24px;
+    text-align: center;
+    color: var(--white);
+  }
+  .coupon-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 16px;
+  }
+  .coupon-text {
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+    opacity: 0.9;
+  }
+  .coupon-code {
+    background: rgba(255,255,255,0.1);
+    border: 2px solid var(--yellow);
+    border-radius: 12px;
+    padding: 16px 20px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    color: var(--yellow);
+    letter-spacing: 0.05em;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .coupon-code:hover {
+    background: rgba(255,255,255,0.15);
+  }
+  .copy-hint {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    font-style: italic;
+  }
+
+  /* ── NEXT BUNDLE ── */
+  .next-section {
+    background: var(--yellow);
+    padding: 52px 24px;
+  }
+  .next-section h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.4rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .next-section-sub {
+    font-size: 0.95rem;
+    color: var(--muted);
+    text-align: center;
+    margin-bottom: 28px;
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .bundle-card {
+    max-width: 520px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .bundle-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.2rem;
+    color: var(--ink);
+    margin-bottom: 8px;
+    letter-spacing: -0.01em;
+  }
+  .bundle-puzzles {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 20px;
+    line-height: 1.6;
+  }
+  .bundle-btn {
+    width: 100%;
+    padding: 15px;
+    background: var(--orange);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .bundle-btn:hover {
+    transform: translate(-1px, -1px);
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 24px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+  footer a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.35);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+  footer a:hover { color: var(--yellow); }
+
+  @media (max-width: 500px) {
+    .celebration h1 { font-size: 1.8rem; }
+    .share-buttons { grid-template-columns: 1fr; }
+    .coupon-code { font-size: 1.1rem; padding: 12px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://oddpieces.com" class="logo">Odd Pieces 🧩</a>
+</nav>
+
+<!-- CELEBRATION -->
+<section class="celebration">
+  <div class="emoji-burst">🎉</div>
+  <h1>You solved it!</h1>
+  <p class="celebration-sub" id="puzzleName">Loading...</p>
+</section>
+
+<!-- ANSWER REVEAL -->
+<section class="answer-section">
+  <div class="answer-wrap">
+    <div class="answer-label">🔓 The Answer</div>
+    <div class="answer-display" id="answerDisplay">Loading...</div>
+    <div class="answer-subtext">You earned this. 🏆</div>
+
+    <div class="share-section">
+      <div class="share-label">📢 Share Your Win</div>
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareToInstagram()">
+          <span class="share-icon">📸</span>
+          Instagram
+        </button>
+        <button class="share-btn" onclick="shareToTwitter()">
+          <span class="share-icon">𝕏</span>
+          Twitter
+        </button>
+        <button class="share-btn" onclick="copyShareLink()">
+          <span class="share-icon">🔗</span>
+          Copy
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COUPON -->
+<section class="coupon-section">
+  <div class="coupon-label">💰 Unlock a Discount</div>
+  <p class="coupon-text">Use this code for 10% off your next Odd Pieces puzzle</p>
+  <div class="coupon-code" onclick="copyCoupon()" id="couponCode">PUZZLESOLVER</div>
+  <p class="copy-hint">👆 Click to copy</p>
+</section>
+
+<!-- NEXT BUNDLE -->
+<section class="next-section">
+  <h2>Ready for more?</h2>
+  <p class="next-section-sub">Challenge yourself with our next collection. More puzzles, more mysteries, more fun.</p>
+  <div class="bundle-card">
+    <div class="bundle-name" id="bundleName">Series 2</div>
+    <div class="bundle-puzzles" id="bundlePuzzles">
+      Loading bundle details...
+    </div>
+    <button class="bundle-btn" onclick="goToShop()">Get This Bundle →</button>
+  </div>
+</section>
+
+<footer>
+  <a href="https://oddpieces.com">oddpieces.com</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles">Shop Puzzles</a>
+  <span style="color:rgba(255,255,255,0.15);font-size:11px;font-family:'Nunito',sans-serif;">© Odd Pieces</span>
+</footer>
+
+<script>
+  // Puzzle data
+  const puzzles = {
+    'snack-attack': { name: 'Snack Attack', answer: 'Snack Attack!', series: 1 },
+    'turbo-3000': { name: 'Turbo 3000', answer: 'Millennial', series: 1 },
+    'beyond-the-kelp': { name: 'Beyond the Kelp', answer: 'Pomeranian', series: 1 },
+    'glitch': { name: 'Glitch', answer: 'Let there be light', series: 2 },
+    'shutterbug': { name: 'Shutterbug', answer: 'Sleeping', series: 2 },
+    'astrogastro': { name: 'AstroGastro', answer: 'Pepperoni pizza', series: 2 },
+    'snack-attack-2': { name: 'Snack Attack 2', answer: 'Raccoon', series: 3 },
+    'snack-attack-3': { name: 'Snack Attack 3', answer: 'A splash of Serendipitous Luck', series: 3 },
+    'mushroom-mayhem': { name: 'Mushroom Mayhem', answer: '28', series: 4 },
+    'silver-lining': { name: 'Silver Lining', answer: '9 days', series: 4 },
+    'time-keepers': { name: 'Time Keepers', answer: 'Oldie But Goodie', series: 4 }
+  };
+
+  // Bundle recommendations
+  const bundles = {
+    1: {
+      name: 'Series 2 Bundle',
+      puzzles: 'Shutterbug • AstroGastro • Glitch',
+      url: 'https://oddpieces.com/en-us/collections/puzzles?filter=series-2'
+    },
+    2: {
+      name: 'Series 3 Bundle',
+      puzzles: 'Snack Attack • Snack Attack 2 • Snack Attack 3',
+      url: 'https://oddpieces.com/en-us/collections/puzzles?filter=series-3'
+    },
+    3: {
+      name: 'Series 4 Bundle',
+      puzzles: 'Time Keepers • Silver Lining • Mushroom Mayhem',
+      url: 'https://oddpieces.com/en-us/collections/puzzles?filter=series-4'
+    },
+    4: {
+      name: 'Series 1 Bundle',
+      puzzles: 'Snack Attack • Beyond the Kelp • Turbo 3000',
+      url: 'https://oddpieces.com/en-us/collections/puzzles?filter=series-1'
+    }
+  };
+
+  // Get URL params
+  const params = new URLSearchParams(window.location.search);
+  const puzzleId = params.get('puzzle') || 'snack-attack';
+  const firstName = params.get('name') || 'Friend';
+
+  // Load data
+  const puzzle = puzzles[puzzleId];
+  if (puzzle) {
+    document.getElementById('puzzleName').textContent = puzzle.name;
+    document.getElementById('answerDisplay').textContent = puzzle.answer;
+
+    // Recommend next series
+    const nextSeries = puzzle.series === 4 ? 1 : puzzle.series + 1;
+    const bundle = bundles[nextSeries];
+    if (bundle) {
+      document.getElementById('bundleName').textContent = bundle.name;
+      document.getElementById('bundlePuzzles').textContent = bundle.puzzles;
+    }
+  }
+
+  // Share functions
+  function shareToInstagram() {
+    const text = `I solved ${puzzle.name} from @oddpieces! The answer was: ${puzzle.answer} 🎉`;
+    alert('Copy this and share on Instagram:\n\n' + text);
+  }
+
+  function shareToTwitter() {
+    const text = `I solved ${puzzle.name} from @oddpieces! 🎉 The answer was: ${puzzle.answer}`;
+    const url = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(url, '_blank');
+  }
+
+  function copyShareLink() {
+    const text = `Check out this puzzle from @oddpieces: ${puzzle.name} — I just solved it! oddpieces.com`;
+    navigator.clipboard.writeText(text).then(() => {
+      alert('Copied to clipboard!');
+    });
+  }
+
+  function copyCoupon() {
+    navigator.clipboard.writeText('PUZZLESOLVER').then(() => {
+      const btn = document.getElementById('couponCode');
+      btn.textContent = '✓ Copied!';
+      setTimeout(() => {
+        btn.textContent = 'PUZZLESOLVER';
+      }, 2000);
+    });
+  }
+
+  function goToShop() {
+    const bundle = bundles[puzzle.series === 4 ? 1 : puzzle.series + 1];
+    if (bundle) {
+      window.location.href = bundle.url;
+    }
+  }
+</script>
+
+</body>
+</html>
