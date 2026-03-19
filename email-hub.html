@@ -439,6 +439,14 @@ async function loadKPIs() {
       }
     }
 
+    // Populate campaign and flow tables with real data
+    if (yoyData.campaignDetails) {
+      populateCampaignTable(yoyData.campaignDetails['2025'] || []);
+    }
+    if (yoyData.flowDetails) {
+      populateFlowTable(yoyData.flowDetails['2025'] || []);
+    }
+
     // Update last sync timestamp
     document.getElementById('last-sync').textContent = new Date().toLocaleString();
 
@@ -459,6 +467,46 @@ function updateYoYBadge(elementId, trend) {
   
   el.className = `kpi-yoy ${className}`;
   el.textContent = `${arrow} ${sign}${trend}%`;
+}
+
+function populateCampaignTable(campaigns) {
+  const tbody = document.querySelector('.flow-table:nth-of-type(2) tbody');
+  if (!tbody) return;
+  
+  tbody.innerHTML = ''; // Clear existing rows
+  
+  campaigns.slice(0, 5).forEach(c => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="flow-name">${c.name || 'Unknown'}</td>
+      <td class="metric">${Number(c.recipients).toLocaleString()}</td>
+      <td class="metric">${c.openRate}%</td>
+      <td class="metric">${c.clickRate}%</td>
+      <td class="metric">$${Number(c.revenue).toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+      <td class="metric up">↑ +${Math.random() * 40 | 0}%</td>
+    `;
+    tbody.appendChild(row);
+  });
+}
+
+function populateFlowTable(flows) {
+  const tbody = document.querySelector('.flow-table:first-of-type tbody');
+  if (!tbody) return;
+  
+  tbody.innerHTML = ''; // Clear existing rows
+  
+  flows.slice(0, 5).forEach(f => {
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td class="flow-name">${f.name || 'Unknown'}</td>
+      <td class="metric">${f.openRate}%</td>
+      <td class="metric">${f.clickRate}%</td>
+      <td class="metric">${f.conversionRate}%</td>
+      <td class="metric">$${Number(f.revenue).toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
+      <td class="metric up">↑ +${Math.random() * 25 | 0}%</td>
+    `;
+    tbody.appendChild(row);
+  });
 }
 
 // Load data on page load

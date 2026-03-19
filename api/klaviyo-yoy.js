@@ -63,6 +63,21 @@ function agg(results) {
   };
 }
 
+function formatResults(results) {
+  // Return individual campaign/flow details
+  return (results || []).map(r => ({
+    name: r.name || r.id,
+    recipients: r.statistics?.recipients || 0,
+    opens: r.statistics?.opens_unique || 0,
+    clicks: r.statistics?.clicks_unique || 0,
+    unsubscribes: r.statistics?.unsubscribes || 0,
+    revenue: r.statistics?.conversion_value || 0,
+    openRate: (r.statistics?.recipients > 0) ? ((r.statistics.opens_unique / r.statistics.recipients) * 100).toFixed(1) : 0,
+    clickRate: (r.statistics?.recipients > 0) ? ((r.statistics.clicks_unique / r.statistics.recipients) * 100).toFixed(2) : 0,
+    conversionRate: (r.statistics?.recipients > 0) ? ((r.statistics.clicks_unique / r.statistics.recipients) * 100).toFixed(2) : 0
+  })).sort((a, b) => b.revenue - a.revenue); // Sort by revenue descending
+}
+
 function sleep(ms) { return new Promise(r => setTimeout(r, ms)); }
 
 export default async function handler() {
@@ -83,9 +98,17 @@ export default async function handler() {
     const flows2025     = agg(r2025F.data?.attributes?.results);
     const flows2024     = agg(r2024F.data?.attributes?.results);
 
+    // Format individual campaigns/flows for dashboard table
+    const campaignDetails2025 = formatResults(r2025C.data?.attributes?.results);
+    const campaignDetails2024 = formatResults(r2024C.data?.attributes?.results);
+    const flowDetails2025 = formatResults(r2025F.data?.attributes?.results);
+    const flowDetails2024 = formatResults(r2024F.data?.attributes?.results);
+
     return new Response(JSON.stringify({
       campaigns: { '2024': campaigns2024, '2025': campaigns2025 },
       flows:     { '2024': flows2024,     '2025': flows2025 },
+      campaignDetails: { '2024': campaignDetails2024, '2025': campaignDetails2025 },
+      flowDetails: { '2024': flowDetails2024, '2025': flowDetails2025 },
       meta: {
         note2024campaigns: 'In-house. Campaigns started agency handoff Feb 4, 2025.',
         note2024flows: 'Mixed — agency PB flows launched May 29, 2024; in-house LPB flows ran in parallel.',
