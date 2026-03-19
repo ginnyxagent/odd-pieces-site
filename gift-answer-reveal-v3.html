@@ -119,6 +119,21 @@
     letter-spacing: -0.02em;
   }
 
+  .gif-section {
+    margin-bottom: 24px;
+    border-radius: 14px;
+    overflow: hidden;
+    background: var(--blue);
+  }
+
+  .gif-section img {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 400px;
+    object-fit: cover;
+  }
+
   .riddle-section {
     background: #F7F6F2;
     padding: 24px;
@@ -698,6 +713,10 @@
     <div class="answer-label">🧩 Your Puzzle</div>
     <h2 class="answer-title" id="answerTitle">Loading...</h2>
 
+    <div class="gif-section">
+      <img id="answerGif" src="https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=GIF+Answer+Reveal" alt="Answer reveal animation" />
+    </div>
+
     <div class="riddle-section">
       <div class="riddle-label">The Riddle</div>
       <div class="riddle-text" id="riddleText">Loading...</div>
@@ -856,57 +875,68 @@
     'snack-attack': {
       name: 'Snack Attack', series: 1,
       riddle: 'Cats and dogs can form a pact. But despite all that, it smells too good to not attack. Oh no! Not again! What kind of attack broke their pact?',
-      answer: 'Snack Attack!'
+      answer: 'Snack Attack!',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Snack+Attack+GIF'
     },
     'turbo-3000': {
       name: 'Turbo 3000', series: 1,
       riddle: 'A certain age group that is well known. They grew up with video games and flip phones. What generation does Ricky belong to?',
-      answer: 'Millennial'
+      answer: 'Millennial',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Turbo+3000+GIF'
     },
     'beyond-the-kelp': {
       name: 'Beyond the Kelp', series: 1,
       riddle: 'What was a typical school day was suddenly in commotion. For it was a savory smell that caused an implosion. One sprinted quicker than others. What breed was the fastest runner?',
-      answer: 'Pomeranian'
+      answer: 'Pomeranian',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Beyond+the+Kelp+GIF'
     },
     'shutterbug': {
       name: 'Shutterbug', series: 2,
       riddle: "The town before was dark and moody. But after the melody, it was all happy and beauty. A certain individual didn't get the cue, for he was occupied and hadn't got a clue. What was this individual doing?",
-      answer: 'Sleeping'
+      answer: 'Sleeping',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Shutterbug+GIF'
     },
     'astrogastro': {
       name: 'AstroGastro', series: 2,
       riddle: "The cosmic cat whose name is finally revealed. We wonder what was Gary's very last meal?",
-      answer: 'Pepperoni pizza'
+      answer: 'Pepperoni pizza',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=AstroGastro+GIF'
     },
     'glitch': {
       name: 'Glitch', series: 2,
       riddle: 'Within this sign lay an important message. Dropped by the guru who speaks an ancient language. What does the mysterious sign say?',
-      answer: 'Let there be light'
+      answer: 'Let there be light',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Glitch+GIF'
     },
     'snack-attack-2': {
       name: 'Snack Attack 2', series: 3,
       riddle: 'Amidst the chaos, a group of mischievous outsiders are looking for snacks, waiting for the perfect time to quietly trespass. What animal sneakily climbed in?',
-      answer: 'Raccoon'
+      answer: 'Raccoon',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Snack+Attack+2+GIF'
     },
     'snack-attack-3': {
       name: 'Snack Attack 3', series: 3,
       riddle: "Cooking is an art and sometimes you need to wing it. Even with all the ingredients, you can't always make it. What do you need to make your food exquisite?",
-      answer: 'A splash of Serendipitous Luck'
+      answer: 'A splash of Serendipitous Luck',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Snack+Attack+3+GIF'
     },
     'time-keepers': {
       name: 'Time Keepers', series: 4,
       riddle: 'The band is set, the keys align, but some seats changed along the line. Match the numbers, press them right. What secret word comes into sight?',
-      answer: 'Oldie But Goodie'
+      answer: 'Oldie But Goodie',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Time+Keepers+GIF'
     },
     'silver-lining': {
       name: 'Silver Lining', series: 4,
       riddle: 'A joyous time of the year where being spotless is an expectation. Thus cleaning is part of preparation. How many days are left until the big event?',
-      answer: '9 days'
+      answer: '9 days',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Silver+Lining+GIF'
     },
     'mushroom-mayhem': {
       name: 'Mushroom Mayhem', series: 4,
       riddle: 'In tough times, good energy keeps troubles at bay. How many cheerful forces are in town today?',
-      answer: '28'
+      answer: '28',
+      gif: 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=Mushroom+Mayhem+GIF'
     }
   };
 
@@ -946,6 +976,7 @@
     document.getElementById('answerTitle').textContent = puzzle.name;
     document.getElementById('riddleText').textContent = puzzle.riddle;
     document.getElementById('answerDisplay').textContent = puzzle.answer;
+    document.getElementById('answerGif').src = puzzle.gif || 'https://via.placeholder.com/500x400/C1E3E8/1A1A1A?text=GIF+Answer';
     document.getElementById('codeBox').textContent = uniqueCode;
   }
 
