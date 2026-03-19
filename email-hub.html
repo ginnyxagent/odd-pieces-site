@@ -397,21 +397,64 @@
 </div>
 
 <script>
-// Placeholder script for Klaviyo API integration
-// In production, replace with actual API calls to /api/klaviyo-kpis and /api/klaviyo-yoy
-document.getElementById('last-sync').textContent = new Date().toLocaleString();
+async function loadKPIs() {
+  try {
+    // Fetch current KPIs
+    const kpiRes = await fetch('/api/klaviyo-kpis');
+    const kpiData = await kpiRes.json();
 
-// Mock data for demonstration (replace with actual API calls)
-setTimeout(() => {
-  document.getElementById('open-rate').textContent = '35%';
-  document.getElementById('click-rate').textContent = '6.2%';
-  document.getElementById('revenue').textContent = '$48,300';
-  document.getElementById('unsub-rate').textContent = '0.3%';
-  document.getElementById('conversion-rate').textContent = '2.8%';
-  document.getElementById('list-growth').textContent = '8.5%';
-  document.getElementById('email-roi').textContent = '3.2x';
-  document.getElementById('bounce-rate').textContent = '0.8%';
-}, 500);
+    // Fetch YoY comparison data
+    const yoyRes = await fetch('/api/klaviyo-yoy');
+    const yoyData = await yoyRes.json();
+
+    // Update KPI cards with real data
+    if (kpiData.open_rate) document.getElementById('open-rate').textContent = kpiData.open_rate + '%';
+    if (kpiData.click_rate) document.getElementById('click-rate').textContent = kpiData.click_rate + '%';
+    if (kpiData.revenue) document.getElementById('revenue').textContent = '$' + Number(kpiData.revenue).toLocaleString();
+    if (kpiData.unsub_rate) document.getElementById('unsub-rate').textContent = kpiData.unsub_rate + '%';
+    if (kpiData.conversion_rate) document.getElementById('conversion-rate').textContent = kpiData.conversion_rate + '%';
+    if (kpiData.list_growth) document.getElementById('list-growth').textContent = kpiData.list_growth + '%';
+    if (kpiData.email_roi) document.getElementById('email-roi').textContent = kpiData.email_roi + 'x';
+    if (kpiData.bounce_rate) document.getElementById('bounce-rate').textContent = kpiData.bounce_rate + '%';
+
+    // Calculate YoY trends
+    if (yoyData.campaigns) {
+      const c2024 = yoyData.campaigns['2024'];
+      const c2025 = yoyData.campaigns['2025'];
+      
+      if (c2024 && c2025) {
+        const openTrend = c2024.openRate > 0 ? (((c2025.openRate - c2024.openRate) / c2024.openRate) * 100).toFixed(0) : 0;
+        const revenueTrend = c2024.totalRevenue > 0 ? (((c2025.totalRevenue - c2024.totalRevenue) / c2024.totalRevenue) * 100).toFixed(0) : 0;
+        
+        updateYoYBadge('open-rate-yoy', openTrend);
+        updateYoYBadge('revenue-yoy', revenueTrend);
+      }
+    }
+
+    // Update last sync timestamp
+    document.getElementById('last-sync').textContent = new Date().toLocaleString();
+
+  } catch (error) {
+    console.error('Failed to load KPI data:', error);
+    document.getElementById('last-sync').textContent = 'Failed to sync data';
+  }
+}
+
+function updateYoYBadge(elementId, trend) {
+  const el = document.getElementById(elementId);
+  if (!el) return;
+  
+  const isUp = trend >= 0;
+  const className = isUp ? 'up' : 'down';
+  const arrow = isUp ? '↑' : '↓';
+  const sign = isUp ? '+' : '';
+  
+  el.className = `kpi-yoy ${className}`;
+  el.textContent = `${arrow} ${sign}${trend}%`;
+}
+
+// Load data on page load
+document.addEventListener('DOMContentLoaded', loadKPIs);
 </script>
 
 </body>
