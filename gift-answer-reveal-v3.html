@@ -1,0 +1,1029 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You Cracked It — Odd Pieces 🧩</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #FEE000;
+    --yellow-dark: #E5C900;
+    --blue: #C1E3E8;
+    --blue-dark: #8CC5D0;
+    --orange: #FC9C1C;
+    --red: #E8342E;
+    --red-dark: #C42A25;
+    --ink: #1A1A1A;
+    --white: #FFFFFF;
+    --muted: #6B6555;
+    --cream: #FFF9E6;
+  }
+
+  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--yellow);
+    padding: 0 28px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(180deg, var(--yellow) 0%, var(--cream) 100%);
+    padding: 64px 24px 56px;
+    text-align: center;
+  }
+  .hero-badge {
+    display: inline-block;
+    background: var(--ink);
+    color: var(--yellow);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 6px 16px;
+    border-radius: 100px;
+    margin-bottom: 20px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 8vw, 3.6rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+    margin-bottom: 16px;
+  }
+  .hero-sub {
+    font-size: 1.1rem;
+    color: var(--ink);
+    opacity: 0.65;
+    max-width: 440px;
+    margin: 0 auto;
+    line-height: 1.5;
+  }
+
+  /* ── ANSWER SECTION ── */
+  .answer-section {
+    background: linear-gradient(180deg, var(--blue) 0%, #D8EEF2 100%);
+    padding: 56px 24px;
+  }
+  .answer-wrap {
+    max-width: 600px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 20px;
+    padding: 40px 32px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+  }
+
+  .answer-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .answer-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--ink);
+    margin-bottom: 24px;
+    letter-spacing: -0.02em;
+  }
+
+  .riddle-section {
+    background: #F7F6F2;
+    padding: 24px;
+    border-radius: 14px;
+    margin-bottom: 24px;
+  }
+
+  .riddle-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+
+  .riddle-text {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+  }
+
+  .answer-display {
+    background: linear-gradient(135deg, #FEF3E0 0%, #FFF8EB 100%);
+    border-left: 5px solid var(--orange);
+    padding: 20px 24px;
+    border-radius: 10px;
+    margin-bottom: 28px;
+  }
+
+  .answer-answer-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+
+  .answer-answer {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    color: var(--red);
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  /* ── SHARE ── */
+  .share-section {
+    border-top: 1px solid rgba(0,0,0,0.06);
+    padding-top: 24px;
+    margin-top: 24px;
+  }
+
+  .share-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .share-buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  .share-btn {
+    padding: 12px;
+    border: 2px solid rgba(0,0,0,0.1);
+    background: #F7F6F2;
+    border-radius: 10px;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.15s;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ink);
+  }
+
+  .share-btn:hover {
+    border-color: var(--orange);
+    background: var(--yellow);
+  }
+
+  .share-icon {
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 4px;
+  }
+
+  /* ── REWARD / DISCOUNT SECTION ── */
+  .reward-section {
+    background: linear-gradient(180deg, var(--ink) 0%, #2A2A2A 100%);
+    padding: 64px 24px;
+    text-align: center;
+  }
+
+  .reward-badge {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .reward-badge span {
+    display: inline-block;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    padding: 5px 14px;
+    border-radius: 100px;
+  }
+  .reward-badge .badge-gold {
+    background: var(--yellow);
+    color: var(--ink);
+  }
+
+  .reward-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+  }
+
+  .reward-sub {
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    margin-bottom: 32px;
+    max-width: 420px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.5;
+  }
+
+  .code-card {
+    max-width: 440px;
+    margin: 0 auto 28px;
+    background: rgba(255,255,255,0.06);
+    border: 2px solid rgba(254,224,0,0.3);
+    border-radius: 16px;
+    padding: 28px;
+  }
+
+  .code-card-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 12px;
+  }
+
+  .code-box {
+    background: rgba(0,0,0,0.4);
+    border: 2px dashed var(--yellow);
+    color: var(--yellow);
+    padding: 18px;
+    border-radius: 12px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.8rem;
+    letter-spacing: 0.08em;
+  }
+
+  .code-box:hover {
+    background: rgba(254,224,0,0.1);
+    transform: scale(1.02);
+  }
+
+  .code-hint {
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.35);
+    text-align: center;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+  /* Timer */
+  .timer-wrap {
+    max-width: 440px;
+    margin: 0 auto 8px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .timer-unit {
+    text-align: center;
+  }
+
+  .timer-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    color: var(--yellow);
+    line-height: 1;
+  }
+
+  .timer-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.35);
+    margin-top: 4px;
+  }
+
+  .timer-sep {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--yellow);
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .timer-expires {
+    font-size: 0.7rem;
+    color: var(--red);
+    font-weight: 600;
+    margin-bottom: 28px;
+  }
+
+  /* ── BUNDLE SECTIONS ── */
+  .bundles-section {
+    background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
+    padding: 64px 24px;
+  }
+
+  .bundles-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .bundles-header h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.5rem, 5vw, 2rem);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .bundles-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+
+  .bundle-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .bundle-card {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 5px 5px 0 var(--ink);
+    transition: transform 0.15s, box-shadow 0.15s;
+    position: relative;
+  }
+
+  .bundle-card:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 7px 7px 0 var(--ink);
+  }
+
+  .bundle-limited-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: var(--red);
+    color: var(--white);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    padding: 4px 10px;
+    border-radius: 100px;
+    z-index: 2;
+  }
+
+  .bundle-images {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+    background: var(--ink);
+  }
+
+  .bundle-images img {
+    width: 100%;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    display: block;
+  }
+
+  .bundle-info {
+    padding: 20px;
+  }
+
+  .bundle-series {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+
+  .bundle-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--ink);
+    margin-bottom: 6px;
+    letter-spacing: -0.01em;
+  }
+
+  .bundle-puzzles {
+    font-size: 0.8rem;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+
+  .bundle-btn {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: var(--red);
+    color: var(--white);
+    border: none;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    text-decoration: none;
+    text-align: center;
+  }
+
+  .bundle-btn:hover {
+    background: var(--red-dark);
+    transform: translateY(-1px);
+  }
+
+  /* ── ALL PUZZLES ── */
+  .all-puzzles {
+    background: var(--white);
+    padding: 64px 24px;
+  }
+
+  .all-puzzles-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .all-puzzles-header h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .all-puzzles-header p {
+    font-size: 0.9rem;
+    color: var(--muted);
+  }
+
+  .puzzle-list {
+    max-width: 700px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .puzzle-item {
+    background: #F7F6F2;
+    border-radius: 14px;
+    overflow: hidden;
+    transition: all 0.2s;
+  }
+
+  .puzzle-item.active {
+    background: linear-gradient(135deg, #FEF3E0 0%, #FFF8EB 100%);
+    border: 2px solid var(--orange);
+  }
+
+  .puzzle-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px 20px;
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .puzzle-header-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .puzzle-series-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .series-1 { background: var(--orange); }
+  .series-2 { background: var(--blue-dark); }
+  .series-3 { background: var(--red); }
+  .series-4 { background: var(--yellow-dark); }
+
+  .puzzle-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--ink);
+  }
+
+  .puzzle-toggle {
+    font-size: 1.2rem;
+    color: var(--muted);
+    transition: transform 0.2s;
+  }
+
+  .puzzle-item.open .puzzle-toggle {
+    transform: rotate(180deg);
+  }
+
+  .puzzle-body {
+    display: none;
+    padding: 0 20px 20px;
+  }
+
+  .puzzle-item.open .puzzle-body {
+    display: block;
+  }
+
+  .puzzle-riddle {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: var(--ink);
+    font-style: italic;
+    margin-bottom: 12px;
+    padding: 12px 16px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 10px;
+  }
+
+  .puzzle-answer-box {
+    background: var(--ink);
+    color: var(--yellow);
+    padding: 12px 16px;
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+  }
+
+  .puzzle-answer-label {
+    font-size: 0.55rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(254,224,0,0.5);
+    margin-bottom: 4px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 28px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  footer a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.3);
+    text-decoration: none;
+    transition: color 0.15s;
+  }
+
+  footer a:hover { color: var(--yellow); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 700px) {
+    .bundle-grid {
+      grid-template-columns: 1fr;
+      max-width: 440px;
+    }
+  }
+
+  @media (max-width: 500px) {
+    .hero h1 { font-size: 2rem; }
+    .answer-wrap { padding: 28px 20px; }
+    .share-buttons { grid-template-columns: 1fr; }
+    .answer-answer { font-size: 1.4rem; }
+    .code-box { font-size: 1.4rem; }
+    .timer-num { font-size: 1.6rem; }
+    .timer-sep { font-size: 1.4rem; }
+    .bundle-info { padding: 16px; }
+  }
+
+  /* Pulse animation for timer */
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+  }
+  .timer-pulse { animation: pulse 1s ease-in-out infinite; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="https://oddpieces.com" class="logo">Odd Pieces 🧩</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-badge">🔓 Puzzle Cracked</div>
+  <h1 id="heroTitle">You cracked it.</h1>
+  <p class="hero-sub" id="puzzleName">Loading...</p>
+</section>
+
+<!-- ANSWER -->
+<section class="answer-section">
+  <div class="answer-wrap">
+    <div class="answer-label">🧩 Your Puzzle</div>
+    <h2 class="answer-title" id="answerTitle">Loading...</h2>
+
+    <div class="riddle-section">
+      <div class="riddle-label">The Riddle</div>
+      <div class="riddle-text" id="riddleText">Loading...</div>
+    </div>
+
+    <div class="answer-display">
+      <div class="answer-answer-label">The Answer</div>
+      <div class="answer-answer" id="answerDisplay">Loading...</div>
+    </div>
+
+    <div class="share-section">
+      <div class="share-label">📢 Brag About It</div>
+      <div class="share-buttons">
+        <button class="share-btn" onclick="shareInstagram()">
+          <span class="share-icon">📸</span>Instagram
+        </button>
+        <button class="share-btn" onclick="shareTwitter()">
+          <span class="share-icon">𝕏</span>Twitter
+        </button>
+        <button class="share-btn" onclick="copyLink()">
+          <span class="share-icon">🔗</span>Copy
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REWARD / DISCOUNT -->
+<section class="reward-section">
+  <div class="reward-badge">
+    <span>🎁 Exclusive</span>
+    <span class="badge-gold">⏳ Limited Time</span>
+  </div>
+  <h2 class="reward-title">This is your reward.</h2>
+  <p class="reward-sub">You earned it. A genius-level discount for a genius-level puzzler. Don't let it expire.</p>
+
+  <div class="timer-wrap">
+    <div class="timer-unit">
+      <div class="timer-num timer-pulse" id="timerH">23</div>
+      <div class="timer-label">Hours</div>
+    </div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit">
+      <div class="timer-num timer-pulse" id="timerM">59</div>
+      <div class="timer-label">Min</div>
+    </div>
+    <div class="timer-sep">:</div>
+    <div class="timer-unit">
+      <div class="timer-num timer-pulse" id="timerS">59</div>
+      <div class="timer-label">Sec</div>
+    </div>
+  </div>
+  <div class="timer-expires">⚡ Code expires when the timer hits zero</div>
+
+  <div class="code-card">
+    <div class="code-card-label">Your Exclusive Discount Code</div>
+    <div class="code-box" onclick="copyCode()" id="codeBox">LOADING</div>
+    <div class="code-hint">👆 Tap to copy — use at checkout</div>
+  </div>
+</section>
+
+<!-- BUNDLES -->
+<section class="bundles-section">
+  <div class="bundles-header">
+    <h2>Ready for the next challenge?</h2>
+    <p>You've earned an exclusive discount. Grab a bundle before time runs out.</p>
+  </div>
+
+  <div class="bundle-grid">
+    <!-- Series 1 -->
+    <div class="bundle-card">
+      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-images">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_5_1_1.jpg?v=1627001078" alt="Snack Attack" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_4_1_1.jpg?v=1627000981" alt="Beyond the Kelp" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_3_1.jpg?v=1627001189" alt="Turbo 3000" loading="lazy">
+      </div>
+      <div class="bundle-info">
+        <div class="bundle-series">Bundle</div>
+        <div class="bundle-name">Series 1</div>
+        <div class="bundle-puzzles">Snack Attack • Beyond the Kelp • Turbo 3000</div>
+        <a href="https://oddpieces.com/en-us/products/series-1-bundle" class="bundle-btn">Get This Bundle →</a>
+      </div>
+    </div>
+
+    <!-- Series 2 -->
+    <div class="bundle-card">
+      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-images">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/Shutterbug-BeforeIllustration.jpg?v=1670474650" alt="Shutterbug" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/AstroGastro-BeforeImageNEW.jpg?v=1670487054" alt="AstroGastro" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/TheGlitch-BeforeImage.jpg?v=1670474342" alt="Glitch" loading="lazy">
+      </div>
+      <div class="bundle-info">
+        <div class="bundle-series">Bundle</div>
+        <div class="bundle-name">Series 2</div>
+        <div class="bundle-puzzles">Shutterbug • AstroGastro • Glitch</div>
+        <a href="https://oddpieces.com/en-us/products/series-2-bundle" class="bundle-btn">Get This Bundle →</a>
+      </div>
+    </div>
+
+    <!-- Series 3 -->
+    <div class="bundle-card">
+      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-images">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_5_1_1.jpg?v=1627001078" alt="Snack Attack" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/1.-Kitty-High---Before_3.jpg?v=1706826052" alt="Snack Attack 2" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/1.PawPark-Before.jpg?v=1763232028" alt="Snack Attack 3" loading="lazy">
+      </div>
+      <div class="bundle-info">
+        <div class="bundle-series">Bundle</div>
+        <div class="bundle-name">Series 3</div>
+        <div class="bundle-puzzles">Snack Attack • Snack Attack 2 • Snack Attack 3</div>
+        <a href="https://oddpieces.com/en-us/products/series-3-3-pack" class="bundle-btn">Get This Bundle →</a>
+      </div>
+    </div>
+
+    <!-- Series 4 -->
+    <div class="bundle-card">
+      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-images">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/pixel_art_puzzle.png?v=1763233427" alt="Time Keepers" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/SilverLiningMysteryPuzzles.jpg?v=1759213934" alt="Silver Lining" loading="lazy">
+        <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/Mushroom_Mayhem_Mystery_Puzzles.jpg?v=1763233427" alt="Mushroom Mayhem" loading="lazy">
+      </div>
+      <div class="bundle-info">
+        <div class="bundle-series">Bundle</div>
+        <div class="bundle-name">Series 4</div>
+        <div class="bundle-puzzles">Time Keepers • Silver Lining • Mushroom Mayhem</div>
+        <a href="https://oddpieces.com/en-us/products/series-4" class="bundle-btn">Get This Bundle →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ALL PUZZLES -->
+<section class="all-puzzles">
+  <div class="all-puzzles-header">
+    <h2>All 11 Riddles & Answers</h2>
+    <p>Every puzzle. Every riddle. Every answer. You're welcome.</p>
+  </div>
+
+  <div class="puzzle-list" id="puzzleList">
+    <!-- Populated by JS -->
+  </div>
+</section>
+
+<footer>
+  <a href="https://oddpieces.com">oddpieces.com</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles">Shop Puzzles</a>
+  <span style="color:rgba(255,255,255,0.12);font-size:11px;font-family:'Nunito',sans-serif;">© Odd Pieces</span>
+</footer>
+
+<script>
+  const puzzles = {
+    'snack-attack': {
+      name: 'Snack Attack', series: 1,
+      riddle: 'Cats and dogs can form a pact. But despite all that, it smells too good to not attack. Oh no! Not again! What kind of attack broke their pact?',
+      answer: 'Snack Attack!'
+    },
+    'turbo-3000': {
+      name: 'Turbo 3000', series: 1,
+      riddle: 'A certain age group that is well known. They grew up with video games and flip phones. What generation does Ricky belong to?',
+      answer: 'Millennial'
+    },
+    'beyond-the-kelp': {
+      name: 'Beyond the Kelp', series: 1,
+      riddle: 'What was a typical school day was suddenly in commotion. For it was a savory smell that caused an implosion. One sprinted quicker than others. What breed was the fastest runner?',
+      answer: 'Pomeranian'
+    },
+    'shutterbug': {
+      name: 'Shutterbug', series: 2,
+      riddle: "The town before was dark and moody. But after the melody, it was all happy and beauty. A certain individual didn't get the cue, for he was occupied and hadn't got a clue. What was this individual doing?",
+      answer: 'Sleeping'
+    },
+    'astrogastro': {
+      name: 'AstroGastro', series: 2,
+      riddle: "The cosmic cat whose name is finally revealed. We wonder what was Gary's very last meal?",
+      answer: 'Pepperoni pizza'
+    },
+    'glitch': {
+      name: 'Glitch', series: 2,
+      riddle: 'Within this sign lay an important message. Dropped by the guru who speaks an ancient language. What does the mysterious sign say?',
+      answer: 'Let there be light'
+    },
+    'snack-attack-2': {
+      name: 'Snack Attack 2', series: 3,
+      riddle: 'Amidst the chaos, a group of mischievous outsiders are looking for snacks, waiting for the perfect time to quietly trespass. What animal sneakily climbed in?',
+      answer: 'Raccoon'
+    },
+    'snack-attack-3': {
+      name: 'Snack Attack 3', series: 3,
+      riddle: "Cooking is an art and sometimes you need to wing it. Even with all the ingredients, you can't always make it. What do you need to make your food exquisite?",
+      answer: 'A splash of Serendipitous Luck'
+    },
+    'time-keepers': {
+      name: 'Time Keepers', series: 4,
+      riddle: 'The band is set, the keys align, but some seats changed along the line. Match the numbers, press them right. What secret word comes into sight?',
+      answer: 'Oldie But Goodie'
+    },
+    'silver-lining': {
+      name: 'Silver Lining', series: 4,
+      riddle: 'A joyous time of the year where being spotless is an expectation. Thus cleaning is part of preparation. How many days are left until the big event?',
+      answer: '9 days'
+    },
+    'mushroom-mayhem': {
+      name: 'Mushroom Mayhem', series: 4,
+      riddle: 'In tough times, good energy keeps troubles at bay. How many cheerful forces are in town today?',
+      answer: '28'
+    }
+  };
+
+  // Load puzzle from URL
+  const params = new URLSearchParams(window.location.search);
+  const puzzleId = params.get('puzzle') || 'snack-attack';
+  const puzzle = puzzles[puzzleId];
+
+  // Generate discount code
+  function generateCode() {
+    const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    let code = 'ODDGENIUS-';
+    for (let i = 0; i < 5; i++) code += chars.charAt(Math.floor(Math.random() * chars.length));
+    return code;
+  }
+
+  // Store code in session so it persists on same visit
+  let uniqueCode = sessionStorage.getItem('op-reward-code');
+  if (!uniqueCode) {
+    uniqueCode = generateCode();
+    sessionStorage.setItem('op-reward-code', uniqueCode);
+  }
+
+  // Store timer start
+  let timerStart = sessionStorage.getItem('op-timer-start');
+  if (!timerStart) {
+    timerStart = Date.now();
+    sessionStorage.setItem('op-timer-start', timerStart);
+  }
+  timerStart = parseInt(timerStart);
+  const TIMER_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+  if (puzzle) {
+    const heroTitles = ['You cracked it.', 'Genius confirmed.', 'Nailed it.', 'Big brain energy.'];
+    document.getElementById('heroTitle').textContent = heroTitles[Math.floor(Math.random() * heroTitles.length)];
+    document.getElementById('puzzleName').textContent = `You solved ${puzzle.name} — not everyone can say that.`;
+    document.getElementById('answerTitle').textContent = puzzle.name;
+    document.getElementById('riddleText').textContent = puzzle.riddle;
+    document.getElementById('answerDisplay').textContent = puzzle.answer;
+    document.getElementById('codeBox').textContent = uniqueCode;
+  }
+
+  // Timer countdown
+  function updateTimer() {
+    const elapsed = Date.now() - timerStart;
+    const remaining = Math.max(0, TIMER_DURATION - elapsed);
+
+    const h = Math.floor(remaining / 3600000);
+    const m = Math.floor((remaining % 3600000) / 60000);
+    const s = Math.floor((remaining % 60000) / 1000);
+
+    document.getElementById('timerH').textContent = String(h).padStart(2, '0');
+    document.getElementById('timerM').textContent = String(m).padStart(2, '0');
+    document.getElementById('timerS').textContent = String(s).padStart(2, '0');
+
+    if (remaining <= 0) {
+      document.querySelector('.timer-expires').textContent = '💀 Code expired. You waited too long.';
+      document.getElementById('codeBox').textContent = 'EXPIRED';
+      document.getElementById('codeBox').style.opacity = '0.4';
+      document.getElementById('codeBox').style.cursor = 'default';
+    }
+  }
+  updateTimer();
+  setInterval(updateTimer, 1000);
+
+  // Build all puzzles list
+  const listEl = document.getElementById('puzzleList');
+  const seriesNames = { 1: 'Series 1', 2: 'Series 2', 3: 'Series 3', 4: 'Series 4' };
+
+  Object.entries(puzzles).forEach(([id, p]) => {
+    const isActive = id === puzzleId;
+    const div = document.createElement('div');
+    div.className = `puzzle-item${isActive ? ' active open' : ''}`;
+    div.innerHTML = `
+      <div class="puzzle-header" onclick="this.parentElement.classList.toggle('open')">
+        <div class="puzzle-header-left">
+          <div class="puzzle-series-dot series-${p.series}"></div>
+          <div class="puzzle-name">${p.name}</div>
+        </div>
+        <div class="puzzle-toggle">▾</div>
+      </div>
+      <div class="puzzle-body">
+        <div class="puzzle-riddle">${p.riddle}</div>
+        <div class="puzzle-answer-box">
+          <div class="puzzle-answer-label">Answer</div>
+          ${p.answer}
+        </div>
+      </div>
+    `;
+    listEl.appendChild(div);
+  });
+
+  // Functions
+  function copyCode() {
+    const elapsed = Date.now() - timerStart;
+    if (elapsed >= TIMER_DURATION) return;
+    navigator.clipboard.writeText(uniqueCode).then(() => {
+      const box = document.getElementById('codeBox');
+      box.textContent = '✓ COPIED!';
+      setTimeout(() => { box.textContent = uniqueCode; }, 2000);
+    });
+  }
+
+  function shareInstagram() {
+    const text = `I cracked ${puzzle.name}! The answer: ${puzzle.answer} 🧩🔥 @oddpieces`;
+    navigator.clipboard.writeText(text).then(() => alert('Copied to clipboard! Paste on Instagram.'));
+  }
+
+  function shareTwitter() {
+    const text = `Just cracked ${puzzle.name} from @oddpieces 🧩 The answer: ${puzzle.answer}. Think you can solve it?`;
+    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`, '_blank');
+  }
+
+  function copyLink() {
+    navigator.clipboard.writeText(window.location.href).then(() => alert('Link copied!'));
+  }
+</script>
+
+</body>
+</html>
