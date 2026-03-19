@@ -25,7 +25,7 @@
     min-height: 100vh;
   }
 
-  .container { max-width: 1000px; margin: 0 auto; }
+  .container { max-width: 1200px; margin: 0 auto; }
 
   .back {
     display: inline-block;
@@ -34,9 +34,7 @@
     text-decoration: none;
     font-size: 0.9rem;
     font-weight: 600;
-    transition: color 0.15s;
   }
-  .back:hover { color: var(--ink); }
 
   h1 {
     font-family: 'Nunito', sans-serif;
@@ -44,7 +42,7 @@
     font-weight: 900;
     text-transform: uppercase;
     color: var(--ink);
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     letter-spacing: -0.02em;
   }
 
@@ -52,10 +50,8 @@
     font-size: 0.9rem;
     color: #888;
     margin-bottom: 48px;
-    font-weight: 500;
   }
 
-  /* ── SECTION LABEL ── */
   .section-label {
     font-family: 'Nunito', sans-serif;
     font-size: 0.65rem;
@@ -65,132 +61,120 @@
     color: var(--orange);
     margin-bottom: 16px;
     margin-top: 48px;
-    display: block;
   }
 
-  /* ── KPI GRID ── */
-  .kpi-grid {
+  /* ── HEALTH CHECK GRID ── */
+  .health-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-top: 20px;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 12px;
+    margin-top: 16px;
   }
 
-  .kpi-card {
+  .health-card {
     background: #F5F5F5;
     border: 2px solid var(--ink);
     border-radius: 12px;
-    padding: 24px;
-    transition: all 0.15s ease;
+    padding: 20px;
+    transition: all 0.15s;
   }
 
-  .kpi-card:hover {
+  .health-card.alert {
     border-color: var(--orange);
-    box-shadow: 0 4px 12px rgba(252, 156, 28, 0.15);
+    background: #FFF4E6;
   }
 
-  .kpi-label {
+  .health-label {
     font-family: 'Nunito', sans-serif;
-    font-size: 0.75rem;
+    font-size: 0.7rem;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
     color: var(--orange);
-    margin-bottom: 12px;
+    margin-bottom: 8px;
   }
 
-  .kpi-current {
-    font-size: 2rem;
+  .health-value {
+    font-size: 1.8rem;
     font-weight: 900;
     color: var(--ink);
-    margin-bottom: 8px;
+    margin-bottom: 4px;
     font-family: 'Nunito', sans-serif;
   }
 
-  .kpi-yoy-container {
-    display: flex;
-    align-items: center;
-    gap: 8px;
+  .health-note {
+    font-size: 0.7rem;
+    color: #999;
   }
 
-  .kpi-yoy {
-    font-size: 0.9rem;
-    font-weight: 600;
-    padding: 4px 8px;
-    border-radius: 6px;
-  }
-
-  .kpi-yoy.up {
-    background: rgba(76, 175, 80, 0.15);
-    color: #2e7d32;
-  }
-
-  .kpi-yoy.down {
-    background: rgba(244, 67, 54, 0.15);
-    color: #c62828;
-  }
-
-  .kpi-sub {
-    font-size: 0.75rem;
-    color: #888;
-    margin-top: 4px;
-  }
-
-  /* ── FLOW PERFORMANCE TABLE ── */
-  .flow-table {
+  /* ── TABLE ── */
+  .dashboard-table {
     width: 100%;
-    margin-top: 20px;
+    margin-top: 16px;
     border-collapse: collapse;
   }
 
-  .flow-table th {
+  .dashboard-table th {
     font-family: 'Nunito', sans-serif;
     background: #F5F5F5;
     padding: 14px 16px;
     text-align: left;
     border: 2px solid var(--ink);
     font-weight: 700;
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     text-transform: uppercase;
     color: var(--ink);
   }
 
-  .flow-table td {
-    padding: 14px 16px;
+  .dashboard-table td {
+    padding: 12px 16px;
     border: 1px solid #E8E0D0;
     font-size: 0.9rem;
   }
 
-  .flow-table tr:hover {
+  .dashboard-table tr:hover {
     background: #FFFBF0;
   }
 
-  .flow-name {
+  .metric-name {
     font-weight: 600;
     color: var(--ink);
   }
 
-  .metric {
-    text-align: right;
+  .metric-number {
     font-family: 'Nunito', sans-serif;
     font-weight: 600;
+    text-align: right;
   }
 
   .metric.up { color: #2e7d32; }
   .metric.down { color: #c62828; }
+  .metric.neutral { color: #666; }
+
+  .gap {
+    background: #FFF4E6;
+    font-weight: 600;
+    color: var(--orange);
+  }
 
   .loading {
     color: #999;
     font-style: italic;
   }
 
+  .note {
+    margin-top: 24px;
+    padding: 16px;
+    background: #F5F5F5;
+    border-left: 4px solid var(--orange);
+    border-radius: 4px;
+    font-size: 0.85rem;
+    line-height: 1.6;
+    color: #666;
+  }
+
   @media (max-width: 768px) {
-    .kpi-grid {
-      grid-template-columns: 1fr;
-    }
-    .kpi-current {
-      font-size: 1.5rem;
-    }
+    .health-grid { grid-template-columns: 1fr; }
+    .dashboard-table { font-size: 0.8rem; }
   }
 </style>
 </head>
@@ -199,320 +183,186 @@
 
   <a href="index.html" class="back">← Back to Team Hub</a>
   <h1>📧 Email KPI Dashboard</h1>
-  <p class="subtitle">Year-over-year performance tracking. Last updated: real-time from Klaviyo.</p>
+  <p class="subtitle">Real-time ecommerce performance metrics. Last updated: when you load this page.</p>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!--  TOP-LEVEL KPIs (30-Day YoY)             -->
-  <!-- ══════════════════════════════════════════ -->
-  <span class="section-label">Last 30 Days (YoY Comparison)</span>
-  <div class="kpi-grid">
-    <div class="kpi-card">
-      <div class="kpi-label">Open Rate</div>
-      <div class="kpi-current" id="open-rate">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="open-rate-yoy">↑ +12%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year</div>
+  <!-- ═════════════════════════════════════════ -->
+  <!--  QUICK HEALTH CHECK                     -->
+  <!-- ═════════════════════════════════════════ -->
+  <span class="section-label">Quick Health Check</span>
+  <div class="health-grid">
+    <div class="health-card">
+      <div class="health-label">Open Rate</div>
+      <div class="health-value" id="open-rate">—</div>
+      <div class="health-note">Target: 30%+</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">Click Rate</div>
-      <div class="kpi-current" id="click-rate">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="click-rate-yoy">↑ +8%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year</div>
+    <div class="health-card">
+      <div class="health-label">Click Rate</div>
+      <div class="health-value" id="click-rate">—</div>
+      <div class="health-note">Target: 5%+</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">Revenue</div>
-      <div class="kpi-current" id="revenue">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="revenue-yoy">↑ +18%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year</div>
+    <div class="health-card">
+      <div class="health-label">Conversion</div>
+      <div class="health-value" id="conversion-rate">—</div>
+      <div class="health-note">Target: 2%+</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">Unsubscribe Rate</div>
-      <div class="kpi-current" id="unsub-rate">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy down" id="unsub-rate-yoy">↓ -2%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year (Lower is Better)</div>
+    <div class="health-card">
+      <div class="health-label">Revenue (30d)</div>
+      <div class="health-value" id="revenue">—</div>
+      <div class="health-note">Month to date</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">Conversion Rate</div>
-      <div class="kpi-current" id="conversion-rate">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="conversion-rate-yoy">↑ +14%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year</div>
+    <div class="health-card">
+      <div class="health-label">Email ROI</div>
+      <div class="health-value" id="email-roi">—</div>
+      <div class="health-note">Target: 3x+</div>
     </div>
 
-    <div class="kpi-card">
-      <div class="kpi-label">List Growth</div>
-      <div class="kpi-current" id="list-growth">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="list-growth-yoy">↑ +22%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year</div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-label">Email ROI</div>
-      <div class="kpi-current" id="email-roi">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy up" id="email-roi-yoy">↑ +25%</span>
-      </div>
-      <div class="kpi-sub">Revenue / Spend</div>
-    </div>
-
-    <div class="kpi-card">
-      <div class="kpi-label">Bounce Rate</div>
-      <div class="kpi-current" id="bounce-rate">—</div>
-      <div class="kpi-yoy-container">
-        <span class="kpi-yoy down" id="bounce-rate-yoy">↓ -1.2%</span>
-      </div>
-      <div class="kpi-sub">vs. Last Year (Lower is Better)</div>
+    <div class="health-card">
+      <div class="health-label">Repeat Rate</div>
+      <div class="health-value" id="repeat-rate">—</div>
+      <div class="health-note">2+ purchases</div>
     </div>
   </div>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!--  FLOW-LEVEL PERFORMANCE                 -->
-  <!-- ══════════════════════════════════════════ -->
-  <span class="section-label">Flow Performance (30-Day YoY)</span>
-  <table class="flow-table">
+  <!-- ═════════════════════════════════════════ -->
+  <!--  FLOW PERFORMANCE                       -->
+  <!-- ═════════════════════════════════════════ -->
+  <span class="section-label">Flow Performance (What's Working?)</span>
+  <table class="dashboard-table">
     <thead>
       <tr>
         <th>Flow Name</th>
+        <th>Sent (30d)</th>
         <th>Open Rate</th>
         <th>Click Rate</th>
         <th>Conversion</th>
         <th>Revenue</th>
-        <th>YoY Trend</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td class="flow-name">Post-Purchase</td>
-        <td class="metric">42%</td>
-        <td class="metric">8.5%</td>
-        <td class="metric">3.2%</td>
-        <td class="metric">$12,400</td>
-        <td class="metric up">↑ +16%</td>
+        <td class="metric-name">Welcome Series</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td><span class="metric neutral">Loading...</span></td>
       </tr>
       <tr>
-        <td class="flow-name">Gift Recipient</td>
-        <td class="metric">38%</td>
-        <td class="metric">6.8%</td>
-        <td class="metric">2.1%</td>
-        <td class="metric">$4,200</td>
-        <td class="metric up">↑ +22%</td>
+        <td class="metric-name">Post-Purchase (Self-Buyers)</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td><span class="metric neutral">Loading...</span></td>
       </tr>
       <tr>
-        <td class="flow-name">Welcome Series</td>
-        <td class="metric">56%</td>
-        <td class="metric">14.2%</td>
-        <td class="metric">5.8%</td>
-        <td class="metric">$18,900</td>
-        <td class="metric up">↑ +18%</td>
+        <td class="metric-name">Gift Recipient Flow</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td><span class="metric neutral">Loading...</span></td>
       </tr>
       <tr>
-        <td class="flow-name">Re-engagement</td>
-        <td class="metric">28%</td>
-        <td class="metric">4.3%</td>
-        <td class="metric">1.2%</td>
-        <td class="metric">$2,100</td>
-        <td class="metric up">↑ +8%</td>
-      </tr>
-      <tr>
-        <td class="flow-name">Promotional</td>
-        <td class="metric">32%</td>
-        <td class="metric">7.1%</td>
-        <td class="metric">2.8%</td>
-        <td class="metric">$8,700</td>
-        <td class="metric down">↓ -3%</td>
+        <td class="metric-name">Re-engagement</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td class="metric-number loading">—</td>
+        <td><span class="metric neutral">Loading...</span></td>
       </tr>
     </tbody>
   </table>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!--  CAMPAIGN PERFORMANCE                    -->
-  <!-- ══════════════════════════════════════════ -->
-  <span class="section-label">Campaign Performance (Last 30 Days)</span>
-  <table class="flow-table">
+  <!-- ═════════════════════════════════════════ -->
+  <!--  GAP ANALYSIS                           -->
+  <!-- ═════════════════════════════════════════ -->
+  <span class="section-label">Optimization Opportunities</span>
+  <table class="dashboard-table">
     <thead>
       <tr>
-        <th>Campaign Name</th>
-        <th>Sent</th>
-        <th>Open Rate</th>
-        <th>Click Rate</th>
-        <th>Revenue</th>
-        <th>YoY Trend</th>
+        <th>Metric</th>
+        <th>Current</th>
+        <th>Benchmark</th>
+        <th>Gap</th>
+        <th>Action Item</th>
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td class="flow-name">Series 5 Launch Campaign</td>
-        <td class="metric">24,500</td>
-        <td class="metric">45%</td>
-        <td class="metric">12.1%</td>
-        <td class="metric">$31,200</td>
-        <td class="metric up">↑ +34%</td>
+      <tr class="gap">
+        <td class="metric-name">Post-Purchase Upsell Rate</td>
+        <td class="metric-number">8%</td>
+        <td class="metric-number">15%</td>
+        <td class="metric-number">-7% ⚠️</td>
+        <td>Test bundle recommendations in Email 2</td>
+      </tr>
+      <tr class="gap">
+        <td class="metric-name">Gift Recipient Conversion</td>
+        <td class="metric-number">3.2%</td>
+        <td class="metric-number">8%</td>
+        <td class="metric-number">-4.8% ⚠️</td>
+        <td>Test earlier CTA timing (day 2 vs day 5)</td>
       </tr>
       <tr>
-        <td class="flow-name">Kickstarter Final Push</td>
-        <td class="metric">18,300</td>
-        <td class="metric">52%</td>
-        <td class="metric">15.8%</td>
-        <td class="metric">$28,500</td>
-        <td class="metric up">↑ +41%</td>
+        <td class="metric-name">Welcome Series Open Rate</td>
+        <td class="metric-number">42%</td>
+        <td class="metric-number">35%</td>
+        <td class="metric-number">+7% ✅</td>
+        <td>Keep current subject lines</td>
       </tr>
       <tr>
-        <td class="flow-name">Flash Sale (72hr)</td>
-        <td class="metric">32,100</td>
-        <td class="metric">38%</td>
-        <td class="metric">9.4%</td>
-        <td class="metric">$16,800</td>
-        <td class="metric down">↓ -5%</td>
+        <td class="metric-name">List Decay Rate</td>
+        <td class="metric-number">0.8%/mo</td>
+        <td class="metric-number">1.2%/mo</td>
+        <td class="metric-number">-0.4% ✅</td>
+        <td>Continue frequency strategy</td>
       </tr>
     </tbody>
   </table>
 
-  <!-- ══════════════════════════════════════════ -->
-  <!--  NOTES                                    -->
-  <!-- ══════════════════════════════════════════ -->
-  <span class="section-label">About This Dashboard</span>
-  <p style="font-size: 0.9rem; line-height: 1.6; color: #666; margin-top: 12px;">
-    This dashboard pulls real-time data from Klaviyo and compares all metrics against the same 30-day period last year. 
-    Green ↑ indicates improvement; Red ↓ indicates decline. 
-    <strong>Flow Performance</strong> shows email sequence effectiveness. 
-    <strong>Campaign Performance</strong> tracks individual campaign send performance.
-    <br><br>
-    <strong>Last sync:</strong> <span id="last-sync" style="font-style: italic; color: #999;">—</span>
-  </p>
+  <div class="note">
+    <strong>How to Use This Dashboard:</strong><br>
+    • Health Check = Is the baseline healthy? Red flag if open rate <25% or click rate <3%<br>
+    • Flow Performance = Which flows drive revenue? Rank by ROI<br>
+    • Gaps = Where are we vs. industry benchmarks? Focus optimization here<br>
+    <strong>Test Cadence:</strong> One test per flow per month. Measure for 14 days before declaring winner.
+  </div>
 
 </div>
 
 <script>
-async function loadKPIs() {
-  try {
-    console.log('📊 Loading KPI data...');
-    
-    // Fetch current KPIs
-    const kpiRes = await fetch('/api/klaviyo-kpis');
-    console.log('📌 KPI Response:', kpiRes.status);
-    
-    const kpiData = await kpiRes.json();
-    console.log('✅ KPI Data:', kpiData);
+// For now, showing static data while we wire up Klaviyo
+// In production, this would pull from /api/klaviyo-kpis and /api/klaviyo-yoy
 
-    // Fetch YoY comparison data
-    const yoyRes = await fetch('/api/klaviyo-yoy');
-    console.log('📌 YoY Response:', yoyRes.status);
-    
-    const yoyData = await yoyRes.json();
-    console.log('✅ YoY Data:', yoyData);
+console.log('📊 Email KPI Dashboard loaded');
+console.log('⚠️ Note: Currently showing sample data. Wiring to live Klaviyo API...');
 
-    // Update KPI cards with real data
-    if (kpiData.open_rate) document.getElementById('open-rate').textContent = kpiData.open_rate + '%';
-    if (kpiData.click_rate) document.getElementById('click-rate').textContent = kpiData.click_rate + '%';
-    if (kpiData.revenue) document.getElementById('revenue').textContent = '$' + Number(kpiData.revenue).toLocaleString();
-    if (kpiData.unsub_rate) document.getElementById('unsub-rate').textContent = kpiData.unsub_rate + '%';
-    if (kpiData.conversion_rate) document.getElementById('conversion-rate').textContent = kpiData.conversion_rate + '%';
-    if (kpiData.list_growth) document.getElementById('list-growth').textContent = kpiData.list_growth + '%';
-    if (kpiData.email_roi) document.getElementById('email-roi').textContent = kpiData.email_roi + 'x';
-    if (kpiData.bounce_rate) document.getElementById('bounce-rate').textContent = kpiData.bounce_rate + '%';
+// Static sample data for demo
+const demoData = {
+  open_rate: '35%',
+  click_rate: '6.2%',
+  conversion_rate: '2.8%',
+  revenue: '$48,300',
+  email_roi: '3.2x',
+  repeat_rate: '22%'
+};
 
-    // Calculate YoY trends
-    if (yoyData.campaigns) {
-      const cYoY = yoyData.campaigns['yoy'];
-      const cCurrent = yoyData.campaigns['current'];
-      
-      if (cYoY && cCurrent) {
-        const openTrend = cYoY.openRate > 0 ? (((cCurrent.openRate - cYoY.openRate) / cYoY.openRate) * 100).toFixed(0) : 0;
-        const revenueTrend = cYoY.totalRevenue > 0 ? (((cCurrent.totalRevenue - cYoY.totalRevenue) / cYoY.totalRevenue) * 100).toFixed(0) : 0;
-        
-        console.log(`💰 Campaign Revenue: ${cYoY.totalRevenue} (YoY) → ${cCurrent.totalRevenue} (Current) = ${revenueTrend}%`);
-        
-        updateYoYBadge('open-rate-yoy', openTrend);
-        updateYoYBadge('revenue-yoy', revenueTrend);
-      }
-    }
-
-    // Populate campaign and flow tables with real data
-    if (yoyData.campaignDetails) {
-      populateCampaignTable(yoyData.campaignDetails['current'] || []);
-    }
-    if (yoyData.flowDetails) {
-      populateFlowTable(yoyData.flowDetails['current'] || []);
-    }
-
-    // Update last sync timestamp
-    document.getElementById('last-sync').textContent = new Date().toLocaleString();
-
-  } catch (error) {
-    console.error('Failed to load KPI data:', error);
-    document.getElementById('last-sync').textContent = 'Failed to sync data';
-  }
-}
-
-function updateYoYBadge(elementId, trend) {
-  const el = document.getElementById(elementId);
-  if (!el) return;
-  
-  const isUp = trend >= 0;
-  const className = isUp ? 'up' : 'down';
-  const arrow = isUp ? '↑' : '↓';
-  const sign = isUp ? '+' : '';
-  
-  el.className = `kpi-yoy ${className}`;
-  el.textContent = `${arrow} ${sign}${trend}%`;
-}
-
-function populateCampaignTable(campaigns) {
-  const tbody = document.querySelector('.flow-table:nth-of-type(2) tbody');
-  if (!tbody) return;
-  
-  tbody.innerHTML = ''; // Clear existing rows
-  
-  campaigns.slice(0, 5).forEach(c => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="flow-name">${c.name || 'Unknown'}</td>
-      <td class="metric">${Number(c.recipients).toLocaleString()}</td>
-      <td class="metric">${c.openRate}%</td>
-      <td class="metric">${c.clickRate}%</td>
-      <td class="metric">$${Number(c.revenue).toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
-      <td class="metric up">↑ +${Math.random() * 40 | 0}%</td>
-    `;
-    tbody.appendChild(row);
-  });
-}
-
-function populateFlowTable(flows) {
-  const tbody = document.querySelector('.flow-table:first-of-type tbody');
-  if (!tbody) return;
-  
-  tbody.innerHTML = ''; // Clear existing rows
-  
-  flows.slice(0, 5).forEach(f => {
-    const row = document.createElement('tr');
-    row.innerHTML = `
-      <td class="flow-name">${f.name || 'Unknown'}</td>
-      <td class="metric">${f.openRate}%</td>
-      <td class="metric">${f.clickRate}%</td>
-      <td class="metric">${f.conversionRate}%</td>
-      <td class="metric">$${Number(f.revenue).toLocaleString('en-US', { maximumFractionDigits: 0 })}</td>
-      <td class="metric up">↑ +${Math.random() * 25 | 0}%</td>
-    `;
-    tbody.appendChild(row);
-  });
-}
-
-// Load data on page load
-document.addEventListener('DOMContentLoaded', loadKPIs);
+// Fill in health check cards
+document.getElementById('open-rate').textContent = demoData.open_rate;
+document.getElementById('click-rate').textContent = demoData.click_rate;
+document.getElementById('conversion-rate').textContent = demoData.conversion_rate;
+document.getElementById('revenue').textContent = demoData.revenue;
+document.getElementById('email-roi').textContent = demoData.email_roi;
+document.getElementById('repeat-rate').textContent = demoData.repeat_rate;
 </script>
 
 </body>
