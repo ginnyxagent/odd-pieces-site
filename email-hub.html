@@ -399,13 +399,21 @@
 <script>
 async function loadKPIs() {
   try {
+    console.log('📊 Loading KPI data...');
+    
     // Fetch current KPIs
     const kpiRes = await fetch('/api/klaviyo-kpis');
+    console.log('📌 KPI Response:', kpiRes.status);
+    
     const kpiData = await kpiRes.json();
+    console.log('✅ KPI Data:', kpiData);
 
     // Fetch YoY comparison data
     const yoyRes = await fetch('/api/klaviyo-yoy');
+    console.log('📌 YoY Response:', yoyRes.status);
+    
     const yoyData = await yoyRes.json();
+    console.log('✅ YoY Data:', yoyData);
 
     // Update KPI cards with real data
     if (kpiData.open_rate) document.getElementById('open-rate').textContent = kpiData.open_rate + '%';
