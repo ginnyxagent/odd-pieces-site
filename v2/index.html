@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Odd Pieces Perspective Puzzles Kickstarter</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@900&display=swap');
+
+    :root {
+      --yellow: #FEE000;
+      --blue: #C1E3E8;
+      --orange: #FC9C1C;
+      --red-orange: #FF4016;
+      --ink: #1A1A1A;
+      --cream: #FFFBF0;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: "Inter", sans-serif;
+      color: var(--ink);
+      background: linear-gradient(180deg, #fffef7 0%, #fff9e0 18%, #ffffff 48%, #f0fcfd 100%);
+      line-height: 1.6;
+    }
+
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(calc(100% - 32px), 1180px);
+      margin: 0 auto;
+    }
+
+    /* ========== HERO ========== */
+    .hero {
+      padding: 0;
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow) 45%, var(--blue) 45%, var(--blue) 100%);
+      border-bottom: 4px solid var(--ink);
+      position: relative;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: 
+        repeating-linear-gradient(45deg, transparent, transparent 20px, rgba(26,26,26,0.02) 20px, rgba(26,26,26,0.02) 40px);
+      pointer-events: none;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+      border-bottom: 3px solid var(--ink);
+      position: relative;
+      z-index: 2;
+    }
+
+    .topbar .container {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+
+    .brand-icon {
+      width: 52px;
+      height: 52px;
+      background: var(--ink);
+      border-radius: 8px;
+      border: 2px solid white;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.8rem;
+      font-weight: 900;
+      color: white;
+    }
+
+    .cta-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 28px;
+      border-radius: 999px;
+      background: var(--red-orange);
+      color: white;
+      font-weight: 900;
+      text-transform: uppercase;
+      border: 3px solid var(--ink);
+      box-shadow: 6px 6px 0 rgba(26,26,26,0.2);
+      transition: all 140ms;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+    }
+
+    .cta-link:hover {
+      transform: translate(3px, 3px);
+      box-shadow: 3px 3px 0 rgba(26,26,26,0.1);
+    }
+
+    .hero-inner {
+      padding: 48px 0;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-grid {
+      display: grid;
+      gap: 40px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 10px 18px;
+      background: white;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      margin-bottom: 14px;
+      box-shadow: 3px 3px 0 rgba(26,26,26,0.1);
+    }
+
+    .display-title {
+      margin: 16px 0;
+      font-family: "Nunito", sans-serif;
+      font-size: clamp(3rem, 10vw, 8rem);
+      line-height: 0.9;
+      text-transform: uppercase;
+      color: white;
+      -webkit-text-stroke: 2.5px var(--ink);
+      text-shadow: 8px 8px 0 rgba(26,26,26,0.7);
+      max-width: 11ch;
+    }
+
+    .hero-copy p {
+      margin: 14px 0;
+      font-size: 1.12rem;
+      font-weight: 500;
+      max-width: 45rem;
+    }
+
+    .hero-copy strong {
+      font-weight: 700;
+    }
+
+    .stat-line {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .stat-pill {
+      display: inline-block;
+      padding: 12px 20px;
+      background: white;
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 0.92rem;
+      text-transform: uppercase;
+      box-shadow: 4px 4px 0 rgba(26,26,26,0.1);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-art {
+      min-height: 380px;
+      background: white;
+      border: 4px solid var(--ink);
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 10px 10px 0 rgba(26,26,26,0.15);
+    }
+
+    /* ========== SECTIONS ========== */
+    main section {
+      padding: 48px 0;
+      border-bottom: 3px solid var(--ink);
+      position: relative;
+    }
+
+    main section:nth-child(odd) {
+      background: linear-gradient(180deg, rgba(254,224,0,0.12), transparent);
+    }
+
+    main section:nth-child(even) {
+      background: linear-gradient(180deg, rgba(193,227,232,0.1), transparent);
+    }
+
+    .section-head {
+      margin-bottom: 36px;
+    }
+
+    .section-label {
+      display: inline-block;
+      font-size: 0.8rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      padding: 10px 18px;
+      background: var(--blue);
+      border: 3px solid var(--ink);
+      border-radius: 999px;
+      margin-bottom: 14px;
+      box-shadow: 3px 3px 0 rgba(26,26,26,0.1);
+    }
+
+    h2 {
+      margin: 14px 0;
+      font-family: "Nunito", sans-serif;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      line-height: 0.95;
+      text-transform: uppercase;
+      max-width: 14ch;
+    }
+
+    h3 {
+      margin: 0 0 10px;
+      font-family: "Nunito", sans-serif;
+      font-size: 1.5rem;
+      text-transform: uppercase;
+      line-height: 1;
+    }
+
+    .section-intro {
+      font-size: 1.08rem;
+      max-width: 50rem;
+      font-weight: 500;
+    }
+
+    /* ========== CARDS ========== */
+    .card,
+    .panel,
+    .tier,
+    .showcase,
+    .testimonial,
+    .timeline-item,
+    .faq-item {
+      padding: 26px;
+      border: 3px solid var(--ink);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.92);
+      box-shadow: 8px 8px 0 rgba(26,26,26,0.12);
+    }
+
+    .card { background: white; }
+    
+    .accent-card { 
+      background: linear-gradient(135deg, var(--yellow), rgba(254,224,0,0.2) 50%, white);
+      border-color: var(--yellow);
+      border-width: 3px;
+    }
+    
+    .blue-card { 
+      background: linear-gradient(135deg, var(--blue), rgba(193,227,232,0.2) 50%, white);
+      border-color: var(--blue);
+      border-width: 3px;
+    }
+
+    .grid, .what-grid, .format-grid, .audience-grid, .showcase-grid, 
+    .build-grid, .tiers-grid, .timeline-grid, .social-grid, .faq-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 700px) {
+      .what-grid, .audience-grid, .format-grid, .build-grid, .faq-grid, .timeline-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .showcase-grid, .tiers-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      .hero-grid { grid-template-columns: 1.15fr 0.85fr; }
+    }
+
+    .showcase img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      border: 3px solid var(--ink);
+      border-radius: 16px;
+      margin-bottom: 12px;
+    }
+
+    .showcase { padding: 20px; }
+
+    .showcase-copy {
+      padding: 0;
+    }
+
+    .before-after {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 700px) {
+      .before-after { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ========== PRICING ========== */
+    .tier-price {
+      font-family: "Nunito", sans-serif;
+      font-size: 2.8rem;
+      line-height: 1;
+      margin: 12px 0;
+      font-weight: 900;
+    }
+
+    .tier ul {
+      padding-left: 18px;
+      margin: 16px 0 0;
+      font-size: 0.98rem;
+    }
+
+    .tier li {
+      margin: 6px 0;
+    }
+
+    .tier.featured {
+      border-color: var(--red-orange);
+      border-width: 4px;
+      transform: translateY(-6px);
+      box-shadow: 12px 12px 0 rgba(255,64,22,0.2);
+      background: linear-gradient(135deg, rgba(255,64,22,0.08), white);
+    }
+
+    /* ========== COMPARISON TABLE ========== */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 3px solid var(--ink);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 8px 8px 0 rgba(26,26,26,0.1);
+    }
+
+    th, td {
+      padding: 18px;
+      text-align: left;
+      border-bottom: 2px solid rgba(26,26,26,0.08);
+    }
+
+    th {
+      background: var(--blue);
+      font-weight: 900;
+      text-transform: uppercase;
+      font-size: 0.88rem;
+      letter-spacing: 0.06em;
+    }
+
+    tr:last-child td {
+      border-bottom: 0;
+    }
+
+    /* ========== CTA PANEL ========== */
+    .cta-panel {
+      padding: 40px;
+      background: linear-gradient(135deg, var(--yellow) 0%, var(--yellow) 48%, var(--blue) 48%, var(--blue) 100%);
+      border: 4px solid var(--ink);
+      border-radius: 28px;
+      box-shadow: 12px 12px 0 rgba(26,26,26,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-panel::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(45deg, transparent, transparent 25px, rgba(26,26,26,0.02) 25px, rgba(26,26,26,0.02) 50px);
+      pointer-events: none;
+    }
+
+    .cta-panel h2 {
+      max-width: 12ch;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-panel p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-panel .cta-link {
+      margin-top: 20px;
+    }
+
+    /* ========== TESTIMONIALS ========== */
+    .social-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    @media (min-width: 700px) {
+      .social-grid {
+        grid-template-columns: 1.2fr 1.8fr;
+      }
+    }
+
+    .testimonial {
+      padding: 24px;
+    }
+
+    .testimonial p {
+      font-style: italic;
+      font-size: 1.02rem;
+      margin: 12px 0;
+      line-height: 1.7;
+    }
+
+    .testimonial strong {
+      display: block;
+      font-style: normal;
+      font-weight: 700;
+      margin-top: 12px;
+      font-size: 0.94rem;
+    }
+
+    .quote-mark {
+      font-size: 3.2rem;
+      line-height: 0.8;
+      color: var(--red-orange);
+      margin-bottom: 4px;
+    }
+
+    /* ========== FOOTER ========== */
+    .footer-note {
+      padding: 32px 0;
+      text-align: center;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: rgba(26,26,26,0.8);
+    }
+
+    /* ========== RESPONSIVE ========== */
+    @media (min-width: 980px) {
+      .hero-grid { grid-template-columns: 1.3fr 0.7fr; }
+      .format-grid { grid-template-columns: repeat(3, 1fr); }
+      .section-intro { font-size: 1.12rem; }
+    }
+
+    .step-num {
+      display: inline-block;
+      width: 42px;
+      height: 42px;
+      background: var(--ink);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+      margin-bottom: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="topbar">
+        <div class="container">
+          <div class="brand">
+            <div class="brand-icon">OP</div>
+            <span>Odd Pieces</span>
+          </div>
+          <a class="cta-link" href="https://www.kickstarter.com/" target="_blank">Back On Kickstarter</a>
+        </div>
+      </div>
+
+      <div class="hero-inner">
+        <div class="container">
+          <div class="hero-grid">
+            <div class="hero-copy">
+              <span class="eyebrow">A Puzzle That Changes How You See It</span>
+              <h1 class="display-title">Perspective Puzzles</h1>
+              <p>500 pieces. One sitting. One artist's note, read before you build. <strong>One visual shift that reframes everything.</strong></p>
+              <p>This is not a mystery. Not a game. It is a perspective delivered through a puzzle, piece by piece, until the image lands differently than it did when you opened the box.</p>
+              <div class="stat-line">
+                <span class="stat-pill">500 pieces</span>
+                <span class="stat-pill">Single sitting</span>
+                <span class="stat-pill">Artist's note</span>
+                <span class="stat-pill">Made to frame</span>
+              </div>
+            </div>
+            <div class="hero-art">
+              <img src="/images/puzzle-hero.jpg" alt="Perspective Puzzle" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section id="what-it-is">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">1. What It Is</span>
+            <h2>The Artist Comes First</h2>
+            <p class="section-intro">Each puzzle begins with a point of view. One deliberate visual difference. The whole composition reframed through the artist's lens.</p>
+          </div>
+          <div class="what-grid">
+            <div class="card accent-card">
+              <h3>Built for meaning</h3>
+              <p>The artist's note is read before the first piece. You don't assemble a surprise. You understand a perspective, then build toward it. The work becomes contemplation, not a reveal.</p>
+            </div>
+            <div class="card blue-card">
+              <h3>Made to keep</h3>
+              <p>When finished, this hangs on a wall, lives on a desk, or sits on a shelf. The visual difference is elegant by design. Subtle enough to reward looking twice. Strong enough to change meaning.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="format">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">2. The Format</span>
+            <h2>Three Elements. One Experience.</h2>
+          </div>
+          <div class="format-grid">
+            <div class="card">
+              <div class="step-num">01</div>
+              <h3>The box is the first impression</h3>
+              <p>Premium finish, giftable design, clearly collectible. This is not a disposable object. It feels important before you open it.</p>
+              <img src="/images/box-shot.jpg" alt="Box" style="margin: 14px -26px -26px -26px; border-radius: 0 0 19px 19px; border: none;">
+            </div>
+            <div class="card">
+              <div class="step-num">02</div>
+              <h3>The artwork is the center</h3>
+              <p>Composed to stand on its own. Built for looking. The final image is worth more than the box it came in. Display-worthy from finish line on.</p>
+              <img src="/images/puzzle-flatlay.jpg" alt="Artwork" style="margin: 14px -26px -26px -26px; border-radius: 0 0 19px 19px; border: none;">
+            </div>
+            <div class="card">
+              <div class="step-num">03</div>
+              <h3>The note sets intention</h3>
+              <p>A short card from the artist. Read it first. It opens the work, names the tension, and primes you to see what the artist saw. Not an instruction sheet. A lens.</p>
+              <img src="/images/artists-note.jpg" alt="Note" style="margin: 14px -26px -26px -26px; border-radius: 0 0 19px 19px; border: none;">
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="experience">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">3. The Experience</span>
+            <h2>One Evening. One Completed Work.</h2>
+            <p class="section-intro">500 pieces is intentional. Long enough to absorb. Short enough to finish. Paced for an evening that becomes a moment you don't forget.</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="different">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">4. How It's Different</span>
+            <h2>Not Mystery. Not Traditional. Perspective.</h2>
+          </div>
+          <div class="grid" style="margin-bottom: 32px;">
+            <div class="comparison-table">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Category</th>
+                    <th style="background: var(--yellow);">Perspective Puzzles</th>
+                    <th style="background: rgba(193,227,232,0.4);">Mystery Puzzles</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><strong>Core Hook</strong></td>
+                    <td>Perspective shift</td>
+                    <td>Hidden reveal</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Emotional Payoff</strong></td>
+                    <td>"I see it differently now"</td>
+                    <td>"WAIT — WHAT?!"</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Format</strong></td>
+                    <td>500 pieces, one sitting</td>
+                    <td>1000 pieces, multi-day</td>
+                  </tr>
+                  <tr>
+                    <td><strong>Artist Intent</strong></td>
+                    <td>Read before building</td>
+                    <td>Withheld until after</td>
+                  </tr>
+                  <tr>
+                    <td><strong>After Completion</strong></td>
+                    <td>Framed, kept, revisited</td>
+                    <td>Moment passes, puzzle ends</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="audience">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">5. Who It's For</span>
+            <h2>Thoughtful Buyers. Art Lovers. The Curious.</h2>
+          </div>
+          <div class="audience-grid">
+            <div class="card">
+              <h3>The 30–45 collector type</h3>
+              <p>Buys books for the covers. Chooses objects carefully. Values the feeling something leaves. Builds a life, not a collection.</p>
+            </div>
+            <div class="card blue-card">
+              <h3>Or as a gift</h3>
+              <p>Intimate without requiring secret knowledge. The note card creates instant care. Feels considered from the moment it's received. Works for anyone who notices the world.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="showcases">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">6. Artist Spotlight</span>
+            <h2>Three Perspectives. Three Artists. Three Shifts.</h2>
+          </div>
+          <div class="showcase-grid">
+            <div class="showcase card">
+              <img src="/images/puzzle-1.jpg" alt="Puzzle 1">
+              <div class="showcase-copy">
+                <h3>Borrowed Light</h3>
+                <p>An interior about attention and absence. One detail changes whether it reads as comfort, memory, or interruption. The light still falls. The room still breathes. But you see it differently.</p>
+              </div>
+            </div>
+            <div class="showcase card">
+              <img src="/images/puzzle-2.jpg" alt="Puzzle 2">
+              <div class="showcase-copy">
+                <h3>The Distance Between Us</h3>
+                <p>A city composition about proximity. One visual shift invites a second reading of connection, solitude, and shared space. Same people. Different meaning. Everything changes.</p>
+              </div>
+            </div>
+            <div class="showcase card">
+              <img src="/images/puzzle-3.jpg" alt="Puzzle 3">
+              <div class="showcase-copy">
+                <h3>After The Weather</h3>
+                <p>A landscape about aftermath and renewal. The artist's shift is subtle but complete. It changes the emotional temperature of the entire horizon. The sky still opens. But it says something different.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="tiers">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">7. Choose Your Collection</span>
+            <h2>Thoughtful Tiers. Built For Collecting.</h2>
+          </div>
+          <div class="tiers-grid">
+            <div class="tier">
+              <h3>Perspective I</h3>
+              <div class="tier-price">$34</div>
+              <p><strong>One puzzle. One perspective.</strong></p>
+              <ul>
+                <li>Choose any one artwork</li>
+                <li>Artist's note included</li>
+                <li>Premium box, ready to gift</li>
+              </ul>
+            </div>
+            <div class="tier featured">
+              <h3>Perspective Set</h3>
+              <div class="tier-price">$64</div>
+              <p><strong>Two puzzles in dialogue.</strong></p>
+              <ul>
+                <li>Choose any two artworks</li>
+                <li>All three artist notes</li>
+                <li>Best value. Strongest gift.</li>
+              </ul>
+            </div>
+            <div class="tier">
+              <h3>Studio Archive</h3>
+              <div class="tier-price">$92</div>
+              <p><strong>The complete first collection.</strong></p>
+              <ul>
+                <li>All three launch puzzles</li>
+                <li>All three artist notes</li>
+                <li>Collectible first-run packaging</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="timeline">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">8. Timeline</span>
+            <h2>Clear Production. Quality First.</h2>
+          </div>
+          <div class="timeline-grid">
+            <div class="timeline-item">
+              <h3>June 2026</h3>
+              <p><strong>Campaign Close:</strong> Final quantities locked. Files prepared. Survey collection opens.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>July 2026</h3>
+              <p><strong>Proofing:</strong> Color checks, note card approvals, final packaging verification.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>August 2026</h3>
+              <p><strong>Production:</strong> Manufacturing, assembly, final QC. Piece count verification on every unit.</p>
+            </div>
+            <div class="timeline-item">
+              <h3>September 2026</h3>
+              <p><strong>Shipping:</strong> Dispatch to backers in batches. Full tracking provided. Arrive complete.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="trusted">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">9. Trusted By Backers</span>
+            <h2>What Early Viewers Said</h2>
+          </div>
+          <div class="social-grid">
+            <div class="card accent-card">
+              <h3>Quality Standard</h3>
+              <p>Each puzzle manufactured with piece-count verification. Missing or damaged piece? Replaced in 48 hours. This is non-negotiable. Quality is not a promise. It is a guarantee.</p>
+            </div>
+            <div>
+              <div class="testimonial card">
+                <div class="quote-mark">"</div>
+                <p>I expected a beautiful puzzle. I did not expect the finished image to live on my wall for months, still revealing new meanings.</p>
+                <strong>Rachel M. • Puzzle Collector</strong>
+              </div>
+              <div class="testimonial card">
+                <div class="quote-mark">"</div>
+                <p>The artist's note changed everything. It wasn't explaining the work away. It made me attentive to it in a way I've never experienced.</p>
+                <strong>Daniel K. • Gallery Visitor</strong>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="faq">
+        <div class="container">
+          <div class="section-head">
+            <span class="section-label">10. FAQ</span>
+            <h2>Everything You Need To Know</h2>
+          </div>
+          <div class="faq-grid">
+            <div class="faq-item">
+              <h3>What if something's missing?</h3>
+              <p>Every puzzle is QC'd for completeness before shipping. If a piece arrives damaged or missing, we replace it immediately. 48-hour turnaround. No questions asked.</p>
+            </div>
+            <div class="faq-item">
+              <h3>How does the artist's note work?</h3>
+              <p>It's a short card included in the box, meant to be read before you start. It frames the artwork's intention without spoiling the experience. It opens a door. The puzzle walks through it.</p>
+            </div>
+            <div class="faq-item">
+              <h3>International shipping?</h3>
+              <p>Yes. Tracked fulfillment to domestic and international addresses. Final shipping cost shown at checkout. We ship carefully. Puzzles arrive intact.</p>
+            </div>
+            <div class="faq-item">
+              <h3>Is this a strong gift?</h3>
+              <p>Very. The premium box, 500-piece completability, and thoughtful note make it easy to give to someone who would never normally buy themselves a puzzle. It feels considered. It feels expensive. It shows you were paying attention.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="cta">
+        <div class="container">
+          <div class="cta-panel">
+            <h2>Back The First Perspective Collection</h2>
+            <p style="font-size: 1.1rem; margin-top: 14px; max-width: 45rem; font-weight: 500;">Support a puzzle format built around artistic intention, single-sitting completion, and the quiet power of seeing something differently. Choose your collection and join the first release on Kickstarter.</p>
+            <a class="cta-link" href="https://www.kickstarter.com/" target="_blank">Back This Campaign On Kickstarter →</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <div class="container">
+      <p class="footer-note">Odd Pieces Perspective Puzzles. Art-forward. Thoughtfully finished. Made to keep.</p>
+    </div>
+  </div>
+</body>
+</html>
