@@ -22,6 +22,8 @@
     --white: #FFFFFF;
     --muted: #6B6555;
     --cream: #FFF9E6;
+    --purple: #7B61FF;
+    --green: #00C853;
   }
 
   body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); -webkit-font-smoothing: antialiased; }
@@ -53,6 +55,20 @@
     background: linear-gradient(180deg, var(--yellow) 0%, var(--cream) 100%);
     padding: 64px 24px 56px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '🧩 🏆 ⭐ 🎉 🧠 💡 🔥';
+    position: absolute;
+    top: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    letter-spacing: 0.5em;
+    opacity: 0.15;
+    white-space: nowrap;
+    pointer-events: none;
   }
   .hero-badge {
     display: inline-block;
@@ -78,12 +94,13 @@
     margin-bottom: 16px;
   }
   .hero-sub {
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--ink);
-    opacity: 0.65;
-    max-width: 440px;
+    opacity: 0.75;
+    max-width: 460px;
     margin: 0 auto;
     line-height: 1.5;
+    font-weight: 600;
   }
 
   /* ── ANSWER SECTION ── */
@@ -237,9 +254,64 @@
 
   /* ── REWARD / DISCOUNT SECTION ── */
   .reward-section {
-    background: linear-gradient(180deg, var(--ink) 0%, #2A2A2A 100%);
-    padding: 64px 24px;
+    background: linear-gradient(135deg, #1A1A1A 0%, #2D1B4E 30%, #4A1942 60%, #E8342E 100%);
+    padding: 72px 24px;
     text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .reward-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: 
+      radial-gradient(circle at 20% 20%, rgba(254,224,0,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 80% 80%, rgba(232,52,46,0.2) 0%, transparent 50%),
+      radial-gradient(circle at 50% 50%, rgba(123,97,255,0.1) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .reward-confetti {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    overflow: hidden;
+  }
+  .reward-confetti span {
+    position: absolute;
+    display: block;
+    font-size: 1.2rem;
+    animation: confetti-fall 4s ease-in-out infinite;
+    opacity: 0.3;
+  }
+  .reward-confetti span:nth-child(1) { left: 5%; animation-delay: 0s; }
+  .reward-confetti span:nth-child(2) { left: 15%; animation-delay: 0.5s; }
+  .reward-confetti span:nth-child(3) { left: 30%; animation-delay: 1s; }
+  .reward-confetti span:nth-child(4) { left: 45%; animation-delay: 0.3s; }
+  .reward-confetti span:nth-child(5) { left: 60%; animation-delay: 1.5s; }
+  .reward-confetti span:nth-child(6) { left: 75%; animation-delay: 0.7s; }
+  .reward-confetti span:nth-child(7) { left: 88%; animation-delay: 1.2s; }
+
+  @keyframes confetti-fall {
+    0% { transform: translateY(-20px) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.4; }
+    90% { opacity: 0.4; }
+    100% { transform: translateY(calc(100vh)) rotate(720deg); opacity: 0; }
+  }
+
+  .reward-content {
+    position: relative;
+    z-index: 2;
+  }
+
+  .reward-emoji-burst {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+    letter-spacing: 0.3em;
   }
 
   .reward-badge {
@@ -262,72 +334,84 @@
   .reward-badge .badge-gold {
     background: var(--yellow);
     color: var(--ink);
+    animation: badge-glow 2s ease-in-out infinite alternate;
+  }
+
+  @keyframes badge-glow {
+    0% { box-shadow: 0 0 10px rgba(254,224,0,0.3); }
+    100% { box-shadow: 0 0 25px rgba(254,224,0,0.6); }
   }
 
   .reward-title {
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    font-size: clamp(1.8rem, 7vw, 2.8rem);
     text-transform: uppercase;
-    color: var(--white);
+    color: var(--yellow);
     margin-bottom: 8px;
     letter-spacing: -0.02em;
+    text-shadow: 0 2px 20px rgba(254,224,0,0.3);
   }
 
   .reward-sub {
-    font-size: 1rem;
-    color: rgba(255,255,255,0.55);
-    margin-bottom: 32px;
-    max-width: 420px;
+    font-size: 1.05rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 36px;
+    max-width: 440px;
     margin-left: auto;
     margin-right: auto;
-    line-height: 1.5;
+    line-height: 1.6;
+    font-weight: 500;
   }
 
   .code-card {
-    max-width: 440px;
-    margin: 0 auto 28px;
-    background: rgba(255,255,255,0.06);
-    border: 2px solid rgba(254,224,0,0.3);
-    border-radius: 16px;
-    padding: 28px;
+    max-width: 460px;
+    margin: 0 auto 32px;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(254,224,0,0.4);
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.3), 0 0 60px rgba(254,224,0,0.1);
   }
 
   .code-card-label {
     font-family: 'Nunito', sans-serif;
     font-weight: 800;
-    font-size: 0.6rem;
+    font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.15em;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 12px;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 14px;
   }
 
   .code-box {
-    background: rgba(0,0,0,0.4);
-    border: 2px dashed var(--yellow);
+    background: rgba(0,0,0,0.5);
+    border: 3px solid var(--yellow);
     color: var(--yellow);
-    padding: 18px;
-    border-radius: 12px;
+    padding: 22px;
+    border-radius: 14px;
     text-align: center;
     cursor: pointer;
     transition: all 0.2s;
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: 1.8rem;
-    letter-spacing: 0.08em;
+    font-size: 2rem;
+    letter-spacing: 0.1em;
+    box-shadow: 0 0 30px rgba(254,224,0,0.15), inset 0 0 20px rgba(254,224,0,0.05);
   }
 
   .code-box:hover {
-    background: rgba(254,224,0,0.1);
-    transform: scale(1.02);
+    background: rgba(254,224,0,0.12);
+    transform: scale(1.03);
+    box-shadow: 0 0 50px rgba(254,224,0,0.3), inset 0 0 30px rgba(254,224,0,0.08);
   }
 
   .code-hint {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.35);
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.45);
     text-align: center;
-    margin-top: 10px;
+    margin-top: 12px;
     font-style: italic;
   }
 
@@ -347,9 +431,10 @@
   .timer-num {
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: 2.2rem;
-    color: var(--yellow);
+    font-size: 2.4rem;
+    color: var(--white);
     line-height: 1;
+    text-shadow: 0 0 20px rgba(254,224,0,0.4);
   }
 
   .timer-label {
@@ -358,7 +443,7 @@
     font-size: 0.55rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.4);
     margin-top: 4px;
   }
 
@@ -367,21 +452,23 @@
     font-weight: 900;
     font-size: 2rem;
     color: var(--yellow);
-    opacity: 0.4;
+    opacity: 0.5;
     line-height: 1;
   }
 
   .timer-expires {
-    font-size: 0.7rem;
-    color: var(--red);
-    font-weight: 600;
-    margin-bottom: 28px;
+    font-size: 0.75rem;
+    color: var(--yellow);
+    font-weight: 700;
+    margin-bottom: 32px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
   }
 
   /* ── BUNDLE SECTIONS ── */
   .bundles-section {
     background: linear-gradient(180deg, var(--cream) 0%, var(--white) 100%);
-    padding: 64px 24px;
+    padding: 72px 24px;
   }
 
   .bundles-header {
@@ -392,7 +479,7 @@
   .bundles-header h2 {
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: clamp(1.5rem, 5vw, 2rem);
+    font-size: clamp(1.5rem, 5vw, 2.2rem);
     text-transform: uppercase;
     letter-spacing: -0.02em;
     color: var(--ink);
@@ -400,10 +487,11 @@
   }
 
   .bundles-header p {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--muted);
-    max-width: 400px;
+    max-width: 450px;
     margin: 0 auto;
+    line-height: 1.5;
   }
 
   .bundle-grid {
@@ -450,13 +538,15 @@
     grid-template-columns: 1fr 1fr 1fr;
     gap: 2px;
     background: var(--ink);
+    padding: 2px;
   }
 
   .bundle-images img {
     width: 100%;
-    aspect-ratio: 4/3;
+    aspect-ratio: 1/1;
     object-fit: cover;
     display: block;
+    border-radius: 4px;
   }
 
   .bundle-info {
@@ -469,24 +559,34 @@
     font-size: 0.6rem;
     text-transform: uppercase;
     letter-spacing: 0.12em;
-    color: var(--muted);
+    color: var(--orange);
     margin-bottom: 4px;
   }
 
   .bundle-name {
     font-family: 'Nunito', sans-serif;
     font-weight: 900;
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     color: var(--ink);
-    margin-bottom: 6px;
+    margin-bottom: 4px;
     letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+
+  .bundle-tagline {
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.4;
   }
 
   .bundle-puzzles {
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     color: var(--muted);
     margin-bottom: 16px;
     line-height: 1.5;
+    opacity: 0.8;
   }
 
   .bundle-btn {
@@ -684,6 +784,7 @@
     .timer-num { font-size: 1.6rem; }
     .timer-sep { font-size: 1.4rem; }
     .bundle-info { padding: 16px; }
+    .reward-emoji-burst { font-size: 2rem; }
   }
 
   /* Pulse animation for timer */
@@ -692,6 +793,23 @@
     50% { opacity: 0.5; }
   }
   .timer-pulse { animation: pulse 1s ease-in-out infinite; }
+
+  /* Shimmer on code card */
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
+  .code-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(90deg, transparent 0%, rgba(254,224,0,0.06) 50%, transparent 100%);
+    background-size: 200% 100%;
+    animation: shimmer 3s ease-in-out infinite;
+    border-radius: 20px;
+    pointer-events: none;
+  }
+  .code-card { position: relative; }
 </style>
 </head>
 <body>
@@ -703,7 +821,7 @@
 <!-- HERO -->
 <section class="hero">
   <div class="hero-badge">🔓 Puzzle Cracked</div>
-  <h1 id="heroTitle">You cracked it.</h1>
+  <h1 id="heroTitle">Big brain energy.</h1>
   <p class="hero-sub" id="puzzleName">Loading...</p>
 </section>
 
@@ -746,107 +864,117 @@
 
 <!-- REWARD / DISCOUNT -->
 <section class="reward-section">
-  <div class="reward-badge">
-    <span>🎁 Exclusive</span>
-    <span class="badge-gold">⏳ Limited Time</span>
+  <div class="reward-confetti">
+    <span>🎉</span><span>✨</span><span>🧩</span><span>🎊</span><span>⭐</span><span>🔥</span><span>🏆</span>
   </div>
-  <h2 class="reward-title">This is your reward.</h2>
-  <p class="reward-sub">You earned it. A genius-level discount for a genius-level puzzler. Don't let it expire.</p>
+  <div class="reward-content">
+    <div class="reward-emoji-burst">🏆 🎉 🧠</div>
+    <div class="reward-badge">
+      <span>🎁 You Earned This</span>
+      <span class="badge-gold">⏳ 24hr Only</span>
+    </div>
+    <h2 class="reward-title">Your genius has been rewarded.</h2>
+    <p class="reward-sub">Only puzzle solvers get this. You cracked the code — now here's yours. Use it before it vanishes.</p>
 
-  <div class="timer-wrap">
-    <div class="timer-unit">
-      <div class="timer-num timer-pulse" id="timerH">23</div>
-      <div class="timer-label">Hours</div>
+    <div class="timer-wrap">
+      <div class="timer-unit">
+        <div class="timer-num timer-pulse" id="timerH">23</div>
+        <div class="timer-label">Hours</div>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit">
+        <div class="timer-num timer-pulse" id="timerM">59</div>
+        <div class="timer-label">Min</div>
+      </div>
+      <div class="timer-sep">:</div>
+      <div class="timer-unit">
+        <div class="timer-num timer-pulse" id="timerS">59</div>
+        <div class="timer-label">Sec</div>
+      </div>
     </div>
-    <div class="timer-sep">:</div>
-    <div class="timer-unit">
-      <div class="timer-num timer-pulse" id="timerM">59</div>
-      <div class="timer-label">Min</div>
-    </div>
-    <div class="timer-sep">:</div>
-    <div class="timer-unit">
-      <div class="timer-num timer-pulse" id="timerS">59</div>
-      <div class="timer-label">Sec</div>
-    </div>
-  </div>
-  <div class="timer-expires">⚡ Code expires when the timer hits zero</div>
+    <div class="timer-expires">⚡ This code self-destructs when the timer hits zero</div>
 
-  <div class="code-card">
-    <div class="code-card-label">Your Exclusive Discount Code</div>
-    <div class="code-box" onclick="copyCode()" id="codeBox">LOADING</div>
-    <div class="code-hint">👆 Tap to copy — use at checkout</div>
+    <div class="code-card">
+      <div class="code-card-label">Your Solver-Only Discount</div>
+      <div class="code-box" onclick="copyCode()" id="codeBox">LOADING</div>
+      <div class="code-hint">👆 Tap to copy — paste at checkout for your reward</div>
+    </div>
   </div>
 </section>
 
 <!-- BUNDLES -->
 <section class="bundles-section">
   <div class="bundles-header">
-    <h2>Ready for the next challenge?</h2>
-    <p>You've earned an exclusive discount. Grab a bundle before time runs out.</p>
+    <h2>You conquered that. Ready for more? 🧠</h2>
+    <p>Each bundle gets weirder, harder, and more satisfying. Your discount works on all of them.</p>
   </div>
 
   <div class="bundle-grid">
     <!-- Series 1 -->
     <div class="bundle-card">
-      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-limited-badge">Starter</div>
       <div class="bundle-images">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_5_1_1.jpg?v=1627001078" alt="Snack Attack" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_4_1_1.jpg?v=1627000981" alt="Beyond the Kelp" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_3_1.jpg?v=1627001189" alt="Turbo 3000" loading="lazy">
       </div>
       <div class="bundle-info">
-        <div class="bundle-series">Bundle</div>
-        <div class="bundle-name">Series 1</div>
+        <div class="bundle-series">3 Puzzles</div>
+        <div class="bundle-name">The OG Collection</div>
+        <div class="bundle-tagline">Where it all began. The originals that started the obsession.</div>
         <div class="bundle-puzzles">Snack Attack • Beyond the Kelp • Turbo 3000</div>
-        <a href="https://oddpieces.com/en-us/products/series-1-bundle" class="bundle-btn">Get This Bundle →</a>
+        <a href="https://oddpieces.com/en-us/products/series-1-bundle" class="bundle-btn">Grab This Bundle →</a>
       </div>
     </div>
 
     <!-- Series 2 -->
     <div class="bundle-card">
-      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-limited-badge">Fan Favorite</div>
       <div class="bundle-images">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/Shutterbug-BeforeIllustration.jpg?v=1670474650" alt="Shutterbug" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/AstroGastro-BeforeImageNEW.jpg?v=1670487054" alt="AstroGastro" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/TheGlitch-BeforeImage.jpg?v=1670474342" alt="Glitch" loading="lazy">
       </div>
       <div class="bundle-info">
-        <div class="bundle-series">Bundle</div>
-        <div class="bundle-name">Series 2</div>
+        <div class="bundle-series">3 Puzzles</div>
+        <div class="bundle-name">The Plot Thickens</div>
+        <div class="bundle-tagline">Trickier riddles. Stranger worlds. You've been warned.</div>
         <div class="bundle-puzzles">Shutterbug • AstroGastro • Glitch</div>
-        <a href="https://oddpieces.com/en-us/products/series-2-bundle" class="bundle-btn">Get This Bundle →</a>
+        <a href="https://oddpieces.com/en-us/products/series-2-bundle" class="bundle-btn">Grab This Bundle →</a>
       </div>
     </div>
 
     <!-- Series 3 -->
     <div class="bundle-card">
-      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-limited-badge">Chaos Mode</div>
       <div class="bundle-images">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/products/PUZZLEBEFORE_5_1_1.jpg?v=1627001078" alt="Snack Attack" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/1.-Kitty-High---Before_3.jpg?v=1706826052" alt="Snack Attack 2" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/1.PawPark-Before.jpg?v=1763232028" alt="Snack Attack 3" loading="lazy">
       </div>
       <div class="bundle-info">
-        <div class="bundle-series">Bundle</div>
-        <div class="bundle-name">Series 3</div>
+        <div class="bundle-series">3 Puzzles</div>
+        <div class="bundle-name">The Snack Attack Saga</div>
+        <div class="bundle-tagline">The trilogy that keeps getting wilder. How deep does the snack hole go?</div>
         <div class="bundle-puzzles">Snack Attack • Snack Attack 2 • Snack Attack 3</div>
-        <a href="https://oddpieces.com/en-us/products/series-3-3-pack" class="bundle-btn">Get This Bundle →</a>
+        <a href="https://oddpieces.com/en-us/products/series-3-3-pack" class="bundle-btn">Grab This Bundle →</a>
       </div>
     </div>
 
     <!-- Series 4 -->
     <div class="bundle-card">
-      <div class="bundle-limited-badge">Limited Time</div>
+      <div class="bundle-limited-badge">🔥 Newest</div>
       <div class="bundle-images">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/pixel_art_puzzle.png?v=1763233427" alt="Time Keepers" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/SilverLiningMysteryPuzzles.jpg?v=1759213934" alt="Silver Lining" loading="lazy">
         <img src="https://cdn.shopify.com/s/files/1/0565/1500/2541/files/Mushroom_Mayhem_Mystery_Puzzles.jpg?v=1763233427" alt="Mushroom Mayhem" loading="lazy">
       </div>
       <div class="bundle-info">
-        <div class="bundle-series">Bundle</div>
-        <div class="bundle-name">Series 4</div>
+        <div class="bundle-series">3 Puzzles</div>
+        <div class="bundle-name">Twisted Minds</div>
+        <div class="bundle-tagline">Our hardest riddles yet. Only for the truly unhinged puzzlers.</div>
         <div class="bundle-puzzles">Time Keepers • Silver Lining • Mushroom Mayhem</div>
-        <a href="https://oddpieces.com/en-us/products/series-4" class="bundle-btn">Get This Bundle →</a>
+        <a href="https://oddpieces.com/en-us/products/series-4" class="bundle-btn">Grab This Bundle →</a>
       </div>
     </div>
   </div>
@@ -967,12 +1095,20 @@
     sessionStorage.setItem('op-timer-start', timerStart);
   }
   timerStart = parseInt(timerStart);
-  const TIMER_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+  const TIMER_DURATION = 24 * 60 * 60 * 1000;
+
+  // Hero subtitle options — celebratory, reward-focused
+  const heroSubs = [
+    `You cracked ${puzzle ? puzzle.name : 'it'}. Welcome to the club — population: not many.`,
+    `${puzzle ? puzzle.name : 'That puzzle'} didn't stand a chance. You earned what comes next.`,
+    `Officially a puzzle genius. The evidence is below. 👇`,
+    `Most people couldn't. You did. That deserves a reward.`,
+  ];
 
   if (puzzle) {
-    const heroTitles = ['You cracked it.', 'Genius confirmed.', 'Nailed it.', 'Big brain energy.'];
+    const heroTitles = ['Big brain energy.', 'Genius confirmed.', 'Nailed it.', 'You absolute legend.'];
     document.getElementById('heroTitle').textContent = heroTitles[Math.floor(Math.random() * heroTitles.length)];
-    document.getElementById('puzzleName').textContent = `You solved ${puzzle.name} — not everyone can say that.`;
+    document.getElementById('puzzleName').textContent = heroSubs[Math.floor(Math.random() * heroSubs.length)];
     document.getElementById('answerTitle').textContent = puzzle.name;
     document.getElementById('riddleText').textContent = puzzle.riddle;
     document.getElementById('answerDisplay').textContent = puzzle.answer;
@@ -1005,7 +1141,6 @@
 
   // Build all puzzles list
   const listEl = document.getElementById('puzzleList');
-  const seriesNames = { 1: 'Series 1', 2: 'Series 2', 3: 'Series 3', 4: 'Series 4' };
 
   Object.entries(puzzles).forEach(([id, p]) => {
     const isActive = id === puzzleId;

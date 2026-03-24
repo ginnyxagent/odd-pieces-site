@@ -1,0 +1,1419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>What You Missed | Odd Pieces Perspective Puzzles</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --yellow: #FEE000;
+            --blue: #C1E3E8;
+            --orange: #FC9C1C;
+            --red-orange: #FF4016;
+            --ink: #1A1A1A;
+            --cream: #FFFBF0;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--ink);
+            background: var(--cream);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        /* ─── TYPOGRAPHY ─── */
+        .display {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            line-height: 0.95;
+            letter-spacing: -0.02em;
+        }
+
+        .headline {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            line-height: 1.1;
+            letter-spacing: -0.01em;
+        }
+
+        .label {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.15em;
+        }
+
+        /* ─── HERO ─── */
+        .hero {
+            background: linear-gradient(135deg, rgba(255,251,240,0.96) 0%, rgba(193,227,232,0.92) 58%, rgba(255,251,240,1) 100%);
+            padding: 80px 40px 60px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            width: 340px;
+            height: 340px;
+            border-radius: 36px;
+            background: rgba(255,255,255,0.42);
+            border: 3px solid rgba(26,26,26,0.08);
+            right: -80px;
+            top: -100px;
+            transform: rotate(14deg);
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            left: -60px;
+            bottom: -80px;
+            width: 260px;
+            height: 160px;
+            background: rgba(254,224,0,0.15);
+            border-radius: 999px;
+            filter: blur(2px);
+            transform: rotate(-10deg);
+            pointer-events: none;
+        }
+
+        .hero-inner {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: clamp(48px, 7vw, 80px);
+            text-transform: uppercase;
+            color: var(--white);
+            -webkit-text-stroke: 2px var(--ink);
+            text-shadow: 3px 3px 0 var(--ink);
+            line-height: 0.95;
+            margin-bottom: 12px;
+        }
+
+        .hero-subheading {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 8px;
+            letter-spacing: 0.05em;
+        }
+
+        .hero-supporting {
+            font-size: 16px;
+            color: var(--ink);
+            opacity: 0.8;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .cta-primary {
+            background: var(--ink);
+            color: var(--white);
+            padding: 14px 36px;
+            font-size: 13px;
+            font-weight: 700;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: 'Nunito', sans-serif;
+            transition: all 0.3s;
+            display: inline-block;
+            text-decoration: none;
+            margin: 15px 0;
+        }
+
+        .cta-primary:hover {
+            background: var(--orange);
+            transform: translateY(-2px);
+        }
+
+        .scarcity {
+            font-size: 12px;
+            color: var(--red-orange);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 15px;
+        }
+
+        .quality-guarantee {
+            font-size: 12px;
+            color: var(--ink);
+            margin-top: 10px;
+            opacity: 0.75;
+        }
+
+        /* ─── HOW IT WORKS ─── */
+        .how-it-works {
+            padding: 60px 40px;
+            background: var(--cream);
+            margin-bottom: 60px;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .how-grid {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .how-card {
+            background: var(--white);
+            border: 3px solid var(--ink);
+            padding: 25px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .how-label {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink);
+            margin-bottom: 15px;
+        }
+
+        .how-placeholder {
+            background: #f5f5f5;
+            height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            margin-bottom: 15px;
+            color: #999;
+            font-style: italic;
+        }
+
+        .how-card p {
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .how-arrow {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--orange);
+            text-align: center;
+        }
+
+        .how-insight {
+            background: rgba(252, 156, 28, 0.1);
+            border: 2px solid var(--orange);
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .how-insight-text {
+            font-size: 15px;
+            color: var(--ink);
+            line-height: 1.8;
+            margin: 10px 0;
+        }
+
+        /* ─── EXPERIENCE ─── */
+        .experience {
+            padding: 60px 40px;
+            background: var(--blue);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience::before {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            border-radius: 999px;
+            background: rgba(254, 224, 0, 0.2);
+            right: -100px;
+            top: -80px;
+            pointer-events: none;
+        }
+
+        .experience h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .experience-steps {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .step {
+            background: var(--white);
+            padding: 25px;
+            border-radius: 4px;
+            border: 2px solid var(--ink);
+            text-align: center;
+        }
+
+        .step-number {
+            font-size: 36px;
+            font-weight: 900;
+            color: var(--red-orange);
+            font-family: 'Nunito', sans-serif;
+            margin-bottom: 10px;
+        }
+
+        .step-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 800;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink);
+            margin-bottom: 12px;
+        }
+
+        .step p {
+            font-size: 13px;
+            color: var(--ink);
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        /* ─── WHY MATTERS ─── */
+        .why-matters {
+            padding: 60px 40px;
+            background: var(--cream);
+            margin-bottom: 60px;
+        }
+
+        .why-matters h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 40px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .why-comparison {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: center;
+            margin-bottom: 40px;
+        }
+
+        .why-card {
+            background: var(--white);
+            border: 3px solid var(--ink);
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .why-card.featured {
+            border-color: var(--orange);
+            border-width: 4px;
+            background: rgba(252, 156, 28, 0.05);
+            transform: scale(1.05);
+        }
+
+        .why-title {
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--ink);
+            margin-bottom: 15px;
+        }
+
+        .why-card p {
+            font-size: 15px;
+            color: var(--ink);
+            line-height: 1.6;
+            margin: 10px 0;
+            font-weight: 600;
+        }
+
+        .why-small {
+            font-size: 12px;
+            font-weight: 400;
+            opacity: 0.75;
+        }
+
+        .why-vs {
+            font-size: 18px;
+            font-weight: 900;
+            color: var(--orange);
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .why-insight {
+            background: rgba(254, 224, 0, 0.15);
+            border: 2px solid var(--orange);
+            padding: 30px;
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .why-insight p {
+            font-size: 15px;
+            color: var(--ink);
+            line-height: 1.8;
+            margin: 12px 0;
+        }
+
+        /* ─── FOR YOU ─── */
+        .for-you {
+            padding: 60px 40px;
+            background: var(--yellow);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .for-you::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: rgba(255, 64, 22, 0.08);
+            border-radius: 999px;
+            left: -100px;
+            bottom: -80px;
+            pointer-events: none;
+        }
+
+        .for-you h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 40px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .checklist {
+            max-width: 600px;
+            margin: 0 auto 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .check-mark {
+            display: inline-block;
+            color: var(--orange);
+            font-weight: 900;
+            font-size: 18px;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .for-you-conclusion {
+            text-align: center;
+            font-size: 16px;
+            color: var(--ink);
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* ─── CREDIBILITY ─── */
+        .credibility {
+            padding: 60px 40px;
+            background: var(--yellow);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .credibility::before {
+            content: '';
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            background: rgba(255, 64, 22, 0.08);
+            border-radius: 999px;
+            right: -100px;
+            bottom: -80px;
+            pointer-events: none;
+        }
+
+        .credibility h2 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            text-align: center;
+            color: var(--ink);
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 4px;
+            text-align: center;
+            border: 2px solid var(--ink);
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 900;
+            color: var(--red-orange);
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 11px;
+            color: var(--ink);
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 700;
+        }
+
+        .testimonial-quote {
+            font-size: 16px;
+            color: var(--ink);
+            margin: 15px auto;
+            padding: 20px;
+            background: var(--white);
+            border-left: 4px solid var(--ink);
+            max-width: 600px;
+            font-style: italic;
+        }
+
+        /* ─── NARRATIVE ─── */
+        .narrative {
+            padding: 60px 40px;
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .narrative h2 {
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--ink);
+            margin-bottom: 30px;
+            font-family: 'Nunito', sans-serif;
+            text-transform: uppercase;
+            line-height: 1.1;
+        }
+
+        .narrative p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--ink);
+            max-width: 600px;
+            margin: 0 auto 20px;
+            opacity: 0.85;
+        }
+
+        /* ─── COMPARISON ─── */
+        .comparison {
+            padding: 60px 40px;
+            background: var(--blue);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .comparison::before {
+            content: '';
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            border-radius: 36px;
+            background: rgba(254, 224, 0, 0.3);
+            left: -80px;
+            top: -100px;
+            transform: rotate(-15deg);
+            pointer-events: none;
+        }
+
+        .comparison h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 40px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: var(--white);
+            border: 2px solid var(--ink);
+            position: relative;
+            z-index: 1;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 2px solid var(--ink);
+            font-size: 14px;
+        }
+
+        .comparison-table th {
+            background: var(--ink);
+            color: var(--white);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .comparison-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        /* ─── THE THREE PUZZLES ─── */
+        .puzzles {
+            padding: 60px 40px;
+            margin-bottom: 60px;
+        }
+
+        .puzzles h2 {
+            text-align: center;
+            font-size: 44px;
+            margin-bottom: 50px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .puzzle-card {
+            background: var(--white);
+            border: 3px solid var(--ink);
+            padding: 30px;
+            margin-bottom: 30px;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .puzzle-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+            background: var(--orange);
+            pointer-events: none;
+        }
+
+        .puzzle-card h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .puzzle-meta {
+            font-size: 12px;
+            color: var(--ink);
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 600;
+            opacity: 0.7;
+        }
+
+        .puzzle-moment {
+            font-size: 15px;
+            color: var(--ink);
+            line-height: 1.6;
+            margin: 15px 0;
+            padding: 15px;
+            background: rgba(254, 224, 0, 0.2);
+            border-left: 3px solid var(--orange);
+        }
+
+        .puzzle-details {
+            font-size: 12px;
+            color: var(--ink);
+            margin-top: 20px;
+            opacity: 0.65;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── REWARDS ─── */
+        .rewards {
+            padding: 60px 40px;
+            background: var(--cream);
+            margin-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .rewards::before {
+            content: '';
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            border-radius: 999px;
+            background: rgba(193, 227, 232, 0.4);
+            right: -100px;
+            top: -80px;
+            pointer-events: none;
+        }
+
+        .rewards h2 {
+            text-align: center;
+            font-size: 44px;
+            margin-bottom: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .rewards-intro {
+            text-align: center;
+            color: var(--ink);
+            margin-bottom: 40px;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+
+        .tier {
+            background: var(--white);
+            padding: 30px;
+            border: 3px solid var(--ink);
+            border-radius: 4px;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .tier.featured {
+            border-color: var(--orange);
+            border-width: 4px;
+            background: rgba(252, 156, 28, 0.05);
+            transform: scale(1.02);
+        }
+
+        .tier h3 {
+            font-size: 20px;
+            margin-bottom: 10px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .tier-price {
+            font-size: 32px;
+            font-weight: 900;
+            color: var(--red-orange);
+            margin-bottom: 15px;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .tier-savings {
+            font-size: 12px;
+            color: var(--ink);
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+
+        .tier-feature {
+            font-size: 14px;
+            color: var(--ink);
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .tier-feature:before {
+            content: "✓";
+            color: var(--orange);
+            font-weight: 900;
+            margin-right: 10px;
+        }
+
+        .tier-badge {
+            display: inline-block;
+            background: var(--orange);
+            color: var(--ink);
+            padding: 6px 12px;
+            font-size: 10px;
+            font-weight: 900;
+            border-radius: 2px;
+            margin-top: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-family: 'Nunito', sans-serif;
+        }
+
+        .guarantee-box {
+            background: rgba(193, 227, 232, 0.3);
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 4px;
+            font-size: 12px;
+            color: var(--ink);
+            border-left: 3px solid var(--blue);
+        }
+
+        /* ─── TIMELINE ─── */
+        .timeline {
+            padding: 60px 40px;
+            text-align: center;
+            background: var(--ink);
+            color: var(--white);
+            margin-bottom: 60px;
+        }
+
+        .timeline h2 {
+            font-size: 36px;
+            margin-bottom: 30px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+        }
+
+        .timeline-item {
+            margin: 20px 0;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        .timeline-item strong {
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* ─── FAQ ─── */
+        .faq {
+            padding: 60px 40px;
+            background: var(--cream);
+            margin-bottom: 60px;
+        }
+
+        .faq h2 {
+            text-align: center;
+            font-size: 40px;
+            margin-bottom: 40px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+        }
+
+        .faq-item {
+            margin-bottom: 15px;
+        }
+
+        .faq-question {
+            background: var(--white);
+            padding: 15px;
+            cursor: pointer;
+            font-weight: 700;
+            border: 2px solid var(--ink);
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'Nunito', sans-serif;
+            text-transform: uppercase;
+            font-size: 13px;
+            letter-spacing: 0.05em;
+            transition: all 0.2s;
+        }
+
+        .faq-question:hover {
+            background: var(--yellow);
+            border-color: var(--orange);
+        }
+
+        .faq-answer {
+            display: none;
+            background: var(--white);
+            padding: 15px;
+            border: 2px solid var(--ink);
+            border-top: none;
+            font-size: 14px;
+            color: var(--ink);
+            line-height: 1.6;
+        }
+
+        .faq-answer.open {
+            display: block;
+        }
+
+        /* ─── FINAL CTA ─── */
+        .final-cta {
+            padding: 80px 40px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--yellow) 0%, rgba(193,227,232,0.6) 100%);
+            margin-bottom: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final-cta::before {
+            content: '';
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            border-radius: 999px;
+            background: rgba(255, 64, 22, 0.08);
+            left: -150px;
+            bottom: -100px;
+            pointer-events: none;
+        }
+
+        .final-cta h2 {
+            font-size: 52px;
+            margin-bottom: 15px;
+            font-family: 'Nunito', sans-serif;
+            font-weight: 900;
+            text-transform: uppercase;
+            color: var(--ink);
+            position: relative;
+            z-index: 1;
+            line-height: 1.1;
+        }
+
+        .final-cta p {
+            font-size: 16px;
+            color: var(--ink);
+            margin-bottom: 30px;
+            position: relative;
+            z-index: 1;
+            opacity: 0.85;
+        }
+
+        /* ─── FOOTER ─── */
+        footer {
+            background: var(--ink);
+            color: var(--white);
+            text-align: center;
+            padding: 30px 40px;
+            font-size: 12px;
+        }
+
+        footer a {
+            color: var(--orange);
+            text-decoration: none;
+        }
+
+        /* ─── RESPONSIVE ─── */
+        @media (max-width: 600px) {
+            .hero h1 {
+                font-size: 36px;
+                -webkit-text-stroke: 1px var(--ink);
+                text-shadow: 2px 2px 0 var(--ink);
+            }
+
+            .how-it-works h2,
+            .experience h2,
+            .why-matters h2,
+            .for-you h2,
+            .narrative h2,
+            .puzzles h2,
+            .rewards h2,
+            .faq h2,
+            .final-cta h2 {
+                font-size: 28px;
+            }
+
+            .how-grid,
+            .why-comparison {
+                grid-template-columns: 1fr;
+            }
+
+            .how-arrow,
+            .why-vs {
+                transform: rotate(90deg);
+                margin: 10px 0;
+            }
+
+            .experience-steps {
+                grid-template-columns: 1fr;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 13px;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 10px;
+            }
+
+            .tier.featured,
+            .why-card.featured {
+                transform: scale(1);
+            }
+
+            .container, .hero, .how-it-works, .experience, .why-matters, .for-you, .credibility, .narrative, .comparison, .puzzles, .rewards, .timeline, .faq, .final-cta {
+                padding: 40px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HERO -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-inner">
+                <h1 class="display">What<br>You<br>Missed</h1>
+                <div class="hero-subheading">From the makers of the #1 mystery puzzle on Kickstarter</div>
+                <div class="hero-supporting">Three puzzles. One change each. A new way of seeing.</div>
+                <button class="cta-primary" onclick="scrollTo('#rewards')">Back This Project</button>
+                <div class="scarcity">⏱ Campaign ends in [XX DAYS] — 30 days to join 25K+ Odd Fam</div>
+                <div class="quality-guarantee">✓ Missing piece? Full replacement in 48 hours. Guaranteed.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section class="how-it-works">
+        <div class="container">
+            <h2 class="headline">Here's How It Works</h2>
+            <div class="how-grid">
+                <div class="how-card">
+                    <div class="how-label">The Box Image</div>
+                    <div class="how-placeholder">[BOX IMAGE]</div>
+                    <p>The complete scene as it appears on the box. Finished. Display-worthy on its own.</p>
+                </div>
+                <div class="how-arrow">→</div>
+                <div class="how-card">
+                    <div class="how-label">The Puzzle Image</div>
+                    <div class="how-placeholder">[PUZZLE IMAGE]</div>
+                    <p>The same scene you build. Except one detail changed. That change carries the meaning.</p>
+                </div>
+            </div>
+            <div class="how-insight">
+                <p class="how-insight-text">Everything is identical EXCEPT one thing the artist changed intentionally.</p>
+                <p class="how-insight-text"><strong>That one change is the entire point.</strong></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- THE EXPERIENCE -->
+    <section class="experience">
+        <div class="container">
+            <h2 class="headline">What Happens When You Build</h2>
+            <div class="experience-steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <div class="step-title">Read the Artist's Note</div>
+                    <p>The artist explains their intention. What they wanted you to think about. Why this change matters to them.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <div class="step-title">Build the Puzzle</div>
+                    <p>500 pieces. 3–4 hours. One sitting. As you build, the image emerges piece by piece.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <div class="step-title">Notice the Change</div>
+                    <p>As the final pieces fall into place, you see it. The one detail. And suddenly the scene means something different.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <div class="step-title">Frame It</div>
+                    <p>It's beautiful. It's meaningful. You put it on your wall. Every time you see it, you remember the artist's perspective.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WHY THIS MATTERS -->
+    <section class="why-matters">
+        <div class="container">
+            <h2 class="headline">Not Just a Puzzle</h2>
+            <div class="why-comparison">
+                <div class="why-card">
+                    <div class="why-title">Traditional Puzzles</div>
+                    <p>"Did I finish it?"</p>
+                    <p class="why-small">(Then you're done.)</p>
+                </div>
+                <div class="why-vs">vs</div>
+                <div class="why-card featured">
+                    <div class="why-title">Perspective Puzzles</div>
+                    <p>"What did the artist mean?"</p>
+                    <p class="why-small">(Then you think about it.)</p>
+                    <p class="why-small">(Then you live with it.)</p>
+                    <p class="why-small">(Then you see things differently.)</p>
+                </div>
+            </div>
+            <div class="why-insight">
+                <p><strong>This is a gift that keeps talking to you.</strong></p>
+                <p>When you finish, it's just beginning. The puzzle sits on your wall. Every time you look at it, you remember the artist's perspective. You see something differently. You feel something differently.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- IS THIS FOR YOU -->
+    <section class="for-you">
+        <div class="container">
+            <h2 class="headline">Is This For You?</h2>
+            <div class="checklist">
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You're looking for a gift that means something</span>
+                </div>
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You want art, not just a puzzle</span>
+                </div>
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You love thinking about things differently</span>
+                </div>
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You want something beautiful to display</span>
+                </div>
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You appreciate artists and their process</span>
+                </div>
+                <div class="check-item">
+                    <span class="check-mark">✓</span>
+                    <span>You want to finish in one afternoon, not weeks</span>
+                </div>
+            </div>
+            <p class="for-you-conclusion"><strong>If this is you, this is made for you.</strong></p>
+        </div>
+    </section>
+
+    <!-- CREDIBILITY SHIFT -->
+    <section class="credibility">
+        <div class="container">
+            <h2 class="headline">Trusted by Puzzle Lovers Worldwide</h2>
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Successful Kickstarters</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">25K+</div>
+                    <div class="stat-label">Backers</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number">$1.5M</div>
+                    <div class="stat-label">Raised</div>
+                </div>
+            </div>
+            <div class="testimonial-quote">
+                "Honestly the best gift I've ever given. It's sitting framed in my office and people ask about it DAILY." — Marcus, backed Campaign 1
+            </div>
+        </div>
+    </section>
+
+    <!-- NARRATIVE -->
+    <section class="narrative">
+        <div class="container">
+            <h2>Not a Mystery.<br>A Perspective.</h2>
+            <p>Our mystery puzzles are about the big reveal. These are different.</p>
+            <p>You build a puzzle. The image has one deliberate change. That change carries the artist's message — something they wanted you to notice, feel, or see differently.</p>
+            <p>It's not just art. It's a perspective delivered through a puzzle.</p>
+        </div>
+    </section>
+
+    <!-- COMPARISON -->
+    <section class="comparison">
+        <div class="container">
+            <h2>How It's Different</h2>
+            <table class="comparison-table">
+                <tr>
+                    <th>Feature</th>
+                    <th>Mystery Puzzles</th>
+                    <th>Perspective Puzzles</th>
+                </tr>
+                <tr>
+                    <td>Pieces</td>
+                    <td>1000</td>
+                    <td>500</td>
+                </tr>
+                <tr>
+                    <td>Experience</td>
+                    <td>Discover as you build</td>
+                    <td>Understand as you build</td>
+                </tr>
+                <tr>
+                    <td>Time</td>
+                    <td>6–10 hours (multi-session)</td>
+                    <td>3–4 hours (one sitting)</td>
+                </tr>
+                <tr>
+                    <td>Core Feeling</td>
+                    <td>Suspense → Surprise</td>
+                    <td>Intention → Meaning</td>
+                </tr>
+                <tr>
+                    <td>The Reward</td>
+                    <td>The Big Reveal</td>
+                    <td>The Connection</td>
+                </tr>
+            </table>
+        </div>
+    </section>
+
+    <!-- THE THREE PUZZLES -->
+    <section class="puzzles">
+        <div class="container">
+            <h2>What You Missed — The Three Puzzles</h2>
+
+            <div class="puzzle-card">
+                <h3>Play Room</h3>
+                <div class="puzzle-meta">By [ARTIST NAME] • [1–2 line bio]</div>
+                <div class="puzzle-moment">"You know this room. You've seen kids play here. One detail carries what the artist noticed: [Artist's message about the change]"</div>
+                <div class="puzzle-details">500 pieces | One sitting | Display-worthy finish</div>
+            </div>
+
+            <div class="puzzle-card">
+                <h3>My Cat and ME</h3>
+                <div class="puzzle-meta">By [ARTIST NAME] • [1–2 line bio]</div>
+                <div class="puzzle-moment">"A moment between you and someone (or something) you love. One detail shifts how you see it: [Artist's message about the change]"</div>
+                <div class="puzzle-details">500 pieces | One sitting | Display-worthy finish</div>
+            </div>
+
+            <div class="puzzle-card">
+                <h3>Siblings</h3>
+                <div class="puzzle-meta">By [ARTIST NAME] • [1–2 line bio]</div>
+                <div class="puzzle-moment">"You've seen sibling dynamics a thousand times. This time, one detail changes the meaning: [Artist's message about the change]"</div>
+                <div class="puzzle-details">500 pieces | One sitting | Display-worthy finish</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- REWARD TIERS -->
+    <section class="rewards" id="rewards">
+        <div class="container">
+            <h2>Choose Your Collection</h2>
+            <div class="rewards-intro">Most backers choose the full set. See why below.</div>
+
+            <div class="tier featured">
+                <h3>Complete Set — All Three Puzzles</h3>
+                <div class="tier-price">$XX.XX</div>
+                <div class="tier-savings">Save $XX vs retail | 🎯 EARLY BIRD +10% OFF</div>
+                <div class="tier-feature">Play Room</div>
+                <div class="tier-feature">My Cat and ME</div>
+                <div class="tier-feature">Siblings</div>
+                <div class="tier-feature">3 Artist cards</div>
+                <div class="tier-feature">Exclusive bonus colorway or print</div>
+                <div class="tier-feature">Free shipping</div>
+                <button class="cta-primary">Back Now</button>
+                <div class="tier-badge">Most Popular — LIMITED QTY</div>
+                <div class="guarantee-box">
+                    ✓ Every puzzle quality-checked<br>
+                    ✓ Missing piece? Shipped in 48 hours<br>
+                    ✓ No hassle, no questions asked
+                </div>
+            </div>
+
+            <div class="tier">
+                <h3>Single Puzzle</h3>
+                <div class="tier-price">$XX.XX</div>
+                <div class="tier-feature">1 puzzle of your choice</div>
+                <div class="tier-feature">Artist card included</div>
+                <div class="tier-feature">Shipping: $X</div>
+                <button class="cta-primary">Add to Cart</button>
+                <div class="guarantee-box">
+                    ✓ Same quality guarantee as the bundle
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TIMELINE -->
+    <section class="timeline">
+        <div class="container">
+            <h2>Here's the Timeline</h2>
+            <div class="timeline-item"><strong>Campaign Ends:</strong> [DATE in 30 days]</div>
+            <div class="timeline-item"><strong>Puzzles Ship:</strong> [MONTH YEAR]</div>
+            <div class="timeline-item"><strong>Your Deadline to Decide:</strong> Back in the next 30 days or wait for retail later</div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>How much of a difference is the change?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">It's subtle enough that you don't immediately notice, but significant enough that when you do, it reframes the entire image. That's the point — it makes you think. The artist's note gives you context, so you know what you're looking for.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Will I be able to spot the change?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">Yes. The artist's note explains their intention and what changed, so you know what you're looking for. As you build, you'll notice it. That's the ritual — understanding their perspective as you build.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Is this just a "spot the difference" game?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">No. Those games are about the hunt. This is about meaning. The change isn't arbitrary — it's intentional and carries the artist's message. When you notice it, you understand what the artist was trying to say. That's why it stays with you.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Can I really finish this in one afternoon?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">Yes. 500 pieces, 3–4 hours. Most backers report finishing in one sitting and then framing it. That's the point — complete it, understand it, live with it.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Why is this better than buying a print of the image?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">Because you build it. There's something about the journey — reading the artist's note, placing each piece, noticing the change — that makes it meaningful in a way a print isn't. You're not just looking at art. You're experiencing the artist's perspective.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>What about missing pieces? I've heard complaints.</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">We heard you. Missing pieces were our #1 complaint on past campaigns. For this launch, every puzzle is quality-checked before shipping. If a piece is missing, we ship a replacement in 48 hours — no questions asked. We guarantee it.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>When will it ship?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">We're aiming for [MONTH YEAR]. Backers always ship before retail — you'll get yours months before it hits stores.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFaq(this)">
+                    <span>Do you ship internationally?</span>
+                    <span>+</span>
+                </div>
+                <div class="faq-answer">Yes. Shipping to [COUNTRIES]. International shipping: $XX. See shipping tab for full list.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>You're a Puzzle Person.<br>This Is For You.</h2>
+            <p>Join 25,000+ who've already backed Odd Pieces.</p>
+            <button class="cta-primary" onclick="scrollTo('#rewards')">Back This Project</button>
+            <div class="scarcity">⏱ Campaign ends in [XX DAYS] — Secure your copy</div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Odd Pieces. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleFaq(element) {
+            const answer = element.nextElementSibling;
+            answer.classList.toggle('open');
+            element.querySelector('span:last-child').textContent = answer.classList.contains('open') ? '−' : '+';
+        }
+
+        function scrollTo(selector) {
+            document.querySelector(selector).scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+
+</body>
+</html>
