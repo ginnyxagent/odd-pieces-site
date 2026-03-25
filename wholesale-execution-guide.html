@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wholesale Execution Guide — Odd Pieces</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #FFFBF0;
+      color: #1A1A1A;
+      line-height: 1.6;
+      padding: 40px 20px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    
+    header {
+      margin-bottom: 60px;
+      border-bottom: 2px solid #FEE000;
+      padding-bottom: 30px;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      font-family: 'Nunito', sans-serif;
+      text-transform: uppercase;
+      color: #1A1A1A;
+    }
+    .subtitle {
+      font-size: 16px;
+      color: #666;
+      font-weight: 400;
+    }
+    
+    h2 {
+      font-size: 32px;
+      font-weight: 900;
+      margin-top: 60px;
+      margin-bottom: 20px;
+      font-family: 'Nunito', sans-serif;
+      color: #1A1A1A;
+    }
+    h3 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-top: 30px;
+      margin-bottom: 12px;
+      color: #1A1A1A;
+    }
+    
+    .hero-section {
+      background: linear-gradient(135deg, #FEE000 0%, #C1E3E8 100%);
+      padding: 40px;
+      border-radius: 16px;
+      margin-bottom: 40px;
+    }
+    .hero-section h2 {
+      color: #1A1A1A;
+      margin-top: 0;
+    }
+    .hero-section p {
+      font-size: 18px;
+      color: #1A1A1A;
+      max-width: 600px;
+    }
+    
+    .timeline {
+      background: #F5F3F0;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    .timeline h3 { margin-top: 0; }
+    .timeline ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .timeline li {
+      padding: 10px 0;
+      padding-left: 24px;
+      position: relative;
+      border-left: 2px solid #FEE000;
+    }
+    .timeline li:before {
+      content: '';
+      position: absolute;
+      left: -8px;
+      top: 14px;
+      width: 12px;
+      height: 12px;
+      background: #FEE000;
+      border-radius: 50%;
+    }
+    
+    .task-card {
+      background: white;
+      border: 2px solid #F0EDE8;
+      border-radius: 12px;
+      padding: 30px;
+      margin: 20px 0;
+      border-left: 6px solid #FEE000;
+    }
+    .task-card.priority-high { border-left-color: #FF4016; }
+    .task-card.priority-medium { border-left-color: #FC9C1C; }
+    
+    .task-card .owner {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #999;
+      letter-spacing: 0.08em;
+      margin-bottom: 8px;
+    }
+    .task-card h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1A1A1A;
+    }
+    .task-card .spec {
+      background: #FFFBF0;
+      padding: 12px;
+      margin: 10px 0;
+      border-radius: 8px;
+      font-size: 14px;
+      font-family: 'Courier New', monospace;
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      background: white;
+      border: 1px solid #F0EDE8;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    thead {
+      background: #F5F3F0;
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.08em;
+    }
+    th, td {
+      padding: 16px;
+      text-align: left;
+      border-bottom: 1px solid #F0EDE8;
+    }
+    tr:last-child td { border-bottom: none; }
+    tbody tr:hover { background: #FFFBF0; }
+    
+    .checklist {
+      background: #F5F3F0;
+      padding: 30px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+    .checklist ul {
+      list-style: none;
+      padding: 0;
+    }
+    .checklist li {
+      padding: 8px 0;
+      display: flex;
+      align-items: center;
+    }
+    .checklist input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+      margin-right: 12px;
+      cursor: pointer;
+    }
+    
+    .cta-button {
+      display: inline-block;
+      background: #FEE000;
+      color: #1A1A1A;
+      padding: 16px 32px;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 700;
+      margin-top: 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .cta-button:hover {
+      transform: translateY(-2px);\n      box-shadow: 0 8px 16px rgba(254, 224, 0, 0.3);
+    }
+    
+    .info-box {
+      background: #C1E3E8;
+      padding: 20px;
+      border-radius: 12px;
+      margin: 20px 0;
+      border-left: 6px solid #1A1A1A;
+    }
+    .info-box strong { color: #1A1A1A; }
+    
+    code {
+      background: #F5F3F0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: 'Courier New', monospace;
+      font-size: 14px;
+    }
+    
+    pre {
+      background: #1A1A1A;
+      color: #FEE000;
+      padding: 20px;
+      border-radius: 8px;
+      overflow-x: auto;
+      font-family: 'Courier New', monospace;
+      font-size: 13px;
+      line-height: 1.5;
+      margin: 20px 0;
+    }
+    
+    .section-nav {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
+    }
+    .section-nav a {
+      background: white;
+      border: 2px solid #F0EDE8;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
+      color: #1A1A1A;
+      transition: all 0.15s;
+    }
+    .section-nav a:hover {
+      border-color: #FEE000;
+      background: #FFFBF0;
+    }
+    
+    footer {
+      margin-top: 80px;
+      padding-top: 30px;
+      border-top: 2px solid #F0EDE8;
+      text-align: center;
+      color: #999;
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🧩 Wholesale Launch</h1>
+      <p class="subtitle">Execution Guide — Odd Pieces | March 25, 2026</p>
+    </header>
+
+    <div class="hero-section">
+      <h2>Ready to launch wholesale in 3 weeks</h2>
+      <p><strong>10 core tasks.</strong> Clear owners. Parallel tracks. Everything you need to go from zero to wholesale live by April 7, 2026.</p>
+    </div>
+
+    <div class="section-nav">
+      <a href="#week1">Week 1: Foundations</a>
+      <a href="#tasks">10 Tasks</a>
+      <a href="#timeline">Timeline</a>
+      <a href="#checklist">Checklist</a>
+    </div>
+
+    <h2 id="week1">🗓️ This Week (Mar 25–28): Pre-Launch Prep</h2>
+    <div class="timeline">
+      <ul>
+        <li><strong>Finalize wholesale price:</strong> Confirm $19/unit wholesale</li>
+        <li><strong>Select SKUs:</strong> 3–5 puzzles for wholesale</li>
+        <li><strong>Decide MOQ:</strong> 12 units first, 6 reorder</li>
+        <li><strong>Payment terms:</strong> Prepay first, Net 30 after</li>
+        <li><strong>Inventory allocation:</strong> % to wholesale vs DTC</li>
+        <li><strong>Brief team:</strong> Martin (design), Kayl (tech), Hermonie (ops)</li>
+        <li><strong>Create email address:</strong> wholesale@oddpieces.com</li>
+      </ul>
+    </div>
+
+    <h2 id="tasks">10 Core Tasks</h2>
+
+    <div class="task-card priority-high">
+      <div class="owner">Task 1 • Design • Owner: Martin</div>
+      <h4>Price List / Sell Sheet Redesign</h4>
+      <p><strong>What:</strong> Single-page PDF retailers see first. Products, pricing, order info.</p>
+      <p><strong>Timeline:</strong> Start Mar 25 → Done Mar 31</p>
+      <p><strong>Front side:</strong> Logo, tagline, 2–3 hero product photos, 3 selling bullets, social proof</p>
+      <p><strong>Back side:</strong> SKU table ($19 wholesale, $38 MSRP, case pack), order info, contact</p>
+      <p><strong>Success:</strong> Retailer understands price, margin, how to order in <60 seconds</p>
+    </div>
+
+    <div class="task-card priority-high">
+      <div class="owner">Task 2 • Tech • Owner: Kayl</div>
+      <h4>Google Form + Auto-Reply</h4>
+      <p><strong>What:</strong> Wholesale application form. Retailers fill it out, get instant confirmation.</p>
+      <p><strong>Timeline:</strong> Start Mar 25 → Done Mar 27</p>
+      <div class="info-box">
+        <strong>⚡ Kayl gets step-by-step guidance:</strong> Copy-paste Apps Script code, numbered clicks, everything.
+      </div>
+      <p><strong>What form collects:</strong> Store name, contact, email, store type, address, how they heard about us, which puzzles interest them, estimated first order qty</p>
+      <p><strong>Success:</strong> Submit test form → auto-reply arrives in 1 min → response in spreadsheet with all fields</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 3 • Design • Owner: Martin</div>
+      <h4>Wholesale Landing Page</h4>
+      <p><strong>What:</strong> oddpieces.com/wholesale — where retailers learn about wholesale and apply</p>
+      <p><strong>Timeline:</strong> Start Mar 28 → Done Apr 2</p>
+      <p><strong>Page sections:</strong> Hero + "Why Carry Us" + "The Numbers" + "What You Get" + "How It Works" + CTA + FAQ</p>
+      <p><strong>Success:</strong> Retailer lands on page, sees 50% margin opportunity, clicks "Apply" within 30 seconds</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 4 • Ops • Owner: Hermonie</div>
+      <h4>Email Templates + Gorgias Setup</h4>
+      <p><strong>What:</strong> 8 pre-written email templates for every wholesale touchpoint</p>
+      <p><strong>Timeline:</strong> Draft by Mar 27 → Ginny approves Mar 28 → Live in Gorgias by Mar 31</p>
+      <p><strong>Templates:</strong></p>
+      <ol>
+        <li>Application Received (auto-reply)</li>
+        <li>Application Approved</li>
+        <li>Application Declined</li>
+        <li>First Order Confirmation</li>
+        <li>Reorder Nudge (30 days)</li>
+        <li>Payment Reminder (Net 30)</li>
+        <li>New Product Announcement</li>
+        <li>General Inquiry Response</li>
+      </ol>
+      <p><strong>+ Hermonie Scripts:</strong> 5 common scenarios (discounts, returns, consignment, online sales, MAP policy)</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 5 • Tech • Owner: Kayl</div>
+      <h4>Wholesale Tracking Spreadsheet</h4>
+      <p><strong>What:</strong> Your wholesale CRM. Tracks every account from application to reorder.</p>
+      <p><strong>Timeline:</strong> Start Mar 25 → Done Mar 27</p>
+      <p><strong>4 tabs:</strong> Applications (auto-populated from Form) | Active Accounts | Orders | Inventory Allocation</p>
+      <p><strong>Success:</strong> Every wholesale interaction tracked in one place. Nothing falls through cracks.</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 6 • Design • Owner: Martin</div>
+      <h4>Shelf Talker Design + Print</h4>
+      <p><strong>What:</strong> Small printed cards on shelves explaining what makes Odd Pieces special.</p>
+      <p><strong>Timeline:</strong> Design start Mar 28 → Done Apr 2 → Print order Apr 3 → Receive Apr 10</p>
+      <p><strong>Specs:</strong> 3.5"x2" or 4"x6" (stands), premium cardstock, brand colors, includes QR code to oddpieces.com</p>
+      <p><strong>Print qty:</strong> 200–500 to start. Include 5–10 per retailer shipment.</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 7 • Design • Owner: Martin</div>
+      <h4>Wholesale Catalog (4–8 pages)</h4>
+      <p><strong>What:</strong> PDF catalog showcasing all wholesale SKUs with photos, descriptions, pricing.</p>
+      <p><strong>Timeline:</strong> Start Mar 31 → Done Apr 7</p>
+      <p><strong>Pages:</strong> Cover | Brand story + stats | Products (1 per page) | Bundles | How to order + contact</p>
+      <p><strong>Success:</strong> Retailer flips through and says "I want to carry these."</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 8 • Ops • Owner: Ginny</div>
+      <h4>Order SOP (Step-by-Step Process)</h4>
+      <p><strong>What:</strong> How anyone processes a wholesale order without asking Ginny. This is how you scale.</p>
+      <p><strong>Timeline:</strong> Write Mar 31 → Test with Hermonie Apr 1–2 → Finalize Apr 3</p>
+      <p><strong>Covers:</strong> When new application arrives | When order comes in | When shipping | Monthly tasks</p>
+      <p><strong>Success:</strong> Hermonie can process an order end-to-end without a single question</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 9 • Docs • Owner: Ginny</div>
+      <h4>Wholesale Terms & Conditions</h4>
+      <p><strong>What:</strong> 1–2 page document setting expectations. Not a legal contract — a "here's how we work together" doc.</p>
+      <p><strong>Timeline:</strong> Draft Mar 26 → Ginny review Mar 27 → Finalize Mar 28</p>
+      <p><strong>Covers:</strong> Pricing | MOQ | Shipping | Returns | MAP policy | Online sales | Marketing support | Account terms</p>
+    </div>
+
+    <div class="task-card">
+      <div class="owner">Task 10 • Ops • Owner: Ginny</div>
+      <h4>Inventory Allocation + Returns Policy</h4>
+      <p><strong>What:</strong> Deciding how much inventory goes wholesale vs DTC, and returns rules</p>
+      <p><strong>Timeline:</strong> Decisions by Mar 27 → Documented by Mar 28</p>
+      <p><strong>Allocation:</strong> Start with 20% of total inventory to wholesale. Never allocate more than you can afford to tie up in Net 30 receivables.</p>
+      <p><strong>Returns:</strong> Damaged = full replacement. Unsold = within 90 days, original condition, 15% restocking fee.</p>
+    </div>
+
+    <h2 id="timeline">📅 Final Timeline — Parallel Tracks</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Track</th>
+          <th>Owner</th>
+          <th>Week 1 (Mar 25–28)</th>
+          <th>Week 2 (Mar 31–Apr 4)</th>
+          <th>Week 3 (Apr 7–11)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Content/Strategy</strong></td>
+          <td>Ginny</td>
+          <td>Lock pricing, MOQ, terms | Draft T&Cs | Decide allocation</td>
+          <td>Approve designs | Write SOP | Test SOP</td>
+          <td>Final approval | Go live</td>
+        </tr>
+        <tr>
+          <td><strong>Design</strong></td>
+          <td>Martin</td>
+          <td>Start price list</td>
+          <td>Sell sheet done → Start shelf talker + landing page</td>
+          <td>Catalog done</td>
+        </tr>
+        <tr>
+          <td><strong>Tech/Ops</strong></td>
+          <td>Kayl</td>
+          <td>Build Form + spreadsheet</td>
+          <td>Form tested | Load templates in Gorgias</td>
+          <td>Ready for live</td>
+        </tr>
+        <tr>
+          <td><strong>Customer Ops</strong></td>
+          <td>Hermonie</td>
+          <td>Prep scripts</td>
+          <td>Learn templates | Review SOP | Test orders</td>
+          <td>Handle live inquiries</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2 id="checklist">✅ Printable 3-Week Checklist</h2>
+
+    <div class="checklist">
+      <h3>Week 1 (Mar 25–28): Foundations</h3>
+      <ul>
+        <li><input type="checkbox"> Finalize pricing ($19/unit)</li>
+        <li><input type="checkbox"> Select SKUs</li>
+        <li><input type="checkbox"> Decide MOQ, payment terms</li>
+        <li><input type="checkbox"> Build Google Form [Kayl]</li>
+        <li><input type="checkbox"> Build tracking spreadsheet [Kayl]</li>
+        <li><input type="checkbox"> Draft T&Cs [Ginny + Willis]</li>
+        <li><input type="checkbox"> Start sell sheet [Martin]</li>
+        <li><input type="checkbox"> Draft email templates [Willis]</li>
+        <li><input type="checkbox"> Approve templates [Ginny]</li>
+      </ul>
+
+      <h3 style="margin-top: 30px;">Week 2 (Mar 31–Apr 4): Build</h3>
+      <ul>
+        <li><input type="checkbox"> Sell sheet finalized [Martin]</li>
+        <li><input type="checkbox"> Shelf talker designed [Martin]</li>
+        <li><input type="checkbox"> Landing page live [Martin]</li>
+        <li><input type="checkbox"> Order SOP written [Ginny]</li>
+        <li><input type="checkbox"> SOP tested [Hermonie]</li>
+        <li><input type="checkbox"> Email templates in Gorgias [Kayl]</li>
+        <li><input type="checkbox"> Print order placed (shelf talkers)</li>
+      </ul>
+
+      <h3 style="margin-top: 30px;">Week 3 (Apr 7–11): Launch</h3>
+      <ul>
+        <li><input type="checkbox"> Catalog finalized [Martin]</li>
+        <li><input type="checkbox"> All materials reviewed + approved [Ginny]</li>
+        <li><input type="checkbox"> Wholesale page live + linked</li>
+        <li><input type="checkbox"> First outreach to retailers</li>
+        <li><input type="checkbox"> 🚀 WHOLESALE IS LIVE</li>
+      </ul>
+    </div>
+
+    <div class="info-box">
+      <strong>💡 Key Insight:</strong> Don't let this become "perfect." Launch with 80% quality. You'll learn more from real retailers in Week 1 than months of planning.
+    </div>
+
+    <div style="text-align: center; margin-top: 60px;">
+      <button class="cta-button" onclick="window.print()">📥 Print This Guide</button>
+    </div>
+
+    <footer>
+      <p>Odd Pieces Wholesale Launch Guide | Version 1.0 | March 25, 2026</p>
+      <p>For detailed specs, code, templates, and scripts → see full guide</p>
+    </footer>
+  </div>
+</body>
+</html>
