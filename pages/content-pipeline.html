@@ -18,6 +18,14 @@
     --white: #FFFFFF;
     --light-gray: #F5F5F5;
     --border: #E0E0E0;
+
+    /* Type colors - consistent throughout */
+    --paid-bg: #E3F2FD;
+    --paid-border: #1565C0;
+    --paid-text: #1565C0;
+    --organic-bg: #F1F8E9;
+    --organic-border: #558B2F;
+    --organic-text: #33691E;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -68,11 +76,142 @@
   .hero {
     background: linear-gradient(135deg, var(--orange), var(--red-orange));
     color: white;
-    padding: 60px 40px;
+    padding: 60px 40px 40px;
     text-align: center;
   }
   .hero h1 { color: white; margin-bottom: 0.5rem; }
-  .hero p { font-size: 1.1rem; opacity: 0.95; }
+  .hero p { font-size: 1.1rem; opacity: 0.95; margin-bottom: 0; }
+
+  /* THE RULE — prominent anchor at top */
+  .the-rule {
+    background: var(--ink);
+    color: white;
+    padding: 50px 40px;
+    text-align: center;
+  }
+  .the-rule-inner { max-width: 900px; margin: 0 auto; }
+  .the-rule h2 {
+    color: var(--yellow);
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+  }
+  .the-rule-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border: 3px solid rgba(255,255,255,0.15);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .rule-paid, .rule-organic {
+    padding: 32px 36px;
+    text-align: left;
+  }
+  .rule-paid {
+    background: rgba(21,101,192,0.25);
+    border-right: 3px solid rgba(255,255,255,0.15);
+  }
+  .rule-organic {
+    background: rgba(85,139,47,0.25);
+  }
+  .rule-type-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 12px;
+    opacity: 0.7;
+  }
+  .rule-emoji-title {
+    font-size: 1.6rem;
+    font-weight: 900;
+    margin-bottom: 12px;
+    color: white;
+    line-height: 1.2;
+  }
+  .rule-def {
+    font-size: 0.95rem;
+    color: rgba(255,255,255,0.85);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+  .rule-success-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 4px;
+  }
+  .rule-success {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.9);
+    font-weight: 600;
+  }
+
+  /* Two Questions gut-check — moved to top */
+  .gut-check {
+    background: var(--yellow);
+    padding: 50px 40px;
+    text-align: center;
+  }
+  .gut-check-inner { max-width: 900px; margin: 0 auto; }
+  .gut-check h2 {
+    font-size: 1rem;
+    font-weight: 800;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    color: var(--ink);
+  }
+  .gut-check-questions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    text-align: left;
+  }
+  .gut-question {
+    background: white;
+    border: 2px solid var(--ink);
+    border-radius: 6px;
+    padding: 28px;
+  }
+  .gut-question .q-num {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: rgba(26,26,26,0.15);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .gut-question .q-text {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .gut-answer {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+  }
+  .gut-answer .ans-label {
+    font-weight: 800;
+    font-size: 0.85rem;
+    min-width: 32px;
+    color: var(--ink);
+  }
+  .gut-answer .ans-label.yes { color: var(--paid-text); }
+  .gut-answer .ans-label.no { color: var(--organic-text); }
 
   .rule-box {
     background: var(--yellow);
@@ -90,36 +229,21 @@
     margin: 2rem 0;
   }
 
-  .three-col {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 24px;
-    margin: 2rem 0;
-  }
-
   .paid-box {
-    background: #E3F2FD;
-    border-left: 5px solid var(--blue);
+    background: var(--paid-bg);
+    border-left: 5px solid var(--paid-border);
     padding: 30px;
     border-radius: 4px;
   }
-  .paid-box h3, .paid-box h4 { color: #1565C0; margin-top: 0; }
+  .paid-box h3, .paid-box h4 { color: var(--paid-text); margin-top: 0; }
 
   .organic-box {
-    background: #F1F8E9;
-    border-left: 5px solid var(--orange);
+    background: var(--organic-bg);
+    border-left: 5px solid var(--organic-border);
     padding: 30px;
     border-radius: 4px;
   }
-  .organic-box h3, .organic-box h4 { color: var(--orange); margin-top: 0; }
-
-  .awareness-box {
-    background: #F3E5F5;
-    border-left: 5px solid #9C27B0;
-    padding: 30px;
-    border-radius: 4px;
-  }
-  .awareness-box h3, .awareness-box h4 { color: #7B1FA2; margin-top: 0; }
+  .organic-box h3, .organic-box h4 { color: var(--organic-text); margin-top: 0; }
 
   .comparison-table {
     width: 100%;
@@ -135,19 +259,27 @@
     text-align: left;
     font-weight: 700;
   }
+  .comparison-table th.paid-col { background: var(--paid-text); }
+  .comparison-table th.organic-col { background: var(--organic-text); }
   .comparison-table td {
     padding: 15px;
     border-bottom: 1px solid var(--border);
+    vertical-align: top;
   }
   .comparison-table tbody tr:nth-child(even) { background: var(--light-gray); }
+  .comparison-table tbody tr:nth-child(even) td.paid-cell { background: #dce9f8; }
+  .comparison-table tbody tr:nth-child(even) td.organic-cell { background: #e6f4d7; }
+  .comparison-table td.paid-cell { background: #edf4fd; }
+  .comparison-table td.organic-cell { background: #f0f9e8; }
 
   .decision-tree {
-    background: var(--blue);
-    padding: 30px;
-    border-radius: 4px;
+    background: #1A1A1A;
+    color: #E8F5E9;
+    padding: 36px;
+    border-radius: 6px;
     font-family: 'Courier New', monospace;
-    font-size: 0.95rem;
-    line-height: 1.6;
+    font-size: 0.9rem;
+    line-height: 1.7;
     white-space: pre-wrap;
     overflow-x: auto;
   }
@@ -161,32 +293,11 @@
   }
   .mistake strong { color: var(--red-orange); }
 
-  .checklist {
-    background: var(--white);
-    border: 2px solid var(--yellow);
-    padding: 30px;
-    border-radius: 4px;
-    margin: 2rem 0;
-  }
-  .checklist ul { margin-left: 30px; margin-top: 15px; }
-  .checklist li { margin-bottom: 10px; }
-
-  .gut-check {
-    background: linear-gradient(135deg, var(--blue), #B8DFE3);
-    padding: 40px;
-    border-radius: 4px;
-    margin: 3rem 0;
-    text-align: center;
-    color: var(--ink);
-  }
-  .gut-check p { font-size: 1.2rem; font-weight: 500; margin: 1rem 0; }
-  .answer { font-weight: 700; color: var(--orange); }
-
   .signal-list {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 2rem 0;
+    gap: 16px;
+    margin: 1.5rem 0;
   }
 
   .signal {
@@ -196,9 +307,11 @@
     border-radius: 4px;
   }
   .signal strong { display: block; margin-bottom: 8px; font-size: 0.9rem; }
-  .signal .label { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; }
-  .signal .label.paid { color: #1565C0; }
-  .signal .label.organic { color: var(--orange); }
+  .signal .label { font-size: 0.75rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 3px; display: inline-block; margin-bottom: 8px; }
+  .signal .label.paid-strong { background: var(--paid-text); color: white; }
+  .signal .label.paid-mod { background: var(--paid-bg); color: var(--paid-text); border: 1px solid var(--paid-text); }
+  .signal .label.organic-strong { background: var(--organic-text); color: white; }
+  .signal .label.organic-mod { background: var(--organic-bg); color: var(--organic-text); border: 1px solid var(--organic-text); }
 
   .warning {
     background: #FFF3E0;
@@ -207,64 +320,7 @@
     margin: 1.5rem 0;
     border-radius: 0 4px 4px 0;
   }
-  .warning strong { color: var(--orange); }
-
-  .deprecated {
-    background: #FFEBEE;
-    border: 2px dashed var(--red-orange);
-    padding: 24px 30px;
-    margin: 2rem 0;
-    border-radius: 4px;
-    position: relative;
-  }
-  .deprecated::before {
-    content: "OLD RULE — RETIRED";
-    display: inline-block;
-    background: var(--red-orange);
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 2px 10px;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
-  }
-
-  .new-rule {
-    background: #E8F5E9;
-    border: 2px solid #4CAF50;
-    padding: 24px 30px;
-    margin: 2rem 0;
-    border-radius: 4px;
-    position: relative;
-  }
-  .new-rule::before {
-    content: "NEW RULE";
-    display: inline-block;
-    background: #4CAF50;
-    color: white;
-    font-size: 0.75rem;
-    font-weight: 800;
-    padding: 2px 10px;
-    border-radius: 3px;
-    margin-bottom: 10px;
-    letter-spacing: 0.05em;
-  }
-
-  .funnel-stage {
-    background: white;
-    border: 2px solid var(--border);
-    padding: 24px;
-    border-radius: 4px;
-    margin: 1rem 0;
-  }
-  .funnel-stage .stage-label {
-    font-size: 0.75rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 8px;
-  }
+  .warning strong { color: #E65100; }
 
   .example-card {
     background: white;
@@ -273,6 +329,9 @@
     padding: 24px;
     margin: 1rem 0;
   }
+  .example-card.paid-card { border-left: 5px solid var(--paid-text); }
+  .example-card.organic-card { border-left: 5px solid var(--organic-border); }
+
   .example-card .tag {
     display: inline-block;
     font-size: 0.7rem;
@@ -283,10 +342,8 @@
     border-radius: 3px;
     margin-bottom: 10px;
   }
-  .tag-awareness { background: #F3E5F5; color: #7B1FA2; }
-  .tag-conversion { background: #E3F2FD; color: #1565C0; }
-  .tag-retarget { background: #FFF3E0; color: #E65100; }
-  .tag-organic { background: #F1F8E9; color: #33691E; }
+  .tag-paid { background: var(--paid-bg); color: var(--paid-text); }
+  .tag-organic { background: var(--organic-bg); color: var(--organic-text); }
 
   footer {
     background: var(--ink);
@@ -301,7 +358,8 @@
     h1 { font-size: 2.5rem; }
     h2 { font-size: 1.5rem; }
     .section, .section-full { padding: 40px 24px; }
-    .two-col, .signal-list, .three-col { grid-template-columns: 1fr; }
+    .two-col, .signal-list, .gut-check-questions, .the-rule-split { grid-template-columns: 1fr; }
+    .rule-paid { border-right: none; border-bottom: 3px solid rgba(255,255,255,0.15); }
     .comparison-table { font-size: 0.85rem; }
     .comparison-table th, .comparison-table td { padding: 10px; }
   }
@@ -310,140 +368,248 @@
 <body>
 
 <nav>
-  <a href="#problem">The Problem</a>
+  <a href="#the-rule">The Rule</a>
+  <a href="#gut-check">Quick Test</a>
   <a href="#intent">Intent Framework</a>
+  <a href="#tree">Decision Tree</a>
   <a href="#signals">Signal List</a>
   <a href="#examples">Examples</a>
   <a href="#comparison">Side-by-Side</a>
-  <a href="#tree">Decision Tree</a>
-  <a href="#mistakes">Common Blends</a>
+  <a href="#mistakes">Common Mistakes</a>
+  <a href="#specs">Platform Specs</a>
 </nav>
 
+<!-- HERO -->
 <div class="hero">
   <h1>Paid vs Organic</h1>
-  <p>It's About Intent, Not Price Tags</p>
+  <p>One rule. One question. No excuses for mixing them up.</p>
 </div>
 
-<!-- THE PROBLEM -->
-<section class="section" id="problem">
-  <h2>The Problem: You're Classifying by Tactics</h2>
-  <p>The old framework said: "If it has a price, it's paid. If it doesn't, it's organic." That's wrong. It confuses <em>what's in the post</em> with <em>why the post exists</em>.</p>
-
-  <p style="margin-top: 1.5rem;">A brand awareness ad doesn't need a price. A top-of-funnel hook ad sends people to a landing page — no price in the creative. A retargeting ad might just say "Still thinking about it?" with a CTA.</p>
-
-  <p style="margin-top: 1.5rem;">Meanwhile, an organic post can say "follow for the reveal" — that's a soft CTA, but it's still organic because the <strong>intent is engagement</strong>, not conversion.</p>
-
-  <div class="rule-box">
-    <p><strong>The real question isn't "does it show a price?"</strong></p>
-    <p style="margin-top: 0.5rem;">It's: <strong>"What is the PURPOSE of this content?"</strong></p>
+<!-- THE RULE — Anchor everything here -->
+<div class="the-rule" id="the-rule">
+  <div class="the-rule-inner">
+    <h2>The Rule</h2>
+    <div class="the-rule-split">
+      <div class="rule-paid">
+        <div class="rule-type-label">Paid Content</div>
+        <div class="rule-emoji-title">💰 You're spending money</div>
+        <p class="rule-def">You pay to put it in front of people. The content exists to move someone through a funnel — toward awareness, consideration, or a purchase.</p>
+        <div class="rule-success-label">You win when</div>
+        <div class="rule-success">They take the next step (click, visit, buy)</div>
+      </div>
+      <div class="rule-organic">
+        <div class="rule-type-label">Organic Content</div>
+        <div class="rule-emoji-title">🌱 No money behind it</div>
+        <p class="rule-def">The algorithm distributes it based on engagement. The content exists to build community, earn follows, and create desire over time — not to convert right now.</p>
+        <div class="rule-success-label">You win when</div>
+        <div class="rule-success">They engage, follow, save, or share</div>
+      </div>
+    </div>
+    <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 2rem;">
+      That's it. Everything else on this page is just applying this rule correctly.
+    </p>
   </div>
-</section>
+</div>
+
+<!-- THE TWO QUESTIONS — quick gut-check right up front -->
+<div class="gut-check" id="gut-check">
+  <div class="gut-check-inner">
+    <h2>The Two Questions — Ask Before You Create Anything</h2>
+    <div class="gut-check-questions">
+      <div class="gut-question">
+        <div class="q-num">01</div>
+        <div class="q-text">"Am I spending money to put this in front of people?"</div>
+        <div class="gut-answer">
+          <span class="ans-label yes">YES</span>
+          <span>→ <strong>PAID.</strong> Now ask: what funnel stage? Match your creative to it.</span>
+        </div>
+        <div class="gut-answer">
+          <span class="ans-label no">NO</span>
+          <span>→ <strong>ORGANIC.</strong> No price, no external links. Make it worth watching.</span>
+        </div>
+      </div>
+      <div class="gut-question">
+        <div class="q-num">02</div>
+        <div class="q-text">"Does this content have ONE clear intent?"</div>
+        <div class="gut-answer">
+          <span class="ans-label yes">YES</span>
+          <span>→ Ship it ✅</span>
+        </div>
+        <div class="gut-answer">
+          <span class="ans-label no">NO</span>
+          <span>→ You're blending. Pick one lane and strip out the other.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 <!-- INTENT FRAMEWORK -->
 <section class="section" id="intent">
   <h2>The Intent Framework</h2>
+  <p>The old rule — "price = paid, no price = organic" — is wrong. It confuses <em>what's in the post</em> with <em>why the post exists</em>.</p>
+  <p style="margin-top: 1rem;">A brand awareness ad has no price. A retargeting ad might just say "Still thinking about it?" A conversion ad shows price and pushes hard. All three are paid — because <strong>you're spending money to distribute them</strong>.</p>
+  <p style="margin-top: 1rem;">Meanwhile, an organic post can have a CTA ("follow for the reveal") and still be organic — because the <strong>intent is engagement</strong>, not conversion.</p>
 
-  <div class="two-col">
+  <div class="two-col" style="margin-top: 2.5rem;">
     <div class="paid-box">
       <h4>💰 PAID = Conversion Intent</h4>
-      <p style="margin-bottom: 12px;">Every dollar spent moves someone through a funnel. The content exists to convert — even if "convert" means "become aware of us."</p>
-      <ul style="margin-left: 20px;">
-        <li><strong>Awareness ads:</strong> No price. Hook + brand impression. Goal: reach new people.</li>
-        <li><strong>Consideration ads:</strong> Maybe price. Landing page link. Goal: educate + interest.</li>
-        <li><strong>Conversion ads:</strong> Price + CTA. Goal: purchase.</li>
-        <li><strong>Retargeting ads:</strong> CTA, maybe discount. Goal: close the sale.</li>
+      <p style="margin-bottom: 12px; font-size: 0.95rem;">Every dollar spent moves someone through a funnel. There's always a <strong>next step</strong> you're paying to deliver.</p>
+      <ul style="margin-left: 20px; font-size: 0.95rem;">
+        <li><strong>Awareness:</strong> No price. Hook + brand. Reach cold audiences.</li>
+        <li><strong>Consideration:</strong> Price optional. Landing page link. Educate and interest.</li>
+        <li><strong>Conversion:</strong> Price + CTA. Close the purchase.</li>
+        <li><strong>Retargeting:</strong> Nudge + CTA. Recover cart abandoners.</li>
       </ul>
-      <p style="margin-top: 12px; font-style: italic; font-size: 0.9rem;">Common thread: there's a <strong>next step</strong> the viewer should take, and you're paying to put it in front of them.</p>
     </div>
     <div class="organic-box">
       <h4>🌱 ORGANIC = Engagement Intent</h4>
-      <p style="margin-bottom: 12px;">No money behind it. The content exists to build community, earn follows, and create desire over time.</p>
-      <ul style="margin-left: 20px;">
+      <p style="margin-bottom: 12px; font-size: 0.95rem;">No money behind it. The content earns reach through engagement. The goal is a <strong>feeling</strong> — curiosity, delight, belonging — not a click.</p>
+      <ul style="margin-left: 20px; font-size: 0.95rem;">
         <li><strong>Entertainment:</strong> Timelapses, satisfying content, humor</li>
         <li><strong>Community:</strong> Polls, challenges, "rate this" posts</li>
         <li><strong>Story:</strong> Behind-the-scenes, mystery reveals, teasers</li>
         <li><strong>Social proof:</strong> UGC reposts, customer photos</li>
       </ul>
-      <p style="margin-top: 12px; font-style: italic; font-size: 0.9rem;">Common thread: the viewer should <strong>feel something</strong> (curiosity, delight, belonging) — not click somewhere.</p>
     </div>
   </div>
 
   <div class="warning">
-    <strong>Key insight:</strong> Organic posts CAN have soft CTAs ("follow for the reveal," "save this for later," "comment your guess"). These are engagement CTAs — they keep people on-platform and build your audience. They're not conversion CTAs.
+    <strong>Organic CTAs are fine — as long as they're engagement CTAs.</strong> "Follow for the reveal," "Comment your guess," "Save this" — these keep people on-platform. They're engagement actions, not purchase actions. The moment you add a price or a link to your website, it's no longer organic.
+  </div>
+</section>
+
+<!-- DECISION TREE -->
+<section class="section-full" style="background: var(--light-gray);">
+  <div class="inner" id="tree">
+    <h2>The Decision Tree</h2>
+    <p style="margin-bottom: 1.5rem;">Run this before creating any piece of content. No exceptions.</p>
+    <div class="decision-tree">START: You're making a piece of content.
+│
+├─ Q1: Are you SPENDING MONEY to distribute this?
+│   ├─ NO  → It's ORGANIC. Jump to Q5.
+│   └─ YES → It's PAID. Continue ↓
+│
+├─ Q2 (Paid): What STAGE of the funnel?
+│   │
+│   ├─ AWARENESS  (cold audience — never heard of us)
+│   │   → No price needed
+│   │   → Hook + brand impression only
+│   │   → CTA: None, or "Learn More" → landing page
+│   │   → Win condition: Reach, video views, CPM
+│   │
+│   ├─ CONSIDERATION  (warm — showed interest, visited site)
+│   │   → Price optional (landing page handles it)
+│   │   → Hook + value prop + social proof
+│   │   → CTA: "Learn More" / "See Collection"
+│   │   → Win condition: CTR, landing page visits
+│   │
+│   ├─ CONVERSION  (hot — ready to buy)
+│   │   → Show the price. Show it early.
+│   │   → Hook + price + urgency + clear CTA
+│   │   → CTA: "Shop Now" / "Get Yours"
+│   │   → Win condition: ROAS, CPA, purchases
+│   │
+│   └─ RETARGETING  (visited site or abandoned cart)
+│       → Price optional (they already know it)
+│       → Just the nudge
+│       → CTA: "Complete Your Order" / "Still thinking?"
+│       → Win condition: Conversion rate, ROAS
+│
+├─ Q3 (Paid): Does the creative match the funnel stage?
+│   ├─ YES → Ship it ✅
+│   └─ NO  → Fix it. Awareness content ≠ conversion content.
+│
+│
+├─ Q5 (Organic): Is the primary goal ENGAGEMENT?
+│   │   (saves, shares, comments, follows)
+│   ├─ YES → Good. Continue ↓
+│   └─ NO  → Why isn't it paid? Rethink the purpose.
+│
+├─ Q6 (Organic): Does it link off-platform?
+│   ├─ YES → ⚠️ This kills organic reach.
+│   │         Remove the link OR make it a paid ad.
+│   └─ NO  → Good ✅
+│
+└─ Q7 (Organic): Could a stranger enjoy this
+    without knowing Odd Pieces at all?
+     ├─ YES → ORGANIC ✅ Post it.
+     └─ NO  → It's not entertaining enough for organic.
+               Make it better — or make it a paid ad.</div>
   </div>
 </section>
 
 <!-- SIGNAL LIST -->
-<section class="section-full" style="background: var(--light-gray);" id="signals">
+<section class="section-full" style="background: white;" id="signals">
   <div class="inner">
     <h2>Intent Signal List</h2>
-    <p>Use these signals to identify the <strong>purpose</strong> of content. No single signal is definitive — look at the pattern.</p>
+    <p>No single signal is definitive — look at the pattern. Multiple signals pointing the same way = you're on the right track.</p>
 
-    <h3>🔵 Paid Content Signals (Conversion Intent)</h3>
+    <h3 style="color: var(--paid-text); margin-top: 2rem;">💰 Paid Content Signals</h3>
     <div class="signal-list">
       <div class="signal">
-        <div class="label paid">Strong Signal</div>
+        <span class="label paid-strong">Strong</span>
         <strong>Has a conversion CTA</strong>
-        <p style="margin: 8px 0 0 0;">"Shop Now," "Get Yours," "Order Today," "Learn More" (with link to product/landing page)</p>
+        <p style="font-size: 0.9rem;">"Shop Now," "Get Yours," "Order Today," "Learn More" linking to a product page or landing page</p>
       </div>
       <div class="signal">
-        <div class="label paid">Strong Signal</div>
+        <span class="label paid-strong">Strong</span>
         <strong>Links off-platform</strong>
-        <p style="margin: 8px 0 0 0;">Sends viewers to website, product page, landing page, or checkout</p>
+        <p style="font-size: 0.9rem;">Sends viewers to your website, product page, landing page, or checkout</p>
       </div>
       <div class="signal">
-        <div class="label paid">Strong Signal</div>
-        <strong>Has a retargeting follow-up planned</strong>
-        <p style="margin: 8px 0 0 0;">The content is part of a funnel sequence — awareness → retarget → convert</p>
+        <span class="label paid-strong">Strong</span>
+        <strong>Part of a funnel sequence</strong>
+        <p style="font-size: 0.9rem;">Designed to feed into retargeting (awareness → pixel → retarget → convert)</p>
       </div>
       <div class="signal">
-        <div class="label paid">Moderate Signal</div>
+        <span class="label paid-mod">Moderate</span>
         <strong>Shows price or discount</strong>
-        <p style="margin: 8px 0 0 0;">Price is a paid signal — but its <em>absence</em> doesn't make it organic. Top-of-funnel paid ads often skip price entirely.</p>
+        <p style="font-size: 0.9rem;">Price is always a paid signal — but its <em>absence</em> doesn't make something organic. Awareness ads routinely skip price.</p>
       </div>
       <div class="signal">
-        <div class="label paid">Moderate Signal</div>
+        <span class="label paid-mod">Moderate</span>
         <strong>Creates purchase urgency</strong>
-        <p style="margin: 8px 0 0 0;">"Only X left," countdown timers, "limited edition," "selling fast"</p>
+        <p style="font-size: 0.9rem;">"Only X left," countdown timers, "limited edition," "selling fast"</p>
       </div>
       <div class="signal">
-        <div class="label paid">Moderate Signal</div>
-        <strong>Uses social proof for persuasion</strong>
-        <p style="margin: 8px 0 0 0;">Review quotes, star ratings, "sold out 3 times" — used to close, not entertain</p>
+        <span class="label paid-mod">Moderate</span>
+        <strong>Uses social proof to persuade</strong>
+        <p style="font-size: 0.9rem;">Review quotes, star ratings, "sold out 3 times" — positioned to close, not entertain</p>
       </div>
     </div>
 
-    <h3 style="margin-top: 2.5rem;">🟠 Organic Content Signals (Engagement Intent)</h3>
+    <h3 style="color: var(--organic-text); margin-top: 3rem;">🌱 Organic Content Signals</h3>
     <div class="signal-list">
       <div class="signal">
-        <div class="label organic">Strong Signal</div>
+        <span class="label organic-strong">Strong</span>
         <strong>Goal is saves, shares, comments, follows</strong>
-        <p style="margin: 8px 0 0 0;">Success = platform engagement metrics, not website clicks or purchases</p>
+        <p style="font-size: 0.9rem;">Success = platform engagement metrics. Not website clicks, not purchases.</p>
       </div>
       <div class="signal">
-        <div class="label organic">Strong Signal</div>
-        <strong>Works without knowing the brand</strong>
-        <p style="margin: 8px 0 0 0;">A stranger would watch/save/share this even if they'd never heard of Odd Pieces</p>
-      </div>
-      <div class="signal">
-        <div class="label organic">Strong Signal</div>
+        <span class="label organic-strong">Strong</span>
         <strong>Keeps people on-platform</strong>
-        <p style="margin: 8px 0 0 0;">No external links. Engagement happens in comments, saves, shares</p>
+        <p style="font-size: 0.9rem;">No external links. Everything happens in comments, saves, and shares.</p>
       </div>
       <div class="signal">
-        <div class="label organic">Moderate Signal</div>
+        <span class="label organic-strong">Strong</span>
+        <strong>Works without knowing the brand</strong>
+        <p style="font-size: 0.9rem;">A stranger would watch, save, or share this even if they'd never heard of Odd Pieces</p>
+      </div>
+      <div class="signal">
+        <span class="label organic-mod">Moderate</span>
         <strong>Has engagement CTAs (not conversion CTAs)</strong>
-        <p style="margin: 8px 0 0 0;">"Follow for the reveal," "Comment your guess," "Save this," "Tag someone who needs this challenge"</p>
+        <p style="font-size: 0.9rem;">"Follow for the reveal," "Comment your guess," "Save this," "Tag someone" — platform actions, not purchase actions</p>
       </div>
       <div class="signal">
-        <div class="label organic">Moderate Signal</div>
+        <span class="label organic-mod">Moderate</span>
         <strong>Entertainment-first format</strong>
-        <p style="margin: 8px 0 0 0;">Timelapse, ASMR, satisfying content, humor, behind-the-scenes, challenges</p>
+        <p style="font-size: 0.9rem;">Timelapse, ASMR, satisfying content, humor, behind-the-scenes, challenges</p>
       </div>
       <div class="signal">
-        <div class="label organic">Moderate Signal</div>
-        <strong>Builds anticipation or story</strong>
-        <p style="margin: 8px 0 0 0;">Multi-part reveals, mystery teasers, "day X of…" series</p>
+        <span class="label organic-mod">Moderate</span>
+        <strong>Builds anticipation or a running story</strong>
+        <p style="font-size: 0.9rem;">Multi-part reveals, mystery teasers, "day X of…" series</p>
       </div>
     </div>
   </div>
@@ -452,61 +618,44 @@
 <!-- EXAMPLES -->
 <section class="section" id="examples">
   <h2>Examples That Break the Old Rules</h2>
-  <p>These show why "price = paid" doesn't work.</p>
+  <p>These prove why "price = paid" is the wrong test.</p>
 
-  <h3>Paid Ads WITHOUT Price</h3>
+  <h3 style="color: var(--paid-text); margin-top: 2rem;">💰 Paid Ads Without a Price</h3>
 
-  <div class="example-card">
-    <span class="tag tag-awareness">Awareness Ad — No Price</span>
-    <h4 style="margin-top: 4px;">🎬 "What's inside the black box?"</h4>
-    <p><strong>Visual:</strong> Mysterious black box on a table. Hands slowly open it. 1000 puzzle pieces pour out. Cut to black. Logo.</p>
+  <div class="example-card paid-card">
+    <span class="tag tag-paid">Awareness Ad — No Price</span>
+    <h4 style="margin-top: 4px; color: var(--paid-text);">🎬 "What's inside the black box?"</h4>
+    <p><strong>Visual:</strong> Mysterious black box. Hands open it. 1000 puzzle pieces pour out. Cut to black. Logo.</p>
     <p><strong>CTA:</strong> None (or "Follow @oddpieces")</p>
     <p><strong>Goal:</strong> Brand impression. Curiosity. Reach new audiences through paid distribution.</p>
-    <p style="margin-top: 8px; font-style: italic; font-size: 0.9rem;">No price. No "shop now." Still paid — because you're spending money to put this in front of cold audiences.</p>
+    <p style="margin-top: 8px; background: var(--paid-bg); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem;"><strong>Why it's paid:</strong> You're spending money to put this in front of cold audiences. No price needed — the landing page handles that later.</p>
   </div>
 
-  <div class="example-card">
-    <span class="tag tag-awareness">Top-of-Funnel Ad — No Price</span>
-    <h4 style="margin-top: 4px;">🎬 "1000 pieces. Zero clues. Can you solve it?"</h4>
-    <p><strong>Visual:</strong> Fast-cut montage of someone puzzling. Frustration. Then triumph. The completed image reveal.</p>
-    <p><strong>CTA:</strong> "Learn More" → links to landing page (not product page)</p>
-    <p><strong>Goal:</strong> Drive landing page traffic from interest-based audiences. Pixel them for retargeting.</p>
-    <p style="margin-top: 8px; font-style: italic; font-size: 0.9rem;">No price in the creative. The landing page handles education and pricing. This ad's job is just to hook.</p>
-  </div>
-
-  <div class="example-card">
-    <span class="tag tag-retarget">Retargeting Ad — No Price Needed</span>
-    <h4 style="margin-top: 4px;">🎬 "Still thinking about it?"</h4>
-    <p><strong>Visual:</strong> Close-up of completed puzzle. Simple text overlay: "Still thinking about it?"</p>
+  <div class="example-card paid-card">
+    <span class="tag tag-paid">Retargeting Ad — No Price Needed</span>
+    <h4 style="margin-top: 4px; color: var(--paid-text);">🎬 "Still thinking about it?"</h4>
+    <p><strong>Visual:</strong> Close-up of completed puzzle. Text overlay: "Still thinking about it?"</p>
     <p><strong>CTA:</strong> "Complete Your Order"</p>
-    <p><strong>Goal:</strong> Convert cart abandoners. They already know the price — remind them to finish.</p>
-    <p style="margin-top: 8px; font-style: italic; font-size: 0.9rem;">Price is optional here. They've seen it. The ad's job is the nudge, not the pitch.</p>
+    <p><strong>Goal:</strong> Convert cart abandoners. They already know the price.</p>
+    <p style="margin-top: 8px; background: var(--paid-bg); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem;"><strong>Why no price:</strong> They've seen it. The ad's job is the nudge, not the pitch. Price is optional here.</p>
   </div>
 
-  <h3 style="margin-top: 2.5rem;">Organic Posts WITH Soft CTAs</h3>
+  <h3 style="color: var(--organic-text); margin-top: 3rem;">🌱 Organic Posts With CTAs</h3>
 
-  <div class="example-card">
+  <div class="example-card organic-card">
     <span class="tag tag-organic">Organic — Has CTA, Still Organic</span>
-    <h4 style="margin-top: 4px;">🎬 "Day 4. I think I see a pattern… follow for the reveal"</h4>
-    <p><strong>Visual:</strong> Progress timelapse. Close-up of partially completed puzzle. Tease of what the image might be.</p>
+    <h4 style="margin-top: 4px; color: var(--organic-text);">🎬 "Day 4. I think I see a pattern… follow for the reveal"</h4>
+    <p><strong>Visual:</strong> Progress timelapse. Close-up of partial puzzle. Hint at the image.</p>
     <p><strong>CTA:</strong> "Follow for the reveal"</p>
-    <p><strong>Why it's organic:</strong> The CTA is an engagement CTA (follow), not a conversion CTA (shop). No link. No price. Intent is to build audience.</p>
+    <p style="margin-top: 8px; background: var(--organic-bg); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem;"><strong>Why it's organic:</strong> "Follow" is an engagement action, not a purchase action. No link. No price. Intent is audience growth.</p>
   </div>
 
-  <div class="example-card">
-    <span class="tag tag-organic">Organic — Mentions Product, Still Organic</span>
-    <h4 style="margin-top: 4px;">🎬 "Rate this difficulty 1–10 🤯"</h4>
-    <p><strong>Visual:</strong> Finished puzzle beauty shot. The product is clearly visible — it's literally the subject.</p>
+  <div class="example-card organic-card">
+    <span class="tag tag-organic">Organic — Shows Product, Still Organic</span>
+    <h4 style="margin-top: 4px; color: var(--organic-text);">🎬 "Rate this difficulty 1–10 🤯"</h4>
+    <p><strong>Visual:</strong> Finished puzzle beauty shot. The product is the subject.</p>
     <p><strong>CTA:</strong> "Comment your rating"</p>
-    <p><strong>Why it's organic:</strong> Showing the product ≠ selling the product. Intent is comments and engagement. No price, no link, no purchase path.</p>
-  </div>
-
-  <div class="example-card">
-    <span class="tag tag-organic">Organic — Soft Sell, Still Organic</span>
-    <h4 style="margin-top: 4px;">🎬 "Save this for your next puzzle night 📌"</h4>
-    <p><strong>Visual:</strong> Cozy setup — candle, coffee, puzzle in progress. Aesthetic lifestyle content.</p>
-    <p><strong>CTA:</strong> "Save this"</p>
-    <p><strong>Why it's organic:</strong> "Save" is a platform action, not a purchase action. The intent is bookmark/aspiration, not conversion.</p>
+    <p style="margin-top: 8px; background: var(--organic-bg); padding: 10px 14px; border-radius: 4px; font-size: 0.9rem;"><strong>Why it's organic:</strong> Showing the product ≠ selling it. No price, no link, no purchase path. Intent is comments.</p>
   </div>
 </section>
 
@@ -514,261 +663,159 @@
 <section class="section-full" style="background: var(--light-gray);" id="comparison">
   <div class="inner">
     <h2>Side-by-Side: Same Product, Three Approaches</h2>
-    <p>The Noir Collection — shown as awareness paid, conversion paid, and organic.</p>
+    <p>The Noir Collection — identical product, three completely different purposes.</p>
 
-    <table class="comparison-table">
+    <table class="comparison-table" style="margin-top: 1.5rem;">
       <thead>
         <tr>
-          <th style="width: 16%;">Element</th>
-          <th style="width: 28%;">🟣 Awareness Ad (Paid)</th>
-          <th style="width: 28%;">🔵 Conversion Ad (Paid)</th>
-          <th style="width: 28%;">🟠 Organic Post</th>
+          <th style="width: 16%; background: var(--ink);">Element</th>
+          <th class="paid-col" style="width: 28%;">💰 Awareness Ad (Paid)</th>
+          <th class="paid-col" style="width: 28%;">💰 Conversion Ad (Paid)</th>
+          <th class="organic-col" style="width: 28%;">🌱 Organic Post</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><strong>Intent</strong></td>
-          <td>Get on their radar</td>
-          <td>Get the purchase</td>
-          <td>Get the follow / save</td>
+          <td class="paid-cell">Get on their radar</td>
+          <td class="paid-cell">Get the purchase</td>
+          <td class="organic-cell">Get the follow / save</td>
         </tr>
         <tr>
           <td><strong>Hook</strong></td>
-          <td>"A puzzle so dark, you can barely see it."</td>
-          <td>"The puzzle that sold out 3 times — $34.99"</td>
-          <td>"POV: zero idea what you're building"</td>
+          <td class="paid-cell">"A puzzle so dark, you can barely see it."</td>
+          <td class="paid-cell">"The puzzle that sold out 3 times — $34.99"</td>
+          <td class="organic-cell">"POV: zero idea what you're building"</td>
         </tr>
         <tr>
           <td><strong>Price shown?</strong></td>
-          <td>❌ No</td>
-          <td>✅ "$34.99 — Free shipping"</td>
-          <td>❌ No</td>
+          <td class="paid-cell">❌ No</td>
+          <td class="paid-cell">✅ "$34.99 — Free shipping"</td>
+          <td class="organic-cell">❌ Never</td>
         </tr>
         <tr>
           <td><strong>CTA</strong></td>
-          <td>None (or "Learn More" → landing page)</td>
-          <td>"Shop Now" → product page</td>
-          <td>"Follow for the reveal"</td>
+          <td class="paid-cell">None / "Learn More" → landing page</td>
+          <td class="paid-cell">"Shop Now" → product page</td>
+          <td class="organic-cell">"Follow for the reveal"</td>
         </tr>
         <tr>
           <td><strong>Links off-platform?</strong></td>
-          <td>Maybe (landing page)</td>
-          <td>Yes (product page)</td>
-          <td>No</td>
+          <td class="paid-cell">Yes (landing page)</td>
+          <td class="paid-cell">Yes (product page)</td>
+          <td class="organic-cell">❌ Never</td>
         </tr>
         <tr>
           <td><strong>Audience</strong></td>
-          <td>Cold — never heard of us</td>
-          <td>Warm — visited site or engaged</td>
-          <td>Followers + algorithm reach</td>
+          <td class="paid-cell">Cold — never heard of us</td>
+          <td class="paid-cell">Warm — visited site or engaged</td>
+          <td class="organic-cell">Followers + algorithm reach</td>
         </tr>
         <tr>
-          <td><strong>Success metric</strong></td>
-          <td>Reach, video views, CPM</td>
-          <td>ROAS, purchases, CPA</td>
-          <td>Saves, shares, follows, comments</td>
+          <td><strong>Win condition</strong></td>
+          <td class="paid-cell">Reach, video views, CPM</td>
+          <td class="paid-cell">ROAS, purchases, CPA</td>
+          <td class="organic-cell">Saves, shares, follows, comments</td>
         </tr>
         <tr>
           <td><strong>Money behind it?</strong></td>
-          <td>✅ Yes</td>
-          <td>✅ Yes</td>
-          <td>❌ No</td>
-        </tr>
-      </tbody>
-    </table>
-
-    <h3 style="margin-top: 3rem;">The Garden Party (Brutal Difficulty) — Three Approaches</h3>
-
-    <table class="comparison-table">
-      <thead>
-        <tr>
-          <th style="width: 16%;">Element</th>
-          <th style="width: 28%;">🟣 Awareness Ad (Paid)</th>
-          <th style="width: 28%;">🔵 Conversion Ad (Paid)</th>
-          <th style="width: 28%;">🟠 Organic Post</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><strong>Intent</strong></td>
-          <td>Make puzzle enthusiasts aware</td>
-          <td>Sell to puzzle enthusiasts</td>
-          <td>Build community around difficulty</td>
-        </tr>
-        <tr>
-          <td><strong>Hook</strong></td>
-          <td>"The puzzle most people quit."</td>
-          <td>"Think you're good? $34.99 to prove it."</td>
-          <td>"This took 6 hours."</td>
-        </tr>
-        <tr>
-          <td><strong>Price shown?</strong></td>
-          <td>❌ No</td>
-          <td>✅ "$34.99"</td>
-          <td>❌ No</td>
-        </tr>
-        <tr>
-          <td><strong>CTA</strong></td>
-          <td>"See if you dare" → landing page</td>
-          <td>"Shop Now — if you dare"</td>
-          <td>"Rate difficulty 1–10"</td>
-        </tr>
-        <tr>
-          <td><strong>Success metric</strong></td>
-          <td>Video views, landing page visits</td>
-          <td>Purchases, ROAS</td>
-          <td>Comments, shares, saves</td>
+          <td class="paid-cell">✅ Yes</td>
+          <td class="paid-cell">✅ Yes</td>
+          <td class="organic-cell">❌ No</td>
         </tr>
       </tbody>
     </table>
   </div>
 </section>
 
-<!-- DECISION TREE -->
+<!-- CORE RULES -->
 <section class="section-full" style="background: var(--white);">
-  <div class="inner" id="tree">
-    <h2>The Decision Tree</h2>
-    <p style="margin-bottom: 1.5rem;">Run this before creating content:</p>
-    <div class="decision-tree">START: You're making a piece of content.
-│
-├─ Q1: Are you SPENDING MONEY to distribute this?
-│   ├─ NO → It's ORGANIC. Skip to Q5.
-│   └─ YES → It's PAID. Continue ↓
-│
-├─ Q2 (Paid): What STAGE of the funnel?
-│   │
-│   ├─ AWARENESS (cold audience, never heard of us)
-│   │   → No price needed
-│   │   → Hook + brand impression
-│   │   → CTA: None, or "Learn More" → landing page
-│   │   → Metric: Reach, CPM, video views
-│   │
-│   ├─ CONSIDERATION (warm audience, showed interest)
-│   │   → Price optional (landing page can handle it)
-│   │   → Hook + value prop + social proof
-│   │   → CTA: "Learn More" or "See Collection"
-│   │   → Metric: CTR, landing page visits
-│   │
-│   ├─ CONVERSION (hot audience, ready to buy)
-│   │   → Price: YES, show it
-│   │   → Hook + price + urgency + CTA
-│   │   → CTA: "Shop Now" / "Get Yours"
-│   │   → Metric: ROAS, CPA, purchases
-│   │
-│   └─ RETARGETING (visited site, abandoned cart)
-│       → Price optional (they already know it)
-│       → Nudge + CTA
-│       → CTA: "Complete Your Order" / "Still thinking?"
-│       → Metric: Conversion rate, ROAS
-│
-├─ Q3 (Paid): Does the creative match the funnel stage?
-│   ├─ YES → Ship it ✅
-│   └─ NO → Fix it. Don't put conversion CTAs
-│           on awareness content (or vice versa).
-│
-├─ Q5 (Organic): Is the primary goal ENGAGEMENT?
-│   │   (saves, shares, comments, follows)
-│   ├─ YES → Good. Continue ↓
-│   └─ NO → Why isn't it paid? Rethink.
-│
-├─ Q6 (Organic): Does it link off-platform?
-│   ├─ YES → ⚠️ This kills organic reach.
-│   │         Remove the link or make it paid.
-│   └─ NO → Good ✅
-│
-└─ Q7 (Organic): Could a stranger enjoy this
-   without knowing your brand?
-    ├─ YES → ORGANIC ✅ Post it.
-    └─ NO → Rethink. It's not entertaining
-            enough for organic. Either make it
-            better or make it a paid ad.</div>
-  </div>
-</section>
-
-<!-- CORE RULES (Revised) -->
-<section class="section-full" style="background: var(--light-gray); border-top: 3px solid var(--orange);">
   <div class="inner">
-    <h2>The Core Rules (Revised)</h2>
+    <h2>The Core Rules</h2>
+    <p style="margin-bottom: 1rem;">If you remember nothing else, remember these.</p>
 
     <div class="two-col">
       <div class="organic-box">
-        <h4>🌱 Organic Content Must:</h4>
+        <h4>🌱 Organic Must:</h4>
         <ul style="margin: 15px 0 0 20px;">
-          <li>Have <strong>engagement intent</strong> (saves, shares, comments, follows)</li>
-          <li>Keep people <strong>on-platform</strong> (no external links)</li>
-          <li>Never mention price</li>
-          <li>Work without knowing the brand</li>
-          <li>Feel like entertainment or community</li>
-          <li>Soft CTAs are fine ("follow for reveal," "comment your guess")</li>
+          <li>Have <strong>engagement intent</strong> — saves, shares, comments, follows</li>
+          <li>Keep people <strong>on-platform</strong> — no external links, ever</li>
+          <li><strong>Never show price</strong></li>
+          <li>Work for a <strong>stranger</strong> who's never heard of Odd Pieces</li>
+          <li>Feel like <strong>entertainment or community</strong></li>
         </ul>
+        <p style="margin-top: 12px; font-size: 0.9rem; color: var(--organic-text);">Soft engagement CTAs are fine: "follow for the reveal," "comment your guess," "save this."</p>
       </div>
       <div class="paid-box">
-        <h4>💰 Paid Content Must:</h4>
+        <h4>💰 Paid Must:</h4>
         <ul style="margin: 15px 0 0 20px;">
-          <li>Have <strong>conversion intent</strong> (even if the conversion is "become aware")</li>
-          <li>Match its <strong>funnel stage</strong> (awareness ≠ conversion)</li>
+          <li>Have <strong>conversion intent</strong> — even if "convert" = brand awareness</li>
+          <li><strong>Match its funnel stage</strong> — awareness ≠ conversion creative</li>
           <li>Have a <strong>clear next step</strong> for the viewer</li>
-          <li>Only show price when the funnel stage calls for it</li>
-          <li>Feel like it has <strong>purpose behind every dollar</strong></li>
-          <li>Be part of a <strong>sequence</strong> (awareness → retarget → convert)</li>
+          <li>Show price <strong>only</strong> when the funnel stage calls for it</li>
+          <li>Be <strong>part of a sequence</strong> — awareness → retarget → convert</li>
         </ul>
+        <p style="margin-top: 12px; font-size: 0.9rem; color: var(--paid-text);">Every dollar should have a purpose. If you can't say what the next step is, the creative isn't ready.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- COMMON BLENDS (THE MISTAKES) -->
+<!-- COMMON BLEND MISTAKES -->
 <section class="section" id="mistakes">
   <h2>Common Blend Mistakes</h2>
+  <p>These are the five ways teams get it wrong. Each one kills performance.</p>
 
   <div class="mistake">
     <p><strong>❌ "The Organic Post with a Price Tag"</strong></p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem;">[Beautiful timelapse, cozy vibes] + "Get yours for $34.99 at oddpieces.com"</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem; font-style: italic;">Result: URL kills organic reach. Price kills engagement. You get neither reach NOR conversion.</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.95rem;">[Beautiful timelapse, cozy vibes] + "Get yours for $34.99 at oddpieces.com"</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; font-style: italic;">The URL kills organic reach. The price kills engagement. You get neither.</p>
   </div>
 
   <div class="mistake">
     <p><strong>❌ "The Conversion Ad Without a Price"</strong></p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem;">[Bottom-of-funnel ad targeting warm audience] + "Shop Now" but no price anywhere</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem; font-style: italic;">Result: They click, see the price on-site, bounce. You paid for a click that didn't convert because the ad didn't set the price expectation.</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.95rem;">[Bottom-of-funnel ad, warm audience] + "Shop Now" but no price anywhere</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; font-style: italic;">They click. They see the price on-site. They bounce. You paid for a click that never had a chance.</p>
   </div>
 
   <div class="mistake">
     <p><strong>❌ "The Awareness Ad That Tries to Sell"</strong></p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem;">[Cold audience has never heard of you] + "$34.99 — Shop Now — Free Shipping — ⭐⭐⭐⭐⭐"</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem; font-style: italic;">Result: Too much too fast. Cold audiences scroll past hard sells. You needed a hook, not a pitch.</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.95rem;">[Cold audience, never heard of you] + "$34.99 — Shop Now — Free Shipping — ⭐⭐⭐⭐⭐"</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; font-style: italic;">Too much, too fast. Cold audiences scroll past hard sells. You needed a hook, not a pitch.</p>
   </div>
 
   <div class="mistake">
     <p><strong>❌ "The Paid Ad That's Too Artistic"</strong></p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem;">[Slow-mo aesthetic footage, no text overlay, no CTA, no next step] marked as "awareness"</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem; font-style: italic;">Result: Viewers think "pretty" and scroll. Without any conversion intent (even awareness-level), you're paying for organic-style content. Either post it organically or add a purpose.</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.95rem;">[Slow-mo aesthetic footage, no text overlay, no CTA, no next step] — labeled "awareness"</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; font-style: italic;">Viewers think "pretty" and scroll. You're paying for organic-style content. Either post it organically or give it a purpose.</p>
   </div>
 
   <div class="mistake">
     <p><strong>❌ "The Tease Series That Breaks for Sales"</strong></p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem;">5-day mystery tease (organic, great!) → Day 3 caption adds "Pre-order now"</p>
-    <p style="margin: 10px 0 0 0; font-size: 0.95rem; font-style: italic;">Result: You killed the mystery. Momentum dies. Comments go silent. Finish the organic series, THEN run a paid conversion ad.</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.95rem;">5-day mystery tease (organic, great!) → Day 3 caption adds "Pre-order now"</p>
+    <p style="margin: 8px 0 0 0; font-size: 0.9rem; font-style: italic;">You killed the mystery. Comments die. Finish the organic series first — THEN run a paid conversion ad.</p>
   </div>
 
-  <h3 style="margin-top: 3rem;">The Fix</h3>
-  <p><strong>Ask: "What is the PURPOSE of this content?"</strong></p>
-  <ul style="margin-left: 30px; margin-top: 15px;">
-    <li><strong>Build audience?</strong> → Organic. No price, no external links, engagement CTAs only.</li>
-    <li><strong>Reach new people (paid)?</strong> → Awareness ad. Hook + brand. No price needed.</li>
-    <li><strong>Drive consideration (paid)?</strong> → Consideration ad. Value prop + landing page. Price optional.</li>
-    <li><strong>Get purchases (paid)?</strong> → Conversion ad. Price + CTA + urgency.</li>
-    <li><strong>Recover lost buyers (paid)?</strong> → Retargeting ad. Nudge + CTA. Price optional.</li>
-  </ul>
-  <p style="margin-top: 1.5rem;"><em>Every piece of content gets ONE intent. No blending.</em></p>
+  <div style="background: var(--ink); color: white; padding: 28px 32px; border-radius: 6px; margin-top: 2.5rem;">
+    <p style="font-weight: 700; font-size: 1.05rem; margin-bottom: 1rem;">The fix is always the same:</p>
+    <p style="margin-bottom: 8px;">Ask: <strong style="color: var(--yellow);">"What is the ONE purpose of this content?"</strong></p>
+    <ul style="margin-left: 24px; margin-top: 12px; line-height: 2;">
+      <li><strong>Build audience?</strong> → Organic. No price, no links, engagement CTAs only.</li>
+      <li><strong>Reach new people (paid)?</strong> → Awareness ad. Hook + brand. No price.</li>
+      <li><strong>Drive consideration (paid)?</strong> → Consideration ad. Value prop + landing page.</li>
+      <li><strong>Get purchases (paid)?</strong> → Conversion ad. Price + CTA + urgency.</li>
+      <li><strong>Win back lost buyers (paid)?</strong> → Retargeting ad. Nudge + CTA.</li>
+    </ul>
+    <p style="margin-top: 1.2rem; font-style: italic; color: rgba(255,255,255,0.6); font-size: 0.9rem;">One intent per piece. No blending. Ever.</p>
+  </div>
 </section>
 
 <!-- PLATFORM SPECS -->
-<section class="section-full" style="background: var(--light-gray);">
+<section class="section-full" style="background: var(--light-gray);" id="specs">
   <div class="inner">
     <h2>Platform Specs</h2>
 
-    <h3>Organic: Length & Hook Timing</h3>
+    <h3 style="color: var(--organic-text);">🌱 Organic: Length & Hook Timing</h3>
     <table class="comparison-table">
       <thead>
         <tr>
@@ -800,7 +847,7 @@
       </tbody>
     </table>
 
-    <h3 style="margin-top: 3rem;">Paid: Length & Hook Timing by Funnel Stage</h3>
+    <h3 style="color: var(--paid-text); margin-top: 3rem;">💰 Paid: Length & Hook Timing by Funnel Stage</h3>
     <table class="comparison-table">
       <thead>
         <tr>
@@ -813,28 +860,28 @@
       </thead>
       <tbody>
         <tr>
-          <td>Awareness</td>
+          <td><strong>Awareness</strong></td>
           <td>15–30s</td>
           <td>First 1.5s</td>
           <td>❌ No</td>
           <td>None / Learn More</td>
         </tr>
         <tr>
-          <td>Consideration</td>
+          <td><strong>Consideration</strong></td>
           <td>15–25s</td>
           <td>First 2s</td>
           <td>⚡ Optional</td>
           <td>Learn More / See More</td>
         </tr>
         <tr>
-          <td>Conversion</td>
+          <td><strong>Conversion</strong></td>
           <td>15–20s</td>
           <td>First 1.5s</td>
           <td>✅ In first 5s</td>
           <td>Shop Now</td>
         </tr>
         <tr>
-          <td>Retargeting</td>
+          <td><strong>Retargeting</strong></td>
           <td>6–10s</td>
           <td>Immediate</td>
           <td>⚡ Optional</td>
@@ -845,32 +892,11 @@
   </div>
 </section>
 
-<!-- THE GUT CHECK -->
-<section class="section" id="gutcheck">
-  <div class="gut-check">
-    <p><strong>The Two Questions:</strong></p>
-    <p style="font-size: 1.2rem; margin: 1.5rem 0;">
-      1. "Am I spending money to put this in front of people?"
-    </p>
-    <div style="font-size: 1rem; margin-bottom: 2rem;">
-      <p><span class="answer">YES</span> → PAID. Now ask: what funnel stage? Match your creative to it.</p>
-      <p><span class="answer">NO</span> → ORGANIC. No price, no external links. Make it worth watching.</p>
-    </div>
-    <p style="font-size: 1.2rem; margin: 1.5rem 0;">
-      2. "Does this content have ONE clear intent?"
-    </p>
-    <div style="font-size: 1rem;">
-      <p><span class="answer">YES</span> → Ship it ✅</p>
-      <p><span class="answer">NO</span> → You're blending. Pick one lane.</p>
-    </div>
-  </div>
-</section>
-
 <footer>
   <p><strong>Odd Pieces Content Pipeline Guide</strong></p>
-  <p>It's about intent, not price tags. One purpose per post. No blending.</p>
-  <p style="margin-top: 1rem; font-size: 0.85rem;">
-    Last updated: March 2026 | 📍 <a href="https://odd-pieces-site.vercel.app" style="color: rgba(255,255,255,0.7); text-decoration: none;">odd-pieces-site.vercel.app</a>
+  <p style="margin-top: 6px; opacity: 0.7;">Paid = spending money to distribute. Organic = no money. One intent per post. No blending.</p>
+  <p style="margin-top: 1rem; font-size: 0.85rem; opacity: 0.5;">
+    Last updated: March 2026 | 📍 <a href="https://odd-pieces-site.vercel.app" style="color: rgba(255,255,255,0.6); text-decoration: none;">odd-pieces-site.vercel.app</a>
   </p>
 </footer>
 
