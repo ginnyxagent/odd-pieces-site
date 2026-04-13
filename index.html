@@ -90,6 +90,7 @@
   .section-label.wholesale { color: var(--yellow); }
   .section-label.emails { color: #1A5F4A; }
   .section-label.website { color: var(--red-orange); }
+  .section-label.ads { color: var(--red-orange); }
 
   /* ── NAV ITEMS ── */
   .nav-list {
@@ -217,32 +218,42 @@
   <!-- BRAND -->
   <div class="section-label brand">Brand</div>
   <div class="nav-list">
-    <a href="brand-guidelines-v6.html" class="nav-item">
+    <a href="brand-guidelines-v7.html" class="nav-item">
       <div class="nav-left">
         <span class="nav-icon">◉</span>
         <div class="nav-text">
           <div class="nav-title">Brand Guidelines</div>
-          <div class="nav-desc">Voice · Logo · Colours · Typography · Packaging · Channels</div>
+          <div class="nav-desc">Voice · Logo · Colours · Typography · Packaging · Channels · Email</div>
         </div>
       </div>
       <span class="nav-arrow">→</span>
     </a>
-    <a href="visual-system.html" class="nav-item">
+    <a href="brand-voice.html" class="nav-item">
       <div class="nav-left">
-        <span class="nav-icon">◧</span>
+        <span class="nav-icon">✦</span>
         <div class="nav-text">
-          <div class="nav-title">Visual System</div>
-          <div class="nav-desc">The Split · Warning Stamps · Pattern · Frame · Type · Colour combos</div>
+          <div class="nav-title">Brand Voice</div>
+          <div class="nav-desc">Email voice guide · Tone rules · What to say / not say</div>
         </div>
       </div>
       <span class="nav-arrow">→</span>
     </a>
-    <a href="text-effects.html" class="nav-item">
+    <a href="customer-profile-report.html" class="nav-item">
       <div class="nav-left">
-        <span class="nav-icon">◨</span>
+        <span class="nav-icon">◎</span>
         <div class="nav-text">
-          <div class="nav-title">Text Effects</div>
-          <div class="nav-desc">Hard shadow · Outline · Stroke treatments · Do's & Don'ts</div>
+          <div class="nav-title">Customer Profile Report</div>
+          <div class="nav-desc">DTC + Kickstarter customer analysis · Demographics · Behavior · Insights</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="customer-personas.html" class="nav-item">
+      <div class="nav-left">
+        <span class="nav-icon">◌</span>
+        <div class="nav-text">
+          <div class="nav-title">Customer Personas</div>
+          <div class="nav-desc">Five customer segments · Revenue mix · Channel behavior · Strategic insights</div>
         </div>
       </div>
       <span class="nav-arrow">→</span>
@@ -393,6 +404,15 @@
       </div>
       <span class="nav-arrow">→</span>
     </a>
+    <a href="email-campaign-strategy.html" class="nav-item">
+      <div class="nav-left">
+        <div class="nav-text">
+          <div class="nav-title">Email Campaign Strategy</div>
+          <div class="nav-desc">Campaign lanes · Themes · Cadence · Interim segmentation plan</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
     <a href="https://docs.google.com/spreadsheets/d/19uQbR3W_pWXQtifxFI8SDKPziNChJvlLLBVlrkTDkXg/edit?gid=1169699215#gid=1169699215" class="nav-item" target="_blank">
       <div class="nav-left">
         <div class="nav-text">
@@ -407,6 +427,47 @@
         <div class="nav-text">
           <div class="nav-title">Flow Strategy</div>
           <div class="nav-desc">Segment logic · Triggers · Customer journeys</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+  </div>
+
+  <!-- ADS -->
+  <div class="section-label ads">Ads</div>
+  <div class="nav-list">
+    <a href="meta-ad-content-pipeline.html" class="nav-item">
+      <div class="nav-left">
+        <div class="nav-text">
+          <div class="nav-title">Meta Ad Content Pipeline</div>
+          <div class="nav-desc">Deliverable 1 · PM operating system · Weekly workflow · QA · Review loop</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="meta-ad-production-templates.html" class="nav-item">
+      <div class="nav-left">
+        <div class="nav-text">
+          <div class="nav-title">Meta Ad Production Templates</div>
+          <div class="nav-desc">Deliverable 2 · UGC · CGC · Designer · Editor · Founder brief templates</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="meta-ad-pm-board.html" class="nav-item">
+      <div class="nav-left">
+        <div class="nav-text">
+          <div class="nav-title">Meta Ad PM Board Mockup</div>
+          <div class="nav-desc">ClickUp-style board view · Weekly concepts · Production flow · QA · Review</div>
+        </div>
+      </div>
+      <span class="nav-arrow">→</span>
+    </a>
+    <a href="meta-ad-week1-library.html" class="nav-item">
+      <div class="nav-left">
+        <div class="nav-text">
+          <div class="nav-title">Meta Ad Week 1 Concept Library</div>
+          <div class="nav-desc">50 starter concepts · Cold / Warm / Hot · Hooks · Formats · Owners</div>
         </div>
       </div>
       <span class="nav-arrow">→</span>
@@ -430,5 +491,11 @@
   <div class="footer">Odd Pieces internal use only</div>
 
 </div>
+
+<script>
+  try {
+    localStorage.removeItem('odd-pieces-hub-layout-v1');
+  } catch (e) {}
+</script>
 </body>
 </html>

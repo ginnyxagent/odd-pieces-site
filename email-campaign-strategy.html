@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Email Campaign Strategy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Nunito:wght@700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --pink: #F6D2E2;
+    --green: #D9F0D5;
+    --lavender: #E7DEFF;
+    --line: #E7DDCA;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+  }
+
+  a { color: inherit; }
+
+  .wrap {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 32px 20px 100px;
+  }
+
+  .back {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #7d7468;
+    text-decoration: none;
+    font-size: 0.88rem;
+    margin-bottom: 24px;
+    font-weight: 600;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, rgba(254,224,0,0.45), rgba(193,227,232,0.7), rgba(255,251,240,1));
+    border: 2px solid var(--ink);
+    border-radius: 28px;
+    padding: 42px;
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.8fr);
+    gap: 22px;
+    margin-bottom: 26px;
+    box-shadow: 0 18px 0 rgba(26,26,26,0.06);
+  }
+
+  .eyebrow,
+  .section-label,
+  .pill,
+  .mini-label {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 800;
+  }
+
+  .eyebrow {
+    font-size: 0.72rem;
+    color: var(--red-orange);
+    margin-bottom: 12px;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 0.98;
+  }
+
+  h1 {
+    font-size: clamp(2.8rem, 7vw, 5.4rem);
+    margin-bottom: 16px;
+    max-width: 10ch;
+  }
+
+  .hero-copy {
+    font-size: 1rem;
+    max-width: 60ch;
+    color: rgba(26,26,26,0.82);
+    margin-bottom: 22px;
+  }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .stat {
+    background: rgba(255,255,255,0.72);
+    border: 2px solid rgba(26,26,26,0.08);
+    border-radius: 16px;
+    padding: 16px;
+  }
+
+  .stat strong {
+    display: block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.6rem;
+    line-height: 1;
+    margin-bottom: 6px;
+  }
+
+  .stat span {
+    font-size: 0.82rem;
+    color: #5c554d;
+  }
+
+  .hero-side {
+    background: rgba(255,255,255,0.72);
+    border: 2px solid rgba(26,26,26,0.08);
+    border-radius: 20px;
+    padding: 24px;
+  }
+
+  .hero-side h2 {
+    font-size: 1.4rem;
+    margin-bottom: 14px;
+  }
+
+  .hero-side ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+  }
+
+  .hero-side li {
+    font-size: 0.92rem;
+    color: #474038;
+    padding-left: 18px;
+    position: relative;
+  }
+
+  .hero-side li::before {
+    content: '•';
+    position: absolute;
+    left: 0;
+    color: var(--red-orange);
+    font-weight: 800;
+  }
+
+  .section { margin-top: 54px; }
+
+  .section-label {
+    font-size: 0.72rem;
+    color: var(--orange);
+    margin-bottom: 10px;
+    display: block;
+  }
+
+  .section-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 16px;
+    margin-bottom: 18px;
+  }
+
+  .section-head h2 {
+    font-size: clamp(2rem, 5vw, 3.4rem);
+  }
+
+  .section-intro {
+    color: #6f675d;
+    max-width: 72ch;
+    font-size: 0.96rem;
+  }
+
+  .cards-3,
+  .cards-4,
+  .cards-2 {
+    display: grid;
+    gap: 16px;
+  }
+
+  .cards-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .cards-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .cards-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  .card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 24px;
+  }
+
+  .card h3 {
+    font-size: 1.35rem;
+    margin-bottom: 10px;
+  }
+
+  .card p {
+    color: #5e564e;
+    font-size: 0.92rem;
+  }
+
+  .pill {
+    display: inline-block;
+    font-size: 0.68rem;
+    padding: 7px 10px;
+    border-radius: 999px;
+    margin-bottom: 14px;
+  }
+
+  .pink { background: var(--pink); color: #8d3d62; }
+  .blue { background: #DFF2F5; color: #2D6672; }
+  .green { background: var(--green); color: #356231; }
+  .yellow { background: #FFF3BF; color: #7A5A00; }
+  .lavender { background: var(--lavender); color: #5B43A0; }
+
+  .lane-list,
+  .theme-list,
+  .bullet-list,
+  .segment-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .lane-list li,
+  .theme-list li,
+  .bullet-list li,
+  .segment-list li {
+    padding-left: 18px;
+    position: relative;
+    color: #4f4840;
+    font-size: 0.9rem;
+  }
+
+  .lane-list li::before,
+  .theme-list li::before,
+  .bullet-list li::before,
+  .segment-list li::before {
+    content: '→';
+    position: absolute;
+    left: 0;
+    color: var(--red-orange);
+    font-weight: 800;
+  }
+
+  .big-takeaway {
+    background: var(--ink);
+    color: var(--cream);
+    border-radius: 24px;
+    padding: 28px;
+  }
+
+  .big-takeaway h3 {
+    font-size: 1.55rem;
+    margin-bottom: 12px;
+    color: var(--yellow);
+  }
+
+  .big-takeaway p {
+    color: rgba(255,251,240,0.86);
+    font-size: 0.98rem;
+  }
+
+  .matrix {
+    overflow-x: auto;
+    border-radius: 20px;
+    border: 1px solid var(--line);
+    background: var(--white);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 760px;
+  }
+
+  th {
+    text-align: left;
+    padding: 14px 16px;
+    background: #FFF8D5;
+    border-bottom: 1px solid var(--line);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.74rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  td {
+    padding: 16px;
+    border-bottom: 1px solid #F0E8D9;
+    font-size: 0.92rem;
+    vertical-align: top;
+    color: #4f4840;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .calendar {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .month-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 22px;
+  }
+
+  .month-card h3 {
+    font-size: 1.15rem;
+    margin-bottom: 10px;
+  }
+
+  .month-card .mini-label {
+    font-size: 0.66rem;
+    color: #8b7f72;
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  .month-card ul {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .month-card li {
+    font-size: 0.9rem;
+    color: #4d463f;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: #FFFBF4;
+    border: 1px solid #F0E7D5;
+  }
+
+  .quote-box {
+    background: linear-gradient(135deg, rgba(255,64,22,0.08), rgba(254,224,0,0.18));
+    border: 1px solid rgba(255,64,22,0.2);
+    border-radius: 22px;
+    padding: 28px;
+  }
+
+  .quote-box h3 {
+    font-size: 1.45rem;
+    margin-bottom: 12px;
+  }
+
+  .quote-box p {
+    font-size: 1rem;
+    color: #433d35;
+  }
+
+  .footer-note {
+    margin-top: 54px;
+    font-size: 0.76rem;
+    color: #8f8577;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  @media (max-width: 980px) {
+    .hero,
+    .cards-4,
+    .cards-3,
+    .cards-2,
+    .calendar {
+      grid-template-columns: 1fr;
+    }
+
+    .hero-stats {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <a href="index.html" class="back">← Back to Team Hub</a>
+
+  <section class="hero">
+    <div>
+      <div class="eyebrow">Emails · Campaign Strategy</div>
+      <h1>Email Campaign Strategy</h1>
+      <p class="hero-copy">Odd Pieces should not wait for perfect segmentation before acting. You already know enough about who buys, who actually puzzles, and who turns into a fan. The job now is to run campaigns around customer intent, while quietly collecting better data in the background.</p>
+      <div class="hero-stats">
+        <div class="stat">
+          <strong>83%</strong>
+          <span>of 2025 DTC orders happened in Q4. This is first and foremost a gifting business in season.</span>
+        </div>
+        <div class="stat">
+          <strong>2–4%</strong>
+          <span>traditional DTC repeat rate. Not because the product fails, but because the buyer is often not the puzzler.</span>
+        </div>
+        <div class="stat">
+          <strong>12.1%</strong>
+          <span>of Kickstarter backers ever cross over to Shopify. Big warm-audience opportunity sitting there.</span>
+        </div>
+      </div>
+    </div>
+    <aside class="hero-side">
+      <h2>The blunt version</h2>
+      <ul>
+        <li>Gifters need a very different campaign angle than puzzlers.</li>
+        <li>Gift recipients are the highest-upside conversion gap in the business.</li>
+        <li>Loyalists should get insider treatment, not generic promos.</li>
+        <li>Off-season revenue needs leisure positioning, not holiday positioning.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Strategic Spine</span>
+    <div class="section-head">
+      <h2>What the campaign strategy is actually for</h2>
+    </div>
+    <div class="cards-4">
+      <div class="card">
+        <span class="pill pink">1 · Capture gifting demand</span>
+        <h3>Make Q4 hit harder</h3>
+        <p>Lean into the fact that a huge portion of DTC revenue comes from thoughtful gift-buyers hunting for something clever and memorable.</p>
+      </div>
+      <div class="card">
+        <span class="pill blue">2 · Convert real puzzlers</span>
+        <h3>Turn recipients into buyers</h3>
+        <p>The end user often is not the purchaser. Campaign strategy should help identify, welcome, and convert the actual puzzler.</p>
+      </div>
+      <div class="card">
+        <span class="pill lavender">3 · Retain the weird little superfans</span>
+        <h3>Grow Odd Club behavior</h3>
+        <p>Repeat customers are disproportionately valuable. Treat them like insiders and they will keep acting like insiders.</p>
+      </div>
+      <div class="card">
+        <span class="pill green">4 · Smooth the seasonality</span>
+        <h3>Build non-Q4 demand</h3>
+        <p>Outside gifting windows, the strongest angle is leisure, ritual, mystery, and quality time, not “buy a present.”</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Five Campaign Lanes</span>
+    <div class="section-head">
+      <h2>The core campaign system</h2>
+      <p class="section-intro">Do not send every campaign to everyone with the same framing. Instead, build the program around five repeatable lanes. These are the engine.</p>
+    </div>
+
+    <div class="cards-3">
+      <div class="card">
+        <span class="pill pink">Lane 1</span>
+        <h3>Seasonal gifting campaigns</h3>
+        <p>Your biggest revenue lane. Especially Q4, but also Mother’s Day, Father’s Day, birthdays, hostess gifting, White Elephant, and “hard-to-shop-for” moments.</p>
+        <ul class="lane-list">
+          <li>Gift guides by recipient type</li>
+          <li>Bundle-focused campaigns</li>
+          <li>Shipping cutoff / urgency sends</li>
+          <li>Why it feels more thoughtful than a generic gift</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill blue">Lane 2</span>
+        <h3>Product + launch storytelling</h3>
+        <p>These emails are for people who care about the product itself, not just the giftability. Lean into mystery, artwork, reveal, and what makes the puzzle feel special.</p>
+        <ul class="lane-list">
+          <li>New release drops</li>
+          <li>Artist / design stories</li>
+          <li>What makes this puzzle weird in the best way</li>
+          <li>If you liked X, try Y next</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill yellow">Lane 3</span>
+        <h3>Gift recipient conversion</h3>
+        <p>The hidden money lane. When someone completes a puzzle or enters the answer-key flow, that is the moment to turn the end user into a customer.</p>
+        <ul class="lane-list">
+          <li>Welcome to Odd Pieces</li>
+          <li>Now get one for yourself</li>
+          <li>Next puzzle recommendations</li>
+          <li>Odd Club intro + review + cross-sell</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill lavender">Lane 4</span>
+        <h3>Loyalist retention campaigns</h3>
+        <p>These should feel like insider treatment, not another sale blast. This group buys new releases, uses THEODDCLUB, and actually wants to hear from you.</p>
+        <ul class="lane-list">
+          <li>Early access</li>
+          <li>VIP previews</li>
+          <li>Collector / completion emails</li>
+          <li>Vote, share, review, refer</li>
+        </ul>
+      </div>
+
+      <div class="card">
+        <span class="pill green">Lane 5</span>
+        <h3>Year-round leisure campaigns</h3>
+        <p>How you reduce overdependence on Q4. Position Odd Pieces as a cozy, screen-free ritual for weekends, rainy days, couples time, and personal unwind time.</p>
+        <ul class="lane-list">
+          <li>Weekend plans solved</li>
+          <li>Date night / family night</li>
+          <li>Rainy day / cozy mystery energy</li>
+          <li>Saturday afternoon in the living room</li>
+        </ul>
+      </div>
+
+      <div class="big-takeaway">
+        <h3>Strategy rule</h3>
+        <p>Q4 campaigns should sell the gift. Launch campaigns should sell the obsession. Recipient campaigns should sell the next purchase. Loyalist campaigns should sell belonging. Off-season campaigns should sell the ritual.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Use the data you already have</span>
+    <div class="section-head">
+      <h2>How to segment before the fancy segmentation exists</h2>
+      <p class="section-intro">You do not need to wait months for perfect gifter / recipient / puzzler segments. Use behavior as a proxy for intent. Klaviyo already gives you enough to get smarter now.</p>
+    </div>
+
+    <div class="matrix">
+      <table>
+        <thead>
+          <tr>
+            <th>Current signal</th>
+            <th>What it probably means</th>
+            <th>Campaign framing</th>
+            <th>Best use right now</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Purchased once, never again</td>
+            <td>Likely gifter or casual one-time buyer</td>
+            <td>Gift-first, low-assumption, broad appeal</td>
+            <td>Seasonal gift campaigns, reminder campaigns</td>
+          </tr>
+          <tr>
+            <td>Purchased 2+ times</td>
+            <td>Likely enthusiast or loyalist</td>
+            <td>Insider, launch, completion, collector</td>
+            <td>Early access, previews, loyalty pushes</td>
+          </tr>
+          <tr>
+            <td>Viewed bundle pages</td>
+            <td>Likely gifting or higher-AOV intent</td>
+            <td>Gift guide, best bundle, recipient-based recommendations</td>
+            <td>Campaigns tied to gifting moments</td>
+          </tr>
+          <tr>
+            <td>Viewed multiple products</td>
+            <td>Browsing for self or actively comparing</td>
+            <td>Product discovery, comparison, “which one next?”</td>
+            <td>Product storytelling campaigns</td>
+          </tr>
+          <tr>
+            <td>Opened / clicked launches</td>
+            <td>Fan behavior, novelty-seeking, high curiosity</td>
+            <td>Launch-first, weirdness-first</td>
+            <td>New drop sends and reveal teasers</td>
+          </tr>
+          <tr>
+            <td>Answer key submitter</td>
+            <td>Actual puzzler identified</td>
+            <td>Welcome, next purchase, Odd Club</td>
+            <td>Recipient conversion campaigns</td>
+          </tr>
+          <tr>
+            <td>Q4-only purchaser</td>
+            <td>Seasonal gifter</td>
+            <td>Holiday, gift, urgency, convenience</td>
+            <td>Q4 ramp and holiday tentpoles</td>
+          </tr>
+          <tr>
+            <td>Purchased outside Q4</td>
+            <td>More likely hobby or leisure buyer</td>
+            <td>Cozy, ritual, self-purchase</td>
+            <td>Year-round demand building</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Campaign Themes</span>
+    <div class="section-head">
+      <h2>The repeatable themes to rotate</h2>
+      <p class="section-intro">Instead of inventing from scratch every week, build a repeatable theme library. These should become the backbone of the calendar.</p>
+    </div>
+
+    <div class="cards-4">
+      <div class="card"><h3>Gift angle</h3><ul class="theme-list"><li>Hard-to-shop-for people</li><li>Gifts that feel personal</li><li>More memorable than another candle</li></ul></div>
+      <div class="card"><h3>Featured puzzle</h3><ul class="theme-list"><li>Hero product focus</li><li>What makes this one special</li><li>Who this one is perfect for</li></ul></div>
+      <div class="card"><h3>What to do next</h3><ul class="theme-list"><li>If you liked this, try that</li><li>Completed one? Here’s your next one</li><li>Build the collection</li></ul></div>
+      <div class="card"><h3>Proof</h3><ul class="theme-list"><li>Customer reactions</li><li>Reviews</li><li>Gift recipient delight</li></ul></div>
+      <div class="card"><h3>Behind the scenes</h3><ul class="theme-list"><li>Art process</li><li>Storytelling mechanics</li><li>How the reveal comes together</li></ul></div>
+      <div class="card"><h3>Collector energy</h3><ul class="theme-list"><li>Which puzzles have you done?</li><li>Completionist nudges</li><li>Series sequencing</li></ul></div>
+      <div class="card"><h3>Cozy leisure</h3><ul class="theme-list"><li>Weekend ritual</li><li>Rainy day plan</li><li>Couples / family / solo unwind</li></ul></div>
+      <div class="card"><h3>Launch + urgency</h3><ul class="theme-list"><li>Early access</li><li>Drop day</li><li>Last chance / shipping deadlines</li></ul></div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Cadence</span>
+    <div class="section-head">
+      <h2>How often to send</h2>
+      <p class="section-intro">Keep it simple. You do not need a bloated campaign machine. You need a consistent one with a clear job.</p>
+    </div>
+
+    <div class="cards-3">
+      <div class="card">
+        <span class="pill yellow">Baseline</span>
+        <h3>1–2 campaigns per week</h3>
+        <ul class="bullet-list">
+          <li>One revenue-focused send</li>
+          <li>One relationship / brand / story send</li>
+          <li>Enough frequency to stay present without becoming wallpaper</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill blue">During launches</span>
+        <h3>2–3 campaigns per week</h3>
+        <ul class="bullet-list">
+          <li>Announcement</li>
+          <li>Proof / story / why-it’s-special follow-up</li>
+          <li>Urgency or segmented reminder</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill pink">During Q4</span>
+        <h3>Increase around tentpoles</h3>
+        <ul class="bullet-list">
+          <li>Gift guide waves</li>
+          <li>Shipping cutoff reminders</li>
+          <li>Recipient-type gift picks</li>
+          <li>Black Friday / Cyber Monday / final gift push</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Suggested monthly mix</span>
+    <div class="section-head">
+      <h2>A workable campaign calendar</h2>
+      <p class="section-intro">This is the simple version, not a giant machine. Enough structure to be strategic, not enough structure to become annoying.</p>
+    </div>
+
+    <div class="calendar">
+      <div class="month-card">
+        <span class="mini-label">Send 1</span>
+        <h3>Revenue email</h3>
+        <ul>
+          <li>Gift guide, featured product, bundle push, or seasonal offer</li>
+          <li>Use broad engaged audience + intent-based split where possible</li>
+        </ul>
+      </div>
+      <div class="month-card">
+        <span class="mini-label">Send 2</span>
+        <h3>Story / proof email</h3>
+        <ul>
+          <li>Reviews, customer reactions, behind the scenes, artist story, reveal tease</li>
+          <li>Keeps the brand from feeling like pure promo sludge</li>
+        </ul>
+      </div>
+      <div class="month-card">
+        <span class="mini-label">Optional send 3</span>
+        <h3>Segment-led follow-up</h3>
+        <ul>
+          <li>Loyalist preview, browse-based reminder, or recipient conversion push</li>
+          <li>Use during launches, holidays, or strong product windows</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">What matters most</span>
+    <div class="cards-2">
+      <div class="quote-box">
+        <h3>The biggest mistake to avoid</h3>
+        <p>Do not talk to gifters, recipients, puzzlers, and loyalists like they are the same person. They are not. Same list, different motives.</p>
+      </div>
+      <div class="quote-box">
+        <h3>The biggest opportunity to unlock</h3>
+        <p>Use the answer-key and completion moments to identify the real puzzler. That is the bridge from one-time gift business into repeat-customer business.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <span class="section-label">Recommended operating model</span>
+    <div class="section-head">
+      <h2>The next few months</h2>
+    </div>
+    <div class="cards-2">
+      <div class="card">
+        <span class="pill yellow">Layer 1</span>
+        <h3>Broad campaigns to the engaged list</h3>
+        <ul class="segment-list">
+          <li>Gift-focused when seasonal</li>
+          <li>Product / mystery / leisure-focused when not seasonal</li>
+          <li>Keep the message clear and singular</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="pill lavender">Layer 2</span>
+        <h3>Simple behavior-based splits</h3>
+        <ul class="segment-list">
+          <li>First-time vs repeat</li>
+          <li>Viewed bundle vs viewed singles</li>
+          <li>Q4-only vs year-round purchasers</li>
+          <li>Answer key submitters</li>
+          <li>High-engagement loyalists</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="footer-note">Built from customer profile + persona findings · Use this page as the campaign north star while richer segmentation matures.</div>
+</div>
+</body>
+</html>
