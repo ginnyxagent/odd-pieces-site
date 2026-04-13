@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odd Pieces — Marketing Calendar 2026</title>
+<title>Odd Pieces — Marketing Calendar 2026 V2</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -237,15 +237,15 @@
 
 <div class="header">
   <a href="index.html" class="back">← Hub</a>
-  <div class="logo">🧩 Odd Pieces <span class="logo-tag">2026 Calendar</span></div>
+  <div class="logo">🧩 Odd Pieces <span class="logo-tag">2026 Calendar V2</span></div>
   <div class="hright">
     <button class="hbtn pri" onclick="exportList()">📋 Export for Agency</button>
   </div>
 </div>
 
 <div class="tabs">
-  <button class="tab on" onclick="switchTab('list',this)">📋 Agency Email List</button>
-  <button class="tab"    onclick="switchTab('cal',this)">📅 Calendar View</button>
+  <button class="tab on" onclick="switchTab('list',this)">📋 Agency Email List V2</button>
+  <button class="tab"    onclick="switchTab('cal',this)">📅 Calendar View V2</button>
 </div>
 
 <div class="insights-bar" id="insights-bar">
@@ -334,26 +334,26 @@ const THEMES = [
   { id:'iwd',            pillar:'Community', name:'🌸 Women\'s History & IWD',      desc:'International Women\'s Day (Mar 8) + Women\'s History Month. Feature women artists in the lineup. Inclusive, educational, celebratory.' },
   { id:'puzzle-culture', pillar:'Brain',     name:'🧩 Puzzle Culture',              desc:'Crosswords, trivia, logic puzzles, escape rooms — puzzle people are our people. Lean into the identity, not just the product.' },
   { id:'detox-challenge',pillar:'Brain',     name:'📵 Digital Detox Challenge',     desc:'Structured offline challenge — 30-min daily, weekend screen-free. Community participation angle. Repeat quarterly.' },
-  { id:'tabletop',       pillar:'Community', name:'🎯 Tabletop & Games Culture',    desc:'Tabletop gaming audience overlaps heavily with our demo. Strategy games, trivia nights, puzzle clubs.' },
-  { id:'literacy',       pillar:'Brain',     name:'📚 World Literacy & Book Day',   desc:'World Book Day (Apr 23), International Literacy Day (Sep 8). Brain-health angle: reading + puzzles = offline enrichment.' },
+  { id:'tabletop',       pillar:'Community', name:'🎯 Puzzle Night & Smart Hobby Crowd',    desc:'People who like board games, trivia, crosswords, mystery books, and clever gifts already speak our language. Lean into the smart-hobby identity.' },
+  { id:'literacy',       pillar:'Brain',     name:'📚 Bookish & Mystery Crowd',   desc:'Cozy mystery readers, puzzle-book buyers, and rainy-day people are a strong fit. Less lecture, more bookish taste signal.' },
   { id:'spring-reset',   pillar:'Seasonal',  name:'🌱 Spring Reset',               desc:'First day of spring — reframe as a reason to stay in. New routines, new puzzle.' },
   { id:'pi-day',         pillar:'Community', name:'🥧 Pi Day — Trivia Crowd',       desc:'3.14 reasons your brain deserves better than Netflix. Nerdy/trivia crowd bait.' },
-  { id:'brain-offline',  pillar:'Brain',     name:'🧠 Offline Is the New Luxury',   desc:'Targets digital-fatigued 30-45 demo. Anchor in March, repeat in Aug/Oct.' },
+  { id:'brain-offline',  pillar:'Brain',     name:'🧠 Offline, But Make It Specific',   desc:'Keep the strong offline angle, but make each send about a distinct moment: better night in, better reset, better use of 30 minutes.' },
   { id:'tax-refund',     pillar:'Promo',     name:'💸 Tax Refund — Treat Yourself', desc:'Our audience has disposable income. $39 feels easy when you just got a refund.' },
   { id:'artist-series',  pillar:'Artist',    name:'🎨 Meet the Artist Series',      desc:'Feature the minority artists behind the puzzles. Monthly, anchored to World Art Day (Apr 15).' },
   { id:'earth-day',      pillar:'Brand',     name:'🌍 Earth Day — Made to Last',    desc:'Made to last, not for the landfill. Premium quality meets sustainability.' },
   { id:'pet-lovers',     pillar:'Community', name:'🐾 Pet Lovers',                  desc:'National Pet Day (Apr 11), International Cat Day (Aug 8), National Dog Day (Aug 26).' },
   { id:'mothers-day',    pillar:'Promo',     name:'💐 Mother\'s Day',               desc:'Mom doesn\'t want another candle. Thoughtful premium gift positioning.' },
   { id:'asian-heritage', pillar:'Brand',     name:'🇨🇦 Asian Heritage Month',       desc:'Founders are Asian Canadian. May = Asian Heritage Month. Founders story + artist spotlights.' },
-  { id:'screen-free',    pillar:'Brain',     name:'🧘 Screen-Free / Mental Health', desc:'The art of slowing down. Offline challenge. Puzzle as the phone antidote.' },
+  { id:'screen-free',    pillar:'Brain',     name:'🧘 Slow Down, Stay In', desc:'Use sparingly. Focus on rest, evenings in, and giving your brain something better to do, without sounding preachy.' },
   { id:'star-wars',      pillar:'Community', name:'⭐ Star Wars Day',               desc:'May the 4th be with your brain. Trivia/pop culture crowd hook.' },
   { id:'fathers-day',    pillar:'Promo',     name:'👔 Father\'s Day',               desc:'Dad doesn\'t need another tie. Same playbook as Mother\'s Day.' },
   { id:'summer-stay-in', pillar:'Seasonal',  name:'🌙 Summer Nights In',            desc:'Contrarian summer angle. Summer nights are better offline. Patio + puzzle.' },
   { id:'prime-day',      pillar:'Promo',     name:'⚡ Prime Day',                   desc:'Amazon moment — teaser + live campaign.' },
-  { id:'treat-yourself', pillar:'Promo',     name:'🎁 Mid-Year Treat Yourself',     desc:'Mid-year you deserves something nice. Permission-to-spend moment.' },
+  { id:'treat-yourself', pillar:'Promo',     name:'🎁 Thoughtful Gift / Personal Pick',     desc:'Use this lane for thoughtful gifting and occasional self-purchase, but avoid generic treat-yourself energy.' },
   { id:'relaxation-day', pillar:'Seasonal',  name:'😌 National Relaxation Day',     desc:'Permission to do nothing productive. Puzzles as rest, not productivity.' },
   { id:'cozy-season',    pillar:'Seasonal',  name:'🍂 Cozy Season',                desc:'It\'s officially puzzle season. Biggest seasonal moment of the year.' },
-  { id:'game-night',     pillar:'Community', name:'🎲 Game Night / Trivia Crowd',   desc:'Trivia night lovers are core to our demo. Peaks on National Board Game Day (Nov 15).' },
+  { id:'game-night',     pillar:'Community', name:'🎲 Trivia, Crossword & Game Night Crowd',   desc:'People who like trivia, crosswords, board games, and mystery stories are a natural fit. Identity first, holiday second.' },
   { id:'mhd',            pillar:'Brain',     name:'🧠 World Mental Health Day',     desc:'Your brain needs offline time. Puzzle as mental wellness tool.' },
   { id:'holiday-gifts',  pillar:'Promo',     name:'🎁 Holiday Gift Guide',          desc:'The gift for people who have everything. $39 positioned as premium but accessible.' },
   { id:'nesting',        pillar:'Seasonal',  name:'🏠 Nesting Season',              desc:'Nesting season is officially open. Holiday hibernation — cozy, stay-in.' },
@@ -365,19 +365,19 @@ const THEMES = [
 
 const EMAILS = [
   { themeId:"nerd-days",      date:"2026-04-01", subject:"April Fools' Day. No tricks — just a puzzle you actually want.",                    brief:"April Fools email where the twist is there's no trick — just a good puzzle. One line setup, one line payoff." },
-  { themeId:"nerd-days",      date:"2026-04-26", subject:"Alien Day (4/26). In space, no one can hear you puzzle.",                           brief:"Alien fan easter egg — dark background, one dry line, no explanation. Niche but deeply rewarding for those who get it." },
-  { themeId:"nerd-days",      date:"2026-05-25", subject:"Towel Day. Don't panic — it's just a puzzle. 🧣",                                   brief:"Towel Day / Hitchhiker's reference — clean design, Don't Panic headline, puzzle as the answer to the universe." },
-  { themeId:"nerd-days",      date:"2026-06-06", subject:"Tetris Day. Same click. Way longer payoff.",                                        brief:"Tetris Day — side-by-side visual: Tetris block snapping vs puzzle piece clicking. Same brain hit, longer payoff." },
-  { themeId:"nerd-days",      date:"2026-09-22", subject:"Happy Hobbit Day. The Shire had good taste. So do you.",                            brief:"Hobbit Day — warm earthy tones, cozy framing, compliment the reader's taste. \"You're a Bilbo, not a Sackville-Baggins.\"" },
-  { themeId:"nerd-days",      date:"2026-10-13", subject:"Ada Lovelace Day. The first programmer would have finished this in a weekend.",     brief:"Ada Lovelace Day — position the puzzle as something the world's first programmer would appreciate. Smart, dry, no over-explaining." },
-  { themeId:"nerd-days",      date:"2026-10-23", subject:"Mole Day (10/23, 6:02am). 6.02 x 10^23 reasons to stay in today.",                 brief:"Mole Day easter egg — Avogadro's number in the subject, minimal design, reward the chemistry nerds. Zero explanation needed." },
-  { themeId:"nerd-days",      date:"2026-11-23", subject:"Fibonacci Day (11/23). 1, 1, 2, 3 — the sequence that ends with you.",              brief:"Fibonacci Day — the sequence as the visual motif, \"it all adds up\" framing, clean and elegant." },
+  { themeId:"nerd-days",      date:"2026-04-26", subject:"For people who'd rather solve something than scroll.",                           brief:"Keep the dry, minimal tone, but make it broader and more ownable. Smart, self-aware, no niche fandom required." },
+  { themeId:"nerd-days",      date:"2026-05-25", subject:"A puzzle for people with good taste in hobbies.",                                   brief:"Keep the dry confidence, lose the inside-baseball reference. Compliment the reader's taste and intelligence instead." },
+  { themeId:"nerd-days",      date:"2026-06-06", subject:"Same satisfying click. Better way to spend a night.",                                        brief:"Keep the punchy comparison, but anchor it in the better-night-in idea rather than a niche holiday." },
+  { themeId:"nerd-days",      date:"2026-09-22", subject:"Rainy day plans for people with excellent taste.",                            brief:"Hobbit Day — warm earthy tones, cozy framing, compliment the reader's taste. \"You're a Bilbo, not a Sackville-Baggins.\"" },
+  { themeId:"nerd-days",      date:"2026-10-13", subject:"For crossword people, trivia people, and the friend who always gets it first.",     brief:"Keep the smart, dry framing, but point it at the broader smart-hobby crowd." },
+  { themeId:"nerd-days",      date:"2026-10-23", subject:"Stay in tonight. Your brain will thank you.",                 brief:"Keep it minimal, but make it relevant to a broader stay-in audience rather than chemistry nerds only." },
+  { themeId:"nerd-days",      date:"2026-11-23", subject:"For the person who's impossible to shop for.",              brief:"Fibonacci Day — the sequence as the visual motif, \"it all adds up\" framing, clean and elegant." },
   { themeId:"spring-reset",   date:"2026-03-23", subject:"New season, new routine. Same couch. 🌱",                                           brief:"Same couch, new puzzle — permission to not change your routine just because it's spring. Warm and self-aware." },
   { themeId:"brain-offline",  date:"2026-03-27", subject:"Put down the phone. Pick up something better.",                                     brief:"Clean, direct challenge — phone down, puzzle up. No lecture. Just the swap." },
   { themeId:"brain-offline",  date:"2026-08-21", subject:"Offline is the new luxury. 📵",                                                     brief:"One headline, beautiful lifestyle image of someone puzzling offline. No bullet points. Offline = aspirational." },
   { themeId:"brain-offline",  date:"2026-10-16", subject:"Your brain is asking for 30 minutes. Here's what to give it.",                     brief:"30 minutes offline, here's what to do with them. Caring not preachy — specific ask, specific product answer." },
-  { themeId:"tax-refund",     date:"2026-04-06", subject:"Tax refund szn. Treat yourself — you actually earned this.",                        brief:"Casual permission slip — \"you got money back, spend it on something good.\" Young, direct, no guilt." },
-  { themeId:"tax-refund",     date:"2026-04-08", subject:"The government gave it back. We say: spend it well.",                               brief:"Dry one-liner on taxes, then the product as the smart spend. Short and punchy." },
+  { themeId:"tax-refund",     date:"2026-04-06", subject:"A better way to spend an evening.",                        brief:"Casual permission slip — \"you got money back, spend it on something good.\" Young, direct, no guilt." },
+  { themeId:"tax-refund",     date:"2026-04-08", subject:"A small luxury with a better payoff.",                               brief:"Short and punchy still works. The tax hook doesn't." },
   { themeId:"artist-series",  date:"2026-04-15", subject:"Meet the artist: [Name] — the story behind April's puzzle.",                       brief:"Full artist profile: large photo, name, hometown, 2-3 sentences on their practice. The puzzle is the hero product. CTA: shop." },
   { themeId:"artist-series",  date:"2026-06-15", subject:"Meet the artist: [Name] — why they make art that challenges you.",                  brief:"Editorial profile — not \"who they are\" but \"why they make art.\" One strong quote leads. CTA: shop their puzzle." },
   { themeId:"artist-series",  date:"2026-08-17", subject:"Meet the artist: [Name] — the puzzle that almost didn't get made.",                brief:"Behind-the-scenes story — the challenge, pivot, or accident that made this puzzle happen. Honest and specific." },
