@@ -269,7 +269,7 @@
       <span class="leg-item p-Community"><span class="leg-dot" style="background:#1d4ed8"></span>Community</span>
       <span class="leg-item p-Artist"><span class="leg-dot" style="background:#6d28d9"></span>Artist</span>
       <span class="leg-item p-Brain"><span class="leg-dot" style="background:#0e7490"></span>Brain/Offline</span>
-      <span style="font-size:.65rem;color:var(--muted);margin-left:8px">Click any chip to review topics, timing, and suggested segment →</span>
+      <span style="font-size:.65rem;color:var(--muted);margin-left:8px">Click any chip to review email topics →</span>
     </div>
     <div id="cal-body"></div>
   </div>
@@ -292,6 +292,7 @@
       <button class="pill" onclick="setListFilter('Artist',this)">🎨 Artist</button>
       <button class="pill" onclick="setListFilter('Brain',this)">🧠 Brain</button>
     </div>
+    <div class="export-note">💡 Approve topics you want to keep → hit <strong>Export for Agency</strong> to get a clean list ready to hand off.</div>
     <table class="list-table">
       <thead><tr>
         <th style="width:90px">Date</th>
@@ -342,7 +343,9 @@ const THEMES = [
   { id:'brand-story',    pillar:'Brand',     name:'🧩 Brand / Founders',          desc:'Founders, artist perspective, and brand-level emails that actually say something.' },
   { id:'repeat-buyer',   pillar:'Brain',     name:'🔁 One Puzzle to Two',         desc:'Emails for known customers, one-puzzle buyers, repeat buyers, and superfans. No fake gift-recipient segmentation.' },
   { id:'sales-moments',  pillar:'Promo',     name:'⚡ Sales Moments',             desc:'Prime Day, BFCM, shipping deadlines, and other direct shopping moments.' },
-];const EMAILS = [
+];
+
+const EMAILS = [
   { themeId:"artist-series", date:"2026-04-17", subject:"Meet the artist: [Name] — the story behind the puzzle.", brief:"Art-first intro with a real point of view. Segment: engaged subscribers, recent buyers, and art-clickers." },
   { themeId:"bookish",       date:"2026-04-23", subject:"For mystery readers, puzzle people, and anyone with suspiciously good taste.", brief:"Bookish / cozy mystery crossover. Segment: engaged non-buyers, subscribers who click story-led content, and general list." },
   { themeId:"brand-story",   date:"2026-04-28", subject:"Why we started Odd Pieces in the first place.", brief:"Founders note, personal not corporate. Segment: full list, especially customers who respond to story emails." },
@@ -417,14 +420,20 @@ const COMMITTED_APPROVALS = {
 };
 // ─────────────────────────────────────────────────────────────────────────────
 
-const tSaved = {};
-const eSaved = {};
+const V2_THEME_STORAGE_KEY = 'op_t5_v2';
+const V2_EMAIL_STORAGE_KEY = 'op_e5_v2';
+const _lt = JSON.parse(localStorage.getItem(V2_THEME_STORAGE_KEY)||'{}');
+const _le = JSON.parse(localStorage.getItem(V2_EMAIL_STORAGE_KEY)||'{}');
+const tSaved = {...COMMITTED_APPROVALS.themes, ..._lt};
+const eSaved = {...COMMITTED_APPROVALS.emails, ..._le};
+localStorage.setItem(V2_THEME_STORAGE_KEY, JSON.stringify(tSaved));
+localStorage.setItem(V2_EMAIL_STORAGE_KEY, JSON.stringify(eSaved));
 let listFilter = 'all';
 let activeDrawerThemeId = null;
 
-function tDec(id){ return 'pending'; }
-function eDec(i) { return 'pending'; }
-function save()  {}
+function tDec(id){ return tSaved[id]?.decision||'pending'; }
+function eDec(i) { return eSaved[i]?.decision||'pending'; }
+function save()  { localStorage.setItem(V2_THEME_STORAGE_KEY,JSON.stringify(tSaved)); localStorage.setItem(V2_EMAIL_STORAGE_KEY,JSON.stringify(eSaved)); }
 
 function approveTheme(id){ tSaved[id]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(id); renderCal(); renderList(); }
 function approveEmail(i) { eSaved[i]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(activeDrawerThemeId); renderList(); updateCalChips(); }
