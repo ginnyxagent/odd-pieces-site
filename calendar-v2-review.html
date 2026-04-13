@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Odd Pieces — Calendar V2 Review</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f7f5f2;
+      --surface: #ffffff;
+      --surface2: #f2efea;
+      --border: #e5e0d8;
+      --text: #1c1917;
+      --muted: #78716c;
+      --accent: #5b3df5;
+      --promo: #b45309;
+      --seasonal: #15803d;
+      --brand: #be185d;
+      --community: #1d4ed8;
+      --artist: #6d28d9;
+      --brain: #0e7490;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: Inter, sans-serif; background: var(--bg); color: var(--text); }
+    .banner { background:#1a1a2e; color:#fff; text-align:center; padding:10px 16px; font-size:13px; border-bottom:2px solid #e63946; }
+    .banner a { color:#aaa; text-decoration:none; }
+    .header { background:#1c1917; color:#fff; padding:18px 24px; }
+    .header h1 { font-size: 1.15rem; font-weight: 900; }
+    .header p { color:#a8a29e; font-size:.82rem; margin-top:6px; }
+    .wrap { max-width: 1100px; margin: 0 auto; padding: 24px; }
+    .month { margin-bottom: 28px; }
+    .month h2 { font-size: 1rem; font-weight: 900; margin-bottom: 12px; }
+    .count { color: var(--muted); font-size: .8rem; font-weight: 600; }
+    .card { background: var(--surface); border:1.5px solid var(--border); border-radius: 14px; padding: 14px 16px; margin-bottom: 10px; }
+    .meta { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-bottom:8px; }
+    .date { font-size:.72rem; color:var(--muted); font-weight:700; }
+    .theme { font-size:.68rem; font-weight:800; padding:4px 8px; border-radius:999px; color:#fff; }
+    .promo { background: var(--promo); }
+    .seasonal { background: var(--seasonal); }
+    .brand { background: var(--brand); }
+    .community { background: var(--community); }
+    .artist { background: var(--artist); }
+    .brain { background: var(--brain); }
+    .subject { font-size:.95rem; font-weight:700; line-height:1.35; margin-bottom:8px; }
+    .brief { font-size:.82rem; line-height:1.55; color:#44403c; }
+  </style>
+</head>
+<body>
+  <div class="banner">✨ You're viewing <strong>V2 Review</strong> &nbsp;|&nbsp; <a href="/calendar.html">← View V1</a></div>
+  <div class="header">
+    <h1>Odd Pieces Marketing Calendar V2 Review</h1>
+    <p>Starts April 17, uses real segmentation only, and keeps at least 5 emails per month from May onward.</p>
+  </div>
+  <div class="wrap" id="app"></div>
+
+  <script>
+    const THEMES = {
+      'artist-series': { name:'Artist Stories', cls:'artist' },
+      'gift-moments': { name:'Gift Moments', cls:'promo' },
+      'smart-hobby': { name:'Smart Hobby Crowd', cls:'community' },
+      'bookish': { name:'Bookish / Mystery Crowd', cls:'community' },
+      'cozy-seasonal': { name:'Cozy / Seasonal', cls:'seasonal' },
+      'brand-story': { name:'Brand / Founders', cls:'brand' },
+      'repeat-buyer': { name:'One Puzzle to Two', cls:'brain' },
+      'sales-moments': { name:'Sales Moments', cls:'promo' },
+    };
+
+    const EMAILS = [
+      { themeId:'artist-series', date:'2026-04-17', subject:'Meet the artist: [Name] — the story behind the puzzle.', brief:'Art-first intro with a real point of view. Segment: engaged subscribers, recent buyers, and art-clickers.' },
+      { themeId:'bookish', date:'2026-04-23', subject:'For mystery readers, puzzle people, and anyone with suspiciously good taste.', brief:'Bookish / cozy mystery crossover. Segment: engaged non-buyers, subscribers who click story-led content, and general list.' },
+      { themeId:'brand-story', date:'2026-04-28', subject:'Why we started Odd Pieces in the first place.', brief:'Founders note, personal not corporate. Segment: full list, especially customers who respond to story emails.' },
+
+      { themeId:'gift-moments', date:'2026-05-01', subject:'A Mother\'s Day gift that feels thoughtful, not default.', brief:'Sharper Mother\'s Day framing. Segment: gift buyers, recent site visitors, and lapsed non-repeat buyers.' },
+      { themeId:'gift-moments', date:'2026-05-05', subject:'Still need a Mother\'s Day gift? Start here.', brief:'Clear utility. Segment: gift buyers and non-purchasers.' },
+      { themeId:'brand-story', date:'2026-05-11', subject:'Why we started Odd Pieces in the first place.', brief:'Founder story. Segment: full list.' },
+      { themeId:'artist-series', date:'2026-05-14', subject:'Meet the artist: [Name] — the perspective behind the piece.', brief:'Artist-led story with a clear hook. Segment: buyers, engaged subscribers, art-clickers.' },
+      { themeId:'brand-story', date:'2026-05-19', subject:'The artists behind your puzzle, and why their work hits different.', brief:'Artist + founder credibility. Segment: buyers and engaged subscribers.' },
+      { themeId:'smart-hobby', date:'2026-05-26', subject:'For crossword people, trivia people, and the friend who always gets it first.', brief:'Identity email for the smart-hobby crowd. Segment: engaged subscribers and known customers.' },
+
+      { themeId:'gift-moments', date:'2026-06-03', subject:'A Father\'s Day gift with a little more personality.', brief:'Less generic than socks-and-ties land. Segment: gift buyers and warm site traffic.' },
+      { themeId:'gift-moments', date:'2026-06-10', subject:'For the dad who\'s impossible to shop for.', brief:'Specific gift problem, clear solve. Segment: gift buyers and browse abandoners.' },
+      { themeId:'artist-series', date:'2026-06-17', subject:'Meet the artist: [Name] — why they make art that makes you look twice.', brief:'Real artist perspective. Segment: buyers, engaged subscribers, art-clickers.' },
+      { themeId:'cozy-seasonal', date:'2026-06-21', subject:'A summer night with better plans.', brief:'Contrarian stay-in angle. Segment: full list and existing customers.' },
+      { themeId:'smart-hobby', date:'2026-06-26', subject:'A puzzle for people with better hobbies.', brief:'Identity/taste email. Segment: engaged subscribers and known customers.' },
+
+      { themeId:'sales-moments', date:'2026-07-03', subject:'A small luxury with a better payoff.', brief:'Self-purchase moment without fake gift-recipient logic. Segment: previous buyers and engaged non-buyers.' },
+      { themeId:'cozy-seasonal', date:'2026-07-09', subject:'Summer nights are better with slightly better plans.', brief:'Stay-in summer framing. Segment: full list.' },
+      { themeId:'sales-moments', date:'2026-07-14', subject:'Prime Day is here. If you were waiting, this is your sign.', brief:'Direct shopping moment. Segment: Amazon-aware audience, recent shoppers, warm traffic.' },
+      { themeId:'repeat-buyer', date:'2026-07-18', subject:'Finished one? Pick your next favorite.', brief:'Second-purchase conversion for known customers. Segment: one-puzzle buyers only.' },
+      { themeId:'artist-series', date:'2026-07-24', subject:'Meet the artist: [Name] — the piece that almost didn\'t happen.', brief:'Story-led artist email. Segment: buyers, engaged subscribers, art-clickers.' },
+      { themeId:'smart-hobby', date:'2026-07-30', subject:'For people who\'d rather solve something than scroll.', brief:'Smart-hobby identity email. Segment: full list, especially engaged subscribers.' },
+
+      { themeId:'cozy-seasonal', date:'2026-08-06', subject:'A better way to spend a quiet night in.', brief:'Offline angle grounded in actual life. Segment: full list and lapsed subscribers.' },
+      { themeId:'artist-series', date:'2026-08-11', subject:'Meet the artist: [Name] — the puzzle that almost didn\'t happen.', brief:'Story-led artist email. Segment: buyers and art-clickers.' },
+      { themeId:'cozy-seasonal', date:'2026-08-20', subject:'Permission to do less, properly.', brief:'Rest angle without sounding like a wellness app. Segment: full list.' },
+      { themeId:'repeat-buyer', date:'2026-08-24', subject:'If you loved your first one, don\'t stop there.', brief:'Repeat-buyer push for known customers. Segment: one-puzzle buyers.' },
+      { themeId:'bookish', date:'2026-08-28', subject:'Rainy day energy, even when it\'s not raining.', brief:'Bookish/cozy framing. Segment: engaged subscribers, readers, homebody audience.' },
+
+      { themeId:'bookish', date:'2026-09-03', subject:'Rainy day plans for people with excellent taste.', brief:'Bookish/cozy mystery positioning. Segment: engaged non-buyers and readers.' },
+      { themeId:'smart-hobby', date:'2026-09-10', subject:'Puzzle people know. Everyone else figures it out later.', brief:'Identity and belonging. Segment: puzzlers, repeat buyers, high-engagement subscribers.' },
+      { themeId:'artist-series', date:'2026-09-17', subject:'Meet the artist: [Name] — art worth staring at longer.', brief:'Art-first spotlight. Segment: buyers and engaged subscribers.' },
+      { themeId:'repeat-buyer', date:'2026-09-23', subject:'Already did one? Here\'s where to go next.', brief:'Known-customer upsell. Segment: one-puzzle buyers and recent customers.' },
+      { themeId:'cozy-seasonal', date:'2026-09-29', subject:'The season for staying in is almost here.', brief:'Pre-cozy-season warm-up. Segment: full list.' },
+
+      { themeId:'cozy-seasonal', date:'2026-10-01', subject:'Cozy season is officially open.', brief:'One of the strongest lanes. Segment: full list.' },
+      { themeId:'repeat-buyer', date:'2026-10-08', subject:'One puzzle was never going to be enough.', brief:'Move known customers toward repeat purchase. Segment: one-puzzle buyers.' },
+      { themeId:'smart-hobby', date:'2026-10-13', subject:'For people who like using their brain for fun.', brief:'Identity/taste email. Segment: full list.' },
+      { themeId:'artist-series', date:'2026-10-20', subject:'Meet the artist: [Name] — the details that make it hit.', brief:'Zoom-in artist send. Segment: engaged subscribers and customers.' },
+      { themeId:'cozy-seasonal', date:'2026-10-27', subject:'Your table has better plans for tonight.', brief:'Stay-in / seasonal framing. Segment: full list.' },
+
+      { themeId:'gift-moments', date:'2026-11-05', subject:'For the person who\'s impossible to shop for.', brief:'One of the cleanest gift solves. Segment: gifters, holiday browsers, non-buyers.' },
+      { themeId:'smart-hobby', date:'2026-11-10', subject:'For people whose game-night taste is a little more evolved.', brief:'Smart-hobby social angle. Segment: puzzlers and engaged subscribers.' },
+      { themeId:'gift-moments', date:'2026-11-19', subject:'Your hard-to-shop-for list just got easier.', brief:'Gift guide opener. Segment: full list, especially gifters.' },
+      { themeId:'sales-moments', date:'2026-11-23', subject:'4 days. Our biggest sale of the year. Mark it.', brief:'BFCM countdown. Segment: full list with VIP carveout if desired.' },
+      { themeId:'sales-moments', date:'2026-11-27', subject:'Black Friday is on.', brief:'Offer-led urgency. Segment: full list.' },
+      { themeId:'sales-moments', date:'2026-11-30', subject:'Cyber Monday. Last call.', brief:'Tight close. Segment: full list, exclude recent purchasers if needed.' },
+
+      { themeId:'gift-moments', date:'2026-12-03', subject:'A gift that feels thoughtful, not default.', brief:'Holiday gifting with taste signal. Segment: gifters, holiday shoppers, non-buyers.' },
+      { themeId:'gift-moments', date:'2026-12-08', subject:'Still need a thoughtful gift? Start here.', brief:'Utility-first save. Segment: gifters only.' },
+      { themeId:'sales-moments', date:'2026-12-10', subject:'Shipping closes soon. This is the nudge you needed.', brief:'Deadline email. Segment: gifters, non-purchasers, browse abandoners.' },
+      { themeId:'cozy-seasonal', date:'2026-12-18', subject:'The holidays are a great reason to stay in.', brief:'Cozy stay-in holiday energy. Segment: full list, especially customers.' },
+      { themeId:'repeat-buyer', date:'2026-12-26', subject:'The gifts are open. Now what?', brief:'Quiet-week next-purchase email. Segment: known customers and one-time buyers.' },
+      { themeId:'brand-story', date:'2026-12-29', subject:'What we got wrong this year. (And what we\'re doing about it.)', brief:'Year-end honesty note. Segment: engaged customers and subscribers.' },
+      { themeId:'cozy-seasonal', date:'2026-12-31', subject:'New year. More puzzles. Less doom-scrolling.', brief:'Resolution email. Segment: full list.' },
+    ];
+
+    const byMonth = {};
+    EMAILS.forEach(e => {
+      const key = e.date.slice(0,7);
+      if (!byMonth[key]) byMonth[key] = [];
+      byMonth[key].push(e);
+    });
+
+    const fmt = d => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+    const app = document.getElementById('app');
+    app.innerHTML = Object.keys(byMonth).sort().map(month => {
+      const rows = byMonth[month].map(e => {
+        const t = THEMES[e.themeId];
+        return `
+          <div class="card">
+            <div class="meta">
+              <div class="date">${fmt(e.date)}</div>
+              <div class="theme ${t.cls}">${t.name}</div>
+            </div>
+            <div class="subject">${e.subject}</div>
+            <div class="brief">${e.brief}</div>
+          </div>`;
+      }).join('');
+      const label = new Date(month + '-01T12:00:00').toLocaleDateString('en-US', { month:'long', year:'numeric' });
+      return `<section class="month"><h2>${label} <span class="count">(${byMonth[month].length} emails)</span></h2>${rows}</section>`;
+    }).join('');
+  </script>
+</body>
+</html>
