@@ -33,7 +33,7 @@
     padding: 0 28px;
     height: 52px;
     display: flex; align-items: center; gap: 16px;
-    position: sticky; top: 0; z-index: 300;
+    position: sticky; top: 43px; z-index: 300;
   }
   .logo { font-size: 1rem; font-weight: 900; color: #fff; letter-spacing: -.02em; display: flex; align-items: center; gap: 8px; }
   .logo-tag { background: var(--accent); color: #fff; font-size: 0.6rem; font-weight: 800; padding: 2px 7px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase; }
@@ -46,7 +46,7 @@
   .hbtn.pri:hover { background: var(--accent-hover); }
 
   /* ── TABS ── */
-  .tabs { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 28px; display: flex; position: sticky; top: 52px; z-index: 200; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
+  .tabs { background: var(--surface); border-bottom: 2px solid var(--border); padding: 0 28px; display: flex; position: sticky; top: 95px; z-index: 200; box-shadow: 0 1px 6px rgba(0,0,0,.05); }
   .tab { padding: 14px 24px; border: none; background: transparent; color: var(--muted); font-size: 0.82rem; font-weight: 700; cursor: pointer; border-bottom: 3px solid transparent; margin-bottom: -2px; transition: all .15s; letter-spacing: -.01em; }
   .tab:hover { color: var(--text); }
   .tab.on { color: var(--accent); border-bottom-color: var(--accent); }
@@ -234,6 +234,10 @@
 </style>
 </head>
 <body>
+
+<div style="background:#1a1a2e;color:#fff;text-align:center;padding:10px 16px;font-family:sans-serif;font-size:13px;position:sticky;top:0;z-index:9999;border-bottom:2px solid #e63946;">
+  ✨ You're viewing <strong>V2</strong> &nbsp;|&nbsp; <a href="/calendar.html" style="color:#aaa;text-decoration:none;">← View V1</a>
+</div>
 
 <div class="header">
   <a href="index.html" class="back">← Hub</a>
