@@ -416,19 +416,21 @@ const COMMITTED_APPROVALS = {
 // ─────────────────────────────────────────────────────────────────────────────
 
 // Merge: committed approvals are base, localStorage entries override (newer decisions win)
-const _lt = JSON.parse(localStorage.getItem('op_t3_v2')||'{}');
-const _le = JSON.parse(localStorage.getItem('op_e3_v2')||'{}');
+const V2_THEME_STORAGE_KEY = 'op_t4_v2';
+const V2_EMAIL_STORAGE_KEY = 'op_e4_v2';
+const _lt = JSON.parse(localStorage.getItem(V2_THEME_STORAGE_KEY)||'{}');
+const _le = JSON.parse(localStorage.getItem(V2_EMAIL_STORAGE_KEY)||'{}');
 const tSaved = {...COMMITTED_APPROVALS.themes, ..._lt};
 const eSaved = {...COMMITTED_APPROVALS.emails, ..._le};
 // Persist merged state so future sessions always have full history
-localStorage.setItem('op_t3_v2', JSON.stringify(tSaved));
-localStorage.setItem('op_e3_v2', JSON.stringify(eSaved));
+localStorage.setItem(V2_THEME_STORAGE_KEY, JSON.stringify(tSaved));
+localStorage.setItem(V2_EMAIL_STORAGE_KEY, JSON.stringify(eSaved));
 let listFilter = 'all';
 let activeDrawerThemeId = null;
 
 function tDec(id){ return tSaved[id]?.decision||'pending'; }
 function eDec(i) { return eSaved[i]?.decision||'pending'; }
-function save()  { localStorage.setItem('op_t3_v2',JSON.stringify(tSaved)); localStorage.setItem('op_e3_v2',JSON.stringify(eSaved)); }
+function save()  { localStorage.setItem(V2_THEME_STORAGE_KEY,JSON.stringify(tSaved)); localStorage.setItem(V2_EMAIL_STORAGE_KEY,JSON.stringify(eSaved)); }
 
 function approveTheme(id){ tSaved[id]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(id); renderCal(); renderList(); }
 function approveEmail(i) { eSaved[i]={decision:'approved',reasons:[],note:''}; save(); refreshDrawer(activeDrawerThemeId); renderList(); updateCalChips(); }
