@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces Puzzles — Customer Profile Report</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  :root { --bg:#0f1117;--card:#1a1d27;--border:#2a2d3a;--text:#e4e4e7;--muted:#9ca3af;--accent:#8b5cf6;--accent2:#06b6d4;--accent3:#f59e0b;--accent4:#ec4899;--green:#22c55e;--red:#ef4444; }
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  .container{max-width:1280px;margin:0 auto;padding:24px}
+  header{text-align:center;padding:40px 0 30px;border-bottom:1px solid var(--border);margin-bottom:32px}
+  header h1{font-size:2.2rem;font-weight:700;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+  header p{color:var(--muted);margin-top:8px;font-size:.95rem}
+  .section-title{font-size:1.35rem;font-weight:600;margin:40px 0 16px;padding-left:12px;border-left:3px solid var(--accent)}
+  .section-title.ks{border-left-color:var(--accent3)}
+  .grid{display:grid;gap:20px}
+  .grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}.grid-4{grid-template-columns:1fr 1fr 1fr 1fr}.grid-5{grid-template-columns:1fr 1fr 1fr 1fr 1fr}
+  @media(max-width:900px){.grid-2,.grid-3,.grid-4,.grid-5{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:24px}
+  .card.ks-card{border-color:rgba(245,158,11,.3);background:linear-gradient(135deg,rgba(245,158,11,.04),var(--card))}
+  .stat-card{text-align:center}
+  .stat-card .value{font-size:1.85rem;font-weight:700;color:var(--accent)}
+  .stat-card .label{font-size:.82rem;color:var(--muted);margin-top:4px}
+  .stat-card .sub{font-size:.75rem;color:var(--muted);margin-top:2px}
+  .stat-card.ks .value{color:var(--accent3)}
+  .chart-container{position:relative;height:300px}
+  .chart-container.tall{height:380px}
+  .chart-container.xtall{height:450px}
+  table{width:100%;border-collapse:collapse;font-size:.85rem}
+  th{text-align:left;padding:10px 12px;border-bottom:2px solid var(--border);color:var(--muted);font-weight:600;text-transform:uppercase;font-size:.72rem;letter-spacing:.05em}
+  td{padding:9px 12px;border-bottom:1px solid var(--border)}
+  tr:last-child td{border-bottom:none}
+  .badge{display:inline-block;padding:2px 10px;border-radius:20px;font-size:.73rem;font-weight:600}
+  .badge-purple{background:rgba(139,92,246,.15);color:#a78bfa}
+  .badge-cyan{background:rgba(6,182,212,.15);color:#22d3ee}
+  .badge-amber{background:rgba(245,158,11,.15);color:#fbbf24}
+  .badge-green{background:rgba(34,197,94,.15);color:#4ade80}
+  .badge-pink{background:rgba(236,72,153,.15);color:#f472b6}
+  .insight{background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.2);border-radius:10px;padding:16px 20px;margin:12px 0;font-size:.9rem}
+  .insight.ks-insight{background:rgba(245,158,11,.06);border-color:rgba(245,158,11,.2)}
+  .insight strong{color:var(--accent)}
+  .insight.ks-insight strong{color:var(--accent3)}
+  .source-tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.68rem;font-weight:600;margin-right:4px}
+  .src-amazon{background:rgba(245,158,11,.15);color:#fbbf24}
+  .src-shopify{background:rgba(34,197,94,.15);color:#4ade80}
+  .src-klaviyo{background:rgba(6,182,212,.15);color:#22d3ee}
+  .src-reviews{background:rgba(236,72,153,.15);color:#f472b6}
+  .src-ks{background:rgba(245,158,11,.2);color:#fbbf24}
+  .persona-card{background:linear-gradient(135deg,rgba(139,92,246,.1),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.3);border-radius:16px;padding:28px;margin:16px 0}
+  .persona-card.ks-persona{background:linear-gradient(135deg,rgba(245,158,11,.1),rgba(236,72,153,.08));border-color:rgba(245,158,11,.3)}
+  .persona-card h3{color:var(--accent);font-size:1.15rem;margin-bottom:12px}.persona-card.ks-persona h3{color:var(--accent3)}
+  .key-findings{columns:2;column-gap:24px}
+  .key-findings .item{break-inside:avoid;margin-bottom:12px;padding:12px 16px;background:var(--card);border-radius:8px;border:1px solid var(--border);font-size:.86rem}
+  @media(max-width:700px){.key-findings{columns:1}}
+  footer{text-align:center;padding:32px 0;color:var(--muted);font-size:.8rem;border-top:1px solid var(--border);margin-top:40px}
+  .divider{border:none;border-top:2px dashed var(--accent3);margin:48px 0;opacity:.4}
+  .ks-banner{text-align:center;padding:20px;margin:8px 0 24px;background:linear-gradient(135deg,rgba(245,158,11,.12),rgba(236,72,153,.08));border:1px solid rgba(245,158,11,.25);border-radius:14px}
+  .ks-banner h2{font-size:1.6rem;font-weight:700;color:var(--accent3)}
+  .ks-banner p{color:var(--muted);font-size:.88rem;margin-top:4px}
+</style>
+</head>
+<body>
+<div class="container">
+ 
+<header>
+  <h1>Odd Pieces Puzzles — Customer Profile Report</h1>
+  <p>Shopify DTC (73,714 orders) &bull; Kickstarter (24,350 orders) &bull; Amazon &bull; Klaviyo &bull; Reviews &bull; Sept 2021 – Apr 2026</p>
+</header>
+ 
+<!-- ===== PART 1: DTC / SHOPIFY (CLEAN) ===== -->
+ 
+<div class="grid grid-5">
+  <div class="card stat-card"><div class="value">$5.83M</div><div class="label">DTC Shopify Revenue</div><div class="sub">73,714 orders (excl. KS & reships)</div></div>
+  <div class="card stat-card"><div class="value">$78.24</div><div class="label">DTC Avg Order Value</div><div class="sub">Range: $72–$86 by year</div></div>
+  <div class="card stat-card"><div class="value">11,618</div><div class="label">Amazon Customers (Q4 '25)</div><div class="sub"><span style="color:var(--green)">+801% vs Q1</span></div></div>
+  <div class="card stat-card"><div class="value">1,966</div><div class="label">Published Reviews</div><div class="sub">4.68 avg &bull; 83% five-star</div></div>
+  <div class="card stat-card"><div class="value">71K+</div><div class="label">Unique DTC Customers</div><div class="sub">96–100% new each year</div></div>
+</div>
+ 
+<!-- DTC GROWTH -->
+<h2 class="section-title">DTC Business Growth — Year Over Year</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">DTC Orders by Year</h3><div class="chart-container"><canvas id="yearlyOrdersChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">DTC Revenue by Year</h3><div class="chart-container"><canvas id="yearlyRevenueChart"></canvas></div></div>
+</div>
+<div class="insight"><span class="source-tag src-shopify">Shopify DTC</span> Excluding Kickstarter fulfillment and reships, DTC orders grew from <strong>1,078 (2021) → 29,732 (2025)</strong> — a 27x increase — and revenue from <strong>$78K → $2.29M</strong>. This is the organic/paid acquisition channel performing independently of KS campaigns.</div>
+ 
+<!-- QUARTERLY -->
+<h2 class="section-title">Quarterly Trends — DTC Orders & Revenue</h2>
+<div class="card"><div class="chart-container tall"><canvas id="quarterlyChart"></canvas></div></div>
+<div class="insight"><strong>Q4 dominates:</strong> Q4 2025 had <strong>24,814 DTC orders ($1.88M)</strong> — that's 83% of the year's DTC orders in one quarter. Q4 2024 had 15,349 orders ($1.32M). Non-Q4 quarters average 1,100–2,800 orders. This extreme holiday seasonality is the defining characteristic of the DTC channel.</div>
+ 
+<!-- PERSONA -->
+<h2 class="section-title">DTC Customer Persona</h2>
+<div class="persona-card">
+  <h3>"The Holiday Gift-Buyer & Puzzle Enthusiast"</h3><p style="margin-bottom:16px">Your DTC customer is a <strong>35–54-year-old</strong>, likely <strong>married</strong>, with a <strong>household income of $75K–$150K+</strong>, living in <strong>US suburbs</strong> (California, Texas, Washington, New York). They have a <strong>bachelor's degree or higher</strong> and heavily over-index on Q4 purchases — buying puzzles as holiday gifts. They typically buy a single bundle or series pack at ~$75–$86 AOV, are drawn to the mystery/storytelling element, and are highly likely to leave a 5-star review. Nearly all are first-time buyers (96%+), with only 2–4% returning year over year.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <span class="badge badge-purple">35–54 yrs old</span>
+    <span class="badge badge-cyan">Female-leaning (Amazon)</span>
+    <span class="badge badge-amber">Married ~45%</span>
+    <span class="badge badge-green">$75K–$150K+ HHI</span>
+    <span class="badge badge-pink">College-educated</span>
+  </div>
+</div>
+ 
+<!-- DEMOGRAPHICS AGE -->
+<h2 class="section-title">Demographics — Age (Amazon Brand Analytics)</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Age Distribution — Q4 2025</h3><div class="chart-container"><canvas id="ageChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Age Trends Q1–Q4 2025</h3><div class="chart-container"><canvas id="ageTrendChart"></canvas></div></div>
+</div>
+<div class="insight">The <strong>45–54 bracket</strong> surged to 19.4% in Q4 (up from 15.5% in Q1), overtaking 35–44 which declined from 24.6% to 18.1%. The <strong>55+ group now represents 26%</strong> of customers — up from 19% in Q1. Your audience is aging up.</div>
+ 
+<!-- DEMOGRAPHICS GENDER -->
+<h2 class="section-title">Demographics — Gender</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Amazon Gender — Q1→Q4 2025</h3><div class="chart-container"><canvas id="genderTrendChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">DTC Gender (Name Inference) by Year</h3><div class="chart-container"><canvas id="shopifyGenderChart"></canvas></div></div>
+</div>
+<div class="card" style="margin-top:20px"><h3 style="font-size:.95rem;margin-bottom:12px">DTC Gender (Name Inference) — Quarterly Breakdown</h3><div class="chart-container tall"><canvas id="dtcGenderQuarterlyChart"></canvas></div></div>
+<div class="insight"><span class="source-tag src-amazon">Amazon</span> Women went from 37.9% → 44.7% (Q3 peak) → 41.4% (Q4). Men declined 39.6% → 35.1%. <span class="source-tag src-shopify">Shopify DTC</span> Name inference shows ~6–10% female, ~2–5% male where classifiable — but ~89% are "Unknown" (initials, company names, non-English names). Amazon household-level data is the better gender signal. The female shift coincides with Amazon listing copy targeting "for Women, White Elephant." <strong>Quarterly DTC pattern:</strong> Female names tend to peak slightly in Q4 (holiday gift-buying season) and Q1, while male names are more consistent across quarters — supporting the theory that Q4 brings in more female gift-buyers.</div>
+ 
+<!-- INCOME -->
+<h2 class="section-title">Demographics — Household Income (Amazon)</h2>
+<div class="card"><div class="chart-container tall"><canvas id="incomeChart"></canvas></div></div>
+<div class="insight">Affluent base: <strong>$75K–$150K</strong> = ~33% of known customers; <strong>$150K+</strong> = another 25%+. The $250K+ segment reached 11.7%. Your $47–$89 price points fit comfortably within this audience's spending power.</div>
+ 
+<!-- EDUCATION & MARITAL -->
+<h2 class="section-title">Education & Marital Status (Amazon)</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Education — Q4 2025</h3><div class="chart-container"><canvas id="educationChart"></canvas></div></div><div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Marital Status — Q4 2025</h3><div class="chart-container"><canvas id="maritalChart"></canvas></div></div>
+</div>
+ 
+<!-- GEOGRAPHY -->
+<h2 class="section-title">Geography — DTC Year Over Year</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Country Mix by Year (DTC)</h3><div class="chart-container tall"><canvas id="countryYearChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Top US States — DTC Growth</h3><div class="chart-container tall"><canvas id="statesYearChart"></canvas></div></div>
+</div>
+<div class="insight"><span class="source-tag src-shopify">DTC</span> US grew from 72% (2021) to ~80% of DTC orders. California leads every year (2,784 in 2025). Canada is 15–22% (Ontario dominant). International is small (&lt;5%) on DTC — contrast with Kickstarter where international is 23%.</div>
+ 
+<!-- PURCHASE BEHAVIOR -->
+<h2 class="section-title">DTC Purchase Behavior</h2>
+<div class="grid grid-4">
+  <div class="card stat-card"><div class="value">96–100%</div><div class="label">New Customers Annually</div><div class="sub">Only 2–4% returning YoY</div></div>
+  <div class="card stat-card"><div class="value">10.4%</div><div class="label">2026 Return Rate</div><div class="sub">Highest ever — improving</div></div>
+  <div class="card stat-card"><div class="value">24%</div><div class="label">Discount Usage (2024–25)</div><div class="sub">Up from 2% in 2021</div></div>
+  <div class="card stat-card"><div class="value">$72–$86</div><div class="label">AOV Range</div><div class="sub">Peak $86 in 2024</div></div>
+</div>
+<div class="grid grid-2" style="margin-top:20px">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">New vs Returning by Year (DTC)</h3><div class="chart-container"><canvas id="newReturnChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">AOV Trend by Year (DTC)</h3><div class="chart-container"><canvas id="aovChart"></canvas></div></div>
+</div>
+ 
+<!-- TOP PRODUCTS DTC -->
+<h2 class="section-title">DTC Product Performance</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">All-Time Top 15 DTC Products (Units)</h3><div class="chart-container xtall"><canvas id="topProductsChart"></canvas></div></div>
+  <div class="card">
+    <h3 style="font-size:.95rem;margin-bottom:12px">Product Mix Evolution (DTC)</h3>
+    <table>
+      <tr><th>Year</th><th>Top Product</th><th>Units</th><th>Shift</th></tr>
+      <tr><td>2021</td><td>All Three Puzzles</td><td>744</td><td>Bundle-only era</td></tr>
+      <tr><td>2022</td><td>All Three Puzzles</td><td>2,889</td><td>Singles emerging</td></tr>
+      <tr><td>2023</td><td>Series 1 Bundle</td><td>3,729</td><td>S2 pre-orders begin</td></tr>
+      <tr><td>2024</td><td>Series 1</td><td>2,952</td><td>Singles dominant, diversified</td></tr>
+      <tr><td>2025</td><td>Series 1</td><td>4,025</td><td>S4 launch, 10+ products</td></tr>
+      <tr><td>2026</td><td>Series 2</td><td>313</td><td>Silver Lining &amp; Time Keepers new</td></tr>
+    </table>
+    <div class="insight" style="margin-top:16px">DTC evolved from "All Three Puzzles" bundle → diversified catalog. <strong>Snack Attack</strong> (7,271 units) and <strong>Series 1</strong> (7,269) are your all-time DTC bestsellers. New standalone puzzles (Mushroom Mayhem, Silver Lining, Time Keepers) show the catalog is maturing.</div>
+  </div>
+</div>
+ 
+<!-- DISCOUNTS -->
+<h2 class="section-title">DTC Discount Analysis</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Top Discount Codes (DTC)</h3><div class="chart-container tall"><canvas id="discountChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Discount Usage % by Year</h3><div class="chart-container tall"><canvas id="discountTrendChart"></canvas></div></div>
+</div><div class="insight"><strong>THEODDCLUB</strong> (7,756 uses, $75K discounts) is your loyalty code. <strong>BESTGIFTEVER10</strong> (2,504) targets gifters. <strong>WANSHOW</strong> (1,057) = influencer/creator partnership. Discount usage grew 2% → 28% — worth monitoring margin impact.</div>
+ 
+<!-- REVIEWS -->
+<h2 class="section-title">Reviews & Sentiment</h2>
+<div class="grid grid-2">
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Rating Distribution (1,966 Reviews)</h3><div class="chart-container"><canvas id="ratingChart"></canvas></div></div>
+  <div class="card"><h3 style="font-size:.95rem;margin-bottom:12px">Reviews by Year</h3><div class="chart-container"><canvas id="reviewTimeChart"></canvas></div></div>
+</div>
+<div class="card" style="margin-top:20px">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+    <div><h4 style="font-size:.85rem;color:var(--green);margin-bottom:8px">Delights</h4><p style="font-size:.85rem">Storytelling/mystery, artwork quality, surprise ending, piece quality, family bonding, giftability</p></div>
+    <div><h4 style="font-size:.85rem;color:var(--red);margin-bottom:8px">Pain Points</h4><p style="font-size:.85rem"><strong>Missing pieces</strong> (#1 by far), shipping delays, piece peeling/loose fits, same die-cuts, mystery underwhelming vs price</p></div>
+  </div>
+</div>
+ 
+<!-- ===== DIVIDER ===== -->
+<hr class="divider">
+ 
+<!-- ===== PART 2: KICKSTARTER ===== -->
+<div class="ks-banner">
+  <h2>Kickstarter Backers</h2>
+  <p>24,350 orders &bull; $2.01M revenue &bull; 19,202 unique backers &bull; 4 campaigns (Series 1–4)</p>
+</div>
+ 
+<div class="grid grid-5">
+  <div class="card stat-card ks"><div class="value">24,350</div><div class="label">Total KS Orders</div><div class="sub">Excl. reships</div></div>
+  <div class="card stat-card ks"><div class="value">$2.01M</div><div class="label">Total KS Revenue</div><div class="sub">~26% of total Shopify</div></div>
+  <div class="card stat-card ks"><div class="value">$82.72</div><div class="label">KS Avg Order Value</div><div class="sub">Range: $66–$244 by series</div></div>
+  <div class="card stat-card ks"><div class="value">17.2%</div><div class="label">Repeat Backer Rate</div><div class="sub">3,311 backed 2+ campaigns</div></div>
+  <div class="card stat-card ks"><div class="value">12.1%</div><div class="label">KS → DTC Crossover</div><div class="sub">2,322 backers also bought DTC</div></div>
+</div>
+ 
+<!-- KS BY SERIES -->
+<h2 class="section-title ks">Kickstarter — By Campaign</h2>
+<div class="grid grid-2">
+  <div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">Orders & Revenue by Series</h3><div class="chart-container"><canvas id="ksSeriesChart"></canvas></div></div>
+  <div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">AOV by Series</h3><div class="chart-container"><canvas id="ksAovChart"></canvas></div></div>
+</div>
+<div class="card ks-card" style="margin-top:20px">
+  <table>
+    <tr><th>Campaign</th><th>Orders</th><th>Revenue</th><th>AOV</th><th>Date Range</th></tr>
+    <tr><td>Series 1</td><td>12,051</td><td>$799,543</td><td>$66.35</td><td>Oct 2021 – Feb 2026</td></tr>
+    <tr><td>Series 2</td><td>4,169</td><td>$424,576</td><td>$101.84</td><td>Apr 2023 – Dec 2025</td></tr>
+    <tr><td>Series 3</td><td>2,484</td><td>$202,848</td><td>$81.66</td><td>Jul 2024 – Sep 2025</td></tr>
+    <tr><td>Series 4</td><td>5,450</td><td>$539,619</td><td>$99.01</td><td>Nov 2025 – Feb 2026</td></tr>
+  </table>
+</div>
+<div class="insight ks-insight">Series 4 is your strongest recent campaign: <strong>5,450 orders, $540K revenue, $99 AOV</strong> in just ~3 months. AOV has climbed from $66 (S1) to $99–$102 (S2/S4) as you've added upsells and tier options. Note: ~200 S3/S4 backers added S1 bundles as add-ons to their campaign orders, showing strong catalog demand from existing backers.</div>
+ 
+<!-- KS GENDER -->
+<h2 class="section-title ks">Kickstarter — Gender</h2>
+<div class="grid grid-2"><div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">KS Gender (Name Inference)</h3><div class="chart-container"><canvas id="ksGenderChart"></canvas></div></div>
+  <div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">KS vs DTC Gender Comparison</h3><div class="chart-container"><canvas id="ksVsDtcGenderChart"></canvas></div></div>
+</div>
+<div class="insight ks-insight">KS backers show <strong>18.5% female, 22.2% male</strong> (where classifiable) — a notably different gender mix than DTC. Kickstarter has a higher proportion of identifiable male backers, while DTC sees more female names. KS backers are more likely to use full names, improving classification. When combined with Amazon data showing 41% female / 35% male, the picture suggests <strong>women dominate DTC/Amazon purchases while men are more represented in KS backing</strong>.</div>
+ 
+<!-- KS GEOGRAPHY -->
+<h2 class="section-title ks">Kickstarter — Geography</h2>
+<div class="grid grid-2">
+  <div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">KS Country Distribution</h3><div class="chart-container"><canvas id="ksGeoChart"></canvas></div></div>
+  <div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">KS Top US States</h3><div class="chart-container"><canvas id="ksStatesChart"></canvas></div></div>
+</div>
+<div class="insight ks-insight">Kickstarter has a <strong>much stronger international presence</strong> than DTC: 23% international (vs &lt;5% DTC). <strong>UK (4.1%), Australia (4%), Germany (2.8%), France, Netherlands, Singapore</strong> all have meaningful KS backer bases. This suggests KS is your best international customer acquisition channel.</div>
+ 
+<!-- KS REPEAT & CROSSOVER -->
+<h2 class="section-title ks">Kickstarter — Repeat Backers & DTC Crossover</h2>
+<div class="grid grid-3">
+  <div class="card ks-card stat-card ks"><div class="value">3,311</div><div class="label">Repeat KS Backers</div><div class="sub">17.2% of 19,202 unique backers</div></div>
+  <div class="card ks-card stat-card ks"><div class="value">2,322</div><div class="label">KS → DTC Crossover</div><div class="sub">12.1% of backers also bought DTC</div></div>
+  <div class="card ks-card stat-card ks"><div class="value">$82.72</div><div class="label">KS Backer AOV</div><div class="sub">vs $78.24 DTC AOV</div></div>
+</div>
+<div class="card ks-card" style="margin-top:20px">
+  <h3 style="font-size:.95rem;margin-bottom:12px">KS Order Value Distribution</h3>
+  <div class="chart-container"><canvas id="ksValueDistChart"></canvas></div>
+</div>
+<div class="insight ks-insight"><strong>17.2% repeat backer rate</strong> is strong — over 3,300 people have backed multiple Odd Pieces campaigns. But only <strong>12.1% cross over to DTC</strong>, meaning 88% of KS backers never buy from your Shopify store. This represents a massive conversion opportunity: 19,200 backers × 88% = ~16,900 potential DTC customers to nurture. The <strong>$50–$100 sweet spot</strong> captures 65% of KS orders.</div>
+ 
+<!-- KS PRODUCTS -->
+<h2 class="section-title ks">Kickstarter — Top Products</h2>
+<div class="card ks-card"><h3 style="font-size:.95rem;margin-bottom:12px">Top 12 KS Products (Units Sold)</h3><div class="chart-container xtall"><canvas id="ksProductsChart"></canvas></div></div>
+<div class="insight ks-insight">KS is bundle-heavy: <strong>"All Three Puzzles" (8,117 units)</strong> dominates, followed by "S4 3-Pack" (5,542) and "S2 3-Pack" (4,230). Add-ons like Storage Kit (2,737), Tote Bag (2,482), and Mini Puzzles (2,445+) show strong upsell performance. KS backers buy more items per order than DTC customers.</div>
+ 
+<!-- KS PERSONA -->
+<h2 class="section-title ks">Kickstarter Backer Persona</h2>
+<div class="persona-card ks-persona">
+  <h3>"The Puzzle Enthusiast & Early Adopter"</h3><p style="margin-bottom:16px">Your KS backer is more likely <strong>male</strong> (22% vs 4% on DTC where classifiable), more <strong>international</strong> (23% vs &lt;5% DTC), and a <strong>higher-value buyer</strong> ($83 AOV with strong upsell attach). They're a true puzzle enthusiast who backs campaigns early, buys bundles + add-ons, and 17% come back for the next campaign. However, only 12% cross over to buy on Shopify. They're concentrated in <strong>California, Washington, Texas, New York, and Virginia</strong> in the US, with significant pockets in <strong>UK, Australia, Germany, France, Netherlands, and Singapore</strong>.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:8px">
+    <span class="badge badge-amber">More male-leaning</span>
+    <span class="badge badge-amber">23% international</span>
+    <span class="badge badge-amber">$83 AOV + upsells</span>
+    <span class="badge badge-amber">17% repeat backer</span>
+    <span class="badge badge-amber">12% → DTC crossover</span>
+  </div>
+</div>
+ 
+<!-- ===== KEY FINDINGS ===== -->
+<hr class="divider">
+<h2 class="section-title">Key Strategic Findings (Combined)</h2>
+<div class="key-findings">
+  <div class="item"><strong style="color:var(--accent)">1. Two Distinct Customer Bases:</strong> KS backers are male-leaning, international, enthusiast-driven early adopters. DTC/Amazon buyers are female-leaning, US-centric, gift-driven holiday shoppers. Marketing should address both personas differently.</div>
+  <div class="item"><strong style="color:var(--accent2)">2. Extreme Q4 Seasonality (DTC):</strong> Q4 2025 = 24,814 orders (83% of the year). This is a holiday gift product. Non-Q4 quarters average ~1,500 orders. Inventory and marketing must be front-loaded for Q4.</div>
+  <div class="item"><strong style="color:var(--accent3)">3. KS → DTC Gap:</strong> Only 12.1% of 19,200 KS backers ever buy on Shopify. That's ~16,900 warm leads not converting. A targeted post-campaign email/SMS nurture could unlock significant DTC revenue.</div>
+  <div class="item"><strong style="color:var(--accent4)">4. Strong KS Repeat Rate:</strong> 17.2% of backers return for the next campaign — well above typical KS repeat rates. Series launches are your #1 re-engagement mechanism.</div>
+  <div class="item"><strong style="color:var(--accent)">5. Missing Pieces = #1 Risk:</strong> Overwhelmingly the top review complaint. Highest-leverage quality investment you can make across both channels.</div>
+  <div class="item"><strong style="color:var(--accent2)">6. KS = International Gateway:</strong> 23% of KS backers are international (UK, AU, DE, FR, NL, SG) vs &lt;5% DTC. Kickstarter is your best tool for building international demand before expanding DTC internationally.</div>
+  <div class="item"><strong style="color:var(--accent3)">7. Discount Creep:</strong> DTC discount usage grew 2% → 28%. THEODDCLUB alone = 7,756 uses. Monitor margin impact. Consider whether loyalty pricing is cannibalizing full-price sales.</div>
+  <div class="item"><strong style="color:var(--accent4)">8. Aging Customer Base:</strong> 55+ grew to 26% (Amazon). 25–34 declined to 11%. Product and marketing should reflect this older, more affluent audience.</div>
+  <div class="item"><strong style="color:var(--accent)">9. KS AOV Climbs:</strong> KS AOV went from $66 (S1) → $99–$102 (S2/S4), driven by better tiering and add-ons. DTC AOV is stable at $72–$86. KS backers spend more per order.</div>
+  <div class="item"><strong style="color:var(--accent2)">10. 2026 Encouraging Signs:</strong> DTC return rate hit 10.4% (best ever). New products (Silver Lining, Time Keepers) are performing. The catalog is maturing beyond series bundles.</div>
+</div>
+ 
+<footer>
+  <p>Report generated April 12, 2026 &bull; Data: Shopify DTC (73,714 orders), Kickstarter (24,350 orders), Amazon (Q1–Q4 2025), Klaviyo, Reviews (1,966)</p>
+  <p style="margin-top:4px">KS orders identified by "KS" tag + KSN/KSI order prefixes &bull; Reships (1,307) excluded from both analyses</p><p style="margin-top:4px">Odd Pieces Puzzles &bull; hello@oddpieces.com &bull; www.oddpieces.com</p>
+</footer>
+</div>
+ 
+<script>
+const P='#8b5cf6',C='#06b6d4',A='#f59e0b',K='#ec4899',G='#22c55e',B='#3b82f6',R='#ef4444',O='#f97316';
+Chart.defaults.color='#9ca3af';Chart.defaults.borderColor='#2a2d3a';Chart.defaults.font.family="'Segoe UI',system-ui,sans-serif";
+ 
+// DTC YEARLY ORDERS
+new Chart(document.getElementById('yearlyOrdersChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026*'],datasets:[{data:[1078,6958,11166,22657,29732,2123],backgroundColor:[P,P,P,P,P,C],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// DTC YEARLY REVENUE
+new Chart(document.getElementById('yearlyRevenueChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026*'],datasets:[{data:[78458,527123,831676,1947138,2289277,153107],backgroundColor:[G,G,G,G,G,C],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toLocaleString()}}},scales:{y:{ticks:{callback:v=>'$'+(v/1e6).toFixed(1)+'M'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// QUARTERLY
+new Chart(document.getElementById('quarterlyChart'),{type:'bar',data:{labels:['21Q3','21Q4','22Q1','22Q2','22Q3','22Q4','23Q1','23Q2','23Q3','23Q4','24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1'],datasets:[{label:'Orders',data:[143,935,2000,1181,1638,2139,2794,2039,1139,5194,1962,2653,2693,15349,1575,1384,1959,24814,2123],backgroundColor:function(){let c=[];for(let i=0;i<19;i++)c.push([3,7,11,13,17].includes(i)?K:P);return c}(),borderRadius:4},{label:'Revenue ($K)',data:[9.7,68.8,152.7,84.6,119.4,170.5,208.2,149.9,86.5,387.0,147.0,242.4,236.4,1321.3,131.6,118.3,162.4,1877.0,153.1],type:'line',borderColor:A,fill:false,tension:.3,pointRadius:3,yAxisID:'y1'}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label==='Revenue ($K)'?'$'+(ctx.parsed.y*1000).toLocaleString():ctx.parsed.y.toLocaleString()+' orders'}}},scales:{y:{grid:{color:'#2a2d3a'},title:{display:true,text:'Orders',color:'#9ca3af'}},y1:{position:'right',grid:{display:false},title:{display:true,text:'Revenue ($K)',color:'#9ca3af'},ticks:{callback:v=>'$'+v+'K'}},x:{grid:{display:false}}}}});
+ 
+// AGE
+new Chart(document.getElementById('ageChart'),{type:'doughnut',data:{labels:['18-24','25-34','35-44','45-54','55-64','65+'],datasets:[{data:[3.29,10.66,18.08,19.44,14.00,12.08],backgroundColor:[C,B,P,K,A,G],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{padding:12,usePointStyle:true}}}}});
+ 
+// AGE TREND
+new Chart(document.getElementById('ageTrendChart'),{type:'line',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'35-44',data:[24.59,22.39,22.84,18.08],borderColor:P,tension:.3,pointRadius:4},{label:'45-54',data:[15.52,15.96,15.58,19.44],borderColor:K,tension:.3,pointRadius:4},{label:'55-64',data:[10.55,9.41,10.11,14.00],borderColor:A,tension:.3,pointRadius:4},{label:'25-34',data:[15.44,14.77,15.00,10.66],borderColor:B,tension:.3,pointRadius:4},{label:'65+',data:[8.38,9.83,9.71,12.08],borderColor:G,tension:.3,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,padding:10,font:{size:11}}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// GENDER AMAZON
+new Chart(document.getElementById('genderTrendChart'),{type:'line',data:{labels:['Q1','Q2','Q3','Q4'],datasets:[{label:'Female',data:[37.86,40.98,44.66,41.41],borderColor:K,backgroundColor:'rgba(236,72,153,.1)',fill:true,tension:.3},{label:'Male',data:[39.57,33.83,30.72,35.06],borderColor:B,backgroundColor:'rgba(59,130,246,.1)',fill:true,tension:.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// SHOPIFY GENDER
+new Chart(document.getElementById('shopifyGenderChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{label:'Female',data:[9.7,8.2,6.8,5.5,6.9,6.7],backgroundColor:K,borderRadius:4},{label:'Male',data:[2.2,3.7,4.2,4.9,3.6,3.6],backgroundColor:B,borderRadius:4},{label:'Unknown',data:[88.0,88.1,89.0,89.6,89.5,89.6],backgroundColor:'#4b5563',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,font:{size:11}}}},scales:{y:{stacked:true,ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{stacked:true,grid:{display:false}}}}});
+ 
+// DTC GENDER QUARTERLY
+new Chart(document.getElementById('dtcGenderQuarterlyChart'),{type:'line',data:{labels:['21Q3','21Q4','22Q1','22Q2','22Q3','22Q4','23Q1','23Q2','23Q3','23Q4','24Q1','24Q2','24Q3','24Q4','25Q1','25Q2','25Q3','25Q4','26Q1'],datasets:[{label:'Female %',data:[9.1,9.8,7.8,7.7,8.4,8.6,8.2,7.4,6.0,6.0,5.9,7.8,6.6,4.8,6.3,6.1,7.2,7.0,6.7],borderColor:K,backgroundColor:'rgba(236,72,153,.08)',fill:true,tension:.3,pointRadius:3},{label:'Male %',data:[4.2,1.9,4.4,3.5,2.9,3.7,3.9,4.1,4.4,4.3,4.9,3.4,4.8,5.2,3.7,4.8,3.6,3.5,3.6],borderColor:B,backgroundColor:'rgba(59,130,246,.08)',fill:true,tension:.3,pointRadius:3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.parsed.y+'%'}}},scales:{y:{min:0,max:12,ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// INCOME
+new Chart(document.getElementById('incomeChart'),{type:'bar',data:{labels:['$50-75K','$75-100K','$100-125K','$125-150K','$150-175K','$175-200K','$200-250K','$250K+'],datasets:[{data:[9.40,10.39,7.52,10.17,5.10,5.96,8.62,11.74],backgroundColor:[C,C,B,B,P,P,A,A],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// EDUCATION
+new Chart(document.getElementById('educationChart'),{type:'doughnut',data:{labels:["Bachelor's","Some College","Graduate","HS Grad","< HS"],datasets:[{data:[25.99,21.82,15.41,11.61,2.74],backgroundColor:[P,C,B,A,'#6b7280'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{padding:10,usePointStyle:true,font:{size:11}}}}}});
+ 
+// MARITAL
+new Chart(document.getElementById('maritalChart'),{type:'doughnut',data:{labels:['Married','Single','N/A'],datasets:[{data:[44.67,6.01,49.32],backgroundColor:[K,C,'#4b5563'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{padding:12,usePointStyle:true}}}}});
+ 
+// COUNTRY BY YEAR
+new Chart(document.getElementById('countryYearChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{label:'US',data:[781,5012,8172,17517,23549,1756],backgroundColor:B,borderRadius:4},{label:'Canada',data:[184,1535,2852,4957,5763,320],backgroundColor:R,borderRadius:4},{label:'Other',data:[113,411,142,183,420,47],backgroundColor:A,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}}},scales:{y:{stacked:true,grid:{color:'#2a2d3a'}},x:{stacked:true,grid:{display:false}}}}});
+ 
+// STATES
+new Chart(document.getElementById('statesYearChart'),{type:'line',data:{labels:['2021','2022','2023','2024','2025'],datasets:[{label:'CA',data:[147,769,1010,2142,2784],borderColor:B,tension:.3,pointRadius:4},{label:'TX',data:[44,325,545,1172,1416],borderColor:R,tension:.3,pointRadius:4},{label:'WA',data:[53,282,464,924,1277],borderColor:G,tension:.3,pointRadius:4},{label:'NY',data:[55,303,408,853,1162],borderColor:P,tension:.3,pointRadius:4},{label:'IL',data:[36,218,329,707,1023],borderColor:A,tension:.3,pointRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true,font:{size:11}}}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// NEW VS RETURNING
+new Chart(document.getElementById('newReturnChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{label:'New',data:[100,99.6,97.7,97.2,96.3,89.6],backgroundColor:B,borderRadius:4},{label:'Returning',data:[0,0.4,2.3,2.8,3.7,10.4],backgroundColor:K,borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}}},scales:{y:{stacked:true,ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{stacked:true,grid:{display:false}}}}});
+ 
+// AOV
+new Chart(document.getElementById('aovChart'),{type:'line',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{label:'AOV',data:[72.78,75.76,74.48,85.94,77.00,72.12],borderColor:G,backgroundColor:'rgba(34,197,94,.15)',fill:true,tension:.3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{min:60,max:95,ticks:{callback:v=>'$'+v},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// TOP PRODUCTS
+new Chart(document.getElementById('topProductsChart'),{type:'bar',data:{labels:['Snack Attack','Series 1','Series 1 Bundle','Series 2','Glitch','Beyond the Kelp','All Three Puzzles','Turbo 3000','Series 4','Shutterbug','AstroGastro','S2 Bundle','S1 & S2','Mushroom Mayhem','Silver Lining'],datasets:[{data:[7271,7269,7054,5255,5217,4241,3633,3616,3415,2947,2763,2375,1698,1679,1584],backgroundColor:[K,B,B,B,A,C,P,P,G,C,A,B,B,G,G],borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#2a2d3a'}},y:{grid:{display:false}}}}});
+ 
+// DISCOUNT CODES
+new Chart(document.getElementById('discountChart'),{type:'bar',data:{labels:['THEODDCLUB','BESTGIFTEVER10','WANSHOW','THEODDCLUB15','credit10','UNBOXED','UNRAVEL10','PLAYPUZZLES10','SOPHIE10','PUZZLEON'],datasets:[{data:[7756,2504,1057,931,875,254,153,148,130,117],backgroundColor:[P,K,A,P,G,C,A,B,K,G],borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#2a2d3a'}},y:{grid:{display:false}}}}});
+ 
+// DISCOUNT TREND
+new Chart(document.getElementById('discountTrendChart'),{type:'line',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{label:'Discount %',data:[2.23,7.65,23.46,23.30,23.78,27.70],borderColor:A,backgroundColor:'rgba(245,158,11,.15)',fill:true,tension:.3,pointRadius:5}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// RATING
+new Chart(document.getElementById('ratingChart'),{type:'bar',data:{labels:['5★','4★','3★','2★','1★'],datasets:[{data:[1628,176,74,48,40],backgroundColor:[G,C,A,O,R],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// REVIEWS TIMELINE
+new Chart(document.getElementById('reviewTimeChart'),{type:'bar',data:{labels:['2021','2022','2023','2024','2025','2026'],datasets:[{data:[19,438,447,281,328,453],backgroundColor:[P,P,P,P,P,C],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// === KICKSTARTER CHARTS ===
+// KS SERIES
+new Chart(document.getElementById('ksSeriesChart'),{type:'bar',data:{labels:['Series 1','Series 2','Series 3','Series 4'],datasets:[{label:'Orders',data:[12051,4169,2484,5450],backgroundColor:[A,A,A,A],borderRadius:6},{label:'Revenue ($K)',data:[800,425,203,540],backgroundColor:[K,K,K,K],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}},tooltip:{callbacks:{label:ctx=>ctx.dataset.label.includes('Rev')?'$'+ctx.parsed.y+'K':ctx.parsed.y.toLocaleString()}}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// KS AOV
+new Chart(document.getElementById('ksAovChart'),{type:'bar',data:{labels:['Series 1','Series 2','Series 3','Series 4'],datasets:[{data:[66.35,101.84,81.66,99.01],backgroundColor:[A,A,A,A],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>'$'+ctx.parsed.y.toFixed(2)}}},scales:{y:{ticks:{callback:v=>'$'+v},grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// KS GENDER
+new Chart(document.getElementById('ksGenderChart'),{type:'doughnut',data:{labels:['Female (18.5%)','Male (22.2%)','Unknown (59.2%)'],datasets:[{data:[18.5,22.2,59.2],backgroundColor:[K,B,'#4b5563'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{padding:12,usePointStyle:true}}}}});
+ 
+// KS VS DTC GENDER
+new Chart(document.getElementById('ksVsDtcGenderChart'),{type:'bar',data:{labels:['Kickstarter','DTC Shopify','Amazon (Q4)'],datasets:[{label:'Female',data:[18.5,6.7,41.4],backgroundColor:K,borderRadius:4},{label:'Male',data:[22.2,3.6,35.1],backgroundColor:B,borderRadius:4},{label:'Unknown/N/A',data:[59.2,89.6,23.5],backgroundColor:'#4b5563',borderRadius:4}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{usePointStyle:true}}},scales:{y:{stacked:true,ticks:{callback:v=>v+'%'},grid:{color:'#2a2d3a'}},x:{stacked:true,grid:{display:false}}}}});
+ 
+// KS GEO
+new Chart(document.getElementById('ksGeoChart'),{type:'doughnut',data:{labels:['US (62.5%)','Canada (14.8%)','UK (4.1%)','Australia (4%)','Germany (2.8%)','Other (11.8%)'],datasets:[{data:[62.5,14.8,4.1,4.0,2.8,11.8],backgroundColor:[B,R,P,G,A,'#6b7280'],borderWidth:0}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{position:'right',labels:{padding:8,usePointStyle:true,font:{size:11}}}}}});
+ 
+// KS STATES
+new Chart(document.getElementById('ksStatesChart'),{type:'bar',data:{labels:['CA','WA','TX','NY','VA','PA','IL','OH','MA','FL'],datasets:[{data:[2287,974,928,809,589,587,581,543,513,503],backgroundColor:A,borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#2a2d3a'}},y:{grid:{display:false}}}}});
+ 
+// KS VALUE DISTRIBUTION
+new Chart(document.getElementById('ksValueDistChart'),{type:'bar',data:{labels:['$0-25','$25-50','$50-75','$75-100','$100-150','$150-200','$200+'],datasets:[{data:[1266,1989,7559,8204,4361,431,520],backgroundColor:[C,C,A,A,K,K,P],borderRadius:6}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.parsed.y.toLocaleString()+' orders'}}},scales:{y:{grid:{color:'#2a2d3a'}},x:{grid:{display:false}}}}});
+ 
+// KS PRODUCTS
+new Chart(document.getElementById('ksProductsChart'),{type:'bar',data:{labels:['All Three Puzzles','S4 3-Pack Bundle','3PK Series 2','S3 2-Pack Bundle','Mystery Mini 3PK','Snack Attack','Storage Kit','Tote Bag','S4 Minis','Character Mini 3PK','S2 Minis 3PK','Turbo 3000'],datasets:[{data:[8117,5542,4230,3397,2922,2739,2737,2482,2445,1864,1821,926],backgroundColor:[A,A,A,A,K,K,C,C,G,K,K,P],borderRadius:4}]},options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{color:'#2a2d3a'}},y:{grid:{display:false}}}}});
+</script>
+</body>
+</html>

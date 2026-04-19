@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Meta Ad PM Board Mockup</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --line: #E7DECD;
+    --muted: #6A655B;
+    --green: #1A5F4A;
+    --soft-green: #E5F5E7;
+    --soft-blue: #E8F7FB;
+    --soft-pink: #FFF0EC;
+    --soft-yellow: #FFF8CC;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+  }
+  .app {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+  }
+  .sidebar {
+    background: #fffdf7;
+    border-right: 1px solid var(--line);
+    padding: 24px 18px;
+  }
+  .brand {
+    margin-bottom: 28px;
+  }
+  .brand-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    font-weight: 900;
+    color: var(--red-orange);
+    margin-bottom: 8px;
+  }
+  .brand h1 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.5rem;
+    line-height: 1.04;
+    text-transform: uppercase;
+  }
+  .side-group { margin-bottom: 22px; }
+  .side-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 900;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .side-item {
+    display: block;
+    padding: 10px 12px;
+    border-radius: 12px;
+    background: var(--white);
+    border: 1px solid var(--line);
+    margin-bottom: 8px;
+    font-size: 0.94rem;
+  }
+  .side-item.active {
+    background: var(--yellow);
+    border-color: var(--ink);
+    font-weight: 700;
+  }
+  .main {
+    padding: 24px;
+    overflow-x: auto;
+  }
+  .topbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 20px;
+  }
+  .topbar h2 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    text-transform: uppercase;
+    line-height: 1.02;
+    margin-bottom: 8px;
+  }
+  .topbar p { color: var(--muted); max-width: 720px; }
+  .top-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    border: 2px solid var(--ink);
+    background: var(--white);
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-weight: 700;
+    font-size: 0.92rem;
+  }
+  .btn.primary { background: var(--yellow); }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin-bottom: 22px;
+  }
+  .stat {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .stat .k {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 900;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .stat .v {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat .d { color: var(--muted); font-size: 0.9rem; }
+  .board-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+  }
+  .board-head h3 {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+  }
+  .filters {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .chip {
+    font-size: 0.84rem;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 8px 10px;
+    background: var(--white);
+    border: 1px solid var(--line);
+  }
+  .board {
+    display: grid;
+    grid-template-columns: repeat(5, 320px);
+    gap: 16px;
+    align-items: start;
+    padding-bottom: 20px;
+  }
+  .col {
+    background: rgba(255,255,255,0.5);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 12px;
+  }
+  .col-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 6px 4px;
+  }
+  .col-title {
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.98rem;
+    text-transform: uppercase;
+    font-weight: 900;
+  }
+  .count {
+    min-width: 28px;
+    height: 28px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--ink);
+    color: white;
+    font-size: 0.82rem;
+    font-weight: 800;
+  }
+  .task {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 14px;
+    margin-bottom: 12px;
+    box-shadow: 0 6px 0 rgba(26,26,26,0.05);
+  }
+  .task:last-child { margin-bottom: 0; }
+  .tag-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 8px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+  .tag.cold { background: var(--soft-blue); color: #125C73; }
+  .tag.warm { background: var(--soft-green); color: var(--green); }
+  .tag.hot { background: var(--soft-pink); color: #A13217; }
+  .tag.ugc { background: #FFF4D6; color: #7A4F00; }
+  .tag.cgc { background: #F1EAFF; color: #5C39A8; }
+  .tag.static { background: #EAF2FF; color: #355C9C; }
+  .tag.video { background: #FFE5DE; color: #9C432C; }
+  .task h4 {
+    font-size: 0.98rem;
+    line-height: 1.25;
+    margin-bottom: 8px;
+  }
+  .task p {
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+    line-height: 1.45;
+  }
+  .meta {
+    display: grid;
+    gap: 6px;
+    font-size: 0.84rem;
+    color: var(--ink);
+  }
+  .meta strong { font-weight: 700; }
+  .footer-note {
+    margin-top: 18px;
+    background: var(--white);
+    border: 2px dashed var(--ink);
+    border-radius: 18px;
+    padding: 16px;
+  }
+  .footer-note h3 {
+    font-family: 'Nunito', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .footer-note p { color: var(--muted); }
+  @media (max-width: 1100px) {
+    .app { grid-template-columns: 1fr; }
+    .sidebar { border-right: none; border-bottom: 1px solid var(--line); }
+    .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+  @media (max-width: 720px) {
+    .main { padding: 18px; }
+    .stats { grid-template-columns: 1fr; }
+    .topbar { flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-label">Odd Pieces</div>
+      <h1>Meta Ad PM Board</h1>
+    </div>
+
+    <div class="side-group">
+      <div class="side-title">Views</div>
+      <div class="side-item active">Board View</div>
+      <div class="side-item">List View</div>
+      <div class="side-item">Calendar View</div>
+      <div class="side-item">Performance View</div>
+    </div>
+
+    <div class="side-group">
+      <div class="side-title">Spaces</div>
+      <div class="side-item">Weekly Concepts</div>
+      <div class="side-item">Creator Briefs</div>
+      <div class="side-item">Designer Queue</div>
+      <div class="side-item">Editor Queue</div>
+      <div class="side-item">Winning Angles</div>
+    </div>
+
+    <div class="side-group">
+      <div class="side-title">Saved Filters</div>
+      <div class="side-item">Cold Traffic Only</div>
+      <div class="side-item">Gift Angle</div>
+      <div class="side-item">UGC Only</div>
+      <div class="side-item">Ready to Launch</div>
+    </div>
+  </aside>
+
+  <main class="main">
+    <div class="topbar">
+      <div>
+        <h2>Week of Apr 13, Meta Content Sprint</h2>
+        <p>This is what the ad content pipeline looks like in a project management tool. The PM would use this to track concept creation, briefing, production, QA, and launch.</p>
+      </div>
+      <div class="top-actions">
+        <button class="btn">Add Concept</button>
+        <button class="btn">Open Tracker</button>
+        <button class="btn primary">Create This Week's 50</button>
+      </div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Total Concepts</div><div class="v">50</div><div class="d">weekly target</div></div>
+      <div class="stat"><div class="k">Cold / Warm / Hot</div><div class="v">30 / 12 / 8</div><div class="d">planned split</div></div>
+      <div class="stat"><div class="k">UGC / CGC</div><div class="v">14 / 8</div><div class="d">creator content planned</div></div>
+      <div class="stat"><div class="k">Statics / Video</div><div class="v">16 / 20</div><div class="d">production mix</div></div>
+      <div class="stat"><div class="k">Launch Ready</div><div class="v">9</div><div class="d">after QA</div></div>
+    </div>
+
+    <div class="board-head">
+      <h3>Board View, This Week's Content Pipeline</h3>
+      <div class="filters">
+        <div class="chip">Audience: All</div>
+        <div class="chip">Format: All</div>
+        <div class="chip">Owner: All</div>
+        <div class="chip">Angle: All</div>
+      </div>
+    </div>
+
+    <div class="board">
+      <div class="col">
+        <div class="col-head"><div class="col-title">Concept Bank</div><div class="count">12</div></div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag ugc">UGC</span></div>
+          <h4>COLD_TWIST_UGC_01</h4>
+          <p>This is not a normal puzzle</p>
+          <div class="meta">
+            <div><strong>Angle:</strong> Twist / reveal</div>
+            <div><strong>Owner:</strong> PM</div>
+            <div><strong>Next:</strong> assign creator</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag cgc">CGC</span></div>
+          <h4>COLD_GIFT_CGC_02</h4>
+          <p>This is the gift you buy when you’re over giving boring gifts</p>
+          <div class="meta">
+            <div><strong>Angle:</strong> Gift angle</div>
+            <div><strong>Owner:</strong> PM</div>
+            <div><strong>Next:</strong> choose creator persona</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag warm">Warm</span><span class="tag static">Static</span></div>
+          <h4>WARM_MECHANIC_STATIC_01</h4>
+          <p>The box is the before. The puzzle is 15 seconds later.</p>
+          <div class="meta">
+            <div><strong>Angle:</strong> Before / aftermath</div>
+            <div><strong>Owner:</strong> PM</div>
+            <div><strong>Next:</strong> brief designer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head"><div class="col-title">Briefing</div><div class="count">10</div></div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag ugc">UGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_TWIST_UGC_03</h4>
+          <p>I thought this was a regular puzzle and I was very wrong</p>
+          <div class="meta">
+            <div><strong>Brief type:</strong> UGC creator ad content</div>
+            <div><strong>Persona:</strong> skeptical friend</div>
+            <div><strong>Next:</strong> send creator brief</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag cgc">CGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_DISCOVERY_CGC_01</h4>
+          <p>Okay wait, why does this puzzle have a secret ending?</p>
+          <div class="meta">
+            <div><strong>Brief type:</strong> customer-feeling content</div>
+            <div><strong>Persona:</strong> weirdly good find</div>
+            <div><strong>Next:</strong> send casual creator brief</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag warm">Warm</span><span class="tag static">Static</span></div>
+          <h4>WARM_ENVELOPE_CAROUSEL_01</h4>
+          <p>5-card explainer carousel featuring the Secret Ending Envelope</p>
+          <div class="meta">
+            <div><strong>Brief type:</strong> graphic designer</div>
+            <div><strong>Owner:</strong> Martin</div>
+            <div><strong>Next:</strong> approve copy</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head"><div class="col-title">In Production</div><div class="count">11</div></div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag ugc">UGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_BEFOREAFTER_UGC_02</h4>
+          <p>Creator filming “box is the before, puzzle is the aftermath” script</p>
+          <div class="meta">
+            <div><strong>Creator:</strong> Jenna</div>
+            <div><strong>Due:</strong> Wed 2pm</div>
+            <div><strong>Status:</strong> filming in progress</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag static">Static</span></div>
+          <h4>COLD_GIFT_STATIC_04</h4>
+          <p>The gift people talk about after everyone goes home</p>
+          <div class="meta">
+            <div><strong>Designer:</strong> Martin</div>
+            <div><strong>Due:</strong> Thu 11am</div>
+            <div><strong>Status:</strong> first draft coming</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag warm">Warm</span><span class="tag video">Video</span></div>
+          <h4>WARM_FOUNDER_VIDEO_01</h4>
+          <p>Founder clip explaining why Odd Pieces is not a normal puzzle</p>
+          <div class="meta">
+            <div><strong>Owner:</strong> Ginny</div>
+            <div><strong>Need:</strong> raw clips + b-roll</div>
+            <div><strong>Status:</strong> capture scheduled</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head"><div class="col-title">QA / Ready to Launch</div><div class="count">9</div></div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag cgc">CGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_GIFT_CGC_03</h4>
+          <p>Casual gift-find style video, needs final caption check</p>
+          <div class="meta">
+            <div><strong>Check:</strong> first 2 seconds strong?</div>
+            <div><strong>Check:</strong> feels human, not ad-y?</div>
+            <div><strong>Next:</strong> export 9:16 + 4:5</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag warm">Warm</span><span class="tag static">Static</span></div>
+          <h4>WARM_TWIST_STATIC_02</h4>
+          <p>Explainer static approved, waiting for ad naming and upload</p>
+          <div class="meta">
+            <div><strong>CTA:</strong> See how it works</div>
+            <div><strong>QA:</strong> passed</div>
+            <div><strong>Next:</strong> upload to Meta</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag hot">Hot</span><span class="tag static">Static</span></div>
+          <h4>HOT_REMINDER_STATIC_01</h4>
+          <p>Still thinking about it?</p>
+          <div class="meta">
+            <div><strong>Audience:</strong> product viewers</div>
+            <div><strong>QA:</strong> passed</div>
+            <div><strong>Next:</strong> launch Friday batch</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="col-head"><div class="col-title">Live + Review</div><div class="count">8</div></div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag ugc">UGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_TWIST_UGC_00</h4>
+          <p>This is not a normal puzzle</p>
+          <div class="meta">
+            <div><strong>CTR:</strong> 2.3%</div>
+            <div><strong>Signal:</strong> strong hook, make variants</div>
+            <div><strong>Decision:</strong> scale + remix</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag cold">Cold</span><span class="tag cgc">CGC</span><span class="tag video">Video</span></div>
+          <h4>COLD_DISCOVERY_CGC_00</h4>
+          <p>Okay wait, why does this puzzle have a secret ending?</p>
+          <div class="meta">
+            <div><strong>CTR:</strong> 1.9%</div>
+            <div><strong>Signal:</strong> believable, good comments</div>
+            <div><strong>Decision:</strong> iterate</div>
+          </div>
+        </div>
+
+        <div class="task">
+          <div class="tag-row"><span class="tag hot">Hot</span><span class="tag static">Static</span></div>
+          <h4>HOT_BUYNOW_STATIC_00</h4>
+          <p>Get the weirdly good one</p>
+          <div class="meta">
+            <div><strong>CPA:</strong> healthy</div>
+            <div><strong>Signal:</strong> closing ad</div>
+            <div><strong>Decision:</strong> keep live</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-note">
+      <h3>How this board works</h3>
+      <p>Each card is one concept. The PM moves it across the board from idea → brief → production → QA → live. Every card should include stage, angle, format, hook, owner, and next action. This is where the pipeline becomes an actual machine instead of a vague doc.</p>
+    </div>
+  </main>
+</div>
+</body>
+</html>

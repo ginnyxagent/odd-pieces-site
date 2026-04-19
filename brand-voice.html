@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Brand Voice</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --cream: #FFFBF0;
+    --ink: #1A1A1A;
+    --muted: #5F5A52;
+    --line: #E9DFC9;
+    --white: #FFFFFF;
+    --yellow: #FEE000;
+    --blue: #CDECF2;
+    --orange: #FDBA4D;
+    --lavender: #E9D5FF;
+    --peach: #FFD8CC;
+    --mint: #DDF6E8;
+  }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .page {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 32px 20px 72px;
+  }
+
+  .back {
+    margin-bottom: 20px;
+  }
+
+  .back a {
+    color: #7c3aed;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .hero {
+    background: linear-gradient(135deg, var(--yellow) 0%, #fff2a8 100%);
+    border: 2px solid #F4D000;
+    border-radius: 24px;
+    padding: 28px;
+    margin-bottom: 24px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Nunito', sans-serif;
+    line-height: 1.1;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: #433f39;
+    max-width: 760px;
+  }
+
+  .section-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    border-radius: 22px;
+    padding: 24px;
+    margin-bottom: 22px;
+    box-shadow: 0 1px 0 rgba(26,26,26,0.03);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+
+  .section-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: 800;
+    flex-shrink: 0;
+  }
+
+  .icon-yellow { background: var(--yellow); }
+  .icon-blue { background: var(--blue); }
+  .icon-orange { background: var(--orange); }
+  .icon-lavender { background: var(--lavender); }
+  .icon-peach { background: var(--peach); }
+  .icon-mint { background: var(--mint); }
+
+  .section-title {
+    font-size: 1.45rem;
+    margin-bottom: 2px;
+  }
+
+  .section-kicker {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: #7a746b;
+    font-weight: 700;
+  }
+
+  p {
+    font-size: 0.97rem;
+    color: #312d28;
+  }
+
+  p + p {
+    margin-top: 10px;
+  }
+
+  .pill-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .pill {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 0.84rem;
+    font-weight: 800;
+    background: #f5f1e8;
+    color: #473f34;
+  }
+
+  .mini-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .mini-card {
+    border-radius: 16px;
+    padding: 16px;
+    border: 1px solid var(--line);
+    background: #fffdfa;
+  }
+
+  .mini-card h3 {
+    font-size: 1rem;
+    margin-bottom: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+
+  th, td {
+    text-align: left;
+    vertical-align: top;
+    padding: 12px 10px;
+    border-bottom: 1px solid #efe7d8;
+    font-size: 0.92rem;
+  }
+
+  th {
+    font-size: 0.76rem;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: #746d63;
+  }
+
+  ul {
+    padding-left: 18px;
+  }
+
+  li {
+    color: #312d28;
+    font-size: 0.95rem;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+
+  .example-card {
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 18px;
+    background: #fffdfa;
+  }
+
+  .example-card + .example-card {
+    margin-top: 14px;
+  }
+
+  .example-label {
+    display: inline-block;
+    margin-bottom: 8px;
+    padding: 5px 10px;
+    border-radius: 999px;
+    background: var(--lavender);
+    color: #6d28d9;
+    font-size: 0.74rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  .example-card h3 {
+    font-size: 1.08rem;
+    margin-bottom: 10px;
+  }
+
+  .field {
+    margin-top: 8px;
+  }
+
+  .field strong {
+    color: #111;
+  }
+
+  .checklist li {
+    margin-top: 8px;
+  }
+
+  .footer-note {
+    margin-top: 16px;
+    padding: 16px;
+    border-radius: 14px;
+    background: #fff7cc;
+    border: 1px solid #f2df7d;
+  }
+
+  .footer-note strong {
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  @media (max-width: 720px) {
+    .page { padding: 24px 16px 56px; }
+    .hero, .section-card { padding: 20px; }
+    h1 { font-size: 2rem; }
+    .section-title { font-size: 1.28rem; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+  <div class="back"><a href="index.html">← Back to Hub</a></div>
+
+  <div class="hero">
+    <h1>Brand Voice</h1>
+    <p class="subtitle">A skimmable guide for writing Odd Pieces emails that feel clever, surprising, clear, and unmistakably us.</p>
+  </div>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">✦</div>
+      <div>
+        <div class="section-kicker">Foundation</div>
+        <h2 class="section-title">What this is for</h2>
+      </div>
+    </div>
+    <p>This is the reference for writing Odd Pieces emails. Launches, promos, story-driven emails, win-back, newsletters, transactional, all of it should sound like it came from the same brand brain.</p>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-blue">◎</div>
+      <div>
+        <div class="section-kicker">Brand context</div>
+        <h2 class="section-title">Who we are</h2>
+      </div>
+    </div>
+    <p>Odd Pieces makes mystery jigsaw puzzles, sold in 600+ retail stores, raised $1M+ on Kickstarter, and loved by 280,000+ happy puzzlers. We’re the puzzle brand that thinks outside the box, literally.</p>
+    <p>Our customers are curious, playful adults who love surprise, novelty, and smart ideas. They’re the kind of people who read the last page first, then enjoy the journey anyway.</p>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-orange">★</div>
+      <div>
+        <div class="section-kicker">Identity</div>
+        <h2 class="section-title">Brand personality</h2>
+      </div>
+    </div>
+    <div class="pill-row">
+      <span class="pill">Clever</span>
+      <span class="pill">Genius</span>
+      <span class="pill">Never Normal</span>
+      <span class="pill">Surprising</span>
+      <span class="pill">Truly Odd</span>
+    </div>
+    <table>
+      <tr><th>Trait</th><th>How it should feel in copy</th></tr>
+      <tr><td><strong>Clever</strong></td><td>Sharp and witty, not try-hard funny. More knowing wink, less stand-up comedian.</td></tr>
+      <tr><td><strong>Genius</strong></td><td>Respect the reader’s intelligence. Talk to them like they’re smart, because they are.</td></tr>
+      <tr><td><strong>Never Normal</strong></td><td>If the email feels safe or generic, it’s probably wrong.</td></tr>
+      <tr><td><strong>Surprising</strong></td><td>Every touchpoint should have a twist, a detail, or a phrase that makes people pause.</td></tr>
+      <tr><td><strong>Truly Odd</strong></td><td>Odd isn’t decoration. It’s the whole point.</td></tr>
+    </table>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-lavender">!?</div>
+      <div>
+        <div class="section-kicker">Rules</div>
+        <h2 class="section-title">Voice rules</h2>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card" style="background:#f7f0ff;">
+        <h3>The golden rule</h3>
+        <p>If you could swap our copy into another puzzle brand’s email and it would still work, rewrite it.</p>
+      </div>
+      <div class="mini-card" style="background:#eef9fc;">
+        <h3>Core principle</h3>
+        <p>Be clever and clear. Intrigue people, but never make them wonder what the email is actually about.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-mint">↔</div>
+      <div>
+        <div class="section-kicker">Calibration</div>
+        <h2 class="section-title">Tone by email type</h2>
+      </div>
+    </div>
+    <table>
+      <tr><th>Email type</th><th>Energy</th><th>Wit</th><th>Warmth</th></tr>
+      <tr><td>Product Launch</td><td>High</td><td>Max</td><td>Medium</td></tr>
+      <tr><td>Promo / Sale</td><td>High</td><td>High</td><td>Medium</td></tr>
+      <tr><td>Brand Story</td><td>Medium</td><td>Medium</td><td>High</td></tr>
+      <tr><td>Transactional</td><td>Calm</td><td>Light touch</td><td>High</td></tr>
+      <tr><td>Win-back</td><td>Intriguing</td><td>High</td><td>Medium</td></tr>
+      <tr><td>Newsletter</td><td>Medium-High</td><td>High</td><td>Medium</td></tr>
+    </table>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-peach">✓</div>
+      <div>
+        <div class="section-kicker">Examples</div>
+        <h2 class="section-title">Do this, not that</h2>
+      </div>
+    </div>
+    <table>
+      <tr><th>Odd Pieces voice</th><th>Generic brand voice</th></tr>
+      <tr><td>“You’ve never solved anything like this.”</td><td>“Check out our newest puzzle!”</td></tr>
+      <tr><td>“Warning: May cause obsessive table-clearing.”</td><td>“This puzzle is really fun!”</td></tr>
+      <tr><td>“The weirdest puzzle we’ve ever made. Naturally, we love it.”</td><td>“We’re excited to share this new product.”</td></tr>
+      <tr><td>“Your dining table called. It wants its evening back.”</td><td>“Great for family game night!”</td></tr>
+      <tr><td>“Piece by piece, things get stranger.”</td><td>“Put together a beautiful image.”</td></tr>
+      <tr><td>“Still here? Good. Most people give up by now.”</td><td>“We miss you! Come back and shop.”</td></tr>
+      <tr><td>“We hid something in this puzzle. You’ll know it when you find it.”</td><td>“This puzzle has a fun surprise inside.”</td></tr>
+      <tr><td>“Not for the faint of heart. Definitely for the stubborn.”</td><td>“A great challenging puzzle for adults.”</td></tr>
+      <tr><td>“You’re about to ruin your weekend. You’re welcome.”</td><td>“Spend your weekend doing something fun.”</td></tr>
+      <tr><td>“This one made our test puzzler swear. Twice.”</td><td>“Our testers loved this one.”</td></tr>
+    </table>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-yellow">✉</div>
+      <div>
+        <div class="section-kicker">Subject lines</div>
+        <h2 class="section-title">Subject line formulas</h2>
+      </div>
+    </div>
+    <div class="mini-grid">
+      <div class="mini-card" style="background:#fff8d8;">
+        <h3>The tease</h3>
+        <ul>
+          <li>Something odd this way comes (hint: 1,000 pieces)</li>
+          <li>You weren’t supposed to see this yet, new puzzle, early access</li>
+          <li>Open if you dare. We just dropped something strange.</li>
+          <li>A mystery puzzle so weird we almost didn’t release it</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#eef9fc;">
+        <h3>The challenge</h3>
+        <ul>
+          <li>Think you’re clever enough for our hardest puzzle yet?</li>
+          <li>Only 2% solve this on the first try. New drop inside.</li>
+          <li>This one broke our testers. Your turn.</li>
+          <li>We dare you to finish this in one sitting</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#fff1ea;">
+        <h3>The oddball</h3>
+        <ul>
+          <li>We put a secret in box #4,217. Yours might be next.</li>
+          <li>Our designer lost sleep over this puzzle (worth it)</li>
+          <li>This email contains zero normal puzzles</li>
+          <li>We asked 50 puzzlers what’s odd. Their answers surprised us.</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#f7f0ff;">
+        <h3>The insider</h3>
+        <ul>
+          <li>Puzzlers only: first look at our newest mystery</li>
+          <li>For our weirdest fans, early access inside</li>
+          <li>You’re on the list. Here’s what’s coming.</li>
+          <li>VIP puzzler alert: 24 hours before everyone else</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#edf8ef;">
+        <h3>The straight shooter</h3>
+        <ul>
+          <li>New puzzle just dropped. It’s a weird one.</li>
+          <li>20% off everything. No riddle, just savings.</li>
+          <li>Your order shipped, brace yourself</li>
+          <li>Back in stock: the one that sold out in 3 hours</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-blue">→</div>
+      <div>
+        <div class="section-kicker">CTAs</div>
+        <h2 class="section-title">CTA guidelines</h2>
+      </div>
+    </div>
+    <p>The formula: action word that’s on-brand + what they’re getting.</p>
+    <div class="mini-grid">
+      <div class="mini-card" style="background:#eef9fc;">
+        <h3>Product launch</h3>
+        <ul>
+          <li>See the new puzzle</li>
+          <li>Explore the collection</li>
+          <li>Snag it before it’s gone</li>
+          <li>Get the details</li>
+          <li>Grab yours, limited run</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#fff1ea;">
+        <h3>Promo & sale</h3>
+        <ul>
+          <li>Save 20%, oddly good deal</li>
+          <li>Unlock your discount</li>
+          <li>Treat yourself (you solved that last one fast)</li>
+          <li>Browse the sale, ends Friday</li>
+        </ul>
+      </div>
+      <div class="mini-card" style="background:#edf8ef;">
+        <h3>Win-back & re-engagement</h3>
+        <ul>
+          <li>See what you’ve been missing</li>
+          <li>Pick up where you left off</li>
+          <li>Your next puzzle is waiting</li>
+          <li>Come back, we made something new</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-lavender">✎</div>
+      <div>
+        <div class="section-kicker">Swipe file</div>
+        <h2 class="section-title">Full email examples</h2>
+      </div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 1</div>
+      <h3>New product launch</h3>
+      <div class="field"><strong>Subject:</strong> Something strange just arrived (1,000 pieces of it)</div>
+      <div class="field"><strong>Preview:</strong> Our oddest puzzle yet. Naturally.</div>
+      <div class="field"><strong>Header:</strong> You’ve never solved anything like this.</div>
+      <div class="field"><strong>Body:</strong> We spent 6 months designing a puzzle that would make you question everything. The image? Unexpected. The difficulty? Let’s just say our testers needed snacks.</div>
+      <div class="field">It’s 1,000 pieces. It’s limited edition. And it’s the kind of thing you’ll want to frame when you’re done (if you finish).</div>
+      <div class="field"><strong>CTA:</strong> See the new puzzle</div>
+      <div class="field"><strong>P.S.</strong> We hid something in the box. You’ll know it when you find it.</div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 2</div>
+      <h3>Promo / sale</h3>
+      <div class="field"><strong>Subject:</strong> 25% off. No riddle. Just savings.</div>
+      <div class="field"><strong>Preview:</strong> Our biggest sale of the year, for real.</div>
+      <div class="field"><strong>Header:</strong> We’ll keep this simple (for once).</div>
+      <div class="field"><strong>Body:</strong> Everything on the site is 25% off through Sunday. Mystery puzzles, classics, gift bundles, all of it.</div>
+      <div class="field">No catch. No secret code. No puzzle to solve first. (We know. Odd.)</div>
+      <div class="field"><strong>CTA:</strong> Browse the sale, ends Sunday</div>
+      <div class="field"><strong>P.S.</strong> Okay fine, there IS a secret code: ODDBALL25. But you didn’t need it. Everything’s already discounted. We just like secrets.</div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 3</div>
+      <h3>Brand story / newsletter</h3>
+      <div class="field"><strong>Subject:</strong> The puzzle that almost didn’t happen</div>
+      <div class="field"><strong>Preview:</strong> A behind-the-scenes story from the Odd Pieces studio.</div>
+      <div class="field"><strong>Header:</strong> Some puzzles come easy. This one fought us.</div>
+      <div class="field"><strong>Body:</strong> Three redesigns. One heated debate about a single shade of blue. And a prototype that our founder’s cat destroyed.</div>
+      <div class="field">But that’s how the best Odd Pieces puzzles happen, through stubbornness, weirdness, and a refusal to make anything normal.</div>
+      <div class="field">Here’s the story of how [Puzzle Name] went from napkin sketch to your dining table.</div>
+      <div class="field"><strong>CTA:</strong> Read the full story</div>
+      <div class="field"><strong>P.S.</strong> The cat is fine. The prototype was not.</div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 4</div>
+      <h3>Win-back</h3>
+      <div class="field"><strong>Subject:</strong> It’s been a while. We made something new.</div>
+      <div class="field"><strong>Preview:</strong> 3 new puzzles since you last visited.</div>
+      <div class="field"><strong>Header:</strong> Still there? Good.</div>
+      <div class="field"><strong>Body:</strong> We get it. Life happens. Tables get used for dinner instead of puzzles. But while you were away, we’ve been busy being odd.</div>
+      <div class="field">Since your last visit: 3 new mystery puzzles, a collab we can’t stop talking about, and a 500-piece puzzle that’s harder than some 1,000-piece ones.</div>
+      <div class="field"><strong>CTA:</strong> See what’s new</div>
+      <div class="field"><strong>P.S.</strong> Your dining table misses you. (For puzzle reasons.)</div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 5</div>
+      <h3>Transactional</h3>
+      <div class="field"><strong>Subject:</strong> Your order is confirmed, the mystery begins</div>
+      <div class="field"><strong>Preview:</strong> Order #12345 is on its way to being packed.</div>
+      <div class="field"><strong>Header:</strong> Nice choice. Seriously.</div>
+      <div class="field"><strong>Body:</strong> We’ve got your order and we’re packing it up now. Here’s what’s coming your way:</div>
+      <div class="field">[Order details]</div>
+      <div class="field">Estimated delivery: [date]. We’ll send you tracking as soon as it ships.</div>
+      <div class="field"><strong>CTA:</strong> Track your order</div>
+      <div class="field"><strong>P.S.</strong> Pro tip: clear the table now. You’ll thank us later.</div>
+    </div>
+
+    <div class="example-card">
+      <div class="example-label">Example 6</div>
+      <h3>Gift / holiday</h3>
+      <div class="field"><strong>Subject:</strong> The gift that confuses people (in the best way)</div>
+      <div class="field"><strong>Preview:</strong> Mystery puzzles make oddly perfect gifts.</div>
+      <div class="field"><strong>Header:</strong> Give the gift of “what the heck is this?”</div>
+      <div class="field"><strong>Body:</strong> Normal gifts get a polite thank-you. Odd Pieces puzzles get a double-take, a confused smile, and then hours of obsession.</div>
+      <div class="field">Whether it’s for the person who has everything or the person who loves a good challenge, we’ve got something that’ll land.</div>
+      <div class="field"><strong>CTA:</strong> Shop gift-worthy puzzles</div>
+      <div class="field"><strong>P.S.</strong> We gift wrap. And yes, the wrapping paper is also odd.</div>
+    </div>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-orange">Aa</div>
+      <div>
+        <div class="section-kicker">Language</div>
+        <h2 class="section-title">Our vocabulary</h2>
+      </div>
+    </div>
+    <table>
+      <tr><th>Words we love</th><th>Words we skip</th></tr>
+      <tr><td>Mystery, peculiar, strange, curious</td><td>Fun, exciting, amazing, awesome</td></tr>
+      <tr><td>Unbox, unravel, decode, discover</td><td>Buy, purchase, order, get</td></tr>
+      <tr><td>Obsess, devour, lose yourself</td><td>Enjoy, like, love</td></tr>
+      <tr><td>Unexpected, twisted, bizarre, wild</td><td>New, great, best, top</td></tr>
+      <tr><td>Clever, sharp, brilliant, cunning</td><td>Smart, cool, nice, neat</td></tr>
+      <tr><td>Dare, challenge, test, stump</td><td>Try, check out, see, browse</td></tr>
+      <tr><td>Strange, eerie, peculiar, uncanny</td><td>Different, unique, special, one-of-a-kind</td></tr>
+      <tr><td>Snag, grab, claim, unlock</td><td>Add to cart, buy now, order today</td></tr>
+    </table>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-mint">⌘</div>
+      <div>
+        <div class="section-kicker">Style</div>
+        <h2 class="section-title">Writing style quick rules</h2>
+      </div>
+    </div>
+    <ul>
+      <li><strong>Sentence case, not Title Case.</strong> Keep it casual, not corporate.</li>
+      <li><strong>Short paragraphs.</strong> 2 to 3 sentences max per block.</li>
+      <li><strong>Use “you” more than “we.”</strong> The reader is the hero.</li>
+      <li><strong>One CTA per email.</strong> Pick one action and make it irresistible.</li>
+      <li><strong>CTAs tell them what they’re getting.</strong> Clever but clear wins.</li>
+      <li><strong>Read it out loud.</strong> If it sounds like a robot or a boardroom, rewrite.</li>
+      <li><strong>Hide an easter egg.</strong> A weird detail, small joke, or fun P.S. goes a long way.</li>
+      <li><strong>Always include a P.S.</strong> It’s the most-read part of any email.</li>
+      <li><strong>Don’t be cryptic.</strong> Intriguing is good. Confusing is not.</li>
+    </ul>
+  </section>
+
+  <section class="section-card">
+    <div class="section-header">
+      <div class="section-icon icon-peach">☑</div>
+      <div>
+        <div class="section-kicker">Before sending</div>
+        <h2 class="section-title">Pre-send checklist</h2>
+      </div>
+    </div>
+    <ul class="checklist">
+      <li>Would this email make sense coming from any other brand?</li>
+      <li>Is the subject line curiosity-driven and clear enough to open?</li>
+      <li>Does the opening line hook within 5 words?</li>
+      <li>Is there a twist, surprise, or odd detail somewhere?</li>
+      <li>Is the CTA clear about what happens when they click?</li>
+      <li>Does the CTA still sound like Odd Pieces?</li>
+      <li>Would I actually want to read this if it landed in my inbox?</li>
+      <li>Is the P.S. doing something fun?</li>
+      <li>Did I read it out loud and does it sound human?</li>
+      <li>Is it short enough?</li>
+    </ul>
+    <div class="footer-note">
+      <strong>Remember</strong>
+      Normal is boring. Odd is the point. But odd doesn’t mean unclear.
+    </div>
+  </section>
+</div>
+</body>
+</html>

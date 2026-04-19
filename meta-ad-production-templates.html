@@ -1,0 +1,1374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Meta Ad Production Templates</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --line: #E7DECD;
+    --muted: #6B665D;
+    --green: #1A5F4A;
+    --pink: #FFD8CF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.58;
+  }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(26,26,26,0.96);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    padding: 14px 18px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav a {
+    display: inline-block;
+    margin-right: 16px;
+    color: rgba(255,255,255,0.72);
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  nav a:hover { color: white; }
+  .wrap, .hero-inner, .footer-inner { max-width: 1180px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, var(--blue) 0%, #dff4f7 24%, var(--yellow) 56%, var(--orange) 100%);
+    padding: 62px 20px 46px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    margin-bottom: 14px;
+  }
+  h1, h2, h3, h4 {
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.04;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    text-transform: uppercase;
+    max-width: 1000px;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    max-width: 820px;
+    font-size: 1.06rem;
+    font-weight: 600;
+    color: rgba(26,26,26,0.8);
+  }
+  .hero-grid, .grid-2, .grid-3, .grid-4 { display: grid; gap: 18px; }
+  .hero-grid { grid-template-columns: 1.25fr 1fr; margin-top: 26px; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .card, .panel, .template, .box, .quote, .copy-block, .mini-table {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 0 8px 0 rgba(26,26,26,0.06);
+  }
+  .card, .panel, .template, .box, .quote, .copy-block { padding: 20px; }
+  .section { padding: 58px 20px; }
+  .section-head { margin-bottom: 22px; max-width: 840px; }
+  .section-head h2 { font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase; margin-bottom: 10px; }
+  .section-head p { color: var(--muted); }
+  .pill {
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    background: var(--yellow);
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .pill.blue { background: var(--blue); }
+  .pill.green { background: #DDF2D8; }
+  .pill.pink { background: var(--pink); }
+  .pill.orange { background: #FFE0B6; }
+  .pill.cream { background: var(--cream); }
+  .big { font-size: clamp(1.5rem, 4vw, 2.3rem); font-weight: 900; text-transform: uppercase; }
+  .muted { color: var(--muted); }
+  .template h3, .panel h3, .card h3, .box h3, .quote h3, .copy-block h3 {
+    font-size: 1.08rem;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .list, .checklist, .badlist {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .list li, .checklist li, .badlist li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.94rem;
+  }
+  .list li::before, .checklist li::before, .badlist li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 900;
+    color: var(--red-orange);
+  }
+  .template-block {
+    margin-top: 14px;
+    padding-top: 14px;
+    border-top: 1px dashed var(--line);
+  }
+  .label {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 10px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .copy-block {
+    background: #fffefb;
+  }
+  .copy-text {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.9rem;
+    white-space: pre-wrap;
+    line-height: 1.6;
+  }
+  .mini-table { overflow-x: auto; }
+  table {
+    width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 14px 16px;
+    border-bottom: 1px solid var(--line);
+    text-align: left;
+    vertical-align: top;
+    font-size: 0.93rem;
+  }
+  th {
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.76rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  tr:last-child td { border-bottom: none; }
+  .quote {
+    background: var(--ink);
+    color: white;
+  }
+  .quote p { color: rgba(255,255,255,0.82); }
+  .do { background: #EDF8FB; }
+  .dont { background: #FFF0EC; }
+  .footer { background: var(--ink); color: rgba(255,255,255,0.72); margin-top: 20px; }
+  .footer-inner { padding: 28px 20px 40px; font-size: 0.85rem; }
+  @media (max-width: 980px) {
+    .hero-grid, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 640px) {
+    .hero { padding: 52px 18px 40px; }
+    .section { padding: 48px 18px; }
+    .card, .panel, .template, .box, .quote, .copy-block { padding: 16px; border-radius: 16px; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#ugc-cgc-difference">UGC vs CGC</a>
+  <a href="#product">Product Explainer</a>
+  <a href="#angles">Angles</a>
+  <a href="#ugc">UGC</a>
+  <a href="#cgc">CGC</a>
+  <a href="#creator-personas">Personas</a>
+  <a href="#creator-hooks">Hooks</a>
+  <a href="#cgc-examples">CGC Examples</a>
+  <a href="#ugc-examples">UGC Examples</a>
+  <a href="#designer-examples">Designer Examples</a>
+  <a href="#design">Designer</a>
+  <a href="#editor">Editor</a>
+  <a href="#editor-examples">Editor Examples</a>
+  <a href="#founder">Founder</a>
+</nav>
+
+<header class="hero" id="overview">
+  <div class="hero-inner">
+    <div class="eyebrow">Odd Pieces · Deliverable 2</div>
+    <h1>Meta Ad Production Templates</h1>
+    <p class="hero-sub">These are copyable briefs the PM can actually hand to creators, designers, editors, and internal talent without assuming they already know the product or the brand.</p>
+
+    <div class="hero-grid">
+      <div class="card">
+        <h3>What this page is for</h3>
+        <div class="big">Turn vague ad requests into clean assignments people can execute fast.</div>
+      </div>
+      <div class="card">
+        <h3>Rule</h3>
+        <p class="muted">Every brief should explain:</p>
+        <ul class="list">
+          <li>what Odd Pieces is</li>
+          <li>what makes it different</li>
+          <li>what angle we are pushing</li>
+          <li>what to say and not say</li>
+          <li>what final asset is needed</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="ugc-cgc-difference">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Important distinction</div>
+      <h2>UGC vs CGC, plain English</h2>
+      <p>These terms sound more confusing than they need to be. Here is the simple difference.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="box do">
+        <div class="pill">UGC</div>
+        <h3>Creator ad content</h3>
+        <p>Someone is hired to make content for the brand. Even if it feels natural, it is still more planned and more structured.</p>
+        <ul class="list">
+          <li>Better when you want exact hooks and talking points</li>
+          <li>Better for testing specific angles</li>
+          <li>Feels more like: “let me show you this product”</li>
+        </ul>
+      </div>
+      <div class="box dont">
+        <div class="pill green">CGC</div>
+        <h3>Customer-feeling content</h3>
+        <p>This should feel like a normal person discovered the product and wanted to share it. Less polished, less ad-like, more believable.</p>
+        <ul class="badlist">
+          <li>Better when you want trust and relatability</li>
+          <li>Better for gifting, discovery, and skeptical-friend angles</li>
+          <li>Feels more like: “okay wait, I found this weird thing”</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="product">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Reusable intro block</div>
+      <h2>Product explainer, use this in every brief</h2>
+      <p>If the person making the asset does not understand the product, the output gets generic fast.</p>
+    </div>
+
+    <div class="copy-block">
+      <div class="pill">Copy and paste</div>
+      <h3>Odd Pieces product explainer</h3>
+      <div class="copy-text">Odd Pieces makes story-first mystery puzzles.
+
+These are not normal jigsaw puzzles.
+
+The box shows the BEFORE scene. The puzzle you build is the same scene 15 seconds later, after everything has gone weird. Inside the box there is also a sealed Secret Ending Envelope that you only open once the puzzle is complete.
+
+So the product is not just “a nice puzzle image.” It is a reveal experience. A surprise. A twist. A table reaction.
+
+People buy Odd Pieces because it feels more surprising, more social, and more memorable than an ordinary puzzle. It also works really well as a gift because people have not seen something quite like it before.
+
+The brand tone is clever, punchy, playful, slightly unhinged, and direct. Never corporate. Never generic. Never bland.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="angles">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Angle bank</div>
+      <h2>Approved angle ideas</h2>
+      <p>The PM should choose from these instead of inventing random themes.</p>
+    </div>
+
+    <div class="mini-table">
+      <table>
+        <thead>
+          <tr>
+            <th>Angle</th>
+            <th>What it means</th>
+            <th>Good hook example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Twist / reveal</td><td>The surprise ending is the main selling point.</td><td>This is not a normal puzzle.</td></tr>
+          <tr><td>Before / 15 seconds later</td><td>The box is the before, the puzzle is the aftermath.</td><td>The box shows the before. The puzzle is what happens next.</td></tr>
+          <tr><td>Secret ending envelope</td><td>The sealed envelope creates curiosity and payoff.</td><td>There is literally a sealed ending in this box.</td></tr>
+          <tr><td>Gift angle</td><td>This is a strong gift because people have not seen it before.</td><td>The gift people talk about after everyone goes home.</td></tr>
+          <tr><td>Table reaction</td><td>Focus on laughing, pointing, obsessing, yelling WAIT WHAT.</td><td>The moment someone yells “WAIT, WHAT?!” is the whole point.</td></tr>
+          <tr><td>Not your ordinary puzzle</td><td>Contrast against normal puzzle expectations.</td><td>If normal puzzles bore you, start here.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="saydontsay">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Language guardrails</div>
+      <h2>What to say and what not to say</h2>
+      <p>This protects the brand from sounding like every bland ad on the internet.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="box do">
+        <div class="pill blue">Say this</div>
+        <ul class="list">
+          <li>Not your ordinary puzzle</li>
+          <li>The box is the before, the puzzle is 15 seconds later</li>
+          <li>Secret Ending Envelope</li>
+          <li>Twist, reveal, surprise</li>
+          <li>Gift people talk about</li>
+          <li>Wildly fun and unexpected</li>
+          <li>You think you know what’s happening. You don’t.</li>
+        </ul>
+      </div>
+      <div class="box dont">
+        <div class="pill pink">Do not say this</div>
+        <ul class="badlist">
+          <li>Fun for the whole family</li>
+          <li>Immersive puzzle experience</li>
+          <li>Premium quality guaranteed</li>
+          <li>Hours of entertainment</li>
+          <li>Perfect holiday gift</li>
+          <li>Luxury game night essential</li>
+          <li>Anything that sounds like a generic brand manager wrote it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ugc">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Template 1</div>
+      <h2>UGC creator brief</h2>
+      <p>Use this for paid creators filming fresh content specifically for ads. This should read like a normal-person creative brief, not marketing homework.</p>
+    </div>
+
+    <div class="quote" style="margin-bottom:18px;">
+      <div class="pill">How to frame this for creators</div>
+      <h3>Your job is not to explain every detail</h3>
+      <p>Your job is to make someone stop scrolling and think: wait, what is this? This product is fun to talk about because it is actually weird and different. Lean into that.</p>
+    </div>
+
+    <div class="template">
+      <div class="pill">UGC Brief Template</div>
+      <h3>What to send the creator</h3>
+
+      <div class="template-block"><div class="label">What this product is, in plain English</div><div>Odd Pieces is a puzzle brand, but not a normal one. The box shows one scene. The puzzle is that same scene 15 seconds later, after everything has gone off the rails. Then there is a sealed Secret Ending Envelope in the box that you only open when you finish. So the whole product is built around surprise, reveal, and people reacting to the ending.</div></div>
+      <div class="template-block"><div class="label">Why this is fun content to make</div><div>You are not trying to sell a boring product. You are showing people something they probably have not seen before. The best videos feel like: “okay wait, this is actually kind of brilliant.”</div></div>
+      <div class="template-block"><div class="label">What we want the viewer to feel</div><div>Curious. Surprised. Slightly obsessed. Like they need to know what the twist is.</div></div>
+      <div class="template-block"><div class="label">Audience</div><div>[Cold / Warm / Hot]</div></div>
+      <div class="template-block"><div class="label">Angle</div><div>[Choose one: twist, before/after, gift, envelope, table reaction, not your ordinary puzzle]</div></div>
+      <div class="template-block"><div class="label">How to think about the video</div><div>Talk like you are telling a friend about a weirdly good thing you found online. Natural. Clear. A little amused. Not “hey guys I’m so excited to partner with...” energy.</div></div>
+      <div class="template-block"><div class="label">Hook ideas</div><div>1. This is not a normal puzzle.
+2. I thought this was a regular puzzle and I was very wrong.
+3. The box shows the before. The puzzle is what happens 15 seconds later.
+4. There is literally a secret ending hidden inside this box.
+5. This is the first puzzle I’ve seen that actually has a plot twist.
+6. If you’re bored by normal puzzles, this is the one to look at.</div></div>
+      <div class="template-block"><div class="label">What to film</div><div>Start with your face if possible. Then show the box clearly. Then show puzzle details or pieces on the table. Then tease the Secret Ending Envelope. Then end with your reaction or your recommendation.</div></div>
+      <div class="template-block"><div class="label">Tone</div><div>Natural, clever, deadpan, curious, slightly obsessed. You can be funny, but don’t perform. The best version feels like you genuinely think the product is cool.</div></div>
+      <div class="template-block"><div class="label">Do say things like</div><div>“this is not a normal puzzle” / “the box is the before” / “there’s a secret ending in the box” / “this would be such a good gift” / “I’ve never seen a puzzle do this before”</div></div>
+      <div class="template-block"><div class="label">Do not say things like</div><div>“premium puzzle experience” / “fun for the whole family” / “hours of entertainment” / “high-quality materials” unless that is the whole point of your video, which it usually is not</div></div>
+      <div class="template-block"><div class="label">Simple filming tips</div><div>Good natural light. Clear audio. Keep the first line strong. Don’t spend 8 seconds introducing yourself. Don’t bury the interesting part. Slightly imperfect is okay if it feels real.</div></div>
+      <div class="template-block"><div class="label">Deliverables</div><div>3 hook variations, 15 to 30 seconds each, vertical 9:16, clean audio, no copyrighted music, and give us a few different opening lines if possible.</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="copy-block">
+        <div class="pill blue">Filled example</div>
+        <h3>UGC example brief, stronger version</h3>
+        <div class="copy-text">Goal: Cold audience curiosity
+Angle: Twist / reveal
+
+What this is:
+This is a puzzle with an actual reveal built into it. The box shows one scene. The puzzle is the same scene 15 seconds later, when everything has gone weird. There is also a sealed Secret Ending Envelope inside the box.
+
+What we want your video to feel like:
+Like you found something genuinely clever and you need to show people.
+
+Hook options:
+- “This is not a normal puzzle.”
+- “I thought this was a regular puzzle and I was extremely wrong.”
+- “This puzzle has a secret ending in the box, which feels unfair in the best way.”
+
+What to film:
+- open on your face
+- say the hook immediately
+- show the box
+- explain that the box is the BEFORE
+- show puzzle details and explain the puzzle is 15 seconds later
+- show the sealed envelope without spoiling it
+- end with something like: “If you’re bored by normal puzzles, look at Odd Pieces.”
+
+Tone:
+Natural, amused, curious, a little obsessed. Not salesy. Not fake excited. Not polished brand-commercial energy.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">Script starter</div>
+        <h3>UGC sample script</h3>
+        <div class="copy-text">“This is not a normal puzzle.
+
+I thought it was just a cool-looking puzzle, but the box is actually the BEFORE scene. The puzzle is the same scene 15 seconds later, after everything goes completely off the rails.
+
+And then, once you finish it, there’s a sealed Secret Ending Envelope inside the box.
+
+So it’s not just puzzling, it’s basically a reveal.
+
+If normal puzzles kind of bore you, this is the one I’d look at.”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cgc">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Template 2</div>
+      <h2>CGC / customer-style creator brief</h2>
+      <p>Use this when the content should feel casual, real, low-pressure, and like a normal person sharing a cool find with another normal person.</p>
+    </div>
+
+    <div class="quote" style="margin-bottom:18px;">
+      <div class="pill green">How this should feel</div>
+      <h3>Less ad, more “okay, this is actually cool”</h3>
+      <p>CGC should feel discovered, not delivered. The charm is that it feels believable, easy, and human.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="template">
+        <div class="pill green">CGC Brief Template</div>
+        <h3>What to send the creator</h3>
+        <div class="template-block"><div class="label">Simple product explanation</div><div>Odd Pieces makes puzzles with a twist. The box shows one scene, but the puzzle is that same scene 15 seconds later after everything changes. There is also a Secret Ending Envelope hidden inside the box. So the whole thing feels more like a surprise story than a normal puzzle.</div></div>
+        <div class="template-block"><div class="label">How this content should feel</div><div>Like you found something weirdly good and wanted to show a friend. Not polished. Not too scripted. Not trying too hard.</div></div>
+        <div class="template-block"><div class="label">Best CGC energy</div><div>Skeptical at first, then impressed. Casual. Honest. Slightly amused. Like, “I did not expect to care about this and now I kind of do.”</div></div>
+        <div class="template-block"><div class="label">Hook ideas</div><div>1. Okay wait, this puzzle is actually insane.
+2. I genuinely thought this was a normal puzzle.
+3. This is the weirdest good gift I’ve found in a while.
+4. I’m kind of mad this is such a good idea.
+5. Why does this puzzle have a secret ending?</div></div>
+        <div class="template-block"><div class="label">What to film</div><div>Handheld selfie intro, casual shot of the box, pieces on a table or couch, natural home setting, maybe your hands flipping through or pointing at details, envelope tease at the end.</div></div>
+        <div class="template-block"><div class="label">What to say</div><div>Keep it simple. Explain the before/after mechanic in one or two sentences. Mention the envelope. Mention why it feels different. Mention why it would make a good gift or why it caught your attention.</div></div>
+        <div class="template-block"><div class="label">What to avoid</div><div>Big influencer energy. Over-selling. Looking too polished. Sounding like you memorized a script. Acting like you are in a TV ad.</div></div>
+        <div class="template-block"><div class="label">Deliverables</div><div>2 to 3 casual versions, 15 to 30 seconds, vertical 9:16, natural audio, real environment, not over-edited.</div></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">Filled example</div>
+        <h3>CGC example brief, stronger version</h3>
+        <div class="copy-text">Goal: Cold audience, gift angle
+
+What this should feel like:
+A real person showing a weirdly good gift idea they did not expect to be this into.
+
+Hook options:
+- “This is the gift you buy when you’re tired of giving boring gifts.”
+- “Okay wait, why does this puzzle have a secret ending?”
+- “I thought this was just a nice puzzle and it absolutely is not.”
+
+What to say, simply:
+- this puzzle brand does something different
+- the box is the before, the puzzle is the same scene 15 seconds later
+- there’s a secret ending envelope in the box
+- this would be such a fun gift because it actually surprises people
+
+What to film:
+- casual selfie opener
+- show the box in your hands
+- show the table / couch / home setup
+- show puzzle details close up
+- show the envelope at the end without spoiling it
+
+Tone:
+Normal person. Curious. Honest. Kind of delighted. Not polished ad voice.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="creator-personas">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Creator personas</div>
+      <h2>Pick a creator style before you brief</h2>
+      <p>This makes it much easier for a normal person to know how to perform the ad. Different people sell Odd Pieces in different ways.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <div class="pill">Persona 1</div>
+        <h3>The skeptical friend</h3>
+        <p class="muted">Energy: “I did not expect to care about this, but honestly this is kind of genius.”</p>
+        <ul class="list">
+          <li>Best for cold traffic</li>
+          <li>Works well with twist and before/after angles</li>
+          <li>Feels believable and low-hype</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill green">Persona 2</div>
+        <h3>The gift finder</h3>
+        <p class="muted">Energy: “This is what you buy when you’re tired of giving boring gifts.”</p>
+        <ul class="list">
+          <li>Best for gifting angles</li>
+          <li>Great for Q4, birthdays, hosts, hard-to-shop-for people</li>
+          <li>Feels useful and specific</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill blue">Persona 3</div>
+        <h3>The puzzle person</h3>
+        <p class="muted">Energy: “If you already like puzzles, this is the one that breaks the category open.”</p>
+        <ul class="list">
+          <li>Best for audience already interested in puzzles</li>
+          <li>Good for “not your ordinary puzzle” angle</li>
+          <li>More knowledgeable tone is okay</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill pink">Persona 4</div>
+        <h3>The weirdly good find</h3>
+        <p class="muted">Energy: “I found this on the internet and had to show you.”</p>
+        <ul class="list">
+          <li>Best for CGC</li>
+          <li>Very shareable tone</li>
+          <li>Feels discoverable, not campaign-y</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill orange">Persona 5</div>
+        <h3>The date-night / table-night person</h3>
+        <p class="muted">Energy: “This is actually such a good thing to do together.”</p>
+        <ul class="list">
+          <li>Best for couples, roommates, families, friend groups</li>
+          <li>Good for table reaction angle</li>
+          <li>Focus on shared experience</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill cream">Persona 6</div>
+        <h3>The delightfully obsessed person</h3>
+        <p class="muted">Energy: “The hidden details in this thing are ridiculous.”</p>
+        <ul class="list">
+          <li>Best for detail hunters and Easter egg lovers</li>
+          <li>Good for close-up footage</li>
+          <li>Feels nerdy in a fun way</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="creator-directions">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ready-made directions</div>
+      <h2>Fast creator directions the PM can assign</h2>
+      <p>These are simple, high-clarity directions you can copy into a brief without reinventing the wheel.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="copy-block">
+        <div class="pill">Direction 1</div>
+        <h3>Skeptical friend</h3>
+        <div class="copy-text">Talk like you did not expect this to be interesting, but now you’re kind of impressed.
+
+Start with:
+“I thought this was just a normal puzzle, and I was very wrong.”
+
+Then explain:
+- the box is the before
+- the puzzle is 15 seconds later
+- there is a secret ending envelope
+
+Tone:
+Dry, amused, believable. No fake hype.</div>
+      </div>
+      <div class="copy-block">
+        <div class="pill green">Direction 2</div>
+        <h3>Gift finder</h3>
+        <div class="copy-text">Talk like you found the answer to “what do I buy for someone who already has everything?”
+
+Start with:
+“This is the gift you buy when you’re tired of giving people boring stuff.”
+
+Then explain why it is memorable:
+- surprising
+- interactive
+- people talk about it after
+- not another generic gift</div>
+      </div>
+      <div class="copy-block">
+        <div class="pill blue">Direction 3</div>
+        <h3>Puzzle lover</h3>
+        <div class="copy-text">Talk like someone who already likes puzzles but is excited to find one that actually feels different.
+
+Start with:
+“If you like puzzles, this is where they get weird in the best way.”
+
+Then explain:
+- it is not just a pretty image
+- it has a reveal mechanic
+- it rewards paying attention</div>
+      </div>
+      <div class="copy-block">
+        <div class="pill pink">Direction 4</div>
+        <h3>Weirdly good find</h3>
+        <div class="copy-text">Talk like you stumbled across something online and immediately sent it to your friends.
+
+Start with:
+“Okay wait, why does this puzzle have a secret ending?”
+
+Then explain only the interesting part first. Keep it casual and quick.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="creator-hooks">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Hook bank</div>
+      <h2>Better hooks for normal-person creators</h2>
+      <p>These should sound like something a real human would actually say.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <div class="pill">Curiosity hooks</div>
+        <ul class="list">
+          <li>This is not a normal puzzle.</li>
+          <li>Why does this puzzle have a secret ending?</li>
+          <li>I thought this was a regular puzzle and I was wrong.</li>
+          <li>The box is the before. The puzzle is what happens next.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill green">Gift hooks</div>
+        <ul class="list">
+          <li>This is the gift you buy when you’re over giving boring gifts.</li>
+          <li>I finally found a gift that people will actually remember.</li>
+          <li>This is for the person who already has everything except this.</li>
+          <li>This is such a better gift than another candle.</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill blue">Puzzle hooks</div>
+        <ul class="list">
+          <li>If normal puzzles bore you, look at this.</li>
+          <li>This is the first puzzle I’ve seen with an actual plot twist.</li>
+          <li>This ruined regular puzzles for me a little bit.</li>
+          <li>This is what happens when puzzles get interesting.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cgc-examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ready-to-send examples</div>
+      <h2>5 actual CGC briefs</h2>
+      <p>These are closer to what a PM could actually copy, paste, and send to a creator.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="copy-block">
+        <div class="pill green">CGC Brief 1</div>
+        <h3>Gift finder</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: CGC / customer-feeling content
+Goal: Make this feel like a normal person found a weirdly good gift and wanted to share it.
+
+What this product is:
+Odd Pieces makes mystery puzzles with a twist. The box shows one scene, but the puzzle is that same scene 15 seconds later after everything changes. There is also a sealed Secret Ending Envelope inside the box.
+
+What this video should feel like:
+Casual, honest, low-pressure, like you found something cool.
+
+Hook options:
+- This is the gift you buy when you’re tired of giving boring gifts.
+- I think I found the least boring gift on the internet.
+- Okay wait, this is actually such a good gift.
+
+What to say:
+- this is not a normal puzzle
+- the box is the before
+- the puzzle is what happens 15 seconds later
+- there’s a secret ending in the box
+- this would be such a fun gift because it actually surprises people
+
+What to film:
+- casual selfie opener
+- show the box in your hands
+- close-up of puzzle / table setup
+- quick envelope tease
+- ending line to camera
+
+Tone:
+Normal person, curious, lightly amused, believable. Not polished ad voice.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">CGC Brief 2</div>
+        <h3>Weirdly good internet find</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: CGC / discovery-style content
+Goal: Make this feel like “I found this weird thing online and had to show someone.”
+
+Hook options:
+- Okay wait, why does this puzzle have a secret ending?
+- I thought this was a normal puzzle and it absolutely is not.
+- This is one of those products that makes you go, wait, what?
+
+What to say:
+Keep it simple and only explain the interesting part first.
+- the box is the before
+- the puzzle is 15 seconds later
+- there is a sealed ending envelope
+- that’s why it feels more like a story than a normal puzzle
+
+What to avoid:
+- sounding scripted
+- big influencer intro energy
+- over-explaining before saying the cool part
+
+Footage:
+handheld selfie, box close-up, quick puzzle detail shots, natural home setting, envelope tease.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">CGC Brief 3</div>
+        <h3>Skeptical friend</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: CGC / skeptical reaction
+Goal: Make this feel like you did not expect to care about this product, and now you kind of do.
+
+Hook options:
+- I was ready to ignore this and then I realized what it actually is.
+- I thought this was just a nice-looking puzzle, but I was wrong.
+- I’m kind of annoyed by how good this idea is.
+
+What to say:
+- I assumed it was a regular puzzle
+- then I realized the box is the before scene
+- the puzzle is what happens 15 seconds later
+- there’s a secret ending envelope too
+- that’s the part that makes it interesting
+
+Tone:
+Dry, amused, believable. Not overly excited.
+
+What to film:
+face-to-camera opener, show the box, show one or two close puzzle details, end on a “okay that’s actually cool” line.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">CGC Brief 4</div>
+        <h3>Date night / table night</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: CGC / shared-experience angle
+Goal: Make this feel like a genuinely fun thing to do together.
+
+Hook options:
+- This is actually such a good date-night puzzle.
+- If you want something to do together that is not just staring at your phones, look at this.
+- This is the kind of puzzle that makes people start yelling across the table.
+
+What to say:
+- this is not a normal puzzle
+- it gives people something to react to
+- the twist is the whole point
+- it’s fun because you’re not just building a picture, you’re figuring something out
+
+What to film:
+show the box, table setup, hands moving pieces, maybe two people in frame, laughter/reaction if available.
+
+Tone:
+Warm, casual, normal, not cheesy.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill green">CGC Brief 5</div>
+        <h3>Puzzle person</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: CGC / puzzle-lover angle
+Goal: Make this feel like a puzzle person found one that actually feels new.
+
+Hook options:
+- If you like puzzles, this is where they get weird in a good way.
+- This is the first puzzle I’ve seen with an actual plot twist.
+- Normal puzzles feel a little flat after seeing this.
+
+What to say:
+- this isn’t just a nice image
+- the before/after mechanic makes it different
+- the envelope adds a reveal at the end
+- it rewards people who like details and surprises
+
+What to film:
+close-up details, pieces on the table, your face reacting, box shot, envelope tease.
+
+Tone:
+Enthusiastic but believable. Curious, not salesman-y.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="design">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Template 3</div>
+      <h2>Graphic designer brief</h2>
+      <p>Use this for static ads, carousels, thumbnails, and simple ad systems.</p>
+    </div>
+
+    <div class="template">
+      <div class="pill orange">Designer Brief Template</div>
+      <h3>What the designer needs to know</h3>
+      <div class="template-block"><div class="label">Brand</div><div>Odd Pieces is clever, punchy, irreverent, premium-but-playful, and never corporate. It should feel like Exploding Kittens wit with Areaware design-store taste.</div></div>
+      <div class="template-block"><div class="label">Product</div><div>This is not a decorative puzzle ad. The core product difference is the reveal mechanic, the before/after concept, and the Secret Ending Envelope.</div></div>
+      <div class="template-block"><div class="label">Goal</div><div>[Example: create 4 static ad concepts for cold Meta traffic using the twist / reveal angle]</div></div>
+      <div class="template-block"><div class="label">Approved visual directions</div><div>Box + puzzle contrast, envelope tease, high-contrast headline card, reaction-led layouts, before/after explanatory carousel.</div></div>
+      <div class="template-block"><div class="label">What to avoid visually</div><div>Generic board game energy, bland ecommerce layouts, fake luxury moodboards, cluttered over-designed compositions, weak text hierarchy.</div></div>
+      <div class="template-block"><div class="label">Sizes</div><div>1:1, 4:5, 9:16 where possible.</div></div>
+      <div class="template-block"><div class="label">Required handoff</div><div>Final exported creatives + editable source files + font/image links if relevant.</div></div>
+    </div>
+
+    <div class="grid-2" style="margin-top:18px;">
+      <div class="box do">
+        <div class="pill blue">Good static ad angles</div>
+        <ul class="list">
+          <li>This is not a normal puzzle</li>
+          <li>The box is the before</li>
+          <li>The puzzle is 15 seconds later</li>
+          <li>There is a secret ending envelope inside</li>
+          <li>The gift people talk about after everyone goes home</li>
+        </ul>
+      </div>
+      <div class="box dont">
+        <div class="pill pink">Bad designer instincts to avoid</div>
+        <ul class="badlist">
+          <li>Making it look like a children’s puzzle brand</li>
+          <li>Using bland “premium product” tropes</li>
+          <li>Writing too much copy into the ad</li>
+          <li>Designing around artwork alone instead of the mechanic</li>
+          <li>Making it too safe</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="ugc-examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ready-to-send examples</div>
+      <h2>5 actual UGC briefs</h2>
+      <p>These are more structured than CGC. Use them when you want clearer talking points and more controlled testing.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="copy-block">
+        <div class="pill blue">UGC Brief 1</div>
+        <h3>Twist / reveal</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: UGC / creator ad content
+Goal: Stop the scroll by making people realize this is not a normal puzzle.
+
+What this product is:
+Odd Pieces makes mystery puzzles where the box is the before scene and the puzzle is the same scene 15 seconds later. There is also a Secret Ending Envelope in the box.
+
+Hook options:
+- This is not a normal puzzle.
+- I thought this was a regular puzzle and I was very wrong.
+- This puzzle has a plot twist.
+
+What to say:
+- say immediately that this is not a normal puzzle
+- explain the before/after mechanic clearly
+- mention the Secret Ending Envelope
+- end by saying why that makes it more interesting than a regular puzzle
+
+What to film:
+selfie hook, box close-up, puzzle detail shots, envelope tease, end line to camera
+
+Tone:
+Clear, clever, natural, deadpan. Not cheesy.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill blue">UGC Brief 2</div>
+        <h3>Gift angle</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: UGC / creator ad content
+Goal: Make this feel like a strong gift idea that people will actually remember.
+
+Hook options:
+- This is the gift you buy when someone already has everything.
+- I finally found a gift that is not boring.
+- This is such a better gift than another generic thing online.
+
+What to say:
+- explain why it feels different from a normal puzzle
+- explain why the reveal makes it memorable
+- frame it as a gift people will talk about after
+
+What to film:
+face-to-camera opener, show the box, show a couple of puzzle details, mention the envelope, finish with a gift recommendation.
+
+Tone:
+Helpful, clear, lightly amused, believable.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill blue">UGC Brief 3</div>
+        <h3>Before / 15 seconds later</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: UGC / creator ad content
+Goal: Explain the core mechanic as quickly and clearly as possible.
+
+Hook options:
+- The box is the before. The puzzle is what happens next.
+- This is why this puzzle is actually different.
+- The whole trick is that the puzzle is 15 seconds later.
+
+What to say:
+- do not overcomplicate it
+- explain the mechanic in one clean sentence
+- show the box while saying BEFORE
+- show the puzzle while saying 15 seconds later
+- mention the envelope at the end
+
+Tone:
+Fast, clean, simple, confident.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill blue">UGC Brief 4</div>
+        <h3>Date night / table night</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: UGC / creator ad content
+Goal: Sell the shared experience, not just the object.
+
+Hook options:
+- This is actually such a good date-night puzzle.
+- If you want something to do together that is not just staring at your phones, look at this.
+- This is the kind of puzzle that gets people yelling across the table.
+
+What to say:
+- this works because it gives people something to react to
+- it is not just building a picture
+- the twist makes the whole thing more fun together
+
+What to film:
+face intro, table setup, hands working on puzzle, a second person if possible, reaction energy.
+
+Tone:
+Warm, natural, easy, not too polished.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill blue">UGC Brief 5</div>
+        <h3>Puzzle lover</h3>
+        <div class="copy-text">Project: Odd Pieces Meta ad content
+Type: UGC / creator ad content
+Goal: Show puzzle people why this category feels fresher and more interesting.
+
+Hook options:
+- If you like puzzles, this is where they get weird in a good way.
+- This is the first puzzle I’ve seen with an actual reveal built into it.
+- If normal puzzles feel a little flat now, here’s why.
+
+What to say:
+- explain that it is not just a pretty image
+- explain the before/after mechanic
+- explain why the envelope adds payoff
+- mention hidden details / surprise if relevant
+
+Tone:
+Genuine enthusiasm, but still believable. Not overhyped.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="designer-examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ready-to-send examples</div>
+      <h2>5 actual designer briefs</h2>
+      <p>Use these for static ads, carousels, and concept sets for Meta.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="copy-block">
+        <div class="pill orange">Designer Brief 1</div>
+        <h3>Cold static, twist angle</h3>
+        <div class="copy-text">Goal: Create 3 static ads for cold Meta traffic.
+Angle: Twist / reveal
+Headline territory: This is not a normal puzzle.
+
+What matters:
+- make the product feel immediately different
+- do not design around artwork alone
+- the mechanic is the point
+
+Visual directions:
+- box + puzzle + envelope composition
+- high-contrast headline
+- clear focal point
+- strange / clever / premium energy
+
+Avoid:
+- generic board game ad look
+- too much copy
+- bland ecommerce layout</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill orange">Designer Brief 2</div>
+        <h3>Warm carousel, mechanic explainer</h3>
+        <div class="copy-text">Goal: Create a 5-card carousel for warm traffic.
+Angle: Before / 15 seconds later
+
+Card flow:
+1. Not your ordinary puzzle
+2. The box is the before
+3. The puzzle is 15 seconds later
+4. There is a Secret Ending Envelope
+5. See the twist
+
+Priority:
+Clarity first. Make the mechanic instantly understandable.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill orange">Designer Brief 3</div>
+        <h3>Gift static set</h3>
+        <div class="copy-text">Goal: Create 3 gift-oriented static ads.
+Angle: Gift for people who already have everything
+
+Headline territory:
+- The gift people talk about after everyone goes home
+- Not another boring gift
+- This is what you buy when they already have everything
+
+Visual feel:
+Smart, playful, premium, giftable, surprising.
+Do not make it feel holiday-generic.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill orange">Designer Brief 4</div>
+        <h3>Hot static reminder</h3>
+        <div class="copy-text">Goal: Create a retargeting static for hot traffic.
+Angle: Reminder / close
+
+Headline territory:
+- Still thinking about it?
+- Get the weirdly good one
+- Your next puzzle night is right here
+
+Design notes:
+Simple, direct, less explanation, stronger CTA.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill orange">Designer Brief 5</div>
+        <h3>Table reaction angle</h3>
+        <div class="copy-text">Goal: Create 2 statics and 1 carousel around the reaction experience.
+Angle: Table reaction / shared experience
+
+Message:
+This is not just a puzzle image. This is the kind of thing that makes people point, laugh, and yell across the table.
+
+Visual notes:
+Use people / hands / table context where possible. Sell the moment, not just the box.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="editor">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Template 4</div>
+      <h2>Video editor brief, using existing clips</h2>
+      <p>Use this when turning founder footage, product clips, or existing content into Meta ads.</p>
+    </div>
+
+    <div class="template">
+      <div class="pill pink">Editor Brief Template</div>
+      <h3>What the edit needs to do</h3>
+      <div class="template-block"><div class="label">Footage source</div><div>Existing product clips, table footage, founder clips, customer reactions, box shots, puzzle detail shots.</div></div>
+      <div class="template-block"><div class="label">Edit rule</div><div>Hook first. No slow warm-up. No long logo intro. No “beautiful montage” before the point lands.</div></div>
+      <div class="template-block"><div class="label">Suggested structure</div><div>0 to 2 sec hook
+2 to 6 sec product difference
+6 to 12 sec visual proof
+12 to 20 sec twist / envelope / reaction
+end with CTA</div></div>
+      <div class="template-block"><div class="label">Caption style</div><div>Bold, readable, fast, high contrast, few words per frame. The captions should help the hook land, not narrate every single thing.</div></div>
+      <div class="template-block"><div class="label">What to avoid</div><div>Slow pacing, tiny captions, over-designed motion graphics, irrelevant b-roll, long setup, generic stock music energy.</div></div>
+      <div class="template-block"><div class="label">Deliverables</div><div>3 to 5 cutdowns, 15 to 30 sec, 9:16 primary, optional 4:5 and 1:1 variants.</div></div>
+    </div>
+
+    <div class="copy-block" style="margin-top:18px;">
+      <div class="pill pink">Filled example</div>
+      <h3>Editor example brief</h3>
+      <div class="copy-text">Goal: Create 3 cold-audience ads from existing product footage
+Angle: Before / 15 seconds later
+
+Use these clips:
+- box front shot
+- puzzle pieces spread on table
+- close-up puzzle detail shots
+- envelope shot
+- founder clip explaining the mechanic
+
+Edit flow:
+- start with text: “The box is the before.”
+- cut quickly to puzzle build with text: “The puzzle is 15 seconds later.”
+- show envelope with text: “Then there’s the secret ending.”
+- end on reaction / founder close with CTA: “See the twist.”
+
+Must feel:
+Clever, surprising, sharp
+
+Must not feel:
+Corporate, sentimental, overproduced</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="editor-examples">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Ready-to-send examples</div>
+      <h2>5 actual editor briefs</h2>
+      <p>Use these when the editor is cutting ads from existing footage, founder clips, and product shots.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="copy-block">
+        <div class="pill pink">Editor Brief 1</div>
+        <h3>Cold hook-first cut</h3>
+        <div class="copy-text">Goal: Cut a cold-traffic ad from existing footage.
+Angle: Twist / reveal
+
+Open with:
+“This is not a normal puzzle.”
+
+Edit flow:
+- strong first frame
+- box shot
+- puzzle details
+- envelope tease
+- end on CTA
+
+Priority:
+Fast hook, no slow intro, no filler b-roll.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill pink">Editor Brief 2</div>
+        <h3>Mechanic explainer cut</h3>
+        <div class="copy-text">Goal: Make the before/after mechanic instantly understandable.
+
+Edit flow:
+- text on screen: The box is the before
+- quick cut to puzzle footage: The puzzle is 15 seconds later
+- envelope shot: Secret Ending Envelope inside
+- end with CTA: See the twist
+
+Priority:
+Clarity over style.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill pink">Editor Brief 3</div>
+        <h3>Gift cutdown</h3>
+        <div class="copy-text">Goal: Cut a gift-focused ad using product footage and creator clips.
+
+Open with:
+“The gift people talk about after everyone goes home.”
+
+Use:
+- box footage
+- reaction shots if available
+- creator line about gifting
+- envelope tease
+
+Must feel:
+Memorable, giftable, not generic.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill pink">Editor Brief 4</div>
+        <h3>Founder explainer cut</h3>
+        <div class="copy-text">Goal: Turn founder clip into a warm-audience ad.
+
+Use founder clip explaining:
+- this is not a normal puzzle
+- box is before
+- puzzle is 15 seconds later
+- secret ending envelope
+
+Support with:
+- box close-ups
+- puzzle footage
+- detail shots
+
+Keep it tight. Trim all unnecessary setup.</div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill pink">Editor Brief 5</div>
+        <h3>Reaction / togetherness cut</h3>
+        <div class="copy-text">Goal: Sell the shared table experience.
+
+Use:
+- hands on puzzle
+- multiple people at table if available
+- laughter / reaction clips
+- close-ups of details
+
+Opening line ideas:
+- This is the kind of puzzle that makes people yell across the table.
+- It’s not just a puzzle, it’s the reveal that gets people.
+
+Must feel:
+Social, lively, surprising.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="founder">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Template 5</div>
+      <h2>Founder / internal capture brief</h2>
+      <p>Use this when Ginny or internal team members are filming raw clips that will later be edited into ads.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="template">
+        <div class="pill cream">Founder Capture Template</div>
+        <h3>What to record</h3>
+        <ul class="list">
+          <li>Direct-to-camera explanation of what makes Odd Pieces different</li>
+          <li>Box close-ups</li>
+          <li>Envelope close-ups</li>
+          <li>Puzzle-on-table footage</li>
+          <li>Hands interacting with puzzle</li>
+          <li>Real reactions if possible</li>
+        </ul>
+        <div class="template-block"><div class="label">Talking points</div><div>Not your ordinary puzzle. Box is the before. Puzzle is 15 seconds later. Secret Ending Envelope. Great gift. People react hard to the twist.</div></div>
+        <div class="template-block"><div class="label">Avoid</div><div>Long speeches, too much setup, explaining every detail, sounding scripted, trying too hard to “perform.”</div></div>
+      </div>
+
+      <div class="copy-block">
+        <div class="pill cream">Founder script starter</div>
+        <h3>Example talking-head prompt</h3>
+        <div class="copy-text">“If you think this is a normal puzzle, that’s the first mistake.
+
+The box shows the before scene. The puzzle is what happens 15 seconds later. And once you finish it, there’s a sealed Secret Ending Envelope inside the box.
+
+So the whole point is the reveal. That’s why people end up yelling across the table.”</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="handoff">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">PM handoff checklist</div>
+      <h2>Before sending any brief</h2>
+      <p>This is the last sanity check so the team does not create random off-brand work.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <h3>Strategy check</h3>
+        <ul class="checklist">
+          <li>Audience stage is defined</li>
+          <li>Angle is selected</li>
+          <li>Hook is selected</li>
+          <li>CTA is selected</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Brand check</h3>
+        <ul class="checklist">
+          <li>Explains Odd Pieces clearly</li>
+          <li>Includes what to say and not say</li>
+          <li>Does not sound corporate</li>
+          <li>Leans into the mechanic, not generic puzzle language</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <h3>Production check</h3>
+        <ul class="checklist">
+          <li>Deliverable is specified</li>
+          <li>Sizes / formats are specified</li>
+          <li>Assets needed are listed</li>
+          <li>Owner and due date are attached</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">Odd Pieces internal use only · Meta Ad Production Templates v1</div>
+</footer>
+</body>
+</html>

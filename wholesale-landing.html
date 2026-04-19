@@ -1,611 +1,572 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Wholesale — Odd Pieces</title>
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    
-    :root {
-      --yellow: #FEE000;
-      --blue: #C1E3E8;
-      --black: #1A1A1A;
-      --cream: #FFFBF0;
-      --orange: #FC9C1C;
-      --gray: #999999;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--cream);
-      color: var(--black);
-      line-height: 1.6;
-    }
-    
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-    
-    /* HEADER */
-    header {
-      padding: 20px 0;
-      border-bottom: 1px solid #f0eae0;
-      background: white;
-      position: sticky;
-      top: 0;
-      z-index: 100;
-    }
-    
-    .header-content {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .logo {
-      font-size: 24px;
-      font-weight: 900;
-      font-family: 'Nunito', sans-serif;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
-    
-    .nav {
-      display: flex;
-      gap: 30px;
-    }
-    
-    .nav a {
-      text-decoration: none;
-      color: var(--black);
-      font-size: 13px;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    
-    .nav a:hover {
-      color: var(--orange);
-    }
-    
-    /* HERO */
-    .hero {
-      padding: 80px 0;
-      background: linear-gradient(135deg, var(--yellow) 0%, var(--blue) 100%);
-      text-align: center;
-    }
-    
-    .hero h1 {
-      font-size: 56px;
-      font-weight: 900;
-      font-family: 'Nunito', sans-serif;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
-    
-    .hero p {
-      font-size: 18px;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      color: var(--black);
-    }
-    
-    .cta-primary {
-      display: inline-block;
-      background: var(--black);
-      color: var(--cream);
-      padding: 16px 48px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    
-    .cta-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    }
-    
-    /* SECTION */
-    section {
-      padding: 60px 0;
-      border-bottom: 1px solid #f0eae0;
-    }
-    
-    section:last-of-type {
-      border-bottom: none;
-    }
-    
-    h2 {
-      font-size: 40px;
-      font-weight: 900;
-      font-family: 'Nunito', sans-serif;
-      margin-bottom: 32px;
-      text-transform: uppercase;
-      letter-spacing: -1px;
-    }
-    
-    h3 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 12px;
-      color: var(--black);
-    }
-    
-    /* WHY CARRY US */
-    .why-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 32px;
-      margin-top: 40px;
-    }
-    
-    .why-card {
-      background: white;
-      padding: 32px;
-      border-radius: 12px;
-      border-left: 6px solid var(--yellow);
-    }
-    
-    .why-card h3 {
-      font-size: 18px;
-      margin-bottom: 12px;
-    }
-    
-    .why-card p {
-      font-size: 14px;
-      color: #555;
-      line-height: 1.7;
-    }
-    
-    /* THE NUMBERS */
-    .numbers {
-      background: white;
-      padding: 40px;
-      border-radius: 12px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 32px;
-      margin: 40px 0;
-    }
-    
-    .number {
-      text-align: center;
-    }
-    
-    .number-value {
-      font-size: 48px;
-      font-weight: 900;
-      font-family: 'Nunito', sans-serif;
-      color: var(--orange);
-      margin-bottom: 8px;
-    }
-    
-    .number-label {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      color: var(--gray);
-      font-weight: 600;
-    }
-    
-    /* WHAT YOU GET */
-    .what-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 32px;
-      margin-top: 40px;
-    }
-    
-    .what-item {
-      background: #f5f3f0;
-      padding: 32px;
-      border-radius: 12px;
-      text-align: center;
-    }
-    
-    .what-item h3 {
-      font-size: 16px;
-      margin-bottom: 12px;
-    }
-    
-    .what-item p {
-      font-size: 13px;
-      color: #666;
-    }
-    
-    /* HOW IT WORKS */
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-      margin-top: 40px;
-    }
-    
-    .step {
-      counter-increment: step-counter;
-      position: relative;
-      padding-left: 60px;
-    }
-    
-    .step::before {
-      content: counter(step-counter);
-      position: absolute;
-      left: 0;
-      top: 0;
-      width: 48px;
-      height: 48px;
-      background: var(--yellow);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 20px;
-      color: var(--black);
-    }
-    
-    .step h3 {
-      margin-bottom: 8px;
-      font-size: 16px;
-    }
-    
-    .step p {
-      font-size: 13px;
-      color: #666;
-    }
-    
-    /* FAQ */
-    .faq {
-      display: grid;
-      gap: 24px;
-      margin-top: 40px;
-    }
-    
-    .faq-item {
-      background: white;
-      padding: 24px;
-      border-radius: 12px;
-      border-left: 4px solid var(--yellow);
-    }
-    
-    .faq-item h4 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      color: var(--black);
-    }
-    
-    .faq-item p {
-      font-size: 13px;
-      color: #555;
-      line-height: 1.6;
-    }
-    
-    /* CTA SECTION */
-    .cta-section {
-      background: var(--yellow);
-      padding: 60px 40px;
-      border-radius: 12px;
-      text-align: center;
-      margin: 60px 0;
-    }
-    
-    .cta-section h2 {
-      margin-bottom: 16px;
-      color: var(--black);
-    }
-    
-    .cta-section p {
-      font-size: 16px;
-      margin-bottom: 32px;
-      color: var(--black);
-    }
-    
-    .cta-secondary {
-      display: inline-block;
-      background: var(--black);
-      color: var(--cream);
-      padding: 16px 48px;
-      border-radius: 12px;
-      text-decoration: none;
-      font-weight: 700;
-      font-size: 16px;
-      transition: transform 0.2s;
-    }
-    
-    .cta-secondary:hover {
-      transform: translateY(-2px);
-    }
-    
-    /* FOOTER */
-    footer {
-      background: var(--black);
-      color: var(--cream);
-      padding: 40px 0;
-      margin-top: 60px;
-    }
-    
-    footer .container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 40px;
-    }
-    
-    footer h4 {
-      font-size: 14px;
-      font-weight: 700;
-      margin-bottom: 16px;
-      text-transform: uppercase;
-    }
-    
-    footer a {
-      display: block;
-      font-size: 13px;
-      color: var(--cream);
-      opacity: 0.8;
-      text-decoration: none;
-      margin-bottom: 8px;
-      transition: opacity 0.2s;
-    }
-    
-    footer a:hover {
-      opacity: 1;
-    }
-    
-    footer p {
-      font-size: 12px;
-      color: var(--cream);
-      opacity: 0.6;
-    }
-    
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .hero h1 {
-        font-size: 36px;
-      }
-      
-      h2 {
-        font-size: 28px;
-      }
-      
-      .nav {
-        display: none;
-      }
-      
-      section {
-        padding: 40px 0;
-      }
-    }
-    
-    /* COUNTER FOR STEPS */
-    .steps {
-      counter-reset: step-counter;
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wholesale — Odd Pieces</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --yellow: #FEE000;
+    --blue:   #C1E3E8;
+    --orange: #FC9C1C;
+    --red:    #FF4016;
+    --ink:    #1A1A1A;
+    --white:  #FFFFFF;
+    --muted:  #6B6555;
+    --border: rgba(26,26,26,0.1);
+  }
+
+  body { font-family: 'Inter', sans-serif; color: var(--ink); background: var(--white); }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--yellow);
+    padding: 0 28px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .nav-link {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--ink);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.15s;
+  }
+  .nav-link:hover { opacity: 1; }
+
+  /* ── SECTIONS ── */
+  .section-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--ink);
+    opacity: 0.5;
+    text-align: center;
+    margin-bottom: 12px;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(1.6rem, 5vw, 2.4rem);
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    text-align: center;
+    margin-bottom: 10px;
+  }
+  .section-sub {
+    font-size: 0.95rem;
+    line-height: 1.65;
+    color: var(--ink);
+    opacity: 0.6;
+    max-width: 480px;
+    margin: 0 auto 32px;
+    text-align: center;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: var(--yellow);
+    padding: 56px 24px 48px;
+    text-align: center;
+  }
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    opacity: 0.5;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(2.2rem, 8vw, 3.8rem);
+    text-transform: uppercase;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 18px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--red);
+  }
+  .hero-sub {
+    font-size: 1rem;
+    line-height: 1.65;
+    color: var(--ink);
+    opacity: 0.65;
+    max-width: 440px;
+    margin: 0 auto 28px;
+  }
+  .hero-cta {
+    display: inline-block;
+    padding: 15px 36px;
+    background: var(--orange);
+    color: var(--ink);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    box-shadow: 3px 3px 0 var(--ink);
+    transition: transform 0.1s, box-shadow 0.1s;
+  }
+  .hero-cta:hover { transform: translate(-1px, -1px); box-shadow: 4px 4px 0 var(--ink); }
+  .hero-cta:active { transform: translate(1px, 1px); box-shadow: 1px 1px 0 var(--ink); }
+
+  /* ── WHY CARRY US (BLUE) ── */
+  .why-section {
+    background: var(--blue);
+    padding: 52px 24px;
+  }
+  .cards-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .card-icon {
+    font-size: 1.6rem;
+    margin-bottom: 10px;
+  }
+  .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .card-text {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ── NUMBERS (WHITE) ── */
+  .numbers-section {
+    background: var(--white);
+    padding: 52px 24px;
+  }
+  .stats-grid {
+    max-width: 600px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .stat-block {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 4px 4px 0 var(--ink);
+  }
+  .stat-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    color: var(--ink);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat-num .accent { color: var(--red); }
+  .stat-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+  }
+
+  /* ── HOW IT WORKS (YELLOW) ── */
+  .how-section {
+    background: var(--yellow);
+    padding: 52px 24px;
+  }
+  .steps-wrap {
+    max-width: 540px;
+    margin: 0 auto;
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  }
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 18px 22px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .step-row:last-child { border-bottom: none; }
+  .step-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 0.68rem;
+    background: var(--yellow);
+    color: var(--ink);
+    border-radius: 6px;
+    padding: 3px 8px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    letter-spacing: 0.05em;
+  }
+  .step-content {}
+  .step-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.88rem;
+    margin-bottom: 2px;
+  }
+  .step-text {
+    font-size: 0.82rem;
+    line-height: 1.55;
+    color: var(--muted);
+  }
+
+  /* ── FAQ (BLUE) ── */
+  .faq-section {
+    background: var(--blue);
+    padding: 52px 24px;
+  }
+  .faq-wrap {
+    max-width: 540px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 8px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    overflow: hidden;
+  }
+  .faq-q {
+    padding: 16px 22px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  .faq-q span {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.88rem;
+  }
+  .faq-toggle {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    color: var(--muted);
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  .faq-a {
+    padding: 0 22px 16px;
+    font-size: 0.84rem;
+    line-height: 1.6;
+    color: var(--muted);
+    display: none;
+  }
+  .faq-item.open .faq-a { display: block; }
+  .faq-item.open .faq-toggle { transform: rotate(45deg); }
+
+  /* ── CTA (WHITE) ── */
+  .cta-section {
+    background: var(--white);
+    padding: 56px 24px 64px;
+  }
+  .cta-card {
+    max-width: 460px;
+    margin: 0 auto;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    padding: 36px 30px;
+    text-align: center;
+    box-shadow: 6px 6px 0 var(--ink);
+  }
+  .cta-card h2 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    line-height: 1.1;
+    margin-bottom: 8px;
+  }
+  .cta-card-sub {
+    font-size: 0.85rem;
+    color: var(--muted);
+    line-height: 1.55;
+    margin-bottom: 24px;
+  }
+  .cta-card .hero-cta {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 15px;
+  }
+  .fine-print {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 14px;
+    line-height: 1.55;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ink);
+    padding: 24px;
+    text-align: center;
+  }
+  footer p {
+    font-size: 0.72rem;
+    color: rgba(255,255,255,0.35);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    .cards-grid, .stats-grid { grid-template-columns: 1fr; }
+  }
+</style>
 </head>
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="container">
-      <div class="header-content">
-        <div class="logo">🧩 Odd Pieces</div>
-        <nav class="nav">
-          <a href="/">Home</a>
-          <a href="#why">Why Carry Us</a>
-          <a href="#how">How It Works</a>
-          <a href="#faq">FAQ</a>
-          <a href="#contact">Contact</a>
-        </nav>
-      </div>
-    </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
-    <div class="container">
-      <h1>Bring Mystery Puzzles to Your Store</h1>
-      <p>Premium 1000-piece puzzles where the box art isn't what you build. Proven bestseller with 4.8★ rating and strong repeat purchase rate.</p>
-      <a href="#apply" class="cta-primary">Apply for Wholesale</a>
-    </div>
-  </section>
+<!-- NAV -->
+<nav>
+  <a href="https://oddpieces.com" class="logo">Odd Pieces 🧩</a>
+  <a href="https://oddpieces.com/en-us/collections/puzzles" class="nav-link">Shop Puzzles →</a>
+</nav>
 
-  <!-- WHY CARRY US -->
-  <section id="why">
-    <div class="container">
-      <h2>Why Retailers Love Odd Pieces</h2>
-      <div class="why-grid">
-        <div class="why-card">
-          <h3>50% Retailer Margin</h3>
-          <p>$17 wholesale / $38 MSRP. Best-in-class margins on premium puzzles. Your customers pay $38, you pocket $21 per unit.</p>
-        </div>
-        <div class="why-card">
-          <h3>Proven Bestseller</h3>
-          <p>Kickstarter-funded. 4.8★ average across 500+ reviews. Amazon bestseller. Your customers already want this.</p>
-        </div>
-        <div class="why-card">
-          <h3>Repeat Purchases</h3>
-          <p>Mystery concept drives collectibility. Customers buy the series. One purchase becomes three. Strong recurring revenue.</p>
-        </div>
-        <div class="why-card">
-          <h3>Marketing Support</h3>
-          <p>Free shelf talkers, social media assets, product photos. We help you sell them, not just drop-ship.</p>
-        </div>
-      </div>
-    </div>
-  </section>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">🏪 Wholesale Partners</div>
+  <h1>Mystery puzzles.<br><em>Your shelves.</em></h1>
+  <p class="hero-sub">Odd Pieces puzzles sell themselves — hidden stories, original art, and customers who come back for more. Bring them to your store.</p>
+  <a href="#apply" class="hero-cta">Apply for Wholesale →</a>
+</section>
 
-  <!-- THE NUMBERS -->
-  <section>
-    <div class="container">
-      <h2>By The Numbers</h2>
-      <div class="numbers">
-        <div class="number">
-          <div class="number-value">50%</div>
-          <div class="number-label">Retailer Margin</div>
-        </div>
-        <div class="number">
-          <div class="number-value">$38</div>
-          <div class="number-label">MSRP (Your Retail)</div>
-        </div>
-        <div class="number">
-          <div class="number-value">4.8★</div>
-          <div class="number-label">Avg. Customer Rating</div>
-        </div>
-        <div class="number">
-          <div class="number-value">13</div>
-          <div class="number-label">SKUs Available</div>
-        </div>
-      </div>
+<!-- WHY CARRY US -->
+<section class="why-section">
+  <div class="section-eyebrow">🔥 Why Carry Us</div>
+  <h2 class="section-title">Built to sell.<br>Easy to stock.</h2>
+  <p class="section-sub">Every puzzle is designed to fly off the shelf and bring customers back for more.</p>
+  <div class="cards-grid">
+    <div class="card">
+      <div class="card-icon">💰</div>
+      <div class="card-title">50% Margins</div>
+      <p class="card-text">Industry-leading wholesale pricing. You keep half on every puzzle sold.</p>
     </div>
-  </section>
+    <div class="card">
+      <div class="card-icon">⭐</div>
+      <div class="card-title">Proven Bestseller</div>
+      <p class="card-text">4.8-star reviews across 1,000+ customers. These puzzles have fans.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <div class="card-title">Repeat Purchases</div>
+      <p class="card-text">13 SKUs and counting. Customers collect them all — they come back.</p>
+    </div>
+    <div class="card">
+      <div class="card-icon">📣</div>
+      <div class="card-title">Marketing Support</div>
+      <p class="card-text">POS displays, product photos, and social content — ready to go.</p>
+    </div>
+  </div>
+</section>
 
-  <!-- WHAT YOU GET -->
-  <section>
-    <div class="container">
-      <h2>What You Get With Your First Order</h2>
-      <div class="what-grid">
-        <div class="what-item">
-          <h3>✓ Free Shelf Talkers</h3>
-          <p>5–10 printed cards per SKU explaining the mystery concept. Help customers understand what they're buying.</p>
-        </div>
-        <div class="what-item">
-          <h3>✓ Marketing Assets</h3>
-          <p>Product photos, social media graphics, email templates. Everything you need to promote to your customers.</p>
-        </div>
-        <div class="what-item">
-          <h3>✓ Dedicated Support</h3>
-          <p>Responsive email support. Reorder nudges. New product announcements. We're here to help you succeed.</p>
-        </div>
-      </div>
+<!-- THE NUMBERS -->
+<section class="numbers-section">
+  <div class="section-eyebrow">📊 The Numbers</div>
+  <h2 class="section-title">Quick math.</h2>
+  <p class="section-sub">The numbers that matter for your bottom line.</p>
+  <div class="stats-grid">
+    <div class="stat-block">
+      <div class="stat-num"><span class="accent">50</span>%</div>
+      <div class="stat-label">Wholesale Margin</div>
     </div>
-  </section>
+    <div class="stat-block">
+      <div class="stat-num">$38</div>
+      <div class="stat-label">MSRP Per Puzzle</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">4.8<span class="accent">★</span></div>
+      <div class="stat-label">Avg Customer Rating</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-num">13</div>
+      <div class="stat-label">SKUs Available</div>
+    </div>
+  </div>
+</section>
 
-  <!-- HOW IT WORKS -->
-  <section id="how">
-    <div class="container">
-      <h2>How It Works</h2>
-      <div class="steps">
-        <div class="step">
-          <h3>Apply</h3>
-          <p>Fill out our simple application form. Tell us about your store and which puzzles interest you.</p>
-        </div>
-        <div class="step">
-          <h3>Get Approved</h3>
-          <p>We review within 2 business days. You'll get our catalog, price list, and terms.</p>
-        </div>
-        <div class="step">
-          <h3>Place Order</h3>
-          <p>Minimum $150 (12 units). Prepay your first order, then Net 30 after account is established.</p>
-        </div>
-        <div class="step">
-          <h3>We Ship</h3>
-          <p>5–7 business days. Includes shelf talkers and marketing materials. You pay shipping.</p>
-        </div>
-        <div class="step">
-          <h3>Sell & Reorder</h3>
-          <p>Your customers love them. Reorder anytime with 6-unit minimum. We handle the rest.</p>
-        </div>
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-eyebrow">🛠️ How It Works</div>
+  <h2 class="section-title">Five steps.<br>That's it.</h2>
+  <p class="section-sub">From application to puzzles on your shelf — here's the process.</p>
+  <div class="steps-wrap">
+    <div class="step-row">
+      <span class="step-num">01</span>
+      <div class="step-content">
+        <div class="step-title">Apply</div>
+        <p class="step-text">Fill out our quick wholesale application. Takes 2 minutes.</p>
       </div>
     </div>
-  </section>
+    <div class="step-row">
+      <span class="step-num">02</span>
+      <div class="step-content">
+        <div class="step-title">Get Approved</div>
+        <p class="step-text">We review your store and get back to you within 48 hours.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num">03</span>
+      <div class="step-content">
+        <div class="step-title">Place Your Order</div>
+        <p class="step-text">Choose your SKUs and quantity. Low minimums — 12 units to start.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num">04</span>
+      <div class="step-content">
+        <div class="step-title">We Ship</div>
+        <p class="step-text">Orders ship within 5 business days. US-based fulfillment.</p>
+      </div>
+    </div>
+    <div class="step-row">
+      <span class="step-num">05</span>
+      <div class="step-content">
+        <div class="step-title">Sell &amp; Reorder</div>
+        <p class="step-text">Watch them fly. Reorder anytime — no contracts, no commitments.</p>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- FAQ -->
-  <section id="faq">
-    <div class="container">
-      <h2>Frequently Asked Questions</h2>
-      <div class="faq">
-        <div class="faq-item">
-          <h4>What's the minimum order?</h4>
-          <p>First order: $150 (12 units minimum). Reorders: $114 (6 units). No maximum.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Do you offer Net 30 terms?</h4>
-          <p>First order must be prepaid. After your account is established, Net 30 is available on subsequent orders.</p>
-        </div>
-        <div class="faq-item">
-          <h4>How long does shipping take?</h4>
-          <p>5–7 business days from order confirmation. You pay for shipping (typically $20–35 per case to US/Canada).</p>
-        </div>
-        <div class="faq-item">
-          <h4>What marketing support do you provide?</h4>
-          <p>Free shelf talkers with your first order. Product photos, social media graphics, and email templates available. We also send reorder nudges at 30 and 60 days.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I order just one SKU or do I need all 13?</h4>
-          <p>You can order individual SKUs. But the $150 minimum applies to your total order, so you may get a mix.</p>
-        </div>
-        <div class="faq-item">
-          <h4>What's your return/damage policy?</h4>
-          <p>Damaged in transit: full replacement within 7 days. Unsold returns: within 90 days, original condition, 15% restocking fee.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Do you do consignment?</h4>
-          <p>No, wholesale purchase only. But our puzzles have strong sell-through, so you won't be stuck with inventory.</p>
-        </div>
-        <div class="faq-item">
-          <h4>Can I sell these online?</h4>
-          <p>Own website at MSRP: yes. Third-party (Amazon/eBay): requires written approval. Contact us to discuss.</p>
-        </div>
+<!-- FAQ -->
+<section class="faq-section">
+  <div class="section-eyebrow">❓ FAQ</div>
+  <h2 class="section-title">Questions?<br>We got you.</h2>
+  <div class="faq-wrap">
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What's the minimum order?</span>
+        <span class="faq-toggle">+</span>
       </div>
+      <div class="faq-a">12 units for your first order. Mix and match any SKUs you want. We keep it low so you can test what works for your store.</div>
     </div>
-  </section>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What are the wholesale prices?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">You'll get full pricing details once approved. The short version: 50% off MSRP. You make great margins on every puzzle.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Do you offer consignment?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Not at this time. All orders are wholesale (buy upfront). But with 50% margins and proven sell-through, the risk is low.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What's included with my order?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Your puzzles plus a retail starter kit: POS display materials, product cards, high-res photos, and social media content you can use.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>How long does shipping take?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Orders ship within 5 business days from our US warehouse. Standard ground shipping is included on orders over $500.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Can I sell on Amazon or online?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Wholesale accounts are for brick-and-mortar retail only. We handle our own online channels to protect everyone's margins.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>What if they don't sell?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">They will. But if you're nervous — start with 12 units, test it out. Our reorder rate speaks for itself. We'll also help with merchandising tips.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q" onclick="this.parentElement.classList.toggle('open')">
+        <span>Do you ship internationally?</span>
+        <span class="faq-toggle">+</span>
+      </div>
+      <div class="faq-a">Currently US and Canada only for wholesale. International is coming — get on the list and we'll let you know.</div>
+    </div>
+  </div>
+</section>
 
-  <!-- CTA SECTION -->
-  <section class="cta-section" id="apply">
-    <div class="container">
-      <h2>Ready to Stock Odd Pieces?</h2>
-      <p>Apply now. Get approved in 2 days. Start selling in a week.</p>
-      <a href="https://forms.gle/YOUR_FORM_ID_HERE" class="cta-secondary" target="_blank">Apply for Wholesale</a>
-    </div>
-  </section>
+<!-- CTA -->
+<section class="cta-section" id="apply">
+  <div class="cta-card">
+    <h2>Ready to stock<br>Odd Pieces?</h2>
+    <p class="cta-card-sub">Apply now. We'll review your store and get back to you within 48 hours. No contracts, no commitments.</p>
+    <a href="mailto:wholesale@oddpieces.com?subject=Wholesale%20Application" class="hero-cta">Apply for Wholesale →</a>
+    <p class="fine-print">Questions? Email wholesale@oddpieces.com — we're real humans. 🧩</p>
+  </div>
+</section>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <div>
-        <h4>About</h4>
-        <p>Odd Pieces makes mystery puzzles where the box art is the before scene, and the puzzle is the after. 1000 pieces. Zero context. Good luck.</p>
-      </div>
-      <div>
-        <h4>Quick Links</h4>
-        <a href="/">Home</a>
-        <a href="/about">About Us</a>
-        <a href="/products">All Products</a>
-        <a href="/">Shop DTC</a>
-      </div>
-      <div>
-        <h4>Wholesale Contact</h4>
-        <p>Email: <a href="mailto:wholesale@oddpieces.com">wholesale@oddpieces.com</a></p>
-        <p>Response time: 2 business days</p>
-      </div>
-      <div>
-        <h4>Follow Us</h4>
-        <a href="https://instagram.com/oddpieces" target="_blank">Instagram</a>
-        <a href="https://tiktok.com/@oddpieces" target="_blank">TikTok</a>
-        <a href="https://youtube.com/@oddpieces" target="_blank">YouTube</a>
-      </div>
-    </div>
-    <div style="text-align: center; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1); margin-top: 40px;">
-      <p>&copy; 2026 Odd Pieces Inc. All rights reserved.</p>
-    </div>
-  </footer>
+<!-- FOOTER -->
+<footer>
+  <p>© 2025 Odd Pieces · Mystery Puzzles with Hidden Stories</p>
+</footer>
 
-  <script>
-    // Smooth scroll for nav links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-          target.scrollIntoView({ behavior: 'smooth' });
-        }
-      });
-    });
-  </script>
 </body>
 </html>

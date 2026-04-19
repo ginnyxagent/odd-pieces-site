@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces Puzzles — Customer Personas</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{--bg:#0a0b10;--card:#13151e;--border:#1e2133;--text:#e4e4e7;--muted:#8891a5;--dim:#5a6178}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.container{max-width:1200px;margin:0 auto;padding:32px 24px}
+
+/* HEADER */
+header{text-align:center;padding:48px 0 40px}
+header h1{font-size:2.4rem;font-weight:800;letter-spacing:-.02em;background:linear-gradient(135deg,#a78bfa,#22d3ee,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+header .sub{color:var(--muted);margin-top:10px;font-size:1rem;max-width:600px;margin-left:auto;margin-right:auto}
+
+/* REVENUE PIE */
+.revenue-row{display:flex;align-items:center;justify-content:center;gap:40px;margin:32px 0 48px;flex-wrap:wrap}
+.revenue-chart-wrap{width:260px;height:260px;position:relative}
+.revenue-legend{display:flex;flex-direction:column;gap:10px}
+.rev-item{display:flex;align-items:center;gap:10px;font-size:.88rem}
+.rev-dot{width:14px;height:14px;border-radius:50%;flex-shrink:0}
+
+/* PERSONA CARDS */
+.persona{position:relative;border-radius:20px;padding:36px;margin-bottom:36px;border:1px solid var(--border);overflow:hidden;transition:transform .2s}
+.persona::before{content:'';position:absolute;top:0;left:0;right:0;height:4px}
+.p1{background:linear-gradient(165deg,rgba(244,114,182,.06),var(--card) 40%)}.p1::before{background:linear-gradient(90deg,#f472b6,#ec4899)}
+.p2{background:linear-gradient(165deg,rgba(59,130,246,.06),var(--card) 40%)}.p2::before{background:linear-gradient(90deg,#60a5fa,#3b82f6)}
+.p3{background:linear-gradient(165deg,rgba(139,92,246,.06),var(--card) 40%)}.p3::before{background:linear-gradient(90deg,#a78bfa,#8b5cf6)}
+.p4{background:linear-gradient(165deg,rgba(34,197,94,.06),var(--card) 40%)}.p4::before{background:linear-gradient(90deg,#4ade80,#22c55e)}
+.p5{background:linear-gradient(165deg,rgba(245,158,11,.06),var(--card) 40%)}.p5::before{background:linear-gradient(90deg,#fbbf24,#f59e0b)}
+
+.persona-header{display:flex;align-items:flex-start;gap:20px;margin-bottom:20px;flex-wrap:wrap}
+.persona-icon{width:64px;height:64px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.8rem;flex-shrink:0}
+.p1 .persona-icon{background:rgba(244,114,182,.12)}
+.p2 .persona-icon{background:rgba(59,130,246,.12)}
+.p3 .persona-icon{background:rgba(139,92,246,.12)}
+.p4 .persona-icon{background:rgba(34,197,94,.12)}
+.p5 .persona-icon{background:rgba(245,158,11,.12)}
+
+.persona-meta{flex:1;min-width:200px}
+.persona-label{font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;font-weight:700;margin-bottom:4px}
+.p1 .persona-label{color:#f472b6}.p2 .persona-label{color:#60a5fa}.p3 .persona-label{color:#a78bfa}.p4 .persona-label{color:#4ade80}.p5 .persona-label{color:#fbbf24}
+.persona-name{font-size:1.4rem;font-weight:700;margin-bottom:2px}
+.persona-rev{font-size:.85rem;color:var(--muted)}
+
+.persona-stats{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.ps{padding:4px 12px;border-radius:20px;font-size:.72rem;font-weight:600;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);color:var(--text)}
+
+.persona-body{font-size:.92rem;color:#c4c9d4;margin-bottom:20px}
+.persona-body strong{color:var(--text)}
+
+/* DATA GRID inside persona */
+.data-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:20px}
+@media(max-width:700px){.data-grid{grid-template-columns:1fr}}
+.data-box{background:rgba(0,0,0,.25);border:1px solid var(--border);border-radius:12px;padding:16px}
+.data-box h4{font-size:.72rem;text-transform:uppercase;letter-spacing:.06em;color:var(--dim);margin-bottom:10px;font-weight:600}
+.data-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:.84rem}
+.data-row .dl{color:var(--muted)}.data-row .dv{font-weight:600}
+.highlight-stat{text-align:center;padding:12px}
+.highlight-stat .hv{font-size:1.6rem;font-weight:700}
+.highlight-stat .hl{font-size:.75rem;color:var(--muted);margin-top:2px}
+.p1 .hv{color:#f472b6}.p2 .hv{color:#60a5fa}.p3 .hv{color:#a78bfa}.p4 .hv{color:#4ade80}.p5 .hv{color:#fbbf24}
+
+/* CHANNEL FLOW */
+.channel-tag{display:inline-block;padding:3px 10px;border-radius:6px;font-size:.72rem;font-weight:600;margin:2px 3px}
+.ch-amazon{background:rgba(245,158,11,.12);color:#fbbf24}
+.ch-shopify{background:rgba(34,197,94,.12);color:#4ade80}
+.ch-ks{background:rgba(59,130,246,.12);color:#60a5fa}
+.ch-social{background:rgba(236,72,153,.12);color:#f472b6}
+.ch-email{background:rgba(139,92,246,.12);color:#a78bfa}
+.ch-influencer{background:rgba(245,158,11,.12);color:#fbbf24}
+
+/* KEY INSIGHT */
+.key-insight{background:linear-gradient(135deg,rgba(139,92,246,.08),rgba(236,72,153,.06));border:1px solid rgba(139,92,246,.2);border-radius:16px;padding:32px;margin:48px 0 24px;text-align:center}
+.key-insight h2{font-size:1.3rem;font-weight:700;margin-bottom:12px;background:linear-gradient(90deg,#a78bfa,#f472b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.key-insight p{font-size:.95rem;color:#c4c9d4;max-width:800px;margin:0 auto;line-height:1.7}
+.key-insight strong{color:var(--text)}
+
+/* FLOW DIAGRAM */
+.flow{display:flex;align-items:center;justify-content:center;gap:12px;margin:24px 0;flex-wrap:wrap}
+.flow-box{padding:10px 20px;border-radius:10px;font-size:.82rem;font-weight:600;text-align:center}
+.flow-arrow{color:var(--dim);font-size:1.2rem}
+.fb-gift{background:rgba(244,114,182,.1);border:1px solid rgba(244,114,182,.25);color:#f472b6}
+.fb-puzzle{background:rgba(139,92,246,.1);border:1px solid rgba(139,92,246,.25);color:#a78bfa}
+.fb-fan{background:rgba(34,197,94,.1);border:1px solid rgba(34,197,94,.25);color:#4ade80}
+.fb-key{background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);color:#fbbf24}
+
+footer{text-align:center;padding:40px 0 20px;color:var(--dim);font-size:.78rem;border-top:1px solid var(--border);margin-top:32px}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>Customer Personas</h1>
+  <p class="sub">Five distinct customer segments powering Odd Pieces Puzzles — based on Shopify, Amazon, Kickstarter, Klaviyo, and review data across 98,000+ orders.</p>
+</header>
+
+<!-- REVENUE SPLIT -->
+<div class="revenue-row">
+  <div class="revenue-chart-wrap"><canvas id="revChart"></canvas></div>
+  <div class="revenue-legend">
+    <div class="rev-item"><div class="rev-dot" style="background:#f472b6"></div><strong>60%</strong>&nbsp; The Thoughtful Gift-Giver</div>
+    <div class="rev-item"><div class="rev-dot" style="background:#60a5fa"></div><strong>20%</strong>&nbsp; The Puzzle Enthusiast</div>
+    <div class="rev-item"><div class="rev-dot" style="background:#a78bfa"></div><strong>10%</strong>&nbsp; The Odd Club Loyalist</div>
+    <div class="rev-item"><div class="rev-dot" style="background:#4ade80"></div><strong>8%</strong>&nbsp; The Active Retiree</div>
+    <div class="rev-item"><div class="rev-dot" style="background:#fbbf24"></div><strong>5%</strong>&nbsp; The Content-Driven Discoverer</div>
+  </div>
+</div>
+
+<!-- ========== PERSONA 1 ========== -->
+<div class="persona p1">
+  <div class="persona-header">
+    <div class="persona-icon">🎁</div>
+    <div class="persona-meta">
+      <div class="persona-label">Primary &middot; ~60% of Revenue</div>
+      <div class="persona-name">"The Thoughtful Gift-Giver"</div>
+      <div class="persona-rev">The reason Q4 is 83% of your DTC business</div>
+      <div class="persona-stats">
+        <span class="ps">Female 35–50</span>
+        <span class="ps">Married</span>
+        <span class="ps">$75K–$150K HHI</span>
+        <span class="ps">College-educated</span>
+        <span class="ps">1x buyer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-body">
+    She's shopping for a <strong>specific kind of gift</strong>: something unique, not available at Target, that feels personal and clever. She's buying for her puzzle-loving sister, her hard-to-shop-for father-in-law, or her book club's White Elephant exchange. She finds you through <strong>Amazon search</strong> ("unique puzzle gift") or a targeted ad, buys one Series bundle at $89, and probably never comes back — not because she's unhappy, but because <strong>she was never the puzzler. She was the gifter.</strong> That's why your DTC repeat rate is only 2–4%. She's not your end user; she's your purchasing agent.
+  </div>
+
+  <div class="data-grid">
+    <div class="data-box">
+      <h4>Key Evidence</h4>
+      <div class="data-row"><span class="dl">BESTGIFTEVER10 code</span><span class="dv">2,504 uses</span></div>
+      <div class="data-row"><span class="dl">Q4 share of DTC orders</span><span class="dv">83%</span></div>
+      <div class="data-row"><span class="dl">Amazon female shift</span><span class="dv">37.9% → 41.4%</span></div>
+      <div class="data-row"><span class="dl">DTC repeat rate</span><span class="dv">2–4%</span></div>
+      <div class="data-row"><span class="dl">Typical AOV</span><span class="dv">$89 (bundle)</span></div>
+    </div>
+    <div class="data-box">
+      <h4>Discovery Channels</h4>
+      <div style="margin-bottom:10px">
+        <span class="channel-tag ch-amazon">Amazon Search</span>
+        <span class="channel-tag ch-shopify">Targeted Ads</span>
+        <span class="channel-tag ch-social">Word of Mouth</span>
+      </div>
+      <h4 style="margin-top:14px">Buying Behavior</h4>
+      <div class="data-row"><span class="dl">Products</span><span class="dv">Series bundles</span></div>
+      <div class="data-row"><span class="dl">Timing</span><span class="dv">Nov–Dec (holiday)</span></div>
+      <div class="data-row"><span class="dl">Intent</span><span class="dv">Gift purchase</span></div>
+      <div class="data-row"><span class="dl">Lifetime orders</span><span class="dv">1</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PERSONA 2 ========== -->
+<div class="persona p2">
+  <div class="persona-header">
+    <div class="persona-icon">🧩</div>
+    <div class="persona-meta">
+      <div class="persona-label">Secondary &middot; ~20% of Revenue</div>
+      <div class="persona-name">"The Puzzle Enthusiast & Kickstarter Backer"</div>
+      <div class="persona-rev">Your early adopter — buys for himself, not as a gift</div>
+      <div class="persona-stats">
+        <span class="ps">Male 30–45</span>
+        <span class="ps">Tech-savvy</span>
+        <span class="ps">23% international</span>
+        <span class="ps">KS backer</span>
+        <span class="ps">Multi-item buyer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-body">
+    He's a genuine puzzle fan — not buying a gift, but <strong>buying for himself</strong>. He discovers you on Kickstarter, backs the campaign, buys the full bundle plus add-ons (Storage Kit, Tote Bag, Mini Puzzles), driving that $83–$102 KS AOV. He's significantly more <strong>international</strong> than your DTC buyer — meaningful pockets in the UK, Australia, Germany, the Netherlands, and Singapore. He's <strong>loyal: 17.2% back multiple campaigns</strong>. But only 12.1% ever buy on your Shopify store. He thinks of Odd Pieces as "that Kickstarter puzzle," not as an ongoing DTC brand. The <strong>WANSHOW code</strong> (1,057 uses — Linus Tech Tips' WAN Show) tells you he's in the <strong>tech/gaming content creator audience</strong>, which overlaps heavily with the "smart hobby" puzzle demographic.
+  </div>
+
+  <div class="data-grid">
+    <div class="data-box">
+      <h4>Key Evidence</h4>
+      <div class="data-row"><span class="dl">KS gender (identifiable)</span><span class="dv">22% M vs 18.5% F</span></div>
+      <div class="data-row"><span class="dl">Repeat backer rate</span><span class="dv">17.2%</span></div>
+      <div class="data-row"><span class="dl">KS → DTC crossover</span><span class="dv">12.1%</span></div>
+      <div class="data-row"><span class="dl">KS international share</span><span class="dv">23%</span></div>
+      <div class="data-row"><span class="dl">WANSHOW code uses</span><span class="dv">1,057</span></div>
+    </div>
+    <div class="data-box">
+      <h4>Discovery Channels</h4>
+      <div style="margin-bottom:10px">
+        <span class="channel-tag ch-ks">Kickstarter</span>
+        <span class="channel-tag ch-influencer">Tech YouTubers</span>
+        <span class="channel-tag ch-social">Reddit / Social</span>
+      </div>
+      <h4 style="margin-top:14px">Buying Behavior</h4>
+      <div class="data-row"><span class="dl">Products</span><span class="dv">Bundles + add-ons</span></div>
+      <div class="data-row"><span class="dl">Timing</span><span class="dv">Campaign launches</span></div>
+      <div class="data-row"><span class="dl">Intent</span><span class="dv">Self-purchase (hobby)</span></div>
+      <div class="data-row"><span class="dl">AOV</span><span class="dv">$83–$102</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PERSONA 3 ========== -->
+<div class="persona p3">
+  <div class="persona-header">
+    <div class="persona-icon">💜</div>
+    <div class="persona-meta">
+      <div class="persona-label">Tertiary &middot; ~10% of Revenue</div>
+      <div class="persona-name">"The Odd Club Loyalist"</div>
+      <div class="persona-rev">Your most valuable customer per-capita — worth 3–5x a one-time buyer</div>
+      <div class="persona-stats">
+        <span class="ps">40–60 yrs old</span>
+        <span class="ps">Slightly more female</span>
+        <span class="ps">Married</span>
+        <span class="ps">Repeat buyer</span>
+        <span class="ps">5-star reviewer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-body">
+    This person started as <strong>Persona 1's gift recipient</strong> or <strong>Persona 2</strong>, but they've converted into a true fan. They use the <strong>THEODDCLUB discount code</strong> (7,756 uses — your most-used code by far), buy every new series when it drops, and leave those glowing 5-star reviews (<em>"best puzzle I've ever done," "I'm addicted"</em>). They drive the <strong>sequential series purchasing</strong> you see in market basket data (Snack Attack → SA2 → SA3 at 14–18% combo rates). They've completed multiple puzzles, understand and love the mystery/story format, and they're <strong>genuinely waiting for your next release</strong>. This is their regular leisure activity — the way some people do crosswords, this person does Odd Pieces.
+  </div>
+
+  <div class="data-grid">
+    <div class="data-box">
+      <h4>Key Evidence</h4>
+      <div class="data-row"><span class="dl">THEODDCLUB code</span><span class="dv">7,756 uses</span></div>
+      <div class="data-row"><span class="dl">Klaviyo segment</span><span class="dv">"Loyal Series 1/2"</span></div>
+      <div class="data-row"><span class="dl">SA→SA2→SA3 combo rate</span><span class="dv">14–18%</span></div>
+      <div class="data-row"><span class="dl">DTC repeat rate</span><span class="dv">2–4% (this IS them)</span></div>
+      <div class="data-row"><span class="dl">Review avg rating</span><span class="dv">4.68 / 5.0</span></div>
+    </div>
+    <div class="data-box">
+      <h4>Discovery Channels</h4>
+      <div style="margin-bottom:10px">
+        <span class="channel-tag ch-email">Klaviyo Email</span>
+        <span class="channel-tag ch-shopify">Shopify DTC</span>
+        <span class="channel-tag ch-ks">Converted from KS</span>
+      </div>
+      <h4 style="margin-top:14px">Buying Behavior</h4>
+      <div class="data-row"><span class="dl">Products</span><span class="dv">Every new release</span></div>
+      <div class="data-row"><span class="dl">Timing</span><span class="dv">At launch / pre-order</span></div>
+      <div class="data-row"><span class="dl">Intent</span><span class="dv">Self-purchase (fan)</span></div>
+      <div class="data-row"><span class="dl">Lifetime value</span><span class="dv">3–5x avg customer</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PERSONA 4 ========== -->
+<div class="persona p4">
+  <div class="persona-header">
+    <div class="persona-icon">🌿</div>
+    <div class="persona-meta">
+      <div class="persona-label">Emerging &middot; ~8–10% &amp; Growing Fast</div>
+      <div class="persona-name">"The Active Retiree"</div>
+      <div class="persona-rev">The segment your data is screaming about — and your best bet for non-seasonal revenue</div>
+      <div class="persona-stats">
+        <span class="ps">55–70+ yrs old</span>
+        <span class="ps">$150K+ HHI</span>
+        <span class="ps">Married</span>
+        <span class="ps">Self-purchaser</span>
+        <span class="ps">Year-round buyer</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-body">
+    The 55–64 age group grew <strong>+3.9%</strong> in Q4 2025 and 65+ grew <strong>+2.4%</strong> — together they now represent <strong>26% of your Amazon customer base</strong>, up from 19% in Q1. They skew higher income ($150K+), they're often married (puzzling with their spouse), and they have <strong>time</strong>. They're not buying this as a gift — they're buying it for <strong>Saturday afternoon in the living room</strong>. They discovered you through Amazon recommendations after buying from Magic Puzzle Company or QUOKKA. They don't need a discount code. They buy in <strong>non-Q4 quarters</strong> when gift-buying is low, making them your best segment for building <strong>consistent, non-seasonal revenue</strong>.
+  </div>
+
+  <div class="data-grid">
+    <div class="data-box">
+      <h4>Key Evidence</h4>
+      <div class="data-row"><span class="dl">55+ share of Amazon base</span><span class="dv">26% (was 19%)</span></div>
+      <div class="data-row"><span class="dl">55-64 growth (Q4)</span><span class="dv">+3.9%</span></div>
+      <div class="data-row"><span class="dl">65+ growth (Q4)</span><span class="dv">+2.4%</span></div>
+      <div class="data-row"><span class="dl">Income bracket</span><span class="dv">$150K+</span></div>
+      <div class="data-row"><span class="dl">Market basket overlap</span><span class="dv">Magic Puzzle Co, QUOKKA</span></div>
+    </div>
+    <div class="data-box">
+      <h4>Discovery Channels</h4>
+      <div style="margin-bottom:10px">
+        <span class="channel-tag ch-amazon">Amazon Recs</span>
+        <span class="channel-tag ch-social">Friend Referral</span>
+      </div>
+      <h4 style="margin-top:14px">Buying Behavior</h4>
+      <div class="data-row"><span class="dl">Products</span><span class="dv">Individual puzzles</span></div>
+      <div class="data-row"><span class="dl">Timing</span><span class="dv">Year-round</span></div>
+      <div class="data-row"><span class="dl">Intent</span><span class="dv">Leisure / couples activity</span></div>
+      <div class="data-row"><span class="dl">Price sensitivity</span><span class="dv">Low — full price</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== PERSONA 5 ========== -->
+<div class="persona p5">
+  <div class="persona-header">
+    <div class="persona-icon">📖</div>
+    <div class="persona-meta">
+      <div class="persona-label">Niche &middot; ~5% of Revenue</div>
+      <div class="persona-name">"The Content-Driven Discoverer"</div>
+      <div class="persona-rev">Bought because a creator they trust recommended Odd Pieces</div>
+      <div class="persona-stats">
+        <span class="ps">Female 25–45</span>
+        <span class="ps">"Cozy" aesthetic</span>
+        <span class="ps">Book reader</span>
+        <span class="ps">Mystery fan</span>
+        <span class="ps">Influencer-driven</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="persona-body">
+    The discount code data maps your <strong>influencer ecosystem</strong>: WANSHOW (1,057), SOPHIE10 (130), READWITHSTEPH10 (75), UNBOXED (254), PLAYPUZZLES10 (148). The <strong>reading/book crossover</strong> is particularly interesting — market basket data shows books purchased alongside puzzles (<em>"Two Twisted Crowns," "Murdle," "Murder Most Puzzling"</em>). This suggests a <strong>cozy mystery / puzzle book reader</strong> audience that aligns perfectly with your storytelling format. She's into candles, rainy day vibes, mystery novels. She buys once from the influencer link, and <strong>whether she becomes a Persona 3 loyalist depends on her first puzzle experience</strong>.
+  </div>
+
+  <div class="data-grid">
+    <div class="data-box">
+      <h4>Influencer Ecosystem (Discount Codes)</h4>
+      <div class="data-row"><span class="dl">WANSHOW (Linus Tech Tips)</span><span class="dv">1,057 uses</span></div>
+      <div class="data-row"><span class="dl">UNBOXED</span><span class="dv">254 uses</span></div>
+      <div class="data-row"><span class="dl">PLAYPUZZLES10</span><span class="dv">148 uses</span></div>
+      <div class="data-row"><span class="dl">SOPHIE10</span><span class="dv">130 uses</span></div>
+      <div class="data-row"><span class="dl">READWITHSTEPH10</span><span class="dv">75 uses</span></div>
+    </div>
+    <div class="data-box">
+      <h4>Discovery Channels</h4>
+      <div style="margin-bottom:10px">
+        <span class="channel-tag ch-influencer">YouTube</span>
+        <span class="channel-tag ch-social">Bookstagram</span>
+        <span class="channel-tag ch-social">TikTok / Podcasts</span>
+      </div>
+      <h4 style="margin-top:14px">Market Basket Books</h4>
+      <div class="data-row"><span class="dl">Two Twisted Crowns</span><span class="dv">Fantasy</span></div>
+      <div class="data-row"><span class="dl">Murdle</span><span class="dv">Puzzle book</span></div>
+      <div class="data-row"><span class="dl">Murder Most Puzzling</span><span class="dv">Mystery</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== KEY INSIGHT ========== -->
+<div class="key-insight">
+  <h2>The Gifter / Receiver Split</h2>
+  <p>The big strategic takeaway across all personas: your business has a <strong>gifter/receiver split problem</strong>. The person buying is often not the person puzzling. That's why repeat rates are low — the actual end user never created an account, never got on your email list, and doesn't know THEODDCLUB exists.</p>
+  <div class="flow" style="margin-top:24px">
+    <div class="flow-box fb-gift">Persona 1<br><small>buys gift</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box fb-puzzle">Gift Recipient<br><small>does puzzle</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box fb-key">Answer Key<br><small>submits online</small></div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-box fb-fan">Persona 3<br><small>becomes loyalist</small></div>
+  </div>
+  <p style="margin-top:20px">Your <strong>Answer Key submission flow</strong> in Klaviyo (the "answer key - gift recipient" segment) is your best tool for bridging this gap. It's the moment the <em>actual puzzler</em> identifies themselves to you. That's the conversion point to nurture Persona 1's gift recipient into Persona 3's loyalist.</p>
+</div>
+
+<footer>
+  <p>Odd Pieces Puzzles &bull; Customer Personas &bull; Based on 98K+ Shopify orders, Amazon Brand Analytics, Klaviyo, and 1,966 reviews &bull; April 2026</p>
+</footer>
+
+</div>
+
+<script>
+Chart.defaults.color='#8891a5';Chart.defaults.borderColor='#1e2133';
+new Chart(document.getElementById('revChart'),{
+  type:'doughnut',
+  data:{
+    labels:['Gift-Giver (60%)','Enthusiast (20%)','Loyalist (10%)','Retiree (8%)','Content (5%)'],
+    datasets:[{data:[60,20,10,8,5],backgroundColor:['#f472b6','#60a5fa','#a78bfa','#4ade80','#fbbf24'],borderWidth:0,hoverOffset:8}]
+  },
+  options:{
+    responsive:true,maintainAspectRatio:true,
+    cutout:'62%',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>ctx.label}}}
+  }
+});
+</script>
+</body>
+</html>

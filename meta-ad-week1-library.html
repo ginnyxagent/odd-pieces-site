@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Meta Ad Week 1 Concept Library</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --line: #E7DECD;
+    --muted: #6B665D;
+    --green: #1A5F4A;
+    --soft-blue: #E8F7FB;
+    --soft-green: #E4F4E6;
+    --soft-pink: #FFF0EC;
+    --soft-yellow: #FFF7D8;
+    --soft-purple: #F0E9FF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.55;
+  }
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(26,26,26,0.96);
+    padding: 14px 18px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  nav a {
+    display: inline-block;
+    margin-right: 16px;
+    color: rgba(255,255,255,0.74);
+    text-decoration: none;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    font-weight: 900;
+  }
+  nav a:hover { color: white; }
+  .wrap, .hero-inner, .footer-inner { max-width: 1240px; margin: 0 auto; }
+  .hero {
+    background: linear-gradient(135deg, var(--yellow) 0%, #ffe866 25%, var(--blue) 68%, #dff7fb 100%);
+    padding: 62px 20px 42px;
+  }
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  h1, h2, h3 {
+    font-family: 'Nunito', sans-serif;
+    letter-spacing: -0.03em;
+    line-height: 1.03;
+  }
+  h1 {
+    font-size: clamp(2.4rem, 7vw, 5rem);
+    text-transform: uppercase;
+    max-width: 1020px;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    max-width: 820px;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: rgba(26,26,26,0.82);
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 24px;
+  }
+  .stat {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 8px 0 rgba(26,26,26,0.06);
+  }
+  .stat .k {
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-bottom: 8px;
+  }
+  .stat .v {
+    font-family: 'Nunito', sans-serif;
+    font-size: 2rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+  .stat .d { color: var(--muted); font-size: 0.9rem; }
+  .section { padding: 54px 20px; }
+  .section-head { margin-bottom: 20px; max-width: 860px; }
+  .section-head h2 { font-size: clamp(2rem, 5vw, 3rem); text-transform: uppercase; margin-bottom: 10px; }
+  .section-head p { color: var(--muted); }
+  .panel, .table-wrap {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    box-shadow: 0 8px 0 rgba(26,26,26,0.06);
+  }
+  .panel { padding: 20px; }
+  .grid-2, .grid-3 { display: grid; gap: 18px; }
+  .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .pill {
+    display: inline-block;
+    padding: 7px 10px;
+    border-radius: 999px;
+    border: 2px solid var(--ink);
+    background: var(--yellow);
+    font-family: 'Nunito', sans-serif;
+    font-size: 11px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 10px;
+  }
+  .pill.blue { background: var(--blue); }
+  .pill.green { background: #DDF2D8; }
+  .pill.pink { background: #FFD8CF; }
+  .pill.purple { background: #EDE2FF; }
+  .list {
+    list-style: none;
+    display: grid;
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .list li {
+    position: relative;
+    padding-left: 18px;
+    font-size: 0.94rem;
+  }
+  .list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-weight: 900;
+    color: var(--red-orange);
+  }
+  .table-wrap { overflow-x: auto; }
+  table {
+    width: 100%;
+    min-width: 1080px;
+    border-collapse: collapse;
+  }
+  th, td {
+    padding: 14px 16px;
+    text-align: left;
+    vertical-align: top;
+    border-bottom: 1px solid var(--line);
+    font-size: 0.92rem;
+  }
+  th {
+    background: var(--cream);
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  tr:last-child td { border-bottom: none; }
+  .tag {
+    display: inline-flex;
+    align-items: center;
+    border-radius: 999px;
+    padding: 5px 8px;
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-right: 6px;
+    margin-bottom: 6px;
+  }
+  .tag.cold { background: var(--soft-blue); color: #125C73; }
+  .tag.warm { background: var(--soft-green); color: var(--green); }
+  .tag.hot { background: var(--soft-pink); color: #A13217; }
+  .tag.ugc { background: var(--soft-yellow); color: #7A4F00; }
+  .tag.cgc { background: var(--soft-purple); color: #5C39A8; }
+  .footer { background: var(--ink); color: rgba(255,255,255,0.72); margin-top: 20px; }
+  .footer-inner { padding: 28px 20px 40px; font-size: 0.85rem; }
+  @media (max-width: 980px) {
+    .stats, .grid-2, .grid-3 { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<nav>
+  <a href="#overview">Overview</a>
+  <a href="#cold">Cold 30</a>
+  <a href="#warm">Warm 12</a>
+  <a href="#hot">Hot 8</a>
+  <a href="#assignment">Assignment Logic</a>
+</nav>
+
+<header class="hero" id="overview">
+  <div class="hero-inner">
+    <div class="eyebrow">Odd Pieces · Week 1</div>
+    <h1>Meta Ad Concept Library</h1>
+    <p class="hero-sub">This is the first 50-concept batch the PM can assign. Each concept is already mapped to audience stage, angle, format, hook, and likely owner.</p>
+
+    <div class="stats">
+      <div class="stat"><div class="k">Total</div><div class="v">50</div><div class="d">concepts</div></div>
+      <div class="stat"><div class="k">Cold</div><div class="v">30</div><div class="d">curiosity + difference</div></div>
+      <div class="stat"><div class="k">Warm</div><div class="v">12</div><div class="d">explain + reassure</div></div>
+      <div class="stat"><div class="k">Hot</div><div class="v">8</div><div class="d">nudge + close</div></div>
+      <div class="stat"><div class="k">UGC / CGC / Design / Edit</div><div class="v">10 / 8 / 20 / 12</div><div class="d">starting mix</div></div>
+    </div>
+  </div>
+</header>
+
+<section class="section" id="assignment">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">How to use this</div>
+      <h2>Assignment logic for the PM</h2>
+      <p>The PM should not invent the batch. Pull from this library, assign by format, and move each concept into briefing.</p>
+    </div>
+
+    <div class="grid-3">
+      <div class="panel">
+        <div class="pill">UGC</div>
+        <h3>Use when you want message control</h3>
+        <ul class="list">
+          <li>Clear hook</li>
+          <li>Specific talking points</li>
+          <li>Better angle testing</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill green">CGC</div>
+        <h3>Use when you want discovery energy</h3>
+        <ul class="list">
+          <li>Feels more human</li>
+          <li>Better for gifting and skeptical-friend angles</li>
+          <li>Less polished, more believable</li>
+        </ul>
+      </div>
+      <div class="panel">
+        <div class="pill orange">Design / Edit</div>
+        <h3>Use when you need speed and repeatability</h3>
+        <ul class="list">
+          <li>Statics for fast testing</li>
+          <li>Carousels for explanation</li>
+          <li>Edits for using existing footage</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="cold">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Cold audience</div>
+      <h2>30 concepts</h2>
+      <p>Job: stop the scroll, explain the difference fast, create curiosity.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Stage</th>
+            <th>Format</th>
+            <th>Angle</th>
+            <th>Hook</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>C01</td><td><span class="tag cold">Cold</span></td><td><span class="tag ugc">UGC</span></td><td>Twist / reveal</td><td>This is not a normal puzzle.</td><td>Creator</td></tr>
+          <tr><td>C02</td><td><span class="tag cold">Cold</span></td><td><span class="tag ugc">UGC</span></td><td>Before / aftermath</td><td>The box is the before. The puzzle is what happens next.</td><td>Creator</td></tr>
+          <tr><td>C03</td><td><span class="tag cold">Cold</span></td><td><span class="tag ugc">UGC</span></td><td>Envelope</td><td>This puzzle has a secret ending in the box.</td><td>Creator</td></tr>
+          <tr><td>C04</td><td><span class="tag cold">Cold</span></td><td><span class="tag ugc">UGC</span></td><td>Gift</td><td>This is the gift you buy when someone already has everything.</td><td>Creator</td></tr>
+          <tr><td>C05</td><td><span class="tag cold">Cold</span></td><td><span class="tag ugc">UGC</span></td><td>Not ordinary</td><td>If normal puzzles bore you, start here.</td><td>Creator</td></tr>
+          <tr><td>C06</td><td><span class="tag cold">Cold</span></td><td><span class="tag cgc">CGC</span></td><td>Discovery</td><td>Okay wait, why does this puzzle have a secret ending?</td><td>Creator</td></tr>
+          <tr><td>C07</td><td><span class="tag cold">Cold</span></td><td><span class="tag cgc">CGC</span></td><td>Gift</td><td>This is the weirdest good gift I’ve found in a while.</td><td>Creator</td></tr>
+          <tr><td>C08</td><td><span class="tag cold">Cold</span></td><td><span class="tag cgc">CGC</span></td><td>Skeptical friend</td><td>I thought this was just a nice puzzle and I was wrong.</td><td>Creator</td></tr>
+          <tr><td>C09</td><td><span class="tag cold">Cold</span></td><td><span class="tag cgc">CGC</span></td><td>Date night</td><td>This is actually such a good thing to do together.</td><td>Creator</td></tr>
+          <tr><td>C10</td><td><span class="tag cold">Cold</span></td><td><span class="tag cgc">CGC</span></td><td>Puzzle lover</td><td>This is the first puzzle I’ve seen with a plot twist.</td><td>Creator</td></tr>
+          <tr><td>C11</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Twist</td><td>Not your ordinary puzzle.</td><td>Designer</td></tr>
+          <tr><td>C12</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Before / aftermath</td><td>The box is the before.</td><td>Designer</td></tr>
+          <tr><td>C13</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Envelope</td><td>There is a secret ending in here.</td><td>Designer</td></tr>
+          <tr><td>C14</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Gift</td><td>The gift people talk about after everyone goes home.</td><td>Designer</td></tr>
+          <tr><td>C15</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Not ordinary</td><td>1000 pieces. Zero context. Good luck.</td><td>Designer</td></tr>
+          <tr><td>C16</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Reaction</td><td>The moment someone yells “WAIT, WHAT?!” is the whole point.</td><td>Designer</td></tr>
+          <tr><td>C17</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Discovery</td><td>You think you know what’s happening. You don’t.</td><td>Designer</td></tr>
+          <tr><td>C18</td><td><span class="tag cold">Cold</span></td><td>Static</td><td>Gift</td><td>Not another boring gift.</td><td>Designer</td></tr>
+          <tr><td>C19</td><td><span class="tag cold">Cold</span></td><td>Edited Video</td><td>Twist</td><td>This is not a normal puzzle.</td><td>Editor</td></tr>
+          <tr><td>C20</td><td><span class="tag cold">Cold</span></td><td>Edited Video</td><td>Before / aftermath</td><td>The box is the before. The puzzle is 15 seconds later.</td><td>Editor</td></tr>
+          <tr><td>C21</td><td><span class="tag cold">Cold</span></td><td>Edited Video</td><td>Envelope</td><td>Then there’s the secret ending.</td><td>Editor</td></tr>
+          <tr><td>C22</td><td><span class="tag cold">Cold</span></td><td>Edited Video</td><td>Gift</td><td>The least boring gift on the internet.</td><td>Editor</td></tr>
+          <tr><td>C23</td><td><span class="tag cold">Cold</span></td><td>Edited Video</td><td>Reaction</td><td>This is the kind of puzzle that makes people yell across the table.</td><td>Editor</td></tr>
+          <tr><td>C24</td><td><span class="tag cold">Cold</span></td><td>Founder Video</td><td>Not ordinary</td><td>If you think this is a normal puzzle, that’s the first mistake.</td><td>Founder</td></tr>
+          <tr><td>C25</td><td><span class="tag cold">Cold</span></td><td>Founder Video</td><td>Before / aftermath</td><td>The box is one scene. The puzzle is 15 seconds later.</td><td>Founder</td></tr>
+          <tr><td>C26</td><td><span class="tag cold">Cold</span></td><td>Founder Video</td><td>Envelope</td><td>There is a sealed ending in the box for a reason.</td><td>Founder</td></tr>
+          <tr><td>C27</td><td><span class="tag cold">Cold</span></td><td>Carousel</td><td>Mechanic explainer</td><td>How Odd Pieces works</td><td>Designer</td></tr>
+          <tr><td>C28</td><td><span class="tag cold">Cold</span></td><td>Carousel</td><td>Gift</td><td>Why this makes a strong gift</td><td>Designer</td></tr>
+          <tr><td>C29</td><td><span class="tag cold">Cold</span></td><td>Carousel</td><td>Reaction</td><td>Why people react so hard to this puzzle</td><td>Designer</td></tr>
+          <tr><td>C30</td><td><span class="tag cold">Cold</span></td><td>Carousel</td><td>Discovery</td><td>You weren’t supposed to find this many details</td><td>Designer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="warm">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Warm audience</div>
+      <h2>12 concepts</h2>
+      <p>Job: explain, reassure, answer why this is worth buying.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Stage</th>
+            <th>Format</th>
+            <th>Angle</th>
+            <th>Hook</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>W01</td><td><span class="tag warm">Warm</span></td><td>Carousel</td><td>Mechanic</td><td>The box is the before. The puzzle is 15 seconds later.</td><td>Designer</td></tr>
+          <tr><td>W02</td><td><span class="tag warm">Warm</span></td><td>Static</td><td>Envelope</td><td>There’s a reason we tell you not to open it early.</td><td>Designer</td></tr>
+          <tr><td>W03</td><td><span class="tag warm">Warm</span></td><td>Edited Video</td><td>Mechanic</td><td>Here’s why this is different from a normal puzzle.</td><td>Editor</td></tr>
+          <tr><td>W04</td><td><span class="tag warm">Warm</span></td><td>Founder Video</td><td>Mechanic</td><td>This isn’t just a pretty image. It’s the reveal that matters.</td><td>Founder</td></tr>
+          <tr><td>W05</td><td><span class="tag warm">Warm</span></td><td><span class="tag ugc">UGC</span></td><td>Puzzle lover</td><td>If you already like puzzles, this is why this one stands out.</td><td>Creator</td></tr>
+          <tr><td>W06</td><td><span class="tag warm">Warm</span></td><td><span class="tag cgc">CGC</span></td><td>Skeptical friend</td><td>I didn’t expect the envelope part to matter this much.</td><td>Creator</td></tr>
+          <tr><td>W07</td><td><span class="tag warm">Warm</span></td><td>Static</td><td>Worth it</td><td>This is not just puzzle time. It’s reveal time.</td><td>Designer</td></tr>
+          <tr><td>W08</td><td><span class="tag warm">Warm</span></td><td>Carousel</td><td>Gift</td><td>Why this is a better gift than another generic thing</td><td>Designer</td></tr>
+          <tr><td>W09</td><td><span class="tag warm">Warm</span></td><td>Edited Video</td><td>Social proof</td><td>People do not react to this like a normal puzzle.</td><td>Editor</td></tr>
+          <tr><td>W10</td><td><span class="tag warm">Warm</span></td><td>Static</td><td>Objection</td><td>Not into puzzles? That might actually be why this works.</td><td>Designer</td></tr>
+          <tr><td>W11</td><td><span class="tag warm">Warm</span></td><td><span class="tag ugc">UGC</span></td><td>Date night</td><td>This is fun because you’re not just building, you’re figuring something out.</td><td>Creator</td></tr>
+          <tr><td>W12</td><td><span class="tag warm">Warm</span></td><td>Founder Video</td><td>Gift</td><td>The gift that surprises everyone, even the person who has everything.</td><td>Founder</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="hot">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">Hot audience</div>
+      <h2>8 concepts</h2>
+      <p>Job: remind, simplify the decision, and close.</p>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>Stage</th>
+            <th>Format</th>
+            <th>Angle</th>
+            <th>Hook</th>
+            <th>Owner</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>H01</td><td><span class="tag hot">Hot</span></td><td>Static</td><td>Reminder</td><td>Still thinking about it?</td><td>Designer</td></tr>
+          <tr><td>H02</td><td><span class="tag hot">Hot</span></td><td>Static</td><td>Close</td><td>Get the weirdly good one.</td><td>Designer</td></tr>
+          <tr><td>H03</td><td><span class="tag hot">Hot</span></td><td>Edited Video</td><td>Reminder</td><td>You already know this is not a normal puzzle.</td><td>Editor</td></tr>
+          <tr><td>H04</td><td><span class="tag hot">Hot</span></td><td>Founder Video</td><td>Close</td><td>If you’ve been thinking about it, this is your sign.</td><td>Founder</td></tr>
+          <tr><td>H05</td><td><span class="tag hot">Hot</span></td><td><span class="tag cgc">CGC</span></td><td>Gift nudge</td><td>If you’re still deciding, this really is a solid gift.</td><td>Creator</td></tr>
+          <tr><td>H06</td><td><span class="tag hot">Hot</span></td><td><span class="tag ugc">UGC</span></td><td>Close</td><td>If you like puzzles, you’re going to want the one with the twist.</td><td>Creator</td></tr>
+          <tr><td>H07</td><td><span class="tag hot">Hot</span></td><td>Static</td><td>Date night</td><td>Your next puzzle night is right here.</td><td>Designer</td></tr>
+          <tr><td>H08</td><td><span class="tag hot">Hot</span></td><td>Carousel</td><td>Close</td><td>Quick refresher, why people love Odd Pieces</td><td>Designer</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">Odd Pieces internal use only · Meta Ad Week 1 Concept Library</div>
+</footer>
+</body>
+</html>
