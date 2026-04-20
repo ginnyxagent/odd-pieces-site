@@ -3,331 +3,321 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Odd Pieces — Perspective Puzzles Brief</title>
+<title>Odd Pieces — Perspective Puzzles Product Brief</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap');
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+    --line: rgba(26,26,26,0.12);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: #FFFBF0;
-    color: #1A1A1A;
-    min-height: 100vh;
-    padding: 0;
+    background: linear-gradient(180deg, var(--cream) 0%, #fffef7 100%);
+    color: var(--ink);
+    line-height: 1.65;
   }
-
-  @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
 
   .page {
-    max-width: 700px;
+    max-width: 820px;
     margin: 0 auto;
-    padding: 72px 24px 80px;
+    padding: 64px 24px 88px;
   }
 
-  /* ── HEADER ── */
-  .header {
-    margin-bottom: 40px;
-  }
-
-  .brand-mark {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-  }
-
-  .brand-dot {
-    width: 8px;
-    height: 8px;
-    background: #F5C842;
-    border-radius: 50%;
-    flex-shrink: 0;
-  }
-
-  .brand-name {
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: #F5C842;
-  }
-
-  h1 {
-    font-size: 2rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 900;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    line-height: 1.1;
-    margin-bottom: 12px;
-    text-transform: uppercase;
-  }
-
-  h2 {
-    font-size: 1.4rem;
-    font-family: 'Nunito', sans-serif;
-    font-weight: 800;
-    color: var(--ink);
-    text-transform: uppercase;
-    margin-top: 40px;
-    margin-bottom: 20px;
-    letter-spacing: -0.01em;
-  }
-
-  .tagline {
-    font-size: 1rem;
-    color: #aaa;
-    font-style: italic;
-    margin-bottom: 20px;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    border: none;
-    border-top: 1px solid #111120;
-    margin: 24px 0;
-  }
-
-  /* ── CONTENT ── */
-  .content {
-    line-height: 1.7;
-    font-size: 0.95rem;
-  }
-
-  .content p {
-    margin-bottom: 16px;
-    color: #ddd;
-  }
-
-  .content ul {
-    margin-left: 20px;
-    margin-bottom: 16px;
-    color: #ddd;
-  }
-
-  .content li {
-    margin-bottom: 8px;
-  }
-
-  /* ── TABLE ── */
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 20px 0;
-    font-size: 0.9rem;
-  }
-
-  th {
-    border-bottom: 2px solid #222236;
-    padding: 12px 8px;
-    text-align: left;
-    color: #aaa;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    font-size: 0.75rem;
-  }
-
-  td {
-    border-bottom: 1px solid #111120;
-    padding: 12px 8px;
-    color: #ddd;
-  }
-
-  tr:last-child td {
-    border-bottom: none;
-  }
-
-  /* ── SECTION CARDS ── */
-  .section-card {
-    background: #F5F5F5;
-    border: 2px solid var(--ink);
-    border-radius: 12px;
-    padding: 24px;
-    margin: 24px 0;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-  }
-
-  .section-card h3 {
-    font-size: 0.95rem;
-    font-family: 'Nunito', sans-serif;
-    color: var(--orange);
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: 12px;
-    font-weight: 700;
-  }
-
-  .section-card p {
-    margin: 0;
-    font-size: 0.95rem;
-    color: #555;
-    line-height: 1.6;
-  }
-
-  .section-card .divider {
-    margin: 12px 0;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    margin-top: 56px;
-    font-size: 0.72rem;
-    color: #282836;
-  }
-
-  /* ── BACK LINK ── */
   .back {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
     text-decoration: none;
-    color: #F5C842;
-    font-size: 0.9rem;
+    color: var(--orange);
+    font-size: 0.92rem;
+    font-weight: 600;
+  }
+
+  .eyebrow {
+    display: inline-block;
+    padding: 8px 14px;
+    border: 2px solid var(--ink);
+    border-radius: 999px;
+    background: var(--yellow);
+    font-size: 0.72rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 16px;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Nunito', sans-serif;
+    color: var(--ink);
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  h1 {
+    font-size: clamp(2.4rem, 6vw, 4.4rem);
+    margin-bottom: 12px;
+  }
+
+  .subhead {
+    font-size: 1.05rem;
+    max-width: 54rem;
+    color: rgba(26,26,26,0.75);
+    margin-bottom: 32px;
+  }
+
+  .hero-card {
+    background: linear-gradient(135deg, rgba(254,224,0,0.18), rgba(193,227,232,0.22));
+    border: 2px solid var(--ink);
+    border-radius: 20px;
+    padding: 24px;
+    margin-bottom: 36px;
+  }
+
+  .hero-card p {
+    font-size: 1.04rem;
     font-weight: 500;
   }
 
-  .back:hover {
-    color: #ffd966;
+  .section {
+    margin-top: 42px;
   }
 
-  /* ─── BRIGHTNESS OVERRIDE ─── */
-  h1 { color: #1A1A1A !important; }
-  h2 { color: #1A1A1A !important; }
-  .content p { color: #555 !important; }
-  .content ul { color: #555 !important; }
-  .content li { color: #555 !important; }
-  .tagline { color: #888 !important; }
-  th { color: #1A1A1A !important; border-bottom: 2px solid #DDD !important; }
-  td { color: #555 !important; border-bottom: 1px solid #DDD !important; }
-  .section-card { background: #F5F5F5 !important; border: 1px solid #DDD !important; }
-  .section-card h3 { color: #FC9C1C !important; }
-  .section-card p { color: #555 !important; }
-  .divider { border-top: 1px solid #DDD !important; }
-  .footer { color: #999 !important; }
-  .back { color: #FC9C1C !important; }
+  .section h2 {
+    font-size: 1.45rem;
+    margin-bottom: 16px;
+  }
+
+  .section p + p {
+    margin-top: 12px;
+  }
+
+  .cards {
+    display: grid;
+    gap: 16px;
+    margin-top: 18px;
+  }
+
+  .card {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 18px;
+    padding: 20px;
+  }
+
+  .card h3 {
+    font-size: 1rem;
+    margin-bottom: 10px;
+    color: var(--orange);
+  }
+
+  .quote {
+    margin-top: 18px;
+    padding: 18px 20px;
+    border-left: 4px solid var(--red-orange);
+    background: rgba(255,64,22,0.05);
+    font-weight: 600;
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  li + li {
+    margin-top: 8px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 18px;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  th, td {
+    padding: 14px 12px;
+    text-align: left;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+
+  th {
+    background: rgba(193,227,232,0.35);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  .footer {
+    margin-top: 56px;
+    font-size: 0.76rem;
+    color: rgba(26,26,26,0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
 </style>
 </head>
 <body>
 <div class="page">
-
   <a href="index.html" class="back">← Back to Hub</a>
 
-  <div class="header">
-    <div class="brand-mark">
-      <div class="brand-dot"></div>
-      <span class="brand-name">Odd Pieces</span>
-    </div>
-    <h1>Perspective Puzzles</h1>
-    <p class="tagline">Product Brief</p>
+  <span class="eyebrow">Odd Pieces · Product Brief</span>
+  <h1>Perspective Puzzles</h1>
+  <p class="subhead">This brief explains the product clearly enough that a new teammate, agency, freelancer, AI system, or collaborator can understand what Perspective Puzzles are, why they exist, and how they differ from the rest of Odd Pieces.</p>
+
+  <div class="hero-card">
+    <p><strong>Short version:</strong> Perspective Puzzles are 500-piece art puzzles built around one intentional visual difference between the box image and the completed puzzle image. That one change carries the artist’s message. This is not a mystery puzzle, not a surprise reveal, and not a gimmick. It is a perspective delivered through a puzzle.</p>
   </div>
 
-  <hr class="divider">
+  <div class="section">
+    <h2>What the product is</h2>
+    <p>Perspective Puzzles are a new Odd Pieces product line designed around <strong>meaning, art, and one deliberate shift in perspective</strong>.</p>
+    <p>Each puzzle begins with a complete artwork shown on the box. When the customer builds the puzzle, they assemble the <strong>same artwork with one intentional difference</strong>. That difference is not random. It is the point. It carries the artist’s perspective, emotional message, or idea.</p>
+    <div class="quote">Not a mystery. Not a game. A perspective, delivered through a puzzle.</div>
+  </div>
 
-  <div class="content">
-
-    <h2>Product Name</h2>
-    <p><strong>Odd Pieces Perspective Puzzles</strong></p>
-
-    <h2>Tagline</h2>
-    <p><em>"A puzzle that changes how you see it."</em></p>
-
-    <h2>What It Is</h2>
-    <p>A 500-piece puzzle built around one deliberate change — a change that makes you think.</p>
-    <p>Each Perspective Puzzle features a complete illustration with one intentional visual difference. That difference carries the artist's message — something they wanted you to feel, question, or see differently.</p>
-    <p>It's not just art. It's a perspective delivered through a puzzle.</p>
-
-    <h2>The Format</h2>
-    
-    <div class="section-card">
-      <h3>Box Image (Before)</h3>
-      <p>The complete illustration as it first appears. A finished, display-worthy image on its own.</p>
+  <div class="section">
+    <h2>How it works</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Box image (before)</h3>
+        <p>The box shows the original image as it first appears. It should already feel complete, beautiful, and display-worthy.</p>
+      </div>
+      <div class="card">
+        <h3>Puzzle image (after)</h3>
+        <p>The completed puzzle reveals the same image with one intentional visual change. That one change reframes the whole piece.</p>
+      </div>
+      <div class="card">
+        <h3>Artist’s note</h3>
+        <p>Each puzzle includes a short note from the artist that is meant to be read <strong>before</strong> building. It provides the lens, intention, or emotional context behind the work.</p>
+      </div>
     </div>
+  </div>
 
-    <div class="section-card">
-      <h3>Puzzle Image (After)</h3>
-      <p>The same illustration with one intentional change — the detail that carries the artist's meaning.</p>
-    </div>
-
-    <div class="section-card">
-      <h3>Artist's Note</h3>
-      <p>A short message from the artist read before building. Explains the idea, the intention, and the change. Not a story. A perspective.</p>
-    </div>
-
-    <h2>The Experience</h2>
-    <p>Completable in a single sitting. Meaningful when finished. Worth framing when done.</p>
-
-    <h2>Who It's For</h2>
+  <div class="section">
+    <h2>Core experience</h2>
+    <p>The product is meant to feel thoughtful, finishable, and meaningful.</p>
     <ul>
-      <li>Adults 30–45</li>
-      <li>Art lovers and thoughtful gift buyers</li>
-      <li>Existing Odd Pieces fans ready for something different</li>
-      <li>New puzzlers looking for more than just a puzzle</li>
+      <li><strong>500 pieces</strong>, so it can usually be completed in one sitting</li>
+      <li><strong>Art-first</strong>, not mechanics-first</li>
+      <li><strong>Reflective payoff</strong>, not a shock payoff</li>
+      <li><strong>Display-worthy outcome</strong>, not just a completed pastime</li>
     </ul>
+    <p>The emotional payoff is not “wait, what?” It is closer to: <strong>“Oh. I see it differently now.”</strong></p>
+  </div>
 
-    <h2>How It's Different From Our 1000-Piece Mystery Puzzles</h2>
-    
+  <div class="section">
+    <h2>What makes it different</h2>
     <table>
       <thead>
         <tr>
-          <th>—</th>
-          <th>Mystery Puzzle</th>
-          <th>Perspective Puzzle</th>
+          <th>Category</th>
+          <th>Odd Pieces Mystery Puzzles</th>
+          <th>Perspective Puzzles</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Pieces</strong></td>
+          <td><strong>Piece count</strong></td>
           <td>1000</td>
           <td>500</td>
         </tr>
         <tr>
-          <td><strong>Experience</strong></td>
-          <td>Discover as you build</td>
-          <td>Understand as you build</td>
-        </tr>
-        <tr>
-          <td><strong>Image</strong></td>
-          <td>Hidden until the end</td>
-          <td>Known from the start</td>
-        </tr>
-        <tr>
-          <td><strong>Core Feeling</strong></td>
+          <td><strong>Main feeling</strong></td>
           <td>Suspense → Surprise</td>
           <td>Intention → Meaning</td>
         </tr>
         <tr>
-          <td><strong>Time</strong></td>
+          <td><strong>Main hook</strong></td>
+          <td>What happens next / hidden reveal</td>
+          <td>How one change reframes the image</td>
+        </tr>
+        <tr>
+          <td><strong>Experience style</strong></td>
+          <td>Playful, twist-driven, discovery-led</td>
+          <td>Reflective, art-forward, perspective-led</td>
+        </tr>
+        <tr>
+          <td><strong>Time commitment</strong></td>
           <td>Multi-session</td>
           <td>Single sitting</td>
         </tr>
         <tr>
-          <td><strong>The Reward</strong></td>
+          <td><strong>Reward</strong></td>
           <td>The reveal</td>
           <td>The connection</td>
         </tr>
       </tbody>
     </table>
+  </div>
 
-    <h2>Positioning</h2>
-    <p><strong>Not a mystery. Not a game.</strong></p>
-    <p><em>A perspective — delivered through a puzzle.</em></p>
-
-    <h2>Product Specs</h2>
+  <div class="section">
+    <h2>What Perspective Puzzles are not</h2>
     <ul>
-      <li>500 pieces</li>
-      <li>Includes artist's note card</li>
-      <li>Box image differs from puzzle image</li>
-      <li>Display-worthy finish</li>
-      <li>Completable in one sitting</li>
+      <li>Not a mystery product</li>
+      <li>Not a secret-ending product</li>
+      <li>Not a “gotcha” reveal</li>
+      <li>Not gimmicky</li>
+      <li>Not driven by chaos, jokes, or surprise-first energy</li>
+      <li>Not a watered-down version of the 1000-piece product line</li>
     </ul>
+  </div>
 
+  <div class="section">
+    <h2>What they should feel like</h2>
+    <p>Perspective Puzzles should feel:</p>
+    <ul>
+      <li>Beautiful</li>
+      <li>Deep</li>
+      <li>Intentional</li>
+      <li>Quietly epic</li>
+      <li>Premium</li>
+      <li>Thoughtful</li>
+      <li>Frame-worthy</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Who they are for</h2>
+    <ul>
+      <li>Adults roughly <strong>30 to 45</strong></li>
+      <li>Art lovers</li>
+      <li>Thoughtful gift buyers</li>
+      <li>Design-conscious customers</li>
+      <li>Existing Odd Pieces fans who want something more reflective</li>
+      <li>New puzzlers who want more than “just a puzzle”</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>Why this product matters</h2>
+    <p>Perspective Puzzles give Odd Pieces a second product lane that is not dependent on twist-based storytelling. They expand the brand into a more art-forward, premium, giftable category without copying traditional art puzzles or diluting the mystery line.</p>
+    <p>The moat is not cardboard. The moat is <strong>original artwork + one intentional change + artist meaning</strong>.</p>
+  </div>
+
+  <div class="section">
+    <h2>Simple prompt summary for new people or AI</h2>
+    <div class="card">
+      <p>Perspective Puzzles is a new Odd Pieces product line. Each product is a 500-piece art puzzle built around one intentional visual difference between the box image and the completed puzzle image. That one change carries the artist’s message or perspective. The product is not a mystery puzzle, not a surprise reveal, and not gimmicky. It is sophisticated, art-forward, contemplative, finishable in one sitting, and designed to feel meaningful and display-worthy. Each puzzle includes an artist’s note that is read before building. The emotional payoff is not shock, but recognition: “Oh, I see it differently now.”</p>
+    </div>
   </div>
 
   <div class="footer">Odd Pieces internal use only</div>
-
 </div>
 </body>
 </html>
