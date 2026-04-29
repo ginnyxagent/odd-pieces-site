@@ -75,7 +75,32 @@
 
   @media (max-width: 768px) {
     .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 14px; }
-    .section, .section-full { padding: 80px 24px; }
+    .section, .section-full { padding: 32px 16px; }
+    nav { padding: 0 16px; height: 46px; gap: 12px; }
+    .hero { padding: 52px 16px 28px; }
+    .hero::before { width: 240px; height: 240px; right: -90px; top: -90px; }
+    .hero::after { width: 220px; height: 140px; left: -60px; bottom: -90px; }
+    .hero h1 { font-size: clamp(42px, 14vw, 68px); -webkit-text-stroke: 2px var(--ink); text-shadow: 3px 3px 0 var(--ink); }
+    .hero-sub { font-size: 15px; margin-bottom: 20px; }
+    .hero-meta { gap: 8px; }
+    .hero-meta-item { font-size: 11px; letter-spacing: 0.06em; padding: 7px 10px; }
+    .section-title { font-size: clamp(30px, 11vw, 48px); line-height: 0.98; }
+    .section-intro { font-size: 15px; }
+    .pill-grid { gap: 10px; margin-top: 18px; }
+    .pill { font-size: 12px; padding: 9px 14px; letter-spacing: 0.06em; }
+    .wait-what { font-size: clamp(44px, 16vw, 72px) !important; line-height: 0.9; }
+    .big-tagline { font-size: 32px !important; line-height: 0.95 !important; }
+    .big-statement { font-size: 20px !important; }
+    .swatch-grid { grid-template-columns: 1fr; gap: 12px; }
+    .logo-demos { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+    .logo-demo { padding: 18px 16px; min-height: auto; }
+    .type-specimen { padding: 14px; }
+    .copy-grid { grid-template-columns: 1fr; gap: 14px; }
+    .warning-stamp { transform: none !important; width: 100%; }
+    .quote-block { padding: 16px; }
+    .quote-block p { font-size: 22px; }
+    .card, .channel-card, .step-card { padding: 14px; }
+    .step-card::before { font-size: 72px; top: -8px; right: 10px; }
   }
 
   /* ─── NAV ─── */
@@ -392,6 +417,18 @@
   }
   @media (max-width: 768px) {
     .logo-demos { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .story-grid,
+    .audience-hero,
+    .signature-grid,
+    .logo-preview-grid,
+    .logo-rules-grid,
+    .asset-grid,
+    .color-balance-grid,
+    .type-grid { grid-template-columns: 1fr !important; }
+    .warning-wrap { gap: 14px !important; }
   }
 
   /* ─── COPY EXAMPLES ─── */
@@ -1242,7 +1279,7 @@
     <p style="font-size:16px; line-height:1.6; color:#333; max-width:900px;">Odd Pieces makes 1000-piece mystery puzzles for people who want surprise, not scenery. The box shows the setup. The puzzle shows what happened next. The ending explains what the hell happened.</p>
     <p style="font-size:16px; line-height:1.6; color:#333; max-width:900px;">This is not about puzzle difficulty or generic family game night. It is about story, payoff, hidden details, and the moment the whole table leans in at once.</p>
 
-    <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; align-items:start; margin-top:2px;">
+    <div class="story-grid" style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; align-items:start; margin-top:2px;">
       <div style="padding:16px; background:var(--ink); border-radius:12px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
         <p class="big-statement" style="color:white; font-size:24px; line-height:1.3;">"A puzzle for people who think regular puzzles are a waste of a perfectly good table."</p>
       </div>
@@ -1268,6 +1305,21 @@
     </div>
   <div class="divider"></div>
   <p class="section-intro">Sharp. Playful. Human. Odd.</p>
+
+  <div class="pill-grid" style="margin-bottom:18px;">
+    <span class="pill">CLEVER</span>
+    <span class="pill orange">GENIUS</span>
+    <span class="pill red">NEVER NORMAL</span>
+    <span class="pill blue">SURPRISING</span>
+    <span class="pill ink">ODD</span>
+    <span class="pill orange">PLAYFUL</span>
+    <span class="pill">WITTY</span>
+    <span class="pill red">UNEXPECTED</span>
+    <span class="pill blue">HUMAN</span>
+    <span class="pill ink">IRREVERENT</span>
+    <span class="pill">SHARP</span>
+    <span class="pill orange">NOT BORING</span>
+  </div>
 
   <div style="display:grid; gap:14px;">
     <div style="background:var(--blue); border-radius:14px; padding:16px;">
@@ -1332,7 +1384,7 @@
 
     <div style="background:var(--white); border-radius:16px; padding:16px; margin-bottom:14px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
       <p class="label" style="color: var(--orange); margin-bottom:12px;">Signature Lines</p>
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; font-size:15px; line-height:1.45; color:var(--ink);">
+      <div class="signature-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; font-size:15px; line-height:1.45; color:var(--ink);">
         <div>“Not your ordinary puzzles.”</div>
         <div>“1000 pieces. Zero context. Good luck.”</div>
         <div>“Not for everyone. Probably for you though.”</div>
@@ -1346,7 +1398,7 @@
 
     
 
-    <div style="margin-bottom:14px; display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
+    <div class="warning-wrap" style="margin-bottom:14px; display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
   <div class="warning-stamp">
     <div class="warning-stamp-head">Warning</div>
     <div class="warning-stamp-body">This puzzle contains things<br>you weren't supposed to find.</div>
@@ -1446,7 +1498,7 @@
   <div class="divider"></div>
   <p class="section-intro">Use the actual logo system, not placeholders. These are the real brand assets and the approved lockups people should grab first.</p>
 
-  <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-bottom:18px;">
+  <div class="logo-preview-grid" style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; margin-bottom:18px;">
     <div class="logo-demo" style="background: var(--cream); border: 2px solid rgba(26,26,26,0.08); padding:18px; border-radius:16px;">
       <div style="background:white; border-radius:12px; min-height:160px; display:flex; align-items:center; justify-content:center; padding:20px;">
         <img src="assets/logo-v9/primary-side/Primary Logo - Emblem Side/Colour/Odd Pieces Primary Logo - Colour.png" alt="Odd Pieces primary logo side color" style="max-width:100%; max-height:120px; display:block;">
@@ -1467,7 +1519,7 @@
     </div>
   </div>
 
-  <div style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:14px;">
+  <div class="logo-rules-grid" style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:14px;">
     <div style="background: white; border-radius:16px; padding:16px;">
       <p class="label" style="color:var(--orange); margin-bottom:14px;">What to use</p>
       <div style="display:grid; gap:10px;">
@@ -1492,7 +1544,7 @@
 
   <div style="background: white; border-radius:16px; padding:16px; margin-top:20px;">
     <p class="label" style="color:var(--orange); margin-bottom:14px;">Available asset set</p>
-    <div style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;">
+    <div class="asset-grid" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;">
       <div style="padding:12px; background:var(--cream); border-radius:10px; text-align:center;">
         <img src="assets/logo-v9/emblem/Emblem/Colour/Odd Pieces Logo - Emblem - Colour.png" alt="Odd Pieces emblem" style="max-width:100%; height:70px; object-fit:contain; display:block; margin:0 auto 8px;">
         <div class="label" style="font-size:10px; color:var(--ink);">Emblem</div>
@@ -1581,7 +1633,7 @@
 
     <div style="background:white; border-radius:12px; padding:14px; margin-top:20px;">
       <p class="label" style="color:var(--orange); margin-bottom:20px;">Usage Combinations</p>
-      <div style="display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-bottom:14px; align-items:stretch;">
+      <div class="color-balance-grid" style="display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-bottom:14px; align-items:stretch;">
         <div style="background:linear-gradient(135deg,var(--blue) 0 58%, var(--yellow) 58% 100%); border-radius:12px; min-height:160px; border:2px solid rgba(26,26,26,0.08); padding:14px; display:flex; align-items:flex-end;">
           <div style="background:rgba(255,255,255,0.78); border-radius:8px; padding:12px 14px; max-width:280px;">
             <p style="font-family:Nunito,sans-serif; font-weight:900; font-size:14px; color:var(--ink); margin-bottom:4px;">Lead by example</p>
@@ -1619,7 +1671,7 @@
   <h2 class="section-title">Type System</h2>
   <p class="section-intro">Use Nunito Black for headers and loud brand moments. Use Inter for everything people need to read fast. Body copy should never go below 16px with 1.5 line-height.</p>
 
-  <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; align-items:start;">
+  <div class="type-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; align-items:start;">
     <div style="background:white; border-radius:16px; padding:16px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
       <p class="nunito-black-sample" style="font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">Nunito Black</p>
       <p class="nunito-black-sample" style="font-size:34px; line-height:0.95; color:var(--ink); margin-bottom:8px; text-transform:uppercase;">Used for the loud stuff.</p>
