@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Odd Pieces — Brand Guidelines v11</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800;900&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --yellow: #FEE000;
+    --blue: #C1E3E8;
+    --orange: #FC9C1C;
+    --red-orange: #FF4016;
+    --ink: #1A1A1A;
+    --cream: #FFFBF0;
+    --white: #FFFFFF;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ─── TYPOGRAPHY UTILS ─── */
+  .display {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    line-height: 1.0;
+    letter-spacing: -0.02em;
+  }
+  .headline {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 1.1;
+  }
+  .label {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+  }
+  .body { font-family: 'Inter', system-ui, sans-serif; font-weight: 400; }
+  .body-medium { font-family: 'Inter', system-ui, sans-serif; font-weight: 500; }
+  .body-copy-rule { font-size: 16px; line-height: 1.5; }
+
+  /* ─── LAYOUT ─── */
+  .section {
+    padding: 44px 20px;
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+  .section-full {
+    padding: 44px 20px;
+  }
+  .section-full .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+  }
+
+  .grid-2 { display: grid; grid-template-columns: minmax(0,1.2fr) minmax(300px,0.8fr); gap: 14px; align-items:start; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 18px; }
+  .grid-4 { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 24px; }
+
+  @media (max-width: 768px) {
+    .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 14px; }
+    .section, .section-full { padding: 32px 16px; }
+    nav { padding: 0 16px; height: 46px; gap: 12px; }
+    .hero { padding: 52px 16px 28px; }
+    .hero::before { width: 240px; height: 240px; right: -90px; top: -90px; }
+    .hero::after { width: 220px; height: 140px; left: -60px; bottom: -90px; }
+    .hero h1 { font-size: clamp(42px, 14vw, 68px); -webkit-text-stroke: 2px var(--ink); text-shadow: 3px 3px 0 var(--ink); }
+    .hero-sub { font-size: 15px; margin-bottom: 20px; }
+    .hero-meta { gap: 8px; }
+    .hero-meta-item { font-size: 11px; letter-spacing: 0.06em; padding: 7px 10px; }
+    .section-title { font-size: clamp(30px, 11vw, 48px); line-height: 0.98; }
+    .section-intro { font-size: 15px; }
+    .pill-grid { gap: 10px; margin-top: 18px; }
+    .pill { font-size: 12px; padding: 9px 14px; letter-spacing: 0.06em; }
+    .wait-what { font-size: clamp(44px, 16vw, 72px) !important; line-height: 0.9; }
+    .big-tagline { font-size: 32px !important; line-height: 0.95 !important; }
+    .big-statement { font-size: 20px !important; }
+    .swatch-grid { grid-template-columns: 1fr; gap: 12px; }
+    .logo-demos { grid-template-columns: 1fr; gap: 14px; margin-top: 20px; }
+    .logo-demo { padding: 18px 16px; min-height: auto; }
+    .type-specimen { padding: 14px; }
+    .copy-grid { grid-template-columns: 1fr; gap: 14px; }
+    .warning-stamp { transform: none !important; width: 100%; }
+    .quote-block { padding: 16px; }
+    .quote-block p { font-size: 22px; }
+    .card, .channel-card, .step-card { padding: 14px; }
+    .step-card::before { font-size: 72px; top: -8px; right: 10px; }
+  }
+
+  /* ─── NAV ─── */
+  nav {
+    background: var(--ink);
+    padding: 0 40px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 52px;
+    overflow-x: auto;
+  }
+  nav a {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: rgba(255,255,255,0.5);
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color 0.15s;
+  }
+  nav a:hover { color: var(--orange); }
+  nav .nav-logo {
+    color: var(--orange);
+    font-size: 13px;
+    margin-right: 8px;
+    flex-shrink: 0;
+  }
+
+  /* ─── HERO ─── */
+  .hero {
+    background:
+      linear-gradient(135deg, rgba(255,251,240,0.96) 0%, rgba(193,227,232,0.92) 58%, rgba(255,251,240,1) 100%);
+    padding: 72px 20px 44px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    width: 440px;
+    height: 440px;
+    border-radius: 36px;
+    background: rgba(255,255,255,0.42);
+    border: 3px solid rgba(26,26,26,0.08);
+    right: -120px;
+    top: -140px;
+    transform: rotate(14deg);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    left: -80px;
+    bottom: -120px;
+    width: 360px;
+    height: 220px;
+    background: rgba(255,64,22,0.12);
+    border-radius: 999px;
+    filter: blur(2px);
+    transform: rotate(-10deg);
+    pointer-events: none;
+  }
+  .hero .inner {
+    max-width: 1080px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-eyebrow {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 12px;
+    text-transform: none;
+    letter-spacing: 0.2em;
+    color: var(--ink);
+    opacity: 0.5;
+    margin-bottom: 12px;
+  }
+  .hero h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(56px, 8vw, 112px);
+    text-transform: uppercase;
+    color: var(--white);
+    -webkit-text-stroke: 3px var(--ink);
+    text-shadow: 4px 4px 0 var(--ink);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    margin-bottom: 12px;
+  }
+  .hero h1 span {
+    display: block;
+  }
+  .hero-sub {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--ink);
+    max-width: 560px;
+    line-height: 1.5;
+    opacity: 0.75;
+    margin-bottom: 40px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .hero-meta-item {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--ink);
+    padding: 8px 16px;
+    background: rgba(255,255,255,0.88);
+    border: 2px solid var(--ink);
+    border-radius: 8px;
+    box-shadow: 4px 4px 0 rgba(26,26,26,0.12);
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-tag {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    margin-bottom: 12px;
+    display: block;
+  }
+  .section-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    margin-bottom: 12px;
+  }
+  .section-intro {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.45;
+    max-width: 100%;
+    margin-bottom: 16px;
+    opacity: 0.8;
+  }
+
+  /* ─── DIVIDER ─── */
+  .divider {
+    display: none;
+  }
+
+  /* ─── CARDS ─── */
+  .card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    border: 2px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .card:hover { border-color: var(--orange); }
+  .card-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+  .card-num {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 48px;
+    color: var(--orange);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+
+  /* ─── BLUE BAND ─── */
+  .blue-band {
+    background: var(--blue);
+  }
+  .yellow-band {
+    background: var(--cream);
+  }
+  .ink-band {
+    background: var(--ink);
+    color: var(--white);
+  }
+  .ink-band .section-tag { color: var(--blue); }
+  .ink-band .section-title { color: var(--white); }
+  .ink-band .section-intro { color: rgba(255,255,255,0.75); }
+  .ink-band .divider { background: var(--blue); }
+
+  /* ─── QUOTE BLOCK ─── */
+  .quote-block {
+    background: var(--cream);
+    border-left: 6px solid var(--orange);
+    border-radius: 0 12px 12px 0;
+    padding: 28px 32px;
+    margin: 48px 0;
+  }
+  .quote-block p {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    text-transform: none;
+    color: var(--ink);
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── COLOR SWATCHES ─── */
+  .swatch-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-top: 40px;
+  }
+  .swatch {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid rgba(0,0,0,0.06);
+  }
+  .swatch-color {
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .swatch-info {
+    padding: 16px;
+    background: var(--white);
+  }
+  .swatch-name {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: none;
+    margin-bottom: 4px;
+  }
+  .swatch-hex {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 13px;
+    color: #666;
+    font-variant-numeric: tabular-nums;
+  }
+  .swatch-role {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    margin-top: 4px;
+  }
+
+  /* ─── TYPE SPECIMENS ─── */
+  .type-specimen {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  .type-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: #999;
+    margin-bottom: 12px;
+    font-weight: 500;
+  }
+
+  /* ─── LOGO DEMO ─── */
+  .logo-demos {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .logo-demo {
+    border-radius: 12px;
+    padding: 40px 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    min-height: 180px;
+  }
+  .logo-placeholder {
+    width: 100%;
+    min-height: 180px;
+    border-radius: 12px;
+    background: #E8E8E2;
+    border: 2px dashed rgba(26,26,26,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 16px;
+  }
+  .logo-placeholder p {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    color: rgba(26,26,26,0.72);
+    margin-bottom: 0;
+  }
+  @media (max-width: 768px) {
+    .logo-demos { grid-template-columns: 1fr; }
+  }
+
+  @media (max-width: 768px) {
+    .story-grid,
+    .audience-hero,
+    .signature-grid,
+    .logo-preview-grid,
+    .logo-rules-grid,
+    .asset-grid,
+    .color-balance-grid,
+    .type-grid { grid-template-columns: 1fr !important; }
+    .warning-wrap { gap: 14px !important; }
+  }
+
+  /* ─── COPY EXAMPLES ─── */
+  .copy-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 32px;
+  }
+  @media (max-width: 768px) {
+    .copy-grid { grid-template-columns: 1fr; }
+  }
+  .copy-card-do {
+    background: var(--blue);
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .copy-card-dont {
+    background: #FFE8E4;
+    border-radius: 12px;
+    padding: 16px;
+  }
+  .copy-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .copy-label.do { color: #0A5C47; }
+  .copy-label.dont { color: var(--red-orange); }
+  .copy-line {
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 1.5;
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .copy-line:last-child { border-bottom: none; }
+
+  /* ─── STEP CARDS ─── */
+  .step-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 40px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+  .step-card::before {
+    content: attr(data-num);
+    position: absolute;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 120px;
+    top: -20px;
+    right: 16px;
+    line-height: 1;
+    color: var(--orange);
+    opacity: 0.4;
+  }
+  .step-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    text-transform: none;
+    margin-bottom: 12px;
+    position: relative;
+  }
+  .step-card p {
+    font-size: 15px;
+    line-height: 1.45;
+    color: #444;
+    position: relative;
+  }
+
+  /* ─── PUZZLE UNIVERSE CARDS ─── */
+  .universe-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 16px;
+    border-left: 4px solid var(--yellow);
+  }
+  .universe-card h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .universe-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* ─── PERSONALITY PILLS ─── */
+  .pill-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+  .pill {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 10px 20px;
+    border-radius: 40px;
+    background: var(--yellow);
+    color: var(--ink);
+  }
+  .pill.blue { background: var(--blue); }
+  .pill.orange { background: var(--orange); }
+  .pill.red { background: var(--red-orange); color: white; }
+  .pill.ink { background: var(--ink); color: white; }
+
+  /* ─── CHANNEL CARDS ─── */
+  .channel-card {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 16px;
+  }
+  .channel-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .channel-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    margin-bottom: 16px;
+  }
+  .channel-rule {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #444;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    display: flex;
+    gap: 8px;
+  }
+  .channel-rule:last-child { border-bottom: none; }
+  .channel-rule::before {
+    content: '→';
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    color: var(--orange);
+    flex-shrink: 0;
+  }
+
+  /* ─── DO / DONT TABLE ─── */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    border-radius: 16px;
+    overflow: hidden;
+    margin-top: 40px;
+    border: 2px solid var(--ink);
+  }
+  @media (max-width: 768px) { .do-dont { grid-template-columns: 1fr; } }
+  .do-col { background: var(--blue); }
+  .dont-col { background: #FFE8E4; }
+  .do-dont-header {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    padding: 24px 32px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 2px solid rgba(0,0,0,0.1);
+  }
+  .do-col .do-dont-header { color: #0A5C47; }
+  .dont-col .do-dont-header { color: var(--red-orange); }
+  .do-dont-item {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 14px 32px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: var(--ink);
+    line-height: 1.4;
+  }
+  .do-dont-item:last-child { border-bottom: none; }
+
+  /* ─── HUMAN BRAND SECTION ─── */
+  .human-card {
+    background: var(--blue);
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .human-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    border: 2px solid var(--ink);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Nunito', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+  .human-card h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 20px;
+    text-transform: none;
+    margin-bottom: 8px;
+  }
+  .human-card p {
+    font-size: 15px;
+    line-height: 1.45;
+    color: rgba(0,0,0,0.75);
+  }
+
+  /* ─── PACKAGING ─── */
+  .pkg-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 24px;
+    margin-top: 32px;
+  }
+  .pkg-item {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+    text-align: center;
+  }
+  .pkg-item-icon {
+    width: 52px;
+    height: 52px;
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--ink);
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 12px;
+    font-weight: 900;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .pkg-item h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: none;
+    margin-bottom: 8px;
+  }
+  .pkg-item p { font-size: 13px; color: #666; line-height: 1.5; }
+
+  /* ─── AUDIENCE ─── */
+  .audience-band {
+    background: var(--ink);
+    color: white;
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 24px;
+  }
+  .audience-band h3 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 28px;
+    text-transform: none;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .audience-band p {
+    font-size: 15px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* ─── FOOTER ─── */
+  footer {
+    background: var(--ink);
+    color: rgba(255,255,255,0.4);
+    text-align: center;
+    padding: 16px;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  footer strong {
+    color: var(--orange);
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+  }
+
+  /* ─── ILLUSTRATION CARDS ─── */
+  .illus-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 28px;
+  }
+  .illus-card h4 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 16px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+  .illus-card p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #555;
+  }
+
+  /* ─── BIG TAGLINE ─── */
+  .big-tagline {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(40px, 7vw, 96px);
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+  }
+
+  /* ─── SCROLL ANCHOR OFFSET ─── */
+  [id] { scroll-margin-top: 60px; }
+
+  /* ─── INLINE CODE ─── */
+  code {
+    font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px;
+    background: rgba(0,0,0,0.06);
+    padding: 2px 6px;
+    border-radius: 4px;
+  }
+
+  /* ─── LOGO WORDMARK ─── */
+  .logo-wordmark {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-size: 24px;
+  }
+
+  /* ─── CALLOUT ─── */
+  .callout {
+    border-left: 4px solid var(--orange);
+    padding: 16px 20px;
+    background: rgba(252,156,28,0.1);
+    border-radius: 0 8px 8px 0;
+    font-size: 15px;
+    line-height: 1.45;
+    margin: 24px 0;
+  }
+  .callout strong {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    text-transform: none;
+    font-size: 13px;
+    letter-spacing: 0.1em;
+    display: block;
+    margin-bottom: 4px;
+    color: var(--orange);
+  }
+
+  /* ─── TAG STRIPE ─── */
+  .tag-stripe {
+    background: var(--ink);
+    padding: 10px 40px;
+    overflow: hidden;
+    white-space: nowrap;
+  }
+  .tag-stripe-inner {
+    display: inline-block;
+    animation: marquee 40s linear infinite;
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: rgba(255,255,255,0.6);
+  }
+  .tag-stripe-inner span { margin: 0 32px; }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+  }
+
+  /* Highlight bar treatment — bold text with black bar accent */
+  .highlight-bar {
+    display: inline;
+    background: var(--ink);
+    color: var(--blue) !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+  }
+  .big-statement {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(32px, 5vw, 56px);
+    line-height: 1.15;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+
+  /* No uppercase on copy — only on short labels and h1/h2 headlines */
+  .section-intro, .quote-block p, .callout, .card-text, .copy-card,
+  .sig-line, .personality-text, p { text-transform: none !important; }
+  /* Keep uppercase only on section-tag labels and h-tags with explicit class */
+  .section-tag, .section-title, .nav-item, h1 { text-transform: uppercase; }
+  h2, h3 { text-transform: none; }
+
+
+  /* TYPOGRAPHY RULE: Nunito = headlines only. Inter = everything readable. */
+  p, li, .section-intro, .callout, .card-text, .card-body,
+  .quote-block p, .copy-card, .sig-line, .personality-text,
+  .grid-2 p, .vibe-text, .note, blockquote, .intro-text, .body-copy,
+  .human-card p, .step-desc, .channel-note, .do-dont p,
+  .universe-desc, .audience-desc, td, th {
+    font-family: 'Inter', sans-serif !important;
+    font-weight: 400;
+    line-height: 1.7;
+  }
+  /* Nunito stays on headlines, nav, labels, short UI text */
+  h1, h2, h3, h4, .section-title, .section-tag, .nav-item,
+  .opt-num, .step-num, .card-title, .human-card-title,
+  .color-name, .font-name, .channel-title { 
+    font-family: 'Nunito', sans-serif !important; 
+  }
+
+
+  /* Branded section labels — Nunito, bold, uppercase */
+  .copy-label, .label, .section-label-pill, .copy-label.do, .copy-label.dont,
+  .voice-principle-title, .step-label, .human-label, .channel-label {
+    font-family: 'Nunito', sans-serif !important;
+    font-weight: 900 !important;
+    font-size: 13px !important;
+    letter-spacing: 0.12em !important;
+    text-transform: uppercase !important;
+  }
+  /* Think: callout label */
+  .think-label {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--orange);
+    margin-bottom: 8px;
+    display: block;
+  }
+  /* WARNING stamp */
+  .warning-stamp {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--red-orange);
+    border: 3px solid var(--ink);
+    padding: 12px 24px;
+    transform: rotate(-2deg);
+    box-shadow: 3px 3px 0 var(--ink);
+    max-width: 320px;
+  }
+  .warning-stamp-head {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: white;
+  }
+  .warning-stamp-body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 600;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.85);
+    margin-top: 4px;
+    text-align: center;
+  }
+  /* 15 seconds later bar */
+  .timestamp-bar {
+    background: var(--ink);
+    padding: 12px 48px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin: 0;
+  }
+  .timestamp-bar span {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 13px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--yellow);
+  }
+  .timestamp-bar .ts-divider {
+    width: 40px;
+    height: 1px;
+    background: rgba(255,255,255,0.2);
+  }
+  /* WAIT WHAT mark */
+  .wait-what {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: clamp(48px, 8vw, 96px);
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: var(--ink);
+  }
+
+  /* ─── BRIGHTNESS OVERRIDE ─── */
+  .section-label, .section-tag { color: var(--orange) !important; }
+  .ink-band { background: var(--cream) !important; color: var(--ink) !important; border: 2px solid var(--ink); }
+  .ink-band .section-tag { color: var(--orange) !important; }
+  .ink-band .section-title { color: var(--ink) !important; }
+  .ink-band .section-intro { color: rgba(26,26,26,0.75) !important; }
+  .ink-band .divider { background: var(--yellow) !important; }
+  nav { background: var(--cream) !important; border-bottom: 2px solid #E8E0D0; }
+  nav a { color: var(--ink) !important; }
+  nav a:hover { color: var(--orange) !important; }
+  .audience-band { background: var(--blue) !important; color: var(--ink) !important; border: 2px solid var(--ink); }
+  .audience-band h3 { color: var(--orange) !important; }
+  .audience-band p { color: rgba(26,26,26,0.75) !important; }
+  .hero { background: linear-gradient(135deg, var(--cream) 0%, var(--blue) 50%, var(--cream) 100%) !important; }
+  .hero h1 { color: var(--ink) !important; text-shadow: none !important; -webkit-text-stroke: none !important; }
+  .do-dont-header, .do-dont-item { color: var(--ink) !important; }
+  .do-col { background: var(--blue) !important; }
+  .dont-col { background: #F5E8E0 !important; }
+  .copy-card-do { background: var(--blue) !important; color: var(--ink) !important; }
+  .copy-card-dont { background: #F5E8E0 !important; color: var(--ink) !important; }
+  .quote-block { background: var(--blue) !important; color: var(--ink) !important; border-left-color: var(--orange) !important; }
+  .quote-block p { color: var(--ink) !important; }
+  .tag-stripe { background: var(--ink) !important; }
+  .tag-stripe-inner { color: var(--yellow) !important; }
+  footer { background: var(--ink) !important; color: rgba(255,255,255,0.7) !important; }
+  footer strong { color: var(--yellow) !important; }
+  /* Universe badge */
+  .universe-badge {
+    width: 100px;
+    height: 100px;
+  }
+
+  p {
+    margin-bottom: 24px;
+  }
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  .resource-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .resource-link {
+    display: block;
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 28px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+  .resource-link:hover {
+    border-color: var(--orange);
+  }
+  .resource-link-title {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 900;
+    font-size: 22px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .resource-link p {
+    color: rgba(26,26,26,0.72);
+  }
+
+  .display-treatment {
+    background: var(--white);
+    border: 2px solid var(--ink);
+    border-radius: 16px;
+    padding: 16px;
+    margin-top: 32px;
+  }
+  .display-treatment-sample {
+    font-family: 'Nunito', sans-serif;
+    font-size: clamp(42px, 7vw, 72px);
+    font-weight: 900;
+    text-transform: uppercase;
+    color: white;
+    -webkit-text-stroke: 2.5px #1A1A1A;
+    text-shadow: 4px 4px 0 #1A1A1A;
+    line-height: 0.95;
+    margin-bottom: 24px;
+  }
+  .code-block {
+    background: var(--ink);
+    color: rgba(255,255,255,0.86);
+    border-radius: 12px;
+    padding: 20px;
+    overflow-x: auto;
+  }
+  .code-block code {
+    background: transparent;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+  }
+
+
+  /* ── HARD SHADOW SYSTEM ──
+     Rule: shadow only works when text colour contrasts with shadow colour.
+     Light text (yellow/white) on dark bg = black shadow ✓
+     Dark text on light bg = NO shadow (invisible otherwise) */
+
+  /* Yellow text on dark backgrounds — black shadow works */
+  .ink-band .section-title,
+  .ink-band h2,
+  .wait-what span[style*="color:var(--yellow)"],
+  .wait-what span[style*="color:var(--orange)"] {
+    text-shadow: 3px 3px 0 rgba(0,0,0,0.5);
+  }
+  /* Dark text on light backgrounds — no shadow */
+  .blue-band h2, .blue-band .section-title,
+  section.section h2.section-title {
+    text-shadow: none;
+  }
+
+
+  .version-banner {
+    background:#1A1A1A;
+    color:#fff;
+    text-align:center;
+    padding:10px 16px;
+    font-family:Inter,sans-serif;
+    font-size:13px;
+    position:sticky;
+    top:0;
+    z-index:9999;
+    border-bottom:4px solid var(--red-orange);
+  }
+  .odd-split {
+    position: relative;
+    overflow: hidden;
+  }
+  .odd-split::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, rgba(193,227,232,0.22) 0 49.3%, rgba(26,26,26,0.9) 49.3% 50.7%, rgba(254,224,0,0.22) 50.7% 100%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  .odd-split > * { position: relative; z-index: 1; }
+  .section, .section-full .inner {
+    position: relative;
+  }
+  .section::before,
+  .section-full .inner::before {
+    display: none;
+  }
+  .section-tag {
+    display: inline-block;
+    padding: 6px 10px;
+    background: rgba(255,255,255,0.72);
+    border: 2px solid rgba(26,26,26,0.08);
+    border-radius: 999px;
+  }
+  .ink-band .section-tag {
+    background: rgba(255,255,255,0.08);
+    border-color: rgba(255,255,255,0.12);
+  }
+  .card, .type-specimen, .channel-card, .human-card, .pkg-item, .quote-block, .callout {
+    border: 2px solid var(--ink) !important;
+    box-shadow: 8px 8px 0 rgba(26,26,26,0.08);
+  }
+  .quote-block {
+    border-left: 8px solid var(--red-orange) !important;
+    transform: rotate(-0.6deg);
+  }
+  .callout {
+    background: linear-gradient(135deg, rgba(254,224,0,0.22) 0%, rgba(255,255,255,0.98) 100%);
+    padding: 22px 24px;
+    border-radius: 14px;
+    margin-top: 24px;
+  }
+  .hero-meta-item:nth-child(odd) {
+    transform: rotate(-1deg);
+  }
+  .hero-meta-item:nth-child(even) {
+    transform: rotate(1deg);
+  }
+  .step-card, .copy-card-do, .copy-card-dont, .illus-card {
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 rgba(26,26,26,0.08);
+  }
+  .big-tagline {
+    text-shadow: 3px 3px 0 var(--yellow);
+  }
+  .warning-stamp {
+    box-shadow: 10px 10px 0 rgba(26,26,26,0.12);
+  }
+  .channel-card {
+    background: rgba(255,255,255,0.86);
+    backdrop-filter: blur(6px);
+  }
+  .swatch {
+    border: 2px solid var(--ink);
+    box-shadow: 8px 8px 0 rgba(26,26,26,0.08);
+  }
+  .section-title .highlight,
+  .big-statement .highlight {
+    color: var(--red-orange);
+  }
+  .messy-note {
+    display:inline-block;
+    margin-top: 12px;
+    padding: 10px 14px;
+    background: var(--yellow);
+    border: 2px solid var(--ink);
+    border-radius: 10px;
+    font-family: Nunito,sans-serif;
+    font-weight: 900;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    box-shadow: 5px 5px 0 var(--ink);
+    transform: rotate(-2deg);
+  }
+  @media (max-width: 768px) {
+    .section::before,
+    .section-full .inner::before { display:none; }
+    .card, .type-specimen, .channel-card, .human-card, .pkg-item, .quote-block, .callout, .swatch { box-shadow: 5px 5px 0 rgba(26,26,26,0.08); }
+  }
+
+
+  .nunito-black-sample {
+    font-family: "Nunito", "Arial Black", "Arial Rounded MT Bold", "Helvetica Rounded", sans-serif !important;
+    font-weight: 900 !important;
+    font-synthesis: none;
+    letter-spacing: -0.03em;
+  }
+  .inter-sample {
+    font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif !important;
+  }
+
+</style>
+</head>
+<body>
+
+<!-- ─── VERSION BANNER ─── -->
+<div style="background:#1a1a2e;color:#fff;text-align:center;padding:10px 16px;font-family:sans-serif;font-size:13px;position:sticky;top:0;z-index:9999;border-bottom:2px solid #e63946;">
+  ✨ You're viewing <strong>V11 (Latest)</strong> &nbsp;|&nbsp; <a href="/brand-guidelines-v10.html" style="color:#aaa;text-decoration:none;">← View V10</a>
+</div>
+
+<!-- ─── NAV ─── -->
+<nav>
+  <a href="#hero" class="nav-logo">OP</a>
+  <a href="#story">Story</a>
+  <a href="#personality">Personality</a>
+  <a href="#audience">Audience</a>
+  <a href="#voice">Voice</a>
+  <a href="#logo">Logo</a>
+  <a href="#colors">Colors</a>
+  <a href="#type">Type</a>
+  <a href="#human">Human Brand</a>
+</nav>
+
+<!-- ─── HERO ─── -->
+<section class="hero odd-split" id="hero">
+  <div class="inner">
+    <p class="hero-eyebrow">Brand Guidelines — Version 11</p>
+    <h1>
+      <span>Odd</span>
+      <span>Pieces</span>
+    </h1>
+    <p class="hero-sub">1000 pieces. A mystery hiding in plain sight. You build the scene, open the envelope, and finally see what the box was setting you up for.</p>
+    <div class="hero-meta">
+      <span class="hero-meta-item">1000 Pieces</span>
+      <span class="hero-meta-item">$39 Each</span>
+      <span class="hero-meta-item">Shopify · Amazon · B&N · Kickstarter</span>
+      
+    </div>
+  </div>
+</section>
+
+<!-- ─── MARQUEE ─── -->
+<div class="tag-stripe">
+  <div class="tag-stripe-inner">
+    <span>NOT YOUR ORDINARY PUZZLES</span>
+    <span style="opacity:0.3">·</span>
+    <span>WILDLY FUN & TOTALLY UNEXPECTED</span>
+    <span style="opacity:0.3">·</span>
+    <span>YOU'LL FIND THINGS IN HERE YOU WEREN'T SUPPOSED TO FIND.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THE TWIST IS THE WHOLE POINT.</span>
+    <span style="opacity:0.3">·</span>
+    <span>NOT YOUR ORDINARY PUZZLES</span>
+    <span style="opacity:0.3">·</span>
+    <span>WILDLY FUN & TOTALLY UNEXPECTED</span>
+    <span style="opacity:0.3">·</span>
+    <span>YOU'LL FIND THINGS IN HERE YOU WEREN'T SUPPOSED TO FIND.</span>
+    <span style="opacity:0.3">·</span>
+    <span>THE TWIST IS THE WHOLE POINT.</span>
+    <span style="opacity:0.3">·</span>
+  </div>
+</div>
+
+<!-- ─── BRAND STORY ─── -->
+<section class="section" id="story">
+  <span class="section-tag" style="color: var(--orange);">01 — Who We Are</span>
+  <h2 class="section-title">The Brand Story</h2>
+  <p class="section-intro">If another puzzle brand could say it, rewrite it.</p>
+
+  <div style="display:grid; gap:14px;">
+    <p style="font-size:16px; line-height:1.6; color:#333; max-width:900px;">Odd Pieces started in 2020 when Terry and Ginny had just moved into a 400-square-foot apartment, got stuck at home during Covid, and realized most puzzles got boring fast. You stare at the picture on the box, then spend hours rebuilding the exact thing you were already looking at.</p>
+    <p style="font-size:16px; line-height:1.6; color:#333; max-width:900px;">So they flipped it. Odd Pieces makes 1000-piece mystery puzzles where the box is the setup, the puzzle is what happened next, the clues are hidden in the details, and the ending stays sealed in an envelope until you finish.</p>
+    <p style="font-size:16px; line-height:1.6; color:#333; max-width:900px;">It started as a Kickstarter idea and turned into four campaigns, 25,000+ backers, 280,000+ customers, Barnes & Noble, and 600+ stores. The point is still the same: surprise beats scenery.</p>
+
+    <div class="story-grid" style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px; align-items:start; margin-top:2px;">
+      <div style="padding:16px; background:var(--ink); border-radius:12px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+        <p class="big-statement" style="color:white; font-size:24px; line-height:1.3;">"Not your ordinary puzzles."</p>
+      </div>
+      <div class="card" style="background:var(--blue);">
+        <h3 class="card-title">What the product does</h3>
+        <p>The image on the box is not the image you build. The scene shifts, clues appear, and the final reveal reframes the whole thing.</p>
+      </div>
+      <div class="card">
+        <h3 class="card-title">What makes it different</h3>
+        <p>Original story-driven artwork, layered details, and a payoff worth pointing at with a full drink still in your hand.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── BRAND PERSONALITY ─── -->
+<section class="section" id="personality">
+  <span class="section-tag" style="color: var(--orange);">02 — Energy</span>
+  <h2 class="section-title">Brand Personality</h2>
+    <div style="margin:32px 0 18px; display:flex; align-items:baseline; gap:0;">
+      <div class="wait-what">WAIT —</div>
+      <div class="wait-what" style="color:var(--orange);">&nbsp;WHAT?!</div>
+    </div>
+  <div class="divider"></div>
+  <p class="section-intro">Unexpected. Clever. Surprising. Playful. Witty.</p>
+
+  <div class="pill-grid" style="margin-bottom:18px;">
+    <span class="pill">CLEVER</span>
+    <span class="pill orange">GENIUS</span>
+    <span class="pill red">NEVER NORMAL</span>
+    <span class="pill blue">SURPRISING</span>
+    <span class="pill ink">ODD</span>
+    <span class="pill orange">PLAYFUL</span>
+    <span class="pill">WITTY</span>
+    <span class="pill red">UNEXPECTED</span>
+    <span class="pill blue">HUMAN</span>
+    <span class="pill ink">IRREVERENT</span>
+    <span class="pill">SHARP</span>
+    <span class="pill orange">NOT BORING</span>
+  </div>
+
+  <div style="display:grid; gap:14px;">
+    <div style="background:var(--blue); border-radius:14px; padding:16px;">
+      <p class="label" style="color:var(--orange); margin-bottom:12px;">How it shows up</p>
+      <div style="display:grid; gap:12px;">
+        <div style="background:white; border-radius:12px; padding:14px;">
+          <p style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#777; margin-bottom:8px;">Product description</p>
+          <p style="font-size:14px; color:#777; margin-bottom:8px;"><strong>Generic:</strong> A premium 1000-piece puzzle experience with surprising details.</p>
+          <p style="font-size:15px; margin-bottom:6px;"><strong>Odd Pieces:</strong> Not your ordinary puzzles.</p>
+          <p style="font-size:13px; color:#666;">Why: it gets to the point fast and actually sounds like a brand with a pulse.</p>
+        </div>
+        <div style="background:white; border-radius:12px; padding:14px;">
+          <p style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#777; margin-bottom:8px;">Support email</p>
+          <p style="font-size:14px; color:#777; margin-bottom:8px;"><strong>Generic:</strong> We're sorry your order arrived damaged. Our team will assist shortly.</p>
+          <p style="font-size:15px; margin-bottom:6px;"><strong>Odd Pieces:</strong> That box should have arrived looking less like it lost a bar fight. We’re fixing it.</p>
+          <p style="font-size:13px; color:#666;">Why: still helpful, still clear, just not robotic.</p>
+        </div>
+        <div style="background:white; border-radius:12px; padding:14px;">
+          <p style="font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:#777; margin-bottom:8px;">Social caption</p>
+          <p style="font-size:14px; color:#777; margin-bottom:8px;"><strong>Generic:</strong> A puzzle night you won't forget.</p>
+          <p style="font-size:15px; margin-bottom:6px;"><strong>Odd Pieces:</strong> You’ll find things in here you weren’t supposed to find.</p>
+          <p style="font-size:13px; color:#666;">Why: it creates tension, invites curiosity, and doesn’t waste words.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AUDIENCE ─── -->
+<div class="section-full" style="background: var(--ink);" id="audience">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">03 — Who It's For</span>
+    <h2 class="section-title" style="color: white;">Our Audience</h2>
+    <div class="divider"></div>
+    <p class="section-intro" style="color: rgba(255,255,255,0.7);">Odd Pieces has four core audiences: the thoughtful gift-giver, the real puzzle fan, the returning loyalist, and the active retiree buying for actual leisure.</p>
+
+    <div style="background: var(--cream); border: 3px solid var(--ink); border-radius: 16px; padding: 40px; display: grid; grid-template-columns: 1fr 1.4fr; gap: 40px; align-items: center; margin-bottom:20px;">
+      <div>
+        <p class="label" style="color: rgba(0,0,0,0.5); margin-bottom:12px;">Audience</p>
+        <p class="big-tagline" style="color: var(--ink);">Giftable enough to buy.<br>Good enough to keep.</p>
+      </div>
+      <div>
+        <p style="font-size:17px; line-height:1.7; color: rgba(0,0,0,0.75);">Most first purchases come from gifters. The strongest repeat behavior comes from puzzlers and loyalists.</p>
+        <p style="font-size:17px; line-height:1.7; color: rgba(0,0,0,0.75);">What they share: they want something specific, premium, and worth talking about.</p>
+        <p style="font-size:17px; line-height:1.7; color: rgba(0,0,0,0.75);">That is exactly why it works as both a gift and a self-purchase.</p>
+      </div>
+    </div>
+
+    <div class="quote-block" style="background: rgba(255,255,255,0.12);">
+      <p style="color:white;">People usually find Odd Pieces through Shopify, Amazon, Barnes & Noble, Kickstarter, and word of mouth, then stay because the format is genuinely different.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ─── VOICE & COPY ─── -->
+<div class="section-full blue-band" id="voice">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">04 — Voice In Use</span>
+    <h2 class="section-title">Voice & Copy</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Adult-leaning, sharp, and conversational. Clear first. Personality second. No filler.</p>
+
+    <div style="background:var(--white); border-radius:16px; padding:16px; margin-bottom:14px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+      <p class="label" style="color: var(--orange); margin-bottom:12px;">Signature Lines</p>
+      <div class="signature-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:10px 18px; font-size:15px; line-height:1.45; color:var(--ink);">
+        <div>“Not your ordinary puzzles.”</div>
+        
+        <div>“Not for everyone. Probably for you though.”</div>
+        
+        <div>“Wildly fun & totally unexpected.”</div>
+        <div>“You’ll find things in here you weren’t supposed to find.”</div>
+        
+        
+      </div>
+    </div>
+
+    
+
+    <div class="warning-wrap" style="margin-bottom:14px; display:flex; gap:32px; align-items:flex-start; flex-wrap:wrap;">
+  <div class="warning-stamp">
+    <div class="warning-stamp-head">Warning</div>
+    <div class="warning-stamp-body">This puzzle contains things<br>you weren't supposed to find.</div>
+  </div>
+  <div class="warning-stamp" style="transform:rotate(1.5deg); background:var(--ink);">
+    <div class="warning-stamp-head" style="color:var(--yellow);">Warning</div>
+    <div class="warning-stamp-body" style="color:rgba(255,255,255,0.7);">The ending will shock you.<br>You've been warned.</div>
+  </div>
+</div>
+<div class="copy-grid">
+      <div class="copy-card-do">
+        <p class="copy-label do" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;">✓ Sound Like This</p>
+        <div class="copy-line">Shocking before it's cute</div>
+        <div class="copy-line">Fun before it's refined</div>
+        <div class="copy-line">Playful before it's serious</div>
+        <div class="copy-line">Irreverent with control</div>
+        <div class="copy-line">Direct, punchy, no filler words</div>
+        <div class="copy-line">Calls the reader in, doesn't talk down</div>
+        <div class="copy-line">Humor that comes from being genuinely clever</div>
+        <div class="copy-line">Urgency without desperation</div>
+      </div>
+      <div class="copy-card-dont">
+        <p class="copy-label dont" style="font-family:'Nunito',sans-serif;font-weight:900;font-size:12px;letter-spacing:0.15em;text-transform:uppercase;">✗ Never Sound Like This</p>
+        <div class="copy-line">"For the whole family!" (too Walmart, too safe)</div>
+        <div class="copy-line">"An immersive puzzle experience" (dry corporate, immediately skip)</div>
+        <div class="copy-line">"The perfect gift this holiday season" (zzz)</div>
+        <div class="copy-line">"Hours of entertainment" (box copy from 1992)</div>
+        <div class="copy-line">"Premium quality guaranteed" (says literally nothing)</div>
+        <div class="copy-line">"Recommended for ages 18+" (we don't age-gate — everyone's welcome)</div>
+        <div class="copy-line">Luxury editorial tone (too stiff, wrong vibe)</div>
+        <div class="copy-line">Corporate / dry / formal (if a PR department wrote it, delete it)</div>
+      </div>
+    </div>
+
+    <div style="margin-top:14px; background:white; border-radius:12px; padding:16px;">
+      <p class="label" style="color:var(--orange); margin-bottom:14px;">Voice Principles</p>
+      <div style="background:var(--cream); border:2px solid rgba(26,26,26,0.08); border-radius:12px; padding:18px 20px; margin-bottom:14px;">
+        <p style="font-size:14px; line-height:1.6; color:#444;"><strong>Practical test:</strong> write the clear version first. Then sharpen it. Keep the point. Cut the fluff.</p>
+      </div>
+      <div class="grid-3">
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Shock First, Explain Later</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">Lead with the surprising, weird, funny thing. Let curiosity do the work. Don't front-load context.</p>
+        </div>
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Confident, Not Arrogant</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">We know we're different. We don't need to yell about it. Confidence is quiet. Arrogance is loud.</p>
+        </div>
+        <div>
+          <h4 class="headline" style="font-size:16px; margin-bottom:8px;">Play It Straight</h4>
+          <p style="font-size:14px; line-height:1.6; color:#555;">The best humor is delivered deadpan. Don't wink too hard. Say the absurd thing like it's obvious.</p>
+        </div>
+      </div>
+    </div>
+  
+
+<div style="background:var(--ink); border-radius:16px; padding:16px; margin-bottom:20px; color:white; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+      <p class="label" style="color:var(--yellow); margin-bottom:14px;">Tone by message type</p>
+      <div style="display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:10px;">
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Product launch</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">Loudest. Sharpest. Most playful.</div></div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Promo / sale</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">Direct, punchy, still clever.</div></div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Brand story</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">Warmer. Still specific.</div></div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Transactional</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">Calm, clear, lightly on-brand.</div></div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Win-back</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">A little nosy. A little tempting.</div></div>
+        <div style="background:rgba(255,255,255,0.08); border-radius:12px; padding:12px 14px;"><strong style="font-family:Nunito,sans-serif;">Newsletter</strong><div style="font-size:13px; color:rgba(255,255,255,0.7); margin-top:4px;">Loose, clever, worth opening.</div></div>
+      </div>
+    </div>
+
+<div class="grid-2">
+      <div style="background:white; border-radius:16px; padding:14px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+        <p class="label" style="color:var(--orange); margin-bottom:14px;">Website / email examples</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"></div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;">“The weirdest puzzle we’ve ever made.”</div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"></div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"></div>
+        </div>
+      </div>
+      <div style="background:white; border-radius:16px; padding:14px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+        <p class="label" style="color:var(--orange); margin-bottom:14px;">Ads / social / packaging examples</p>
+        <div style="display:flex; flex-direction:column; gap:10px;">
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;">“Warning: highly additive.”</div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;">“Piece by piece, things get stranger.”</div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"></div>
+          <div style="padding:12px 14px; background:var(--cream); border-radius:10px;">“This one made our test puzzler swear. Twice.”</div>
+        </div>
+      </div>
+    </div>
+  
+</div>
+</div>
+
+<!-- ─── LOGO SYSTEM ─── -->
+<section class="section" id="logo">
+  <span class="section-tag" style="color: var(--orange);">05 — Identity</span>
+  <h2 class="section-title">Logo System</h2>
+  <div class="divider"></div>
+  <p class="section-intro">Use the actual logo system, not placeholders. These are the real brand assets and the approved lockups people should grab first.</p>
+
+  <div class="logo-preview-grid" style="display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:14px; margin-bottom:18px;">
+    <div class="logo-demo" style="background: var(--cream); border: 2px solid rgba(26,26,26,0.08); padding:18px; border-radius:16px;">
+      <div style="background:white; border-radius:12px; min-height:160px; display:flex; align-items:center; justify-content:center; padding:20px;">
+        <img src="assets/logo-v9/primary-side/Primary Logo - Emblem Side/Colour/Odd Pieces Primary Logo - Colour.png" alt="Odd Pieces primary logo side color" style="max-width:100%; max-height:120px; display:block;">
+      </div>
+      <p class="label" style="font-size:10px; color:rgba(0,0,0,0.45); margin-top:10px;">Primary logo, side emblem</p>
+    </div>
+    <div class="logo-demo" style="background: var(--ink); padding:18px; border-radius:16px;">
+      <div style="background:rgba(255,255,255,0.06); border-radius:12px; min-height:160px; display:flex; align-items:center; justify-content:center; padding:20px;">
+        <img src="assets/logo-v9/primary-top/Primary Logo - Emblem Top/B_W/Odd Pieces Primary Logo - B_W.png" alt="Odd Pieces primary logo top black and white" style="max-width:100%; max-height:120px; display:block; filter:invert(1);">
+      </div>
+      <p class="label" style="font-size:10px; color:rgba(255,255,255,0.45); margin-top:10px;">Primary logo, top emblem on dark</p>
+    </div>
+    
+  </div>
+
+  <div class="logo-rules-grid" style="display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,0.85fr); gap:14px;">
+    <div style="background: white; border-radius:16px; padding:16px;">
+      <p class="label" style="color:var(--orange); margin-bottom:14px;">What to use</p>
+      <div style="display:grid; gap:10px;">
+        <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"><strong>Primary Logo, Emblem Side</strong><br>Default choice for most brand moments. Use this first unless the format clearly needs something else.</div>
+        <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"><strong>Primary Logo, Emblem Top</strong><br>Use when a taller lockup fits better than a wide one.</div>
+                <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"><strong>Emblem</strong><br>Use for avatars, favicons, stickers, and shorthand brand hits.</div>
+        <div style="padding:12px 14px; background:var(--cream); border-radius:10px;"><strong>Typography Only</strong><br>Use when the emblem would be redundant or too busy.</div>
+      </div>
+    </div>
+    <div style="background: white; border-radius:16px; padding:16px;">
+      <p class="label" style="color:var(--orange); margin-bottom:14px;">Non-negotiables</p>
+      <ul style="list-style:none; display:flex; flex-direction:column; gap:10px;">
+        <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> Use the supplied files. Do not redraw the logo.</li>
+        <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> Prefer colour versions on light backgrounds and B/W versions when clarity is better.</li>
+        <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> Keep proportions locked. No stretching, rotating, or squeezing.</li>
+        <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--orange); font-weight:700;">→</span> Do not add outlines, shadows, bevels, glow, texture, or “make it pop” nonsense.</li>
+        <li style="font-size:15px; display:flex; gap:10px;"><span style="color:var(--red-orange); font-weight:700;">✗</span> Do not mix-and-match pieces from different lockups.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="background: white; border-radius:16px; padding:16px; margin-top:20px;">
+    <p class="label" style="color:var(--orange); margin-bottom:14px;">Available asset set</p>
+    <div class="asset-grid" style="display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:12px;">
+      <div style="padding:12px; background:var(--cream); border-radius:10px; text-align:center;">
+        <img src="assets/logo-v9/emblem/Emblem/Colour/Odd Pieces Logo - Emblem - Colour.png" alt="Odd Pieces emblem" style="max-width:100%; height:70px; object-fit:contain; display:block; margin:0 auto 8px;">
+        <div class="label" style="font-size:10px; color:var(--ink);">Emblem</div>
+      </div>
+      <div style="padding:12px; background:var(--cream); border-radius:10px; text-align:center;">
+        <img src="assets/logo-v9/type-only/Logo Typography Only/Colour/Odd Pieces Logo - Colour - Typography Only.png" alt="Odd Pieces typography only logo" style="max-width:100%; height:70px; object-fit:contain; display:block; margin:0 auto 8px;">
+        <div class="label" style="font-size:10px; color:var(--ink);">Typography only</div>
+      </div>
+      <div style="padding:12px; background:var(--cream); border-radius:10px; text-align:center;">
+        <img src="assets/logo-v9/primary-top/Primary Logo - Emblem Top/Colour/Odd Pieces Primary Logo - Colour.png" alt="Odd Pieces primary logo top emblem color" style="max-width:100%; height:70px; object-fit:contain; display:block; margin:0 auto 8px;">
+        <div class="label" style="font-size:10px; color:var(--ink);">Primary top</div>
+      </div>
+      <div style="padding:12px; background:var(--cream); border-radius:10px; text-align:center;">
+        <video autoplay muted loop playsinline style="max-width:100%; height:70px; object-fit:contain; display:block; margin:0 auto 8px; border-radius:8px; background:white;">
+          <source src="assets/logo-v9/animated/Animated Logo/Odd Pieces Animation - Option A.mp4" type="video/mp4">
+        </video>
+        <div class="label" style="font-size:10px; color:var(--ink);">Animated logo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── COLORS ─── -->
+<div class="section-full" style="background: var(--blue);" id="colors">
+  <div class="inner">
+    <span class="section-tag" style="color: var(--orange);">06 — Palette</span>
+    <h2 class="section-title">Color System</h2>
+    <div class="divider"></div>
+    <p class="section-intro">Use yellow and blue together. In any major campaign or page, blue should cover at least 40% of the visual surface.</p>
+
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FEE000;">
+          <span style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:13px;  color:rgba(0,0,0,0.4);">HERO</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Odd Yellow</div>
+          <div class="swatch-hex">#FEE000</div>
+          <div class="swatch-role">Hero color. Own it. Lead with it.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #C1E3E8;">
+          <span style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:13px;  color:rgba(0,0,0,0.4);">HERO</span>
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Light Blue</div>
+          <div class="swatch-hex">#C1E3E8</div>
+          <div class="swatch-role">Background anchor. Major surfaces, large sections, and bold contrast blocks.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FC9C1C;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Orange</div>
+          <div class="swatch-hex">#FC9C1C</div>
+          <div class="swatch-role">Accent. CTAs, highlights, arrows.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FF4016;"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Red-Orange</div>
+          <div class="swatch-hex">#FF4016</div>
+          <div class="swatch-role">Urgency, warnings, "WAIT" moments.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #1A1A1A; display:flex; align-items:center; justify-content:center;">
+        </div>
+        <div class="swatch-info">
+          <div class="swatch-name">Ink Black</div>
+          <div class="swatch-hex">#1A1A1A</div>
+          <div class="swatch-role">Primary text. Outlines. Dark backgrounds.</div>
+        </div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background: #FFFBF0; border:1px solid rgba(0,0,0,0.06);"></div>
+        <div class="swatch-info">
+          <div class="swatch-name">Clean Cream</div>
+          <div class="swatch-hex">#FFFBF0</div>
+          <div class="swatch-role">Warm page background. Softer than pure white.</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:12px; padding:14px; margin-top:20px;">
+      <p class="label" style="color:var(--orange); margin-bottom:20px;">Usage Combinations</p>
+      <div class="color-balance-grid" style="display:grid; grid-template-columns:1.2fr 1fr; gap:24px; margin-bottom:14px; align-items:stretch;">
+        <div style="background:linear-gradient(135deg,var(--blue) 0 58%, var(--yellow) 58% 100%); border-radius:12px; min-height:160px; border:2px solid rgba(26,26,26,0.08); padding:14px; display:flex; align-items:flex-end;">
+          <div style="background:rgba(255,255,255,0.78); border-radius:8px; padding:12px 14px; max-width:280px;">
+            <p style="font-family:Nunito,sans-serif; font-weight:900; font-size:14px; color:var(--ink); margin-bottom:4px;">Lead by example</p>
+            <p style="font-size:12px; line-height:1.5; color:#555;">Blue and yellow should visibly share the stage. If the guidelines look mostly dark, the system will be misread as mostly dark.</p>
+          </div>
+        </div>
+        <div style="background:var(--ink); border-radius:12px; padding:14px;">
+          <p class="label" style="color:var(--yellow); margin-bottom:12px;">Balance Rule</p>
+          <p style="font-size:14px; line-height:1.6; color:rgba(255,255,255,0.72);">Commit to the balance. If yellow gets the spotlight, blue gets a real field, not a tiny accent wash.</p>
+        </div>
+      </div>
+      <div class="grid-3">
+        <div style="background:var(--cream); border:2px solid var(--yellow); padding:14px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:15px;  color:var(--ink); margin-bottom:4px;">Yellow + Ink</p>
+          <p style="font-size:12px; color:rgba(0,0,0,0.6);">Primary combo. Hero moments.</p>
+        </div>
+        <div style="background:var(--blue); padding:14px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:15px;  color:var(--ink); margin-bottom:4px;">Blue + Ink</p>
+          <p style="font-size:12px; color:rgba(0,0,0,0.6);">Background sections. Secondary UI.</p>
+        </div>
+        <div style="background:var(--ink); padding:14px; border-radius:8px; text-align:center;">
+          <p style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:15px;  color:var(--yellow); margin-bottom:4px;">Ink + Yellow</p>
+          <p style="font-size:12px; color:rgba(255,255,255,0.6);">Dark sections. High contrast.</p>
+        </div>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+
+<!-- ─── TYPOGRAPHY ─── -->
+<section class="section" id="type">
+  <span class="section-tag" style="color: var(--orange);">07 — Typography</span>
+  <h2 class="section-title">Type System</h2>
+  <p class="section-intro">Use Nunito Black for headers and loud brand moments. Use Inter for everything people need to read fast. Body copy should never go below 16px with 1.5 line-height.</p>
+
+  <div class="type-grid" style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-bottom:14px; align-items:start;">
+    <div style="background:white; border-radius:16px; padding:16px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+      <p class="nunito-black-sample" style="font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">Nunito Black</p>
+      <p class="nunito-black-sample" style="font-size:34px; line-height:0.95; color:var(--ink); margin-bottom:8px; text-transform:uppercase;">Used for the loud stuff.</p>
+      <p class="nunito-black-sample" style="font-size:56px; line-height:0.86; color:var(--ink); margin-bottom:10px; text-transform:uppercase;">ODD PIECES</p>
+      <p class="nunito-black-sample" style="font-size:40px; line-height:0.9; color:var(--red-orange); margin-bottom:14px; text-transform:uppercase;">WAIT, WHAT?!</p>
+
+      <div style="background:var(--cream); border-radius:14px; padding:14px; border:2px solid var(--ink); margin-bottom:12px;">
+        <p style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:12px; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">Display treatment, Nunito Black only</p>
+        <div style="display:grid; gap:10px;">
+          <div style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:34px; line-height:0.9; text-transform:uppercase; color:white; -webkit-text-stroke:2.5px #1A1A1A; text-shadow:4px 4px 0 #1A1A1A;">Odd Pieces</div>
+          <div style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:34px; line-height:0.9; text-transform:uppercase; color:var(--yellow); -webkit-text-stroke:2.5px #1A1A1A; text-shadow:4px 4px 0 #1A1A1A;">Wait, What?!</div>
+          <div style="font-family:'Nunito', system-ui, sans-serif; font-weight:900; font-size:34px; line-height:0.9; text-transform:uppercase; color:var(--blue); -webkit-text-stroke:2.5px #1A1A1A; text-shadow:4px 4px 0 #1A1A1A;">Not Ordinary</div>
+        </div>
+      </div>
+
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <span style="font-family:Nunito,sans-serif; font-weight:900; font-size:12px; text-transform:uppercase; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Headlines</span>
+        <span style="font-family:Nunito,sans-serif; font-weight:900; font-size:12px; text-transform:uppercase; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Labels</span>
+        <span style="font-family:Nunito,sans-serif; font-weight:900; font-size:12px; text-transform:uppercase; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Stamps</span>
+      </div>
+    </div>
+
+    <div style="background:white; border-radius:16px; padding:16px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+      <p class="inter-sample" style="font-weight:700; font-size:14px; text-transform:uppercase; letter-spacing:0.08em; color:var(--orange); margin-bottom:10px;">Inter</p>
+      <p class="inter-sample" style="font-weight:700; font-size:24px; line-height:1.15; color:#222; margin-bottom:8px;">Used for the readable stuff.</p>
+      <p class="inter-sample" style="font-weight:500; font-size:18px; line-height:1.5; color:#222; margin-bottom:14px;">This is body copy. Use it for paragraphs, support copy, descriptions, and anything people actually need to scan quickly.</p>
+      <div style="display:flex; flex-wrap:wrap; gap:8px;">
+        <span style="font-family:Inter,sans-serif; font-weight:600; font-size:12px; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Paragraphs</span>
+        <span style="font-family:Inter,sans-serif; font-weight:600; font-size:12px; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Descriptions</span>
+        <span style="font-family:Inter,sans-serif; font-weight:600; font-size:12px; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">Support copy</span>
+        <span style="font-family:Inter,sans-serif; font-weight:600; font-size:12px; padding:8px 10px; background:var(--cream); border:2px solid var(--ink); border-radius:999px;">UI text</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── VISUAL PAYOFFS ─── -->
+<section class="section odd-split" id="visual-payoffs">
+  <span class="section-tag" style="color: var(--orange);">08 — What Makes The Art Hit</span>
+  <h2 class="section-title">More To Notice Than Feels Fair</h2>
+  <div class="divider"></div>
+  <p class="section-intro">The art should reward people who look once, then twice, then stop the person next to them so they can point at something stupid in the background. Density matters. Payoff matters. The joke cannot be one-and-done.</p>
+  <div style="background:var(--ink); border-radius:16px; padding:14px; color:white; margin-bottom:28px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+    <p class="label" style="color:var(--yellow); margin-bottom:16px;">The standard</p>
+    <p style="font-family:Nunito,sans-serif; font-weight:900; font-size:30px; line-height:1.25; margin-bottom:12px;">Every time you look back, there should be one more thing to notice.</p>
+    <p style="font-size:15px; line-height:1.75; color:rgba(255,255,255,0.72);">That might be a visual joke, a character payoff, a background gag, a reference, or a clue that only becomes funny once you understand the whole scene.</p>
+  </div>
+
+  <div class="grid-2" style="grid-template-columns:1fr 1fr; margin-bottom:28px;">
+    <div class="card" style="background:var(--blue);">
+      <div class="card-num">01</div>
+      <h3 class="card-title">Comedic payoffs</h3>
+      <p>The best scenes do not just look busy. They pay off. One object causes another problem. One background detail makes the foreground joke funnier. The scene should keep cashing checks.</p>
+    </div>
+    <div class="card">
+      <div class="card-num">02</div>
+      <h3 class="card-title">Pop culture energy</h3>
+      <p>References can show up, but they should feel remixed, hidden, sideways, or cleverly disguised. Never lazy parody. Never “look, an IP.”</p>
+    </div>
+    <div class="card">
+      <div class="card-num">03</div>
+      <h3 class="card-title">Metauniverse threads</h3>
+      <p>Characters, objects, logos, symbols, and tiny weird details should echo across titles. The universe should feel connected without turning into homework.</p>
+    </div>
+    <div class="card" style="background:var(--blue);">
+      <div class="card-num">04</div>
+      <h3 class="card-title">Maximum density</h3>
+      <p>If there is empty space, it should be a choice, not an accident. The art should feel packed with things worth discovering, not decorated with filler.</p>
+    </div>
+  </div>
+
+  <div style="background:white; border-radius:16px; padding:14px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+    <p class="label" style="color:var(--orange); margin-bottom:16px;">Quick gut check</p>
+    <div style="display:flex; flex-direction:column; gap:12px;">
+      <div style="padding:14px 16px; background:var(--cream); border-radius:10px;">Does the scene reward close looking?</div>
+      <div style="padding:14px 16px; background:var(--cream); border-radius:10px;">Is there more than one joke, reveal, or payoff?</div>
+      <div style="padding:14px 16px; background:var(--cream); border-radius:10px;">Do the references feel clever instead of obvious?</div>
+      <div style="padding:14px 16px; background:var(--cream); border-radius:10px;">Would someone point at a tiny detail and make everyone else come look?</div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── HUMAN BRAND ─── -->
+<section class="section odd-split" id="human">
+  <span class="section-tag" style="color: var(--orange);">09 — What Makes Us Different</span>
+  <h2 class="section-title">The Human Brand</h2>
+  <p class="section-intro">This section should not read like values on a wall. It should show how the brand behaves when a real person is on the other side.</p>
+
+  <div style="display:grid; grid-template-columns:1fr 1fr; gap:18px; margin-bottom:20px;">
+    <div style="background:var(--ink); border-radius:18px; padding:24px; color:white; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08);">
+      <p class="label" style="color:var(--yellow); margin-bottom:14px;">Core idea</p>
+      <p style="font-family:Nunito,sans-serif; font-weight:900; font-size:32px; line-height:1.2; margin-bottom:12px;">Act like a real team making something people actually care about.</p>
+      <p style="font-size:15px; line-height:1.6; color:rgba(255,255,255,0.72);">If it feels automated, generic, or weirdly over-scripted, it is off-brand.</p>
+    </div>
+    <div style="background:linear-gradient(135deg,var(--blue) 0%, var(--yellow) 100%); border-radius:18px; padding:24px; border:2px solid var(--ink); box-shadow:8px 8px 0 rgba(26,26,26,0.08); display:flex; align-items:end;">
+      <div>
+        <p class="label" style="color:rgba(0,0,0,0.55); margin-bottom:12px;">What that looks like</p>
+        <p style="font-family:Nunito,sans-serif; font-weight:900; font-size:28px; line-height:1.15; color:var(--ink);">Helpful.<br>Specific.<br>Human.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid-2" style="grid-template-columns:1fr 1fr; gap:18px;">
+    <div class="human-card">
+      <div class="human-card-icon">✉️</div>
+      <div>
+        <h3>They mail missing pieces</h3>
+        <p>If someone needs a missing piece, the team sends the actual piece.</p>
+      </div>
+    </div>
+
+    <div class="human-card" style="background: var(--blue);">
+      <div class="human-card-icon">🔍</div>
+      <div>
+        <h3>They give clues, not spoilers</h3>
+        <p>If someone asks for the answer, they get help without killing the reveal.</p>
+      </div>
+    </div>
+
+    <div class="human-card" style="background: var(--ink); color:white;">
+      <div class="human-card-icon">🎨</div>
+      <div>
+        <h3 style="color:white;">They work with real artists</h3>
+        <p style="color: rgba(255,255,255,0.82);">The art is made by humans and treated like it matters.</p>
+      </div>
+    </div>
+
+    <div class="human-card" style="background: var(--orange);">
+      <div class="human-card-icon">☻</div>
+      <div>
+        <h3>They sound like people</h3>
+        <p>The support, packaging, and copy should feel like they came from the same smart team.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+</body>
+</html>

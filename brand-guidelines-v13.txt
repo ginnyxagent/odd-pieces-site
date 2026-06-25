@@ -1,0 +1,272 @@
+✨ You're viewing V13 (Latest)
+OP
+STORY
+PERSONALITY
+AUDIENCE
+VOICE
+LOGO
+COLORS
+TYPE
+HUMAN BRAND
+Brand Guidelines — Version 13
+ODD
+PIECES
+1000 pieces. A mystery hiding in plain sight. You build the scene, open the envelope, and finally see what the box was setting you up for.
+1000 PIECES
+$39 EACH
+SHOPIFY · AMAZON · B&N · KICKSTARTER
+NOT YOUR ORDINARY PUZZLES · WILDLY FUN & TOTALLY UNEXPECTED · YOU'LL FIND THINGS IN HERE YOU WEREN'T SUPPOSED TO FIND. · THE TWIST IS THE WHOLE POINT. · NOT YOUR ORDINARY PUZZLES · WILDLY FUN & TOTALLY UNEXPECTED · YOU'LL FIND THINGS IN HERE YOU WEREN'T SUPPOSED TO FIND. · THE TWIST IS THE WHOLE POINT. ·
+HOW TO EDIT V13
+The easiest way to edit this page is at the very top of the file in the const BRAND_COPY = { ... } block.
+Change the text inside the quotes only. Do not touch the punctuation around the keys unless you want to break the page.
+Best workflow:
+	•	Open brand-guidelines-v13.html in VS Code or Cursor
+	•	Search for const BRAND_COPY
+	•	Edit the lines you want
+	•	Save
+	•	Run vercel --prod --yes from the odd-pieces-site folder
+01 — WHO WE ARE
+THE BRAND STORY
+EDITABLE: Brand story copy lives in the 3 paragraphs below. If you want to tweak the founder story, product explanation, or origin, edit those paragraphs only.
+If another puzzle brand could say it, rewrite it.
+Odd Pieces started in 2020 when Terry and Ginny had just moved into a 400-square-foot apartment, got stuck at home during Covid, and realized most puzzles got boring fast. You stare at the picture on the box, then spend hours rebuilding the exact thing you were already looking at.
+So they flipped it. Odd Pieces makes 1000-piece mystery puzzles where the box is the setup, the puzzle is what happened next, the clues are hidden in the details, and the ending stays sealed in an envelope until you finish.
+It started as a Kickstarter idea and turned into four campaigns, 25,000+ backers, 280,000+ customers, Barnes & Noble, and 600+ stores. The point is still the same: surprise beats scenery.
+Not your ordinary puzzles.
+WHAT THE PRODUCT DOES
+The image on the box is not the image you build. The scene shifts, clues appear, and the final reveal reframes the whole thing.
+WHAT MAKES IT DIFFERENT
+Original story-driven artwork, layered details, and a payoff worth pointing at with a full drink still in your hand.
+02 — ENERGY
+BRAND PERSONALITY
+EDITABLE: The adjective pills and the 3 example cards below are the easiest place to tweak tone. Leave layout markup alone, just swap the words/sentences.
+WAIT —
+ WHAT?!
+Unexpected. Clever. Surprising. Playful. Witty.
+CLEVER
+GENIUS
+NEVER NORMAL
+SURPRISING
+ODD
+PLAYFUL
+WITTY
+UNEXPECTED
+HUMAN
+IRREVERENT
+SHARP
+NOT BORING
+HOW IT SHOWS UP
+Product description
+Generic: A premium 1000-piece puzzle experience with surprising details.
+Odd Pieces: Not your ordinary puzzles.
+Why: it gets to the point fast and actually sounds like a brand with a pulse.
+Support email
+Generic: We're sorry your order arrived damaged. Our team will assist shortly.
+Odd Pieces: That box should have arrived looking less like it lost a bar fight. We’re fixing it.
+Why: still helpful, still clear, just not robotic.
+Social caption
+Generic: A puzzle night you won't forget.
+Odd Pieces: You’ll find things in here you weren’t supposed to find.
+Why: it creates tension, invites curiosity, and doesn’t waste words.
+03 — WHO IT'S FOR
+OUR AUDIENCE
+Odd Pieces has four core audiences: the thoughtful gift-giver, the real puzzle fan, the returning loyalist, and the active retiree buying for actual leisure.
+AUDIENCE
+Giftable enough to buy. Good enough to keep.
+Most first purchases come from gifters. The strongest repeat behavior comes from puzzlers and loyalists.
+What they share: they want something specific, premium, and worth talking about.
+That is exactly why it works as both a gift and a self-purchase.
+People usually find Odd Pieces through Shopify, Amazon, Barnes & Noble, Kickstarter, and word of mouth, then stay because the format is genuinely different.
+04 — VOICE IN USE
+VOICE & COPY
+EDITABLE: Signature lines, warning stamps, and copy examples below are the main copy blocks to update. Easiest safe edit: replace one line at a time inside the existing cards.
+Adult-leaning, sharp, and conversational. Clear first. Personality second. No filler.
+SIGNATURE LINES
+Not your ordinary puzzles.
+Not for everyone. Probably for you though.
+Wildly fun & totally unexpected.
+You’ll find things in here you weren’t supposed to find.
+WARNING
+THIS PUZZLE CONTAINS THINGS
+YOU WEREN'T SUPPOSED TO FIND.
+WARNING
+THE ENDING WILL SHOCK YOU.
+YOU'VE BEEN WARNED.
+✓ SOUND LIKE THIS
+Shocking before it's cute
+Fun before it's refined
+Playful before it's serious
+Irreverent with control
+Direct, punchy, no filler words
+Calls the reader in, doesn't talk down
+Humor that comes from being genuinely clever
+Urgency without desperation
+✗ NEVER SOUND LIKE THIS
+"For the whole family!" (too Walmart, too safe)
+"An immersive puzzle experience" (dry corporate, immediately skip)
+"The perfect gift this holiday season" (zzz)
+"Hours of entertainment" (box copy from 1992)
+"Premium quality guaranteed" (says literally nothing)
+"Recommended for ages 18+" (we don't age-gate — everyone's welcome)
+Luxury editorial tone (too stiff, wrong vibe)
+Corporate / dry / formal (if a PR department wrote it, delete it)
+VOICE PRINCIPLES
+Practical test: write the clear version first. Then sharpen it. Keep the point. Cut the fluff.
+SHOCK FIRST, EXPLAIN LATER
+Lead with the surprising, weird, funny thing. Let curiosity do the work. Don't front-load context.
+CONFIDENT, NOT ARROGANT
+We know we're different. We don't need to yell about it. Confidence is quiet. Arrogance is loud.
+PLAY IT STRAIGHT
+The best humor is delivered deadpan. Don't wink too hard. Say the absurd thing like it's obvious.
+TONE BY MESSAGE TYPE
+Product launch
+Loudest. Sharpest. Most playful.
+Promo / sale
+Direct, punchy, still clever.
+Brand story
+Warmer. Still specific.
+Transactional
+Calm, clear, lightly on-brand.
+Win-back
+A little nosy. A little tempting.
+Newsletter
+Loose, clever, worth opening.
+WEBSITE / EMAIL EXAMPLES
+
+The weirdest puzzle we’ve ever made.
+
+
+ADS / SOCIAL / PACKAGING EXAMPLES
+Warning: highly additive.
+Piece by piece, things get stranger.
+
+This one made our test puzzler swear. Twice.
+05 — IDENTITY
+LOGO SYSTEM
+EDITABLE: If logo guidance changes, update the text labels and usage notes here. Avoid renaming image file paths unless you also change the actual assets folder.
+Use the actual logo system, not placeholders. These are the real brand assets and the approved lockups people should grab first.
+
+PRIMARY LOGO, SIDE EMBLEM
+
+PRIMARY LOGO, TOP EMBLEM ON DARK
+WHAT TO USE
+Primary Logo, Emblem Side
+Default choice for most brand moments. Use this first unless the format clearly needs something else.
+Primary Logo, Emblem Top
+Use when a taller lockup fits better than a wide one.
+Emblem
+Use for avatars, favicons, stickers, and shorthand brand hits.
+Typography Only
+Use when the emblem would be redundant or too busy.
+NON-NEGOTIABLES
+		→ Use the supplied files. Do not redraw the logo. → Prefer colour versions on light backgrounds and B/W versions when clarity is better. → Keep proportions locked. No stretching, rotating, or squeezing. → Do not add outlines, shadows, bevels, glow, texture, or “make it pop” nonsense. ✗ Do not mix-and-match pieces from different lockups.
+AVAILABLE ASSET SET
+
+EMBLEM
+
+TYPOGRAPHY ONLY
+
+PRIMARY TOP
+
+ANIMATED LOGO
+06 — PALETTE
+COLOR SYSTEM
+EDITABLE: The safest color edits are the intro sentence, swatch names/roles, and the balance-rule copy. Do not change hex codes unless the palette truly changed.
+Use yellow and blue together. In any major campaign or page, blue should cover at least 40% of the visual surface.
+HERO
+Odd Yellow
+#FEE000
+Hero color. Own it. Lead with it.
+HERO
+Light Blue
+#C1E3E8
+Background anchor. Major surfaces, large sections, and bold contrast blocks.
+Orange
+#FC9C1C
+Accent. CTAs, highlights, arrows.
+Red-Orange
+#FF4016
+Urgency, warnings, "WAIT" moments.
+Ink Black
+#1A1A1A
+Primary text. Outlines. Dark backgrounds.
+Clean Cream
+#FFFBF0
+Warm page background. Softer than pure white.
+USAGE COMBINATIONS
+Lead by example
+Blue and yellow should visibly share the stage. If the guidelines look mostly dark, the system will be misread as mostly dark.
+BALANCE RULE
+Commit to the balance. If yellow gets the spotlight, blue gets a real field, not a tiny accent wash.
+Yellow + Ink
+Primary combo. Hero moments.
+Blue + Ink
+Background sections. Secondary UI.
+Ink + Yellow
+Dark sections. High contrast.
+07 — TYPOGRAPHY
+TYPE SYSTEM
+EDITABLE: Font guidance and specimen labels live here. Safest edits: captions, rules, and example phrases. Avoid changing the font-family declarations unless you mean to rework the system.
+Use Nunito Black for headers and loud brand moments. Use Inter for everything people need to read fast. Body copy should never go below 16px with 1.5 line-height.
+Nunito Black
+Used for the loud stuff.
+ODD PIECES
+WAIT, WHAT?!
+Display treatment, Nunito Black only
+ODD PIECES
+WAIT, WHAT?!
+NOT ORDINARY
+HEADLINES
+LABELS
+STAMPS
+Inter
+Used for the readable stuff.
+This is body copy. Use it for paragraphs, support copy, descriptions, and anything people actually need to scan quickly.
+Paragraphs
+Descriptions
+Support copy
+UI text
+08 — WHAT MAKES THE ART HIT
+MORE TO NOTICE THAN FEELS FAIR
+The art should reward people who look once, then twice, then stop the person next to them so they can point at something stupid in the background. Density matters. Payoff matters. The joke cannot be one-and-done.
+THE STANDARD
+Every time you look back, there should be one more thing to notice.
+That might be a visual joke, a character payoff, a background gag, a reference, or a clue that only becomes funny once you understand the whole scene.
+01
+COMEDIC PAYOFFS
+The best scenes do not just look busy. They pay off. One object causes another problem. One background detail makes the foreground joke funnier. The scene should keep cashing checks.
+02
+POP CULTURE ENERGY
+References can show up, but they should feel remixed, hidden, sideways, or cleverly disguised. Never lazy parody. Never “look, an IP.”
+03
+METAUNIVERSE THREADS
+Characters, objects, logos, symbols, and tiny weird details should echo across titles. The universe should feel connected without turning into homework.
+04
+MAXIMUM DENSITY
+If there is empty space, it should be a choice, not an accident. The art should feel packed with things worth discovering, not decorated with filler.
+QUICK GUT CHECK
+Does the scene reward close looking?
+Is there more than one joke, reveal, or payoff?
+Do the references feel clever instead of obvious?
+Would someone point at a tiny detail and make everyone else come look?
+09 — WHAT MAKES US DIFFERENT
+THE HUMAN BRAND
+EDITABLE: These cards define how the team behaves. Easy safe edits: card headlines and the one-sentence explanations under each icon.
+This section should not read like values on a wall. It should show how the brand behaves when a real person is on the other side.
+CORE IDEA
+Act like a real team making something people actually care about.
+If it feels automated, generic, or weirdly over-scripted, it is off-brand.
+WHAT THAT LOOKS LIKE
+Helpful. Specific. Human.
+✉️
+They mail missing pieces
+If someone needs a missing piece, the team sends the actual piece.
+🔍
+They give clues, not spoilers
+If someone asks for the answer, they get help without killing the reveal.
+🎨
+They work with real artists
+The art is made by humans and treated like it matters.
+☻
+They sound like people
+The support, packaging, and copy should feel like they came from the same smart team.
